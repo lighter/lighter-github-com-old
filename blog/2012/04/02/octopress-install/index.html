@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Lighter's Blog</title>
+  <title>octopress install with github - Lighter's Blog</title>
   <meta name="author" content="Willy lighter">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lighter.github.com">
+  <link rel="canonical" href="http://lighter.github.com/blog/2012/04/02/octopress-install">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -65,15 +65,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/04/02/octopress-install/">Octopress Install With Github</a></h1>
+      <h1 class="entry-title">Octopress Install With Github</h1>
     
     
       <p class="meta">
@@ -96,7 +93,7 @@
   </header>
 
 
-  <div class="entry-content"><p>來記錄一下如何架設Octopress</p>
+<div class="entry-content"><p>來記錄一下如何架設Octopress</p>
 
 <p>我使用的是Mac OS X 10.7.3</p>
 
@@ -125,23 +122,106 @@
 
 
 
+<!--more-->
+
+
+<p>安裝的過程中似乎因為我有安裝Xcode所以有出現一些問題，ruby也裝失敗了，而我是參考這兩篇解決的:</p>
+
+<ol>
+<li><p><a href="http://gogojimmy.net/%E6%8E%83%E9%9B%B7/RVM/Ruby%201.9.3/install-ruby-1-dot-9-3-via-rvm-on-mac-problem/">在 Mac 上使用 RVM 安裝 Ruby 1.9.3 時錯誤</a></p></li>
+<li><p><a href="http://blog.visioncan.com/2011/install-octopress/">Octopress安裝筆記</a></p></li>
+</ol>
+
+
+<p><strong>Step 3.</strong>發佈到github</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p>會要你輸入你的github pages repository url(例如：git@github.com:xxxxx/xxxxx.github.com.git)</p>
+
+<p>其實這段在你建立的github網頁中即可找到，按下Enter後在執行下面的指令</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>過個10分鐘左右，會收到github的來信，接著再把檔案push到github上</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
+</span><span class='line'>$ git commit -m 'your message'
+</span><span class='line'>$ git push origin source</span></code></pre></td></tr></table></div></figure>
+
+
+<p>輸入你的github project名稱就可以看到你的網頁了。</p>
+
+<p>如果要在本機端觀看你的網站可輸入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://localhost:4000">http://localhost:4000</a>即可看到你的網站</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/02/octopress-install/">Read on &rarr;</a>
-    </footer>
+
+<span class="byline author vcard">Posted by <span class="fn">Willy lighter</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2012-04-02T21:41:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/04/02/octopress-install/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/04/02/octopress-install/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -159,7 +239,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -178,6 +258,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
