@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Slider View - Lighter's Blog</title>
+  <meta name="author" content="Willy lighter">
+
+  
+  <meta name="description" content="Slider在iPhone比較常見是用來調整螢幕的明暗度，或是在某些圖片編輯app內用來調整RGB的比例，我們使用一個簡單的範例來操控Slider。 簡單的範例最後要達到的結果如左圖，拖拉Slider可以觀察到數值隨著Slider的變化跟著改變。 Step 1.建立一個SingleView的專案， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lighter.github.com/blog/2012/04/24/slider-view">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Lighter's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30526664-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Lighter's Blog</a></h1>
+  
+    <h2>凡寫過必留下痕跡</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="apple.xva@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lighter.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Slider View</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-24T14:30:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Slider在iPhone比較常見是用來調整螢幕的明暗度，或是在某些圖片編輯app內用來調整RGB的比例，我們使用一個簡單的範例來操控Slider。</p>
+
+<p><img class="left" src="/images/iPhone/sliderViews1.jpeg">簡單的範例最後要達到的結果如左圖，拖拉Slider可以觀察到數值隨著Slider的變化跟著改變。</p>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<!-- more -->
+
+
+<p><strong>Step 1.</strong>建立一個<code>SingleView</code>的專案，專案的名稱為Slider View</p>
+
+<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard</p>
+
+<p>加入<code>Slider</code>、<code>Label</code>兩個元件，當中的元件屬性設定你可以隨自己喜好去做設定。</p>
+
+<p><img src="/images/iPhone/sliderViews2.jpeg"></p>
+
+<p>比較需要注意的是<code>Slider</code>的屬性設定；設定它的最大值、最小值以及預設值。</p>
+
+<p><img src="/images/iPhone/sliderViews3.jpeg"></p>
+
+<p><strong>Step 3.</strong>編輯ViewController.h</p>
+
+<p>定義<code>UISlider</code>、<code>UILabel</code>兩個型態變數，<code>setSliderValue:</code>方法為Slider被拖拉時，會改變<code>UILabel</code>的數值。</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">UISlider</span> <span class="o">*</span><span class="n">slider_</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UILabel</span> <span class="o">*</span><span class="n">label_</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span><span class="kt">IBOutlet</span> <span class="n">UISlider</span> <span class="o">*</span><span class="n">slider</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span><span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">label</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">setSliderValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 4.</strong>編輯ViewController.m</p>
+
+<p><code>currentValue</code>用來取得<code>Slider</code>的值；取得值的結果在放到<code>NSString</code>型態的變數value，最後將value的結果指定給<code>UILabel</code></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">slider_</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">setSliderValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">currentValue</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">currentValue</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">slider</span> <span class="n">value</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">value</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat:</span><span class="s">@&quot;Value is %2.f&quot;</span><span class="p">,</span> <span class="n">currentValue</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">label</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在一開始<code>UILabel</code>是沒有數值的，只有當你拖拉Slider才會出現值，如果要讓一近到畫面時就要有初始值，可以複製<code>setSliderValue:</code>中的方法到<code>viewDidLoad</code>即可。</p>
+
+<p><strong>Step 5.</strong>最後建立<code>IBOutlet</code>、<code>IBAction</code>的關聯</p>
+
+<p><img src="/images/iPhone/sliderViews4.jpeg"></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Willy lighter</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-24T14:30:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/04/24/slider-view/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/04/24/slider-view/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/24/action-sheet/" title="Previous Post: Action Sheet">&laquo; Action Sheet</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/04/24/web-view/" title="Next Post: Web View">Web View &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>  
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/web-view/">Web View</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/slider-view/">Slider View</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/action-sheet/">Action Sheet</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/02/octopress-install/">octopress install with github</a>
+      </li>
+    
+  </ul>
+  
+  <h1>Categories</h1>
+  <ul>
+    <li>
+      <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+    </li>
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("lighter_lai", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/lighter_lai" class="twitter-follow-button" data-show-count="false">Follow @lighter_lai</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Willy lighter -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'lighter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lighter.github.com/blog/2012/04/24/slider-view/';
+        var disqus_url = 'http://lighter.github.com/blog/2012/04/24/slider-view/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

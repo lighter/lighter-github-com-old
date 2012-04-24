@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iPhone | Lighter's Blog]]></title>
+  <link href="http://lighter.github.com/blog/categories/iphone/atom.xml" rel="self"/>
+  <link href="http://lighter.github.com/"/>
+  <updated>2012-04-24T16:24:12+08:00</updated>
+  <id>http://lighter.github.com/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Web View]]></title>
+    <link href="http://lighter.github.com/blog/2012/04/24/web-view/"/>
+    <updated>2012-04-24T15:23:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2012/04/24/web-view</id>
+    <content type="html"><![CDATA[<p>建立一個簡單Web瀏覽器，此範例需要使用到<code>TextField</code>、<code>Web View</code>、<code>Toolbar</code>、<code>Bar Button Item</code>、<code>Activity Indicator View</code>；元件的用途方別如下：</p>
+
+<ol>
+<li><code>TextField</code>:輸入網址。</li>
+<li><code>Web View</code>:show網頁使用。</li>
+<li><code>Toolbar</code>、<code>Bar Button Item</code>:工具列，可返回上頁、下頁、重整。</li>
+<li><code>Activity Indicator View</code>:讓使用者得知網頁還在進行loading。</li>
+</ol>
+
+
+
+
+<!-- more -->
+
+
+<p>預期完成後的結果如下圖：</p>
+
+<p><img src="/images/iPhone/webViews1.jpeg"></p>
+
+<p><strong>Step 1.</strong>建立<code>SingleView</code>，專案名稱為<code>Web View</code></p>
+
+<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard</p>
+
+<p>將元件依序拖曳近來，並且安排好擺設的位置</p>
+
+<p><img src="/images/iPhone/webViews2.jpeg"></p>
+
+<p>需注意的是<code>Activity Indicator View</code>的屬性設定，要將<code>Animating</code>、<code>Hidden</code>打勾，預設才會隱藏，動畫也才會執行。</p>
+
+<p><img src="/images/iPhone/webViews3.jpeg"></p>
+
+<p><strong>Step 3.</strong>編輯ViewController.h</p>
+
+<ol>
+<li>加入<code>UIWebViewDelegate</code>協定。</li>
+<li>定義元件的變數。</li>
+<li>定義<code>Bar Button Item</code>的<code>IBAction</code>事件。</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIWebViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIWebView</span> <span class="o">*</span><span class="n">webView_</span><span class="p">;</span>
+</span><span class='line'><span class="n">UITextField</span> <span class="o">*</span><span class="n">urlTextField_</span><span class="p">;</span>
+</span><span class='line'><span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView_</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIWebView</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">webView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">urlTextField</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">goforward:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//往下頁</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">goback:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>    <span class="c1">//往上頁</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">goaddress:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//往目前的網址</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitReturn:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//點選鍵盤的return的觸發事件&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 4-1.</strong>編輯ViewController.m</p>
+
+<p>完成<code>synthesize</code>的部份。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">webView</span> <span class="o">=</span> <span class="n">webView</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">urlTextField</span> <span class="o">=</span> <span class="n">urlTextField</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">activityView</span> <span class="o">=</span> <span class="n">activityView_</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>完成之後依序寫入<code>往下頁</code>、<code>往上頁</code>的事件，直接使用WebView元件提供的方法<code>goForward</code>、<code>goBack</code>來達到往下頁、往上頁的目的。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">goforward:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="n">goForward</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">goback:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="n">goBack</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 4-2.</strong>編輯ViewController.m</p>
+
+<p><code>goaddress</code>事件中，先取得<code>TextField</code>的值，放入<code>NSString</code>的<code>urlString</code>變數中，在將此值，給予<code>NSURL</code>的<code>url</code>變數；得知url為何時，再使用<code>NSURLRequest</code>來取得<code>url</code>所得到的網頁結果；而這個結果由<code>Web View</code>來呈現。</p>
+
+<p><code>[urlTextField_ resignFirstResponder];</code>是將<code>TextField</code>的鍵盤回到原本的狀態(原本狀態為隱藏)。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">goaddress:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">NSString</span> <span class="o">*</span><span class="n">urlString</span><span class="p">;</span>
+</span><span class='line'><span class="n">urlString</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">urlTextField</span> <span class="n">text</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">urlString</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">urlRequest</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadRequest:</span><span class="n">urlRequest</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">urlTextField_</span> <span class="n">resignFirstResponder</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 4-3.</strong>編輯ViewController.m</p>
+
+<p>透過<code>webViewDidStartLoad</code>、<code>webViewDidFinishLoad</code>這兩個方法，來設定<code>Activity Indicator View</code>是否為隱藏，並開始動畫的效果。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nl">webViewDidStartLoad:</span><span class="p">(</span><span class="n">UIWebView</span> <span class="o">*</span><span class="p">)</span><span class="n">webView</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">activityView_</span><span class="p">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">activityView_</span> <span class="n">startAnimating</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nl">webViewDidFinishLoad:</span><span class="p">(</span><span class="n">UIWebView</span> <span class="o">*</span><span class="p">)</span><span class="n">webView</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">activityView_</span><span class="p">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">activityView_</span> <span class="n">stopAnimating</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><code>hitReturn:</code>為鍵盤上的return被按下時要執行的事件，其內容都跟上面一樣！</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitReturn:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">NSString</span> <span class="o">*</span><span class="n">urlString</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">urlTextField</span> <span class="n">text</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">urlString</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">urlRequest</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadRequest:</span><span class="n">urlRequest</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">urlTextField_</span> <span class="n">resignFirstResponder</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 5.</strong>建立關連</p>
+
+<p>最後就是建立<code>IBAction</code>、<code>IBOutlet</code>的關聯，如下圖：</p>
+
+<p><img src="/images/iPhone/webViews4.jpeg"></p>
+
+<p>如果想要一近畫面時就啟動預設的網頁畫面，在<code>viewDidLoad</code>加入下列的程式碼，其運作過程都一樣。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'><span class="n">webView_</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.google.com&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">urlString</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">urlTextField</span> <span class="n">text</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">urlString</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">urlRequest</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadRequest:</span><span class="n">urlRequest</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Slider View]]></title>
+    <link href="http://lighter.github.com/blog/2012/04/24/slider-view/"/>
+    <updated>2012-04-24T14:30:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2012/04/24/slider-view</id>
+    <content type="html"><![CDATA[<p>Slider在iPhone比較常見是用來調整螢幕的明暗度，或是在某些圖片編輯app內用來調整RGB的比例，我們使用一個簡單的範例來操控Slider。</p>
+
+<p><img class="left" src="/images/iPhone/sliderViews1.jpeg">簡單的範例最後要達到的結果如左圖，拖拉Slider可以觀察到數值隨著Slider的變化跟著改變。</p>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<!-- more -->
+
+
+<p><strong>Step 1.</strong>建立一個<code>SingleView</code>的專案，專案的名稱為Slider View</p>
+
+<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard</p>
+
+<p>加入<code>Slider</code>、<code>Label</code>兩個元件，當中的元件屬性設定你可以隨自己喜好去做設定。</p>
+
+<p><img src="/images/iPhone/sliderViews2.jpeg"></p>
+
+<p>比較需要注意的是<code>Slider</code>的屬性設定；設定它的最大值、最小值以及預設值。</p>
+
+<p><img src="/images/iPhone/sliderViews3.jpeg"></p>
+
+<p><strong>Step 3.</strong>編輯ViewController.h</p>
+
+<p>定義<code>UISlider</code>、<code>UILabel</code>兩個型態變數，<code>setSliderValue:</code>方法為Slider被拖拉時，會改變<code>UILabel</code>的數值。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UISlider</span> <span class="o">*</span><span class="n">slider_</span><span class="p">;</span>
+</span><span class='line'><span class="n">UILabel</span> <span class="o">*</span><span class="n">label_</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span><span class="kt">IBOutlet</span> <span class="n">UISlider</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">slider</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span><span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">label</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">setSliderValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 4.</strong>編輯ViewController.m</p>
+
+<p><code>currentValue</code>用來取得<code>Slider</code>的值；取得值的結果在放到<code>NSString</code>型態的變數value，最後將value的結果指定給<code>UILabel</code>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">slider</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">setSliderValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">float</span> <span class="n">currentValue</span><span class="p">;</span>
+</span><span class='line'><span class="n">currentValue</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">slider</span> <span class="n">value</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">value</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat:</span><span class="s">@&quot;Value is %2.f&quot;</span><span class="p">,</span> <span class="n">currentValue</span><span class="p">];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">label</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>在一開始<code>UILabel</code>是沒有數值的，只有當你拖拉Slider才會出現值，如果要讓一近到畫面時就要有初始值，可以複製<code>setSliderValue:</code>中的方法到<code>viewDidLoad</code>即可。</p>
+
+<p><strong>Step 5.</strong>最後建立<code>IBOutlet</code>、<code>IBAction</code>的關聯</p>
+
+<p><img src="/images/iPhone/sliderViews4.jpeg"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Action Sheet]]></title>
+    <link href="http://lighter.github.com/blog/2012/04/24/action-sheet/"/>
+    <updated>2012-04-24T10:29:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2012/04/24/action-sheet</id>
+    <content type="html"><![CDATA[<p>UIActionSheet是一個由下往上出現的視窗，通常彈出一些按鈕選項讓使用者選擇要執行的方式為何！使用一個簡單的範例來介紹它的使用方法。</p>
+
+<p>在iPhone畫面中加入一個Round Rect Button，當Button按下時，ActionSheet則會彈出。</p>
+
+<p><img class="center" src="/images/iPhone/actionSheets1.jpeg"></p>
+
+<p><strong>Step 1.</strong>建立一個<code>SingleView</code>的專案，專案名稱為Action Sheet</p>
+
+<p><strong>Step 2.</strong>開啟MainStoryboard.storyboard，加入一個<code>Round Rect Button</code>的元件，並且設定該元件的Title為Show Action Sheet</p>
+
+<!-- more -->
+
+
+<p><img class="center" src="/images/iPhone/actionSheets2.jpeg"></p>
+
+<p><strong>Step 3.</strong>編輯ViewController.h</p>
+
+<p>1.加入<code>UIActionSheetDelegate</code>的協定。</p>
+
+<p>2.定義showActionSheet為Button的觸發事件。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIActionSheetDelegate</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showActionSheet:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 4.</strong>編輯ViewController.m</p>
+
+<p>1.在showActionSheet:內定義一個<code>UIActionSheet</code>的actoinSheet變數，當中的參數如以下設定；特別的是當你有其它選項想讓使用者選擇時，<code>otherButtonTitles:</code>這個參數設定後面連續使用<code>@""</code>連接。</p>
+
+<p>2.<code>actionSheetStyle</code>設定ActionSheet的Style。</p>
+
+<p>3.記得設定<code>showInVie</code>將ActionSheet顯示在畫面上。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showActionSheet:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIActionSheet</span> <span class="o">*</span><span class="n">actionSheet</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIActionSheet</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTitle:</span><span class="s">@&quot;Share Save&quot;</span>
+</span><span class='line'>            <span class="nl">delegate:</span><span class="n">self</span>
+</span><span class='line'>            <span class="nl">cancelButtonTitle:</span><span class="s">@&quot;Cancel&quot;</span>
+</span><span class='line'>            <span class="nl">destructiveButtonTitle:</span><span class="s">@&quot;Save&quot;</span>
+</span><span class='line'>            <span class="nl">otherButtonTitles:</span><span class="s">@&quot;Email&quot;</span><span class="p">,</span> <span class="s">@&quot;Facebook&quot;</span><span class="p">,</span> <span class="s">@&quot;Twitter&quot;</span><span class="p">,</span> <span class="s">@&quot;Plurk&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">actionSheet</span><span class="p">.</span><span class="n">actionSheetStyle</span> <span class="o">=</span> <span class="n">UIActionSheetStyleDefault</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">actionSheet</span> <span class="nl">showInView:</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 5.</strong>判斷按下了哪個按鈕！！</p>
+
+<p>可以透過<code>actionSheet:clickedButtonAtIndex:</code>這個方法來協助得知按下了是哪一個按鈕。</p>
+
+<p>在ViewController.m檔加入這個方法，並使用簡單的<code>switch</code>來判斷是哪一個按鈕被按下了，這邊使用一個簡單的<code>NSLog</code>訊息來告知你按下了哪一個按鈕。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">actionSheet:</span><span class="p">(</span><span class="n">UIActionSheet</span> <span class="o">*</span><span class="p">)</span><span class="n">actionSheet</span> <span class="nl">clickedButtonAtIndex:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">buttonIndex</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">switch</span> <span class="p">(</span><span class="n">buttonIndex</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Save&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Email&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Facebook&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Twitter&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Plurk&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 6.</strong>建立關連</p>
+
+<p>建立<code>showActionSheet</code>與<code>Round Rect Button</code>的關聯</p>
+
+<p><img class="center" src="/images/iPhone/actionSheets3.jpeg"></p>
+]]></content>
+  </entry>
+  
+</feed>
