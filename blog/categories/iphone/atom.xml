@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter's Blog]]></title>
   <link href="http://lighter.github.com/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-04-26T09:14:35+08:00</updated>
+  <updated>2012-04-26T15:32:57+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -24,6 +24,9 @@
 
 <p><img src="/images/iPhone/imageViews1.jpeg">
 <img src="/images/iPhone/imageViews2.jpeg"></p>
+
+<!-- more -->
+
 
 <p><strong>Step 1.</strong>建立<code>SingleView</code>專案，專案命名為<code>Image View</code>。</p>
 
