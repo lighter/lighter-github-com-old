@@ -12,6 +12,8 @@ categories: iPhone
 {% img /images/iPhone/imageViews1.jpeg %}
 {% img /images/iPhone/imageViews2.jpeg %}
 
+<!-- more -->
+
 **Step 1.**建立<code>SingleView</code>專案，專案命名為<code>Image View</code>。
 
 **Step 2.**編輯MainStoryboard.storyboard。
