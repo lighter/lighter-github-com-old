@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter's Blog]]></title>
   <link href="http://lighter.github.com/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-04-26T15:32:57+08:00</updated>
+  <updated>2012-04-29T20:42:19+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scroll View]]></title>
+    <link href="http://lighter.github.com/blog/2012/04/29/scroll-view/"/>
+    <updated>2012-04-29T17:27:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2012/04/29/scroll-view</id>
+    <content type="html"><![CDATA[<p>當iPhone的畫面要塞進很多內容時，可以利用<code>Scroll View</code>來捲動畫面瀏覽頁面，例如當畫面需要呈現很多張圖片的時候，一個<code>View</code>只能呈現一張<code>UIImage</code>，因此可以利用<code>Scroll View</code>來呈現。</p>
+
+<p>最後的結果如下圖：(將圖片向右排列，手指將畫面往左拖曳，即可看到其他的圖片)。</p>
+
+<p><img src="/images/iPhone/scrollViews1.jpeg">
+<img src="/images/iPhone/scrollViews2.jpeg">
+<img src="/images/iPhone/scrollViews3.jpeg"></p>
+
+<!-- more -->
+
+
+<p><strong>Step 1.</strong>建立<code>Single View</code>專案，專案命名為<code>Scroll View</code>。</p>
+
+<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard。</p>
+
+<p>加入一個<code>Scroll View</code>到View中。</p>
+
+<p><img src="/images/iPhone/scrollViews4.jpeg"></p>
+
+<p><strong>Step 3.</strong>編輯ViewController.h。</p>
+
+<ol>
+    <li>加入<code>UIScrollViewDelegate</code>的協定。</li>
+    <li>定義一個<code>UIScrollView</code>的變數<code>scrollView_</code>。</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIScrollViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIScrollView</span> <span class="o">*</span><span class="n">scrollView_</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIScrollView</span> <span class="o">*</span><span class="n">scrollView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 4.</strong>編輯ViewController.m。</p>
+
+<ol>
+    <li>首先要在專案內加入幾張圖片檔案。</li>
+    <li>第6行，定義一個<code>NSMutableArray</code>的陣列變數<code>photoName</code>記錄圖片的檔案名稱。</li>
+    <li>第7行，再定義一個<code>NSMutableArray</code>的陣列變數<code>photos</code>，一個一個使用<code>objectAtIndex</code>定義<code>UIImage</code>。</li>
+    <li>第14行，<code>i</code>變數用調整<code>UIImage View</code>的寬度。</li>
+    <li>第15行，使用for迴圈，一個一個定義<code>UIImage</code>。</li>
+    <li>第16行，使用<code>UIImageView</code>來放置要顯示的圖片<code>UIImage</code>。</li>
+    <li>第17行，定義<code>UIImageView</code>的模式為<code>UIViewContentModeScaleToFill</code>自動縮放填滿畫面。</li>
+    <li>第18行，定義<code>clipsToBounds</code>，當值為<code>YES</code>時，畫面會自動切除影像超出Bounds的部份</li>
+    <li>第20行，使用<code>CGRectMake</code>定義<code>UIImageView</code>的<code>(x座標, y座標, 寬, 高)</code>。</li>
+    <li>第22行，將<code>imageView</code>加入<code>scrollView</code>。</li>
+    <li>第25行，定義<code>scrollView</code>的頁面大小<code>CGSizeMake(寬, 高)</code>。</li>
+    <li>第26行，定義<code>scrollView_</code>的<code>delegate</code>為<code>self</code>。</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">scrollView</span> <span class="o">=</span> <span class="n">scrollView_</span><span class="p">;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">photoName</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithObjects:</span><span class="s">@&quot;a2.jpg&quot;</span><span class="p">,</span> <span class="s">@&quot;a3.jpg&quot;</span><span class="p">,</span> <span class="s">@&quot;a4.jpg&quot;</span><span class="p">,</span> <span class="s">@&quot;a5.jpg&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">photos</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithObjects:</span>
+</span><span class='line'>                            <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="p">[</span><span class="n">photoName</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]],</span>
+</span><span class='line'>                            <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="p">[</span><span class="n">photoName</span> <span class="nl">objectAtIndex:</span><span class="mi">1</span><span class="p">]],</span>
+</span><span class='line'>                            <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="p">[</span><span class="n">photoName</span> <span class="nl">objectAtIndex:</span><span class="mi">2</span><span class="p">]],</span>
+</span><span class='line'>                            <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="p">[</span><span class="n">photoName</span> <span class="nl">objectAtIndex:</span><span class="mi">3</span><span class="p">]],</span>
+</span><span class='line'>                            <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="n">UIImage</span> <span class="o">*</span><span class="n">image</span> <span class="k">in</span> <span class="n">photos</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">UIImageView</span> <span class="o">*</span><span class="n">imageView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIImageView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithImage:</span><span class="n">image</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">imageView</span><span class="p">.</span><span class="n">contentMode</span> <span class="o">=</span> <span class="n">UIViewContentModeScaleToFill</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">imageView</span><span class="p">.</span><span class="n">clipsToBounds</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">imageView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">320</span><span class="o">*</span><span class="n">i</span><span class="o">++</span><span class="p">,</span><span class="mi">0</span> <span class="p">,</span><span class="mi">320</span><span class="p">,</span> <span class="mi">460</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">scrollView</span> <span class="nl">addSubview:</span><span class="n">imageView</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">scrollView</span><span class="p">.</span><span class="n">contentSize</span> <span class="o">=</span> <span class="n">CGSizeMake</span><span class="p">(</span><span class="mi">320</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="mi">460</span><span class="p">);</span>
+</span><span class='line'><span class="n">scrollView_</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 5.</strong>建立關連</p>
+
+<p><img src="/images/iPhone/scrollViews5.jpeg"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Image View]]></title>
