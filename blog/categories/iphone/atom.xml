@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter's Blog]]></title>
   <link href="http://lighter.github.com/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-04-29T20:42:19+08:00</updated>
+  <updated>2012-05-01T11:40:27+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Segmented Controller]]></title>
+    <link href="http://lighter.github.com/blog/2012/05/01/segmented-controller/"/>
+    <updated>2012-05-01T10:07:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2012/05/01/segmented-controller</id>
+    <content type="html"><![CDATA[<p><code>Segmented Controller</code>最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用<code>Segmented Controller</code>來切換網頁呈現網站內容。</p>
+
+<p>以下使用3個<code>Segments</code>來做Google、Yahoo、Youtube的切換。</p>
+
+<p><img src="/images/iPhone/segmentedController1.jpeg">
+<img src="/images/iPhone/segmentedController2.jpeg">
+<img src="/images/iPhone/segmentedController3.jpeg"></p>
+
+<!-- more -->
+
+
+<p><strong>Step 1.</strong>建立<code>SingleView</code>專案，專案命名為<code>Segmented Contrller</code>。</p>
+
+<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard。</p>
+
+<p>該專案會使用到的元件有：</p>
+
+<ol>
+    <li><code>Toolbar</code></li>
+    <li><code>Web View</code></li>
+    <li><code>TextField</code></li>
+    <li><code>Segmented Controller</code></li>
+    <li><code>Activity Indicator View</code></li>
+</ol>
+
+
+<p><code>Activity Indicator View</code>的設定如同之前<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>一樣。</p>
+
+<p><code>Segmented Controlle</code>在預設中只有兩個選項，要增加選項可在<code>Attributes inspector</code>的<code>Segments</code>設定成你要的數量，接著在下方<code>Segment</code>可以設定<code>Segment 0</code>的<code>Title</code>，根據你選擇到第幾個<code>Segment</code>可以個別去設定<code>Title</code>。</p>
+
+<p><img src="/images/iPhone/segmentedController4.jpeg">
+<img src="/images/iPhone/segmentedController5.jpeg">
+<img src="/images/iPhone/segmentedController6.jpeg"></p>
+
+<p><strong>Step 3.</strong>編輯ViewController.h</p>
+
+<p>定義的變數如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>內的，這裡多一個<code>UISegmentedControl</code>，<code>hitSegmented</code>是<code>Segmented Controller</code>的觸發事件。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIWebViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIWebView</span> <span class="o">*</span><span class="n">webView_</span><span class="p">;</span>
+</span><span class='line'><span class="n">UITextField</span> <span class="o">*</span><span class="n">urlTextField_</span><span class="p">;</span>
+</span><span class='line'><span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented_</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIWebView</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">webView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">urlTextField</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitReturn:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//點選鍵盤的return的觸發事件&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitSegmented:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span><span class="c1">//點選Segmented Controller的事件</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 4.</strong>編輯ViewController.m</p>
+
+<p>載入網頁的過程也如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>的說明，因此在<code>viewDidLoad</code>、<code>hitReturn</code>方法都與<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>相同；<code>UIActivityIndicatorView</code>的操作也一樣僅需將<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>中的<code>webViewDidStartLoad</code>、<code>webViewDidFinishLoad</code>複製過來即可。</p>
+
+<p>這裡則是多了一個<code>hitSegmented</code>的方法，載入網頁的過程都是使用相同的方法。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitSegmented:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">NSString</span> <span class="o">*</span><span class="n">urlString</span><span class="p">;</span>    <span class="c1">//網頁字串</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSInteger</span> <span class="n">segmentedNum</span><span class="p">;</span> <span class="c1">//Segmented的選項</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">segmentedNum</span> <span class="o">=</span> <span class="n">segmented_</span><span class="p">.</span><span class="n">selectedSegmentIndex</span><span class="p">;</span> <span class="c1">//取得點選的Segmented Index</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">switch</span> <span class="p">(</span><span class="n">segmentedNum</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.google.com&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.yahoo.com.tw&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.youtube.com.tw&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">urlTextField</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">urlString</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">urlString</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">urlRequest</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadRequest:</span><span class="n">urlRequest</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><strong>Step 5.</strong>建立關連</p>
+
+<p><img src="/images/iPhone/segmentedController7.jpeg"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Scroll View]]></title>
@@ -647,145 +805,6 @@
 <p><strong>Step 5.</strong>最後建立<code>IBOutlet</code>、<code>IBAction</code>的關聯</p>
 
 <p><img src="/images/iPhone/sliderViews4.jpeg"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Action Sheet]]></title>
-    <link href="http://lighter.github.com/blog/2012/04/24/action-sheet/"/>
-    <updated>2012-04-24T10:29:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/04/24/action-sheet</id>
-    <content type="html"><![CDATA[<p>UIActionSheet是一個由下往上出現的視窗，通常彈出一些按鈕選項讓使用者選擇要執行的方式為何！使用一個簡單的範例來介紹它的使用方法。</p>
-
-<p>在iPhone畫面中加入一個Round Rect Button，當Button按下時，ActionSheet則會彈出。</p>
-
-<p><img class="center" src="/images/iPhone/actionSheets1.jpeg"></p>
-
-<p><strong>Step 1.</strong>建立一個<code>SingleView</code>的專案，專案名稱為Action Sheet</p>
-
-<p><strong>Step 2.</strong>開啟MainStoryboard.storyboard，加入一個<code>Round Rect Button</code>的元件，並且設定該元件的Title為Show Action Sheet</p>
-
-<!-- more -->
-
-
-<p><img class="center" src="/images/iPhone/actionSheets2.jpeg"></p>
-
-<p><strong>Step 3.</strong>編輯ViewController.h</p>
-
-<p>1.加入<code>UIActionSheetDelegate</code>的協定。</p>
-
-<p>2.定義showActionSheet為Button的觸發事件。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIActionSheetDelegate</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showActionSheet:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><strong>Step 4.</strong>編輯ViewController.m</p>
-
-<p>1.在showActionSheet:內定義一個<code>UIActionSheet</code>的actoinSheet變數，當中的參數如以下設定；特別的是當你有其它選項想讓使用者選擇時，<code>otherButtonTitles:</code>這個參數設定後面連續使用<code>@""</code>連接。</p>
-
-<p>2.<code>actionSheetStyle</code>設定ActionSheet的Style。</p>
-
-<p>3.記得設定<code>showInVie</code>將ActionSheet顯示在畫面上。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showActionSheet:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIActionSheet</span> <span class="o">*</span><span class="n">actionSheet</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIActionSheet</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTitle:</span><span class="s">@&quot;Share Save&quot;</span>
-</span><span class='line'>            <span class="nl">delegate:</span><span class="n">self</span>
-</span><span class='line'>            <span class="nl">cancelButtonTitle:</span><span class="s">@&quot;Cancel&quot;</span>
-</span><span class='line'>            <span class="nl">destructiveButtonTitle:</span><span class="s">@&quot;Save&quot;</span>
-</span><span class='line'>            <span class="nl">otherButtonTitles:</span><span class="s">@&quot;Email&quot;</span><span class="p">,</span> <span class="s">@&quot;Facebook&quot;</span><span class="p">,</span> <span class="s">@&quot;Twitter&quot;</span><span class="p">,</span> <span class="s">@&quot;Plurk&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">actionSheet</span><span class="p">.</span><span class="n">actionSheetStyle</span> <span class="o">=</span> <span class="n">UIActionSheetStyleDefault</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span><span class="n">actionSheet</span> <span class="nl">showInView:</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">];</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><strong>Step 5.</strong>判斷按下了哪個按鈕！！</p>
-
-<p>可以透過<code>actionSheet:clickedButtonAtIndex:</code>這個方法來協助得知按下了是哪一個按鈕。</p>
-
-<p>在ViewController.m檔加入這個方法，並使用簡單的<code>switch</code>來判斷是哪一個按鈕被按下了，這邊使用一個簡單的<code>NSLog</code>訊息來告知你按下了哪一個按鈕。
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">actionSheet:</span><span class="p">(</span><span class="n">UIActionSheet</span> <span class="o">*</span><span class="p">)</span><span class="n">actionSheet</span> <span class="nl">clickedButtonAtIndex:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">buttonIndex</span>
-</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">switch</span> <span class="p">(</span><span class="n">buttonIndex</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Save&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Email&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Facebook&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Twitter&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Plurk&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">default</span><span class="o">:</span>
-</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><strong>Step 6.</strong>建立關連</p>
-
-<p>建立<code>showActionSheet</code>與<code>Round Rect Button</code>的關聯</p>
-
-<p><img class="center" src="/images/iPhone/actionSheets3.jpeg"></p>
 ]]></content>
   </entry>
   

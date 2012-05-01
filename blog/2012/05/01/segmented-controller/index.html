@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Segmented Controller - Lighter's Blog</title>
+  <meta name="author" content="Willy lighter">
+
+  
+  <meta name="description" content="Segmented Controller最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用Segmented Controller來切換網頁呈現網站內容。 以下使用3個Segments來做Google、Yahoo、Youtube的切換。 Step 1. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lighter.github.com/blog/2012/05/01/segmented-controller">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Lighter's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30526664-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Lighter's Blog</a></h1>
+  
+    <h2>凡寫過必留下痕跡</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="apple.xva@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lighter.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Segmented Controller</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-01T10:07:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><code>Segmented Controller</code>最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用<code>Segmented Controller</code>來切換網頁呈現網站內容。</p>
+
+<p>以下使用3個<code>Segments</code>來做Google、Yahoo、Youtube的切換。</p>
+
+<p><img src="/images/iPhone/segmentedController1.jpeg">
+<img src="/images/iPhone/segmentedController2.jpeg">
+<img src="/images/iPhone/segmentedController3.jpeg"></p>
+
+<!-- more -->
+
+
+<p><strong>Step 1.</strong>建立<code>SingleView</code>專案，專案命名為<code>Segmented Contrller</code>。</p>
+
+<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard。</p>
+
+<p>該專案會使用到的元件有：</p>
+
+<ol>
+    <li><code>Toolbar</code></li>
+    <li><code>Web View</code></li>
+    <li><code>TextField</code></li>
+    <li><code>Segmented Controller</code></li>
+    <li><code>Activity Indicator View</code></li>
+</ol>
+
+
+<p><code>Activity Indicator View</code>的設定如同之前<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>一樣。</p>
+
+<p><code>Segmented Controlle</code>在預設中只有兩個選項，要增加選項可在<code>Attributes inspector</code>的<code>Segments</code>設定成你要的數量，接著在下方<code>Segment</code>可以設定<code>Segment 0</code>的<code>Title</code>，根據你選擇到第幾個<code>Segment</code>可以個別去設定<code>Title</code>。</p>
+
+<p><img src="/images/iPhone/segmentedController4.jpeg">
+<img src="/images/iPhone/segmentedController5.jpeg">
+<img src="/images/iPhone/segmentedController6.jpeg"></p>
+
+<p><strong>Step 3.</strong>編輯ViewController.h</p>
+
+<p>定義的變數如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>內的，這裡多一個<code>UISegmentedControl</code>，<code>hitSegmented</code>是<code>Segmented Controller</code>的觸發事件。</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIWebViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">UIWebView</span> <span class="o">*</span><span class="n">webView_</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">urlTextField_</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented_</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIWebView</span> <span class="o">*</span><span class="n">webView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">urlTextField</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitReturn:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//點選鍵盤的return的觸發事件</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitSegmented:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span><span class="c1">//點選Segmented Controller的事件</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 4.</strong>編輯ViewController.m</p>
+
+<p>載入網頁的過程也如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>的說明，因此在<code>viewDidLoad</code>、<code>hitReturn</code>方法都與<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>相同；<code>UIActivityIndicatorView</code>的操作也一樣僅需將<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>中的<code>webViewDidStartLoad</code>、<code>webViewDidFinishLoad</code>複製過來即可。</p>
+
+<p>這裡則是多了一個<code>hitSegmented</code>的方法，載入網頁的過程都是使用相同的方法。</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitSegmented:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">urlString</span><span class="p">;</span>  <span class="c1">//網頁字串</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">NSInteger</span> <span class="n">segmentedNum</span><span class="p">;</span>  <span class="c1">//Segmented的選項</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">segmentedNum</span> <span class="o">=</span> <span class="n">segmented_</span><span class="p">.</span><span class="n">selectedSegmentIndex</span><span class="p">;</span> <span class="c1">//取得點選的Segmented Index</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">segmentedNum</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>            <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.google.com&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>            <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.yahoo.com.tw&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>            <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.youtube.com.tw&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">urlTextField</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">urlString</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">urlString</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">urlRequest</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadRequest:</span><span class="n">urlRequest</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 5.</strong>建立關連</p>
+
+<p><img src="/images/iPhone/segmentedController7.jpeg"></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Willy lighter</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-01T10:07:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/05/01/segmented-controller/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/05/01/segmented-controller/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/29/scroll-view/" title="Previous Post: Scroll View">&laquo; Scroll View</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>  
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/05/01/segmented-controller/">Segmented Controller</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/29/scroll-view/">Scroll View</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/26/image-view/">Image View</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/web-view/">Web View</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/slider-view/">Slider View</a>
+      </li>
+    
+  </ul>
+  
+  <h1>Categories</h1>
+  <ul>
+    <li>
+      <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+    </li>
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("lighter_lai", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/lighter_lai" class="twitter-follow-button" data-show-count="false">Follow @lighter_lai</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Willy lighter -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'lighter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lighter.github.com/blog/2012/05/01/segmented-controller/';
+        var disqus_url = 'http://lighter.github.com/blog/2012/05/01/segmented-controller/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
