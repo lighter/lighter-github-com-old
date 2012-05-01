@@ -61,7 +61,7 @@ categories: iPhone
 -(IBAction)hitSegmented:(id)sender;//點選Segmented Controller的事件
 {% endcodeblock %}
 
-**Step 4.**編輯ViewController.m
+**Step 4.**編輯ViewController.m。
 
 載入網頁的過程也如同[Web View](http://lighter.github.com/blog/2012/04/24/web-view/)的說明，因此在<code>viewDidLoad</code>、<code>hitReturn</code>方法都與[Web View](http://lighter.github.com/blog/2012/04/24/web-view/)相同；<code>UIActivityIndicatorView</code>的操作也一樣僅需將[Web View](http://lighter.github.com/blog/2012/04/24/web-view/)中的<code>webViewDidStartLoad</code>、<code>webViewDidFinishLoad</code>複製過來即可。
 
@@ -95,7 +95,7 @@ categories: iPhone
 }
 {% endcodeblock %}
 
-**Step 5.**建立關連
+**Step 5.**建立關連。
 
 {% img /images/iPhone/segmentedController7.jpeg %}
 
