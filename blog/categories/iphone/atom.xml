@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter's Blog]]></title>
   <link href="http://lighter.github.com/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-05-01T11:40:27+08:00</updated>
+  <updated>2012-05-01T11:44:07+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -100,7 +100,7 @@
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitSegmented:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span><span class="c1">//點選Segmented Controller的事件</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p><strong>Step 4.</strong>編輯ViewController.m</p>
+<p><strong>Step 4.</strong>編輯ViewController.m。</p>
 
 <p>載入網頁的過程也如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>的說明，因此在<code>viewDidLoad</code>、<code>hitReturn</code>方法都與<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>相同；<code>UIActivityIndicatorView</code>的操作也一樣僅需將<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>中的<code>webViewDidStartLoad</code>、<code>webViewDidFinishLoad</code>複製過來即可。</p>
 
@@ -165,7 +165,7 @@
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p><strong>Step 5.</strong>建立關連</p>
+<p><strong>Step 5.</strong>建立關連。</p>
 
 <p><img src="/images/iPhone/segmentedController7.jpeg"></p>
 ]]></content>
