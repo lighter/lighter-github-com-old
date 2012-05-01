@@ -36,7 +36,7 @@ categories: iPhone
 {% img /images/iPhone/segmentedController5.jpeg %}
 {% img /images/iPhone/segmentedController6.jpeg %}
 
-**Step 3.**編輯ViewController.h
+**Step 3.**編輯ViewController.h。
 
 定義的變數如同[Web View](http://lighter.github.com/blog/2012/04/24/web-view/)內的，這裡多一個<code>UISegmentedControl</code>，<code>hitSegmented</code>是<code>Segmented Controller</code>的觸發事件。
 
