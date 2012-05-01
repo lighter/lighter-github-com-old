@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.github.com/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-05-01T11:44:07+08:00</updated>
+  <updated>2012-05-01T11:45:27+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -52,7 +52,7 @@
 <img src="http://lighter.github.com/images/iPhone/segmentedController5.jpeg">
 <img src="http://lighter.github.com/images/iPhone/segmentedController6.jpeg"></p>
 
-<p><strong>Step 3.</strong>編輯ViewController.h</p>
+<p><strong>Step 3.</strong>編輯ViewController.h。</p>
 
 <p>定義的變數如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>內的，這裡多一個<code>UISegmentedControl</code>，<code>hitSegmented</code>是<code>Segmented Controller</code>的觸發事件。</p>
 
