@@ -146,7 +146,6 @@ categories: iPhone
     webView_.delegate = self;
     
     NSString *urlString = @"http://www.google.com";
-    urlString = [self.urlTextField text];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
