@@ -24,6 +24,8 @@ categories: iPhone
 
 {% img /images/iPhone/coredatas1.jpeg %}
 
+<!-- more -->
+
 **Step 1.**建立<code>Empty Application</code>，專案名稱為core data example
 
 {% img /images/iPhone/coredatas2.jpeg %}
