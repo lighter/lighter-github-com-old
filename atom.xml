@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.github.com/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-05-08T15:21:20+08:00</updated>
+  <updated>2012-05-08T15:29:38+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -184,6 +184,9 @@
 <p>整個流程大致上如下圖：</p>
 
 <p><img src="http://lighter.github.com/images/iPhone/coredatas1.jpeg"></p>
+
+<!-- more -->
+
 
 <p><strong>Step 1.</strong>建立<code>Empty Application</code>，專案名稱為core data example</p>
 
