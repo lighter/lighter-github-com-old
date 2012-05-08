@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Lighter's Blog</title>
+  <title>Core Data-Part1 - Lighter's Blog</title>
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="Map View很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
-該範例使用Segmented Contrl來切換Map View的樣式，並且定位出目前的所在位址(如下第三張圖)。 ">
+  <meta name="description" content="Core Data主要分成三個部分 Managed Object Context
+Persistent Store Coordinator
+Persistent Object Store Managed Object Context這類別記載了我們的App在記憶體中所有的Entity， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lighter.github.com">
+  <link rel="canonical" href="http://lighter.github.com/blog/2012/05/08/core-data-part1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,63 +78,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/05/08/map-view/">Map View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-08T11:13:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/08/map-view/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>Map View</code>很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
-該範例使用<code>Segmented Contrl</code>來切換<code>Map View</code>的樣式，並且定位出目前的所在位址(如下第三張圖)。</p>
-
-<p><img src="/images/iPhone/mapViews1.jpeg">
-<img src="/images/iPhone/mapViews2.jpeg">
-<img src="/images/iPhone/mapViews4.jpeg"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/08/map-view/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/08/core-data-part1/">Core Data-Part1</a></h1>
+      <h1 class="entry-title">Core Data-Part1</h1>
     
     
       <p class="meta">
@@ -151,14 +101,14 @@
 
 <time datetime="2012-05-08T10:52:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/05/08/core-data-part1/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><code>Core Data</code>主要分成三個部分</p>
+<div class="entry-content"><p><code>Core Data</code>主要分成三個部分</p>
 
 <ol>
 <li>Managed Object Context</li>
@@ -342,71 +292,16 @@
 </ol>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/01/segmented-controller/">Segmented Controller</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Willy lighter</span></span>
 
-<time datetime="2012-05-01T10:07:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/01/segmented-controller/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>Segmented Controller</code>最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用<code>Segmented Controller</code>來切換網頁呈現網站內容。</p>
-
-<p>以下使用3個<code>Segments</code>來做Google、Yahoo、Youtube的切換。</p>
-
-<p><img src="/images/iPhone/segmentedController1.jpeg">
-<img src="/images/iPhone/segmentedController2.jpeg">
-<img src="/images/iPhone/segmentedController3.jpeg"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/01/segmented-controller/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/29/scroll-view/">Scroll View</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -418,310 +313,48 @@
   
 
 
-<time datetime="2012-04-29T17:27:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/29/scroll-view/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>當iPhone的畫面要塞進很多內容時，可以利用<code>Scroll View</code>來捲動畫面瀏覽頁面，例如當畫面需要呈現很多張圖片的時候，一個<code>View</code>只能呈現一張<code>UIImage</code>，因此可以利用<code>Scroll View</code>來呈現。</p>
-
-<p>最後的結果如下圖：(將圖片向右排列，手指將畫面往左拖曳，即可看到其他的圖片)。</p>
-
-<p><img src="/images/iPhone/scrollViews1.jpeg">
-<img src="/images/iPhone/scrollViews2.jpeg">
-<img src="/images/iPhone/scrollViews3.jpeg"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/29/scroll-view/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2012-05-08T10:52:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/26/image-view/">Image View</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+  
+</span>
 
 
-<time datetime="2012-04-26T06:09:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/26/image-view/#disqus_thread">Comments</a>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>在iPhone上要呈現圖需透過Image View這個元件來呈現，接著以簡單的範例來呈現。</p>
-
-<p>該範例以簡單的Button事件來改變Image View呈現的圖片。</p>
-
-<p><img src="/images/iPhone/imageViews1.jpeg">
-<img src="/images/iPhone/imageViews2.jpeg"></p>
-
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/05/08/core-data-part1/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/05/08/core-data-part1/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/26/image-view/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/24/web-view/">Web View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-24T15:23:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/24/web-view/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>建立一個簡單Web瀏覽器，此範例需要使用到<code>TextField</code>、<code>Web View</code>、<code>Toolbar</code>、<code>Bar Button Item</code>、<code>Activity Indicator View</code>；元件的用途方別如下：</p>
-
-<ol>
-<li><code>TextField</code>:輸入網址。</li>
-<li><code>Web View</code>:show網頁使用。</li>
-<li><code>Toolbar</code>、<code>Bar Button Item</code>:工具列，可返回上頁、下頁、重整。</li>
-<li><code>Activity Indicator View</code>:讓使用者得知網頁還在進行loading。</li>
-</ol>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/24/web-view/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+        <a class="basic-alignment left" href="/blog/2012/05/01/segmented-controller/" title="Previous Post: Segmented Controller">&laquo; Segmented Controller</a>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/24/slider-view/">Slider View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-24T14:30:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/24/slider-view/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Slider在iPhone比較常見是用來調整螢幕的明暗度，或是在某些圖片編輯app內用來調整RGB的比例，我們使用一個簡單的範例來操控Slider。</p>
-
-<p><img class="left" src="/images/iPhone/sliderViews1.jpeg">簡單的範例最後要達到的結果如左圖，拖拉Slider可以觀察到數值隨著Slider的變化跟著改變。</p>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/24/slider-view/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/24/action-sheet/">Action Sheet</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-24T10:29:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/24/action-sheet/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>UIActionSheet是一個由下往上出現的視窗，通常彈出一些按鈕選項讓使用者選擇要執行的方式為何！使用一個簡單的範例來介紹它的使用方法。</p>
-
-<p>在iPhone畫面中加入一個Round Rect Button，當Button按下時，ActionSheet則會彈出。</p>
-
-<p><img class="center" src="/images/iPhone/actionSheets1.jpeg"></p>
-
-<p><strong>Step 1.</strong>建立一個<code>SingleView</code>的專案，專案名稱為Action Sheet</p>
-
-<p><strong>Step 2.</strong>開啟MainStoryboard.storyboard，加入一個<code>Round Rect Button</code>的元件，並且設定該元件的Title為Show Action Sheet</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/24/action-sheet/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+        <a class="basic-alignment right" href="/blog/2012/05/08/map-view/" title="Next Post: Map View">Map View &raquo;</a>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/02/octopress-install/">Octopress Install With Github</a></h1>
-    
-    
-      <p class="meta">
-        
+    </p>
+  </footer>
+</article>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-02T21:41:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/02/octopress-install/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>來記錄一下如何架設Octopress</p>
-
-<p>我使用的是Mac OS X 10.7.3</p>
-
-<p><strong>Step 1.</strong>建立github page
-在<a href="https://github.com/">github</a>網站建立一個Repositories，project名稱為xxxxx.github.com</p>
-
-<p><strong>Step 2.</strong>Octopress Setup</p>
-
-<p>可參考<a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.2 && rvm use 1.9.2
-</span><span class='line'>$ git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>$ cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
-</span><span class='line'>$ ruby --version  # Should report Ruby 1.9.2
-</span><span class='line'>$ gem install bundler
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ rake install</span></code></pre></td></tr></table></div></figure>
-
-
-
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/02/octopress-install/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>  
@@ -762,7 +395,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -782,6 +415,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -796,7 +430,10 @@
       var disqus_shortname = 'lighter';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lighter.github.com/blog/2012/05/08/core-data-part1/';
+        var disqus_url = 'http://lighter.github.com/blog/2012/05/08/core-data-part1/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

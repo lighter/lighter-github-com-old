@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Action Sheet - Lighter's Blog</title>
+  <title>Map View - Lighter's Blog</title>
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="UIActionSheet是一個由下往上出現的視窗，通常彈出一些按鈕選項讓使用者選擇要執行的方式為何！使用一個簡單的範例來介紹它的使用方法。 在iPhone畫面中加入一個Round Rect Button，當Button按下時，ActionSheet則會彈出。 Step 1. &hellip;">
+  <meta name="description" content="Map View很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
+該範例使用Segmented Contrl來切換Map View的樣式，並且定位出目前的所在位址(如下第三張圖)。 Step 1.建立Single View專案，專案名稱為Map View Step 2. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lighter.github.com/blog/2012/04/24/action-sheet">
+  <link rel="canonical" href="http://lighter.github.com/blog/2012/05/08/map-view">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Action Sheet</h1>
+      <h1 class="entry-title">Map View</h1>
     
     
       <p class="meta">
@@ -97,7 +98,7 @@
   
 
 
-<time datetime="2012-04-24T10:29:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
+<time datetime="2012-05-08T11:13:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,41 +107,49 @@
   </header>
 
 
-<div class="entry-content"><p>UIActionSheet是一個由下往上出現的視窗，通常彈出一些按鈕選項讓使用者選擇要執行的方式為何！使用一個簡單的範例來介紹它的使用方法。</p>
+<div class="entry-content"><p><code>Map View</code>很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
+該範例使用<code>Segmented Contrl</code>來切換<code>Map View</code>的樣式，並且定位出目前的所在位址(如下第三張圖)。</p>
 
-<p>在iPhone畫面中加入一個Round Rect Button，當Button按下時，ActionSheet則會彈出。</p>
-
-<p><img class="center" src="/images/iPhone/actionSheets1.jpeg"></p>
-
-<p><strong>Step 1.</strong>建立一個<code>SingleView</code>的專案，專案名稱為Action Sheet</p>
-
-<p><strong>Step 2.</strong>開啟MainStoryboard.storyboard，加入一個<code>Round Rect Button</code>的元件，並且設定該元件的Title為Show Action Sheet</p>
+<p><img src="/images/iPhone/mapViews1.jpeg">
+<img src="/images/iPhone/mapViews2.jpeg">
+<img src="/images/iPhone/mapViews4.jpeg"></p>
 
 <!-- more -->
 
 
-<p><img class="center" src="/images/iPhone/actionSheets2.jpeg"></p>
+<p><strong>Step 1.</strong>建立<code>Single View</code>專案，專案名稱為Map View</p>
 
-<p><strong>Step 3.</strong>編輯ViewController.h</p>
+<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard</p>
 
-<p>1.加入<code>UIActionSheetDelegate</code>的協定。</p>
+<p>加入：</p>
 
-<p>2.定義showActionSheet為Button的觸發事件。</p>
+<ol>
+<li>Toolbar</li>
+<li>Segmented Control</li>
+<li>Bar Button Item</li>
+<li>Flexible Space Bar Button Item</li>
+<li>Map View</li>
+</ol>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIActionSheetDelegate</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showActionSheet:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+
+<p><img src="/images/iPhone/mapViews5.jpeg"></p>
+
+<p><strong>Step 3.</strong>加入<code>MapKit</code>的framework</p>
+
+<p>在檔案瀏覽的地方點選專案，接著畫面中間選擇<code>TARGETS</code>在往右邊上方找到<code>Build Phases</code>，下方可看到<code>Link Binary With Libraries</code>，點選下方的<cde>＋</code>加號，將<code>MapKit.framework</code>加進來。加入成功以後在你的專案資料夾內即可看到一個<code>MapKit.framework</code></p>
+
+<p><img src="/images/iPhone/mapViews6.jpeg"></p>
+
+<p><strong>Step 4.</strong>編輯ViewController.h</p>
+
+<ol>
+<li>引入<code>MapKit/MapKit.h</code></li>
+<li>定義變數，如同程式碼所述</li>
+<li>定義兩個<code>IBAction</code>，該用途如程式碼的註解</li>
+</ol>
 
 
-<p><strong>Step 4.</strong>編輯ViewController.m</p>
 
-<p>1.在showActionSheet:內定義一個<code>UIActionSheet</code>的actoinSheet變數，當中的參數如以下設定；特別的是當你有其它選項想讓使用者選擇時，<code>otherButtonTitles:</code>這個參數設定後面連續使用<code>@""</code>連接。</p>
-
-<p>2.<code>actionSheetStyle</code>設定ActionSheet的Style。</p>
-
-<p>3.記得設定<code>showInVie</code>將ActionSheet顯示在畫面上。</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -153,25 +162,46 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showActionSheet:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">UIActionSheet</span> <span class="o">*</span><span class="n">actionSheet</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIActionSheet</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTitle:</span><span class="s">@&quot;Share Save&quot;</span>
-</span><span class='line'>              <span class="nl">delegate:</span><span class="n">self</span>
-</span><span class='line'>              <span class="nl">cancelButtonTitle:</span><span class="s">@&quot;Cancel&quot;</span>
-</span><span class='line'>              <span class="nl">destructiveButtonTitle:</span><span class="s">@&quot;Save&quot;</span>
-</span><span class='line'>              <span class="nl">otherButtonTitles:</span><span class="s">@&quot;Email&quot;</span><span class="p">,</span> <span class="s">@&quot;Facebook&quot;</span><span class="p">,</span> <span class="s">@&quot;Twitter&quot;</span><span class="p">,</span> <span class="s">@&quot;Plurk&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+</span><span class='line'><span class="cp">#import &lt;MapKit/MapKit.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">actionSheet</span><span class="p">.</span><span class="n">actionSheetStyle</span> <span class="o">=</span> <span class="n">UIActionSheetStyleDefault</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">actionSheet</span> <span class="nl">showInView:</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">];</span>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">MKMapView</span> <span class="o">*</span><span class="n">mapView_</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented_</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">MKMapView</span> <span class="o">*</span><span class="n">mapView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//顯示定位</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//改變地圖的type</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 5.</strong>編輯ViewController.m</p>
+
+<p>一樣要先補上<code>synthesize</code>，接著是撰寫<code>showLocation:</code>，該方法很簡單，只要定義<code>mapView</code>的<code>showsUserLocation</code>為</code>YES</code>即可顯示目前該使用者的位址。</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">mapView</span> <span class="o">=</span> <span class="n">mapView_</span><span class="p">,</span> <span class="n">segmented</span> <span class="o">=</span> <span class="n">segmented_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">showsUserLocation</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Step 5.</strong>判斷按下了哪個按鈕！！</p>
-
-<p>可以透過<code>actionSheet:clickedButtonAtIndex:</code>這個方法來協助得知按下了是哪一個按鈕。</p>
-
-<p>在ViewController.m檔加入這個方法，並使用簡單的<code>switch</code>來判斷是哪一個按鈕被按下了，這邊使用一個簡單的<code>NSLog</code>訊息來告知你按下了哪一個按鈕。</p>
+<p>在改變地圖的模式，使用<code>Segmented Control</code>，操作的方式如同<a href="http://lighter.github.com/blog/2012/05/01/segmented-controller/">Segmented Control</a>，唯一不同的是在<code>case</code>內執行的東西；在<code>case</code>內去改變<code>mapView</code>的<code>mapType</code>，地圖模式一共有三種模式可以更換，因此您可以依自己的需求去做變換。</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -191,27 +221,19 @@
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">actionSheet:</span><span class="p">(</span><span class="n">UIActionSheet</span> <span class="o">*</span><span class="p">)</span><span class="n">actionSheet</span> <span class="nl">clickedButtonAtIndex:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">buttonIndex</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">buttonIndex</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSInteger</span> <span class="n">segmentedNum</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">segmentedNum</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">segmented</span><span class="p">.</span><span class="n">selectedSegmentIndex</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">segmentedNum</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>        <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Save&quot;</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeStandard</span><span class="p">;</span>
 </span><span class='line'>            <span class="k">break</span><span class="p">;</span>
 </span><span class='line'>        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Email&quot;</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeSatellite</span><span class="p">;</span>
 </span><span class='line'>            <span class="k">break</span><span class="p">;</span>
 </span><span class='line'>        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Facebook&quot;</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Twitter&quot;</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Plurk&quot;</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeHybrid</span><span class="p">;</span>
 </span><span class='line'>            <span class="k">break</span><span class="p">;</span>
 </span><span class='line'>        <span class="k">default</span><span class="o">:</span>
 </span><span class='line'>            <span class="k">break</span><span class="p">;</span>
@@ -222,9 +244,7 @@
 
 <p><strong>Step 6.</strong>建立關連</p>
 
-<p>建立<code>showActionSheet</code>與<code>Round Rect Button</code>的關聯</p>
-
-<p><img class="center" src="/images/iPhone/actionSheets3.jpeg"></p>
+<p><img src="/images/iPhone/mapViews7.jpeg"></p>
 </div>
 
 
@@ -247,7 +267,7 @@
   
 
 
-<time datetime="2012-04-24T10:29:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
+<time datetime="2012-05-08T11:13:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -261,7 +281,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/04/24/action-sheet/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/04/24/action-sheet/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/05/08/map-view/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/05/08/map-view/" >Tweet</a>
   
   
   
@@ -272,10 +292,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/02/octopress-install/" title="Previous Post: octopress install with github">&laquo; octopress install with github</a>
+        <a class="basic-alignment left" href="/blog/2012/05/08/core-data-part1/" title="Previous Post: Core Data-Part1">&laquo; Core Data-Part1</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/04/24/slider-view/" title="Next Post: Slider View">Slider View &raquo;</a>
       
     </p>
   </footer>
@@ -365,8 +383,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://lighter.github.com/blog/2012/04/24/action-sheet/';
-        var disqus_url = 'http://lighter.github.com/blog/2012/04/24/action-sheet/';
+        var disqus_identifier = 'http://lighter.github.com/blog/2012/05/08/map-view/';
+        var disqus_url = 'http://lighter.github.com/blog/2012/05/08/map-view/';
         var disqus_script = 'embed.js';
       
     (function () {
