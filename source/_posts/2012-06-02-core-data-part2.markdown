@@ -136,7 +136,7 @@ categories: iPhone
 
 Step 8.建立關連
 
-最後就是將元件跟<code>IBOutlet</code>、<code>IBAction</code>建立關連
+最後就是將元件跟<code>IBOutlet</code>、<code>IBAction</code>建立關連，在此就不多做贅述了。
 
 範例下載：[Download here](https://lighter@github.com/lighter/Core-Data-Example.git)
 
