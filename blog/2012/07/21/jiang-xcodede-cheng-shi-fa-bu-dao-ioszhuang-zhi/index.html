@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>octopress install with github - Lighter's Blog</title>
+  <title>將XCODE的程式發佈到iOS裝置 - Lighter's Blog</title>
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="來記錄一下如何架設Octopress 我使用的是Mac OS X 10.7.3 Step 1.建立github page
-在github網站建立一個Repositories，project名稱為xxxxx.github.com Step 2.Octopress Setup 可參考Octopress &hellip;">
+  <meta name="description" content="以下是我使用的作業環境 Mac Lion 10.7.4
+XCODE 4.3.3
+iOS5.1 裝置為 iPhone 4 Step 1.製作假驗證 首先在Finder的地方，點選前往 -> 工具程式。 開啟鑰匙圈存取。 選取鑰匙圈存取 -> 憑證輔助程式 -> 製作憑證。 名稱：fake &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lighter.github.com/blog/2012/04/02/octopress-install">
+  <link rel="canonical" href="http://lighter.github.com/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress Install With Github</h1>
+      <h1 class="entry-title">將XCODE的程式發佈到iOS裝置</h1>
     
     
       <p class="meta">
@@ -98,7 +99,7 @@
   
 
 
-<time datetime="2012-04-02T21:41:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+<time datetime="2012-07-21T15:52:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,81 +108,103 @@
   </header>
 
 
-<div class="entry-content"><p>來記錄一下如何架設Octopress</p>
+<div class="entry-content"><p>以下是我使用的作業環境</p>
 
-<p>我使用的是Mac OS X 10.7.3</p>
-
-<p><strong>Step 1.</strong>建立github page
-在<a href="https://github.com/">github</a>網站建立一個Repositories，project名稱為xxxxx.github.com</p>
-
-<p><strong>Step 2.</strong>Octopress Setup</p>
-
-<p>可參考<a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.2 && rvm use 1.9.2
-</span><span class='line'>$ git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>$ cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
-</span><span class='line'>$ ruby --version  # Should report Ruby 1.9.2
-</span><span class='line'>$ gem install bundler
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ rake install</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>Mac Lion 10.7.4</li>
+<li>XCODE 4.3.3</li>
+<li>iOS5.1 裝置為 iPhone 4</li>
+</ul>
 
 
+<!-- more -->
 
 
-<!--more-->
+<p><strong>Step 1.製作假驗證</strong></p>
+
+<p>首先在Finder的地方，點選前往 -> 工具程式。</p>
+
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone1.png"></p>
+
+<p>開啟鑰匙圈存取。</p>
+
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone2.png"></p>
+
+<p>選取鑰匙圈存取 -> 憑證輔助程式 -> 製作憑證。</p>
+
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone3.png"></p>
+
+<ul>
+<li>名稱：fake</li>
+<li>識別身分類型：自簽根</li>
+<li>憑證類型：代碼簽名
+*覆蓋預設值(勾選)</li>
+</ul>
 
 
-<p>安裝的過程中似乎因為我有安裝Xcode所以有出現一些問題，ruby也裝失敗了，而我是參考這兩篇解決的:</p>
+<p>繼續之後會跳出一個對話視窗一樣選取繼續。</p>
+
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone4.png"></p>
+
+<ul>
+<li>序號：121212</li>
+<li>有效時間：999</li>
+</ul>
+
+
+<p>接著一直繼續到最後。</p>
+
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone5.png"></p>
+
+<p>Step 2.修改XCODE讓他可以抓取到我們的製作的假驗證。</p>
+
+<p>開啟應用程式資料夾，找到XCODE，右鍵 -> 顯示套件內容。</p>
+
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone6.png"></p>
+
+<p>依照Contents/Developer/Platforms/iPhoneOS.plaftorm的路徑尋找到<code>Info.plist<code>。</p>
+
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone7.png"></p>
 
 <ol>
-<li><p><a href="http://gogojimmy.net/%E6%8E%83%E9%9B%B7/RVM/Ruby%201.9.3/install-ruby-1-dot-9-3-via-rvm-on-mac-problem/">在 Mac 上使用 RVM 安裝 Ruby 1.9.3 時錯誤</a></p></li>
-<li><p><a href="http://blog.visioncan.com/2011/install-octopress/">Octopress安裝筆記</a></p></li>
+<li>將<code>Info.plist</code>複製到桌面上開啟，使用<code>cmd+f</code>尋找<code>CODE_SIGN_CONTEST_CLASS</code>，將原本的預設值改為<code>XCCodeSignContext</code>(共有兩個地方要修改)。</li>
+<li><code>RuntimeRequirements -> Classes -> item 0</code>的預設值也改為<code>XCCodeSignContext</code>。</li>
 </ol>
 
 
-<p><strong>Step 3.</strong>發佈到github</p>
+<p><strong>ps.這樣總共有三個地方要修改為<code>XCCodeSignContext</code>。</strong></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+<p>修改完後將該檔案貼回原本的地方並且取代掉。</p>
 
+<p>Step 3.修改專案。</p>
 
-<p>會要你輸入你的github pages repository url(例如：git@github.com:xxxxx/xxxxx.github.com.git)</p>
+<p>接著在你的<code>XCODE</code>專案，點選專案的設定檔<code>PROJECT</code> -> <code>Build Settings</code> -> <code>Code Signing</code> -> <code>Code Signing Identity</code>。</p>
 
-<p>其實這段在你建立的github網頁中即可找到，按下Enter後在執行下面的指令</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone8.png"></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate
-</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+<p>將裡面的憑證選取您剛新增的金鑰名稱，這裡使用之前已經建立好的<code>fake code sign</code>，所以會跟前面有所不同！！</p>
 
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone9.png"></p>
 
-<p>過個10分鐘左右，會收到github的來信，接著再把檔案push到github上</p>
+<p>建立完之後在編譯專案的右邊，選取我們要發佈的裝置，記得裝置必須先與電腦連接。接著就可以編譯發佈到實體裝置上了。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
-</span><span class='line'>$ git commit -m 'your message'
-</span><span class='line'>$ git push origin source</span></code></pre></td></tr></table></div></figure>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone12.png"></p>
 
+<p>發佈的時候如果點選App後馬上閃退的話，這時修改一下<code>Scheme</code>。</p>
 
-<p>輸入你的github project名稱就可以看到你的網頁了。</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone10.png"></p>
 
-<p>如果要在本機端觀看你的網站可輸入</p>
+<p>選擇第二個<code>Run XXX.app</code> -> <code>Info</code> -> <code>Debugger</code> -> 選取<code>GDB</code>，最後按下OK，再次重新編譯專案發佈到實體裝置，應該就可以解決閃退的問題了。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone11.png"></p>
 
+<h3>參考資料</h3>
 
-<p><a href="http://localhost:4000">http://localhost:4000</a>即可看到你的網站</p>
+<ol>
+<li><a href="http://tw.myblog.yahoo.com/pcman-128/article?mid=850&amp;prev=-2&amp;next=-2&amp;page=1&amp;sc=1#yartcmt">如何將Xcode的程式發布到iOS裝置(免年費)</a></li>
+<li><a href="http://wangshifuola.blogspot.tw/2012/04/ioserror-launching-remote-program.html">iOS學習_Error launching remote program: failed to get the task for process</a></li>
+</ol>
+
 </div>
 
 
@@ -204,12 +227,12 @@
   
 
 
-<time datetime="2012-04-02T21:41:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+<time datetime="2012-07-21T15:52:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
   
 </span>
 
@@ -218,7 +241,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/04/02/octopress-install/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/04/02/octopress-install/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/" >Tweet</a>
   
   
   
@@ -229,8 +252,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2012/06/02/core-data-part2/" title="Previous Post: Core Data-Part2">&laquo; Core Data-Part2</a>
       
-        <a class="basic-alignment right" href="/blog/2012/04/24/action-sheet/" title="Next Post: Action Sheet">Action Sheet &raquo;</a>
       
     </p>
   </footer>
@@ -320,8 +343,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://lighter.github.com/blog/2012/04/02/octopress-install/';
-        var disqus_url = 'http://lighter.github.com/blog/2012/04/02/octopress-install/';
+        var disqus_identifier = 'http://lighter.github.com/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/';
+        var disqus_url = 'http://lighter.github.com/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/';
         var disqus_script = 'embed.js';
       
     (function () {
