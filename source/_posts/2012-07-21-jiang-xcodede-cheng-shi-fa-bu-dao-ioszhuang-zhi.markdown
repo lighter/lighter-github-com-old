@@ -50,7 +50,7 @@ Step 2.修改XCODE讓他可以抓取到我們的製作的假驗證。
 
 {% img /images/xcodeToiPhone/xcodeToiPhone6.png %}
 
-依照Contents/Developer/Platforms/iPhoneOS.platform的路徑尋找到<code>Info.plist<code>。
+依照Contents/Developer/Platforms/iPhoneOS.platform的路徑尋找到<code>Info.plist</code>。
 
 {% img /images/xcodeToiPhone/xcodeToiPhone7.png %}
 
