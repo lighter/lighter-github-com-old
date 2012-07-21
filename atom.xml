@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.github.com/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-07-21T17:11:39+08:00</updated>
+  <updated>2012-07-21T17:15:42+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -72,7 +72,7 @@
 
 <p><img src="http://lighter.github.com/images/xcodeToiPhone/xcodeToiPhone6.png"></p>
 
-<p>依照Contents/Developer/Platforms/iPhoneOS.plaftorm的路徑尋找到<code>Info.plist<code>。</p>
+<p>依照Contents/Developer/Platforms/iPhoneOS.platform的路徑尋找到<code>Info.plist</code>。</p>
 
 <p><img src="http://lighter.github.com/images/xcodeToiPhone/xcodeToiPhone7.png"></p>
 
