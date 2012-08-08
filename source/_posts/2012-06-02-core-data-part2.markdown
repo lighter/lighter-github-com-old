@@ -60,14 +60,18 @@ categories: iPhone
 @end
 {% endcodeblock %}
 
+第5行，取得AppDelegate的<code>delegate</code>
+
+第6行，透過app取得AppDelegete的<code>NSManagedObjectContext</code>
+
+第7行，定義要加入的Entity是Phone。
+
+第9行，用一個<code>if</code>檢查欄位的值是否為空白，當不是空白的時候才寫入。
+
+第18~22，當寫入發生錯誤時才會執行。
+
 {% codeblock AddDetailViewController.m lang:objc %}
 @synthesize name = name_, number = number_, app;
-
-第5行，取得AppDelegate的<code>delegate</code>
-第6行，透過app取得AppDelegete的<code>NSManagedObjectContext</code>
-第7行，定義要加入的Entity是Phone。
-第9行，用一個<code>if</code>檢查欄位的值是否為空白，當不是空白的時候才寫入。
-第18~22，當寫入發生錯誤時才會執行。
 
 -(IBAction)save:(id)sender
 {
