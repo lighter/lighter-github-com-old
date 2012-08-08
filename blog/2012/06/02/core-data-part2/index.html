@@ -179,7 +179,15 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>第5行，取得AppDelegate的<code>delegate</code></p>
 
+<p>第6行，透過app取得AppDelegete的<code>NSManagedObjectContext</code></p>
+
+<p>第7行，定義要加入的Entity是Phone。</p>
+
+<p>第9行，用一個<code>if</code>檢查欄位的值是否為空白，當不是空白的時候才寫入。</p>
+
+<p>第18~22，當寫入發生錯誤時才會執行。</p>
 
 <figure class='code'><figcaption><span>AddDetailViewController.m  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -205,19 +213,7 @@
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
 </pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">number_</span><span class="p">,</span> <span class="n">app</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">第</span><span class="mi">5</span><span class="err">行，取得</span><span class="n">AppDelegate</span><span class="err">的</span><span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">delegate</span><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;</span>
-</span><span class='line'><span class="err">第</span><span class="mi">6</span><span class="err">行，透過</span><span class="n">app</span><span class="err">取得</span><span class="n">AppDelegete</span><span class="err">的</span><span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">NSManagedObjectContext</span><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;</span>
-</span><span class='line'><span class="err">第</span><span class="mi">7</span><span class="err">行，定義要加入的</span><span class="n">Entity</span><span class="err">是</span><span class="n">Phone</span><span class="err">。</span>
-</span><span class='line'><span class="err">第</span><span class="mi">9</span><span class="err">行，用一個</span><span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;</span><span class="err">檢查欄位的值是否為空白，當不是空白的時候才寫入。</span>
-</span><span class='line'><span class="err">第</span><span class="mi">18</span><span class="o">~</span><span class="mi">22</span><span class="err">，當寫入發生錯誤時才會執行。</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
 </span><span class='line'><span class="p">{</span>
