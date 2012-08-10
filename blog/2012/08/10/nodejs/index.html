@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>octopress install with github - Lighter's Blog</title>
+  <title>NodeJS - Lighter's Blog</title>
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="來記錄一下如何架設Octopress 我使用的是Mac OS X 10.7.3 Step 1.建立github page
-在github網站建立一個Repositories，project名稱為xxxxx.github.com Step 2.Octopress Setup 可參考Octopress &hellip;">
+  <meta name="description" content="Node.js使以Javascript語言為基礎的框架，讓我覺得很神奇的是它可以拿來做網站，以往在寫網頁時是使用需要使用php、Apache、MySQL；而Node.js可以直接建立網站，真的蠻酷的！ 安裝完Node.js，在桌面上建立一個hello.js的檔案，程式碼內容如下 hello.js &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lighter.github.com/blog/2012/04/02/octopress-install">
+  <link rel="canonical" href="http://lighter.github.com/blog/2012/08/10/nodejs">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress Install With Github</h1>
+      <h1 class="entry-title">NodeJS</h1>
     
     
       <p class="meta">
@@ -98,7 +97,7 @@
   
 
 
-<time datetime="2012-04-02T21:41:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+<time datetime="2012-08-10T13:34:00+08:00" pubdate data-updated="true">Aug 10<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,81 +106,59 @@
   </header>
 
 
-<div class="entry-content"><p>來記錄一下如何架設Octopress</p>
+<div class="entry-content"><p><a href="http://nodejs.org/">Node.js</a>使以Javascript語言為基礎的框架，讓我覺得很神奇的是它可以拿來做網站，以往在寫網頁時是使用需要使用php、Apache、MySQL；而Node.js可以直接建立網站，真的蠻酷的！</p>
 
-<p>我使用的是Mac OS X 10.7.3</p>
+<p>安裝完Node.js，在桌面上建立一個<code>hello.js</code>的檔案，程式碼內容如下</p>
 
-<p><strong>Step 1.</strong>建立github page
-在<a href="https://github.com/">github</a>網站建立一個Repositories，project名稱為xxxxx.github.com</p>
-
-<p><strong>Step 2.</strong>Octopress Setup</p>
-
-<p>可參考<a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>hello.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.2 && rvm use 1.9.2
-</span><span class='line'>$ git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>$ cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
-</span><span class='line'>$ ruby --version  # Should report Ruby 1.9.2
-</span><span class='line'>$ gem install bundler
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ rake install</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">});</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}}.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-
-
-<!--more-->
-
-
-<p>安裝的過程中似乎因為我有安裝Xcode所以有出現一些問題，ruby也裝失敗了，而我是參考這兩篇解決的:</p>
-
-<ol>
-<li><p><a href="http://gogojimmy.net/%E6%8E%83%E9%9B%B7/RVM/Ruby%201.9.3/install-ruby-1-dot-9-3-via-rvm-on-mac-problem/">在 Mac 上使用 RVM 安裝 Ruby 1.9.3 時錯誤</a></p></li>
-<li><p><a href="http://blog.visioncan.com/2011/install-octopress/">Octopress安裝筆記</a></p></li>
-</ol>
-
-
-<p><strong>Step 3.</strong>發佈到github</p>
+<p>接著在終端機切換到該檔案的路徑下輸入</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ node hello.js</span></code></pre></td></tr></table></div></figure>
 
 
-<p>會要你輸入你的github pages repository url(例如：git@github.com:xxxxx/xxxxx.github.com.git)</p>
+<p>開啟瀏覽器網址輸入http://127.0.0.1:8000，即可看到一個Hello World，就這麼簡單，但讓我覺得很厲害的地方是終端機使用，看到有人將終端機的操作透過Node.js即時的反應呈現在網路上！</p>
 
-<p>其實這段在你建立的github網頁中即可找到，按下Enter後在執行下面的指令</p>
+<p>目前我也發現<code>Express</code>這個套件，這套件讓開發http server變得容易許多，修改<code>hello.js</code>(使用Express)。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate
-</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>過個10分鐘左右，會收到github的來信，接著再把檔案push到github上</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>hello.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
-</span><span class='line'>$ git commit -m 'your message'
-</span><span class='line'>$ git push origin source</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">).</span><span class="nx">createServer</span><span class="p">();</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>輸入你的github project名稱就可以看到你的網頁了。</p>
+<p>上面的程式碼可看到<code>app</code>還可以定義HTTP的路由，此例為<code>app.get</code>。</p>
 
-<p>如果要在本機端觀看你的網站可輸入</p>
+<h2>參考資料</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
+<p><a href="http://nodejs.org/">Node.js</a></p>
 
+<p><a href="http://book.nodejs.tw/">Node.js 中文電子書</a></p>
 
-<p><a href="http://localhost:4000">http://localhost:4000</a>即可看到你的網站</p>
+<p><a href="http://www.csser.com/board/4f77e6f996ca600f78000936">Express.js 中文入門指引手冊</a></p>
 </div>
 
 
@@ -204,12 +181,12 @@
   
 
 
-<time datetime="2012-04-02T21:41:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+<time datetime="2012-08-10T13:34:00+08:00" pubdate data-updated="true">Aug 10<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
   
 </span>
 
@@ -218,7 +195,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/04/02/octopress-install/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/04/02/octopress-install/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/blog/2012/08/10/nodejs/" data-via="lighter_lai" data-counturl="http://lighter.github.com/blog/2012/08/10/nodejs/" >Tweet</a>
   
   
   
@@ -229,8 +206,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/" title="Previous Post: 將XCODE的程式發佈到iOS裝置">&laquo; 將XCODE的程式發佈到iOS裝置</a>
       
-        <a class="basic-alignment right" href="/blog/2012/04/24/action-sheet/" title="Next Post: Action Sheet">Action Sheet &raquo;</a>
       
     </p>
   </footer>
@@ -320,8 +297,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://lighter.github.com/blog/2012/04/02/octopress-install/';
-        var disqus_url = 'http://lighter.github.com/blog/2012/04/02/octopress-install/';
+        var disqus_identifier = 'http://lighter.github.com/blog/2012/08/10/nodejs/';
+        var disqus_url = 'http://lighter.github.com/blog/2012/08/10/nodejs/';
         var disqus_script = 'embed.js';
       
     (function () {
