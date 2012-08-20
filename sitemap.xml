@@ -2,57 +2,57 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://lighter.github.com/blog/2012/04/02/octopress-install/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/04/24/action-sheet/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/04/24/slider-view/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/04/24/web-view/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/04/26/image-view/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/04/29/scroll-view/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/05/01/segmented-controller/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/05/08/core-data-part1/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/05/08/map-view/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/06/02/core-data-part2/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://lighter.github.com/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/
         </loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/2012/08/10/nodejs/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/blog/archives/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/feed/index.xml</loc>
@@ -60,6 +60,6 @@
     </url>
     <url>
         <loc>http://lighter.github.com/</loc>
-        <lastmod>2012-08-21T02:31:44+08:00</lastmod>
+        <lastmod>2012-08-21T02:52:21+08:00</lastmod>
     </url>
 </urlset>
