@@ -60,7 +60,7 @@ socket.on('update_user', function(data){
 });
 {% endcodeblock %}
 
-最後則是發送對話按鈕的觸發事件。
+最後則是發送對話按鈕的觸發事件以及HTML的部份。
 
 {% codeblock index.html lang:javascript %}
 //Part 3
@@ -76,6 +76,26 @@ $(function(){
   });
 });
 </script>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2" id="users">
+      <!--Sidebar content-->
+    </div>
+    <div class="span10">
+      <!--Body content-->
+      <div class="span12" id="chat_content"></div>
+      <div class="input-append">
+      <input class="span2" id="send_input" size="16" type="text"><button class="btn" type="button" id="send">Send!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
 {% endcodeblock %}
 
 ##Server端
