@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.github.com/feed" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-08-24T13:52:34+08:00</updated>
+  <updated>2012-08-26T09:33:11+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,315 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NodeJS and Socket.io chat]]></title>
+    <link href="http://lighter.github.com/blog/2012/08/26/nodejs-and-socket-dot-io-chat/"/>
+    <updated>2012-08-26T08:48:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2012/08/26/nodejs-and-socket-dot-io-chat</id>
+    <content type="html"><![CDATA[<p>有了簡單的聊天室的概念(<a href="http://lighter.github.com/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple Chat With Socket.io</a>)之後，我就在想，那同時有很多人時，要如何知道現在線上有誰呢？還有每次發言的人是誰呢？有了這些想法，那就開始繼續修改程式碼吧。</p>
+
+<h2>Client端</h2>
+
+<p>我將程式碼拆解幾個部分來看，先從Client端來看，一開始是引入<code>bootstrap</code>、<code>jQuery</code>等基本的<code>html</code>宣告</p>
+
+<figure class='code'><figcaption><span>index.html  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再來就是<code>javascript</code>的部份，可看到<code>socket.on</code>監聽的是<code>connect</code>事件，當開啟網頁連現實，會呼應到Server端的<code>add_user</code>事件，並且執行<code>prompt()</code>。這邊暫且先不看到Server端，繼續往下看下去。</p>
+
+<figure class='code'><figcaption><span>index.html  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">&#39;http://localhost:8080&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Part 1</span>
+</span><span class='line'><span class="c1">//一連線時執行</span>
+</span><span class='line'><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;add_user&#39;</span><span class="p">,</span> <span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;What&#39;s your name&quot;</span><span class="p">));</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>當有位新的使用者加入時，目前線上所有使用者，勢必要更新，而使用者列表更新，需透過Server端告知Clint端要執行更新的動作因此在Client的程式碼如下：</p>
+
+<p>下面程式碼可看到<code>update_chat_content</code>如同之前的方式加入對話內容(<a href="http://lighter.github.com/blog/2012/08/24/simple-chat-with-socket-dot-io/">Here</a>)；接著<code>update_user</code>一開始先清空使用者列表所有內容，使用<code>$.each</code>一一將使用者重新加入列表中。</p>
+
+<figure class='code'><figcaption><span>index.html  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Part 2</span>
+</span><span class='line'><span class="c1">//update_chat_content</span>
+</span><span class='line'><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user_name</span><span class="p">,</span> <span class="nx">data</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//由Server端emit &#39;update_chat_content&#39; 更新談話內容</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#chat_content&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span> <span class="o">+</span> <span class="nx">user_name</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//update_user</span>
+</span><span class='line'><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update_user&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//先清空所有使用名稱</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#users&quot;</span><span class="p">).</span><span class="nx">empty</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//將data取出，使用each的方法一個一個將使用者重新加入列表</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#users&quot;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後則是發送對話按鈕的觸發事件以及HTML的部份。</p>
+
+<figure class='code'><figcaption><span>index.html  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Part 3</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send&quot;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//取得input text欄位的值後，將欄位內容清除</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//呼叫Server端的emit &#39;send_chat&#39;</span>
+</span><span class='line'>    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;send_chat&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/head&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;container-fluid&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;row-fluid&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;span2&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;users&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="c">&lt;!--</span><span class="nx">Sidebar</span> <span class="nx">content</span><span class="o">--&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;span10&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="c">&lt;!--</span><span class="nx">Body</span> <span class="nx">content</span><span class="o">--&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;span12&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;chat_content&quot;</span><span class="o">&gt;&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;input-append&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">input</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;span2&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;send_input&quot;</span> <span class="nx">size</span><span class="o">=</span><span class="s2">&quot;16&quot;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="o">&gt;&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;btn&quot;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;send&quot;</span><span class="o">&gt;</span><span class="nx">Send</span><span class="o">!&lt;</span><span class="err">/button&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/body&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Server端</h2>
+
+<p>Server端主要的情況有3個：</p>
+
+<p>1.當Client發送對話訓時</p>
+
+<p>2.當有新加入的使用者時</p>
+
+<p>3.當使用者關閉網頁時</p>
+
+<p>程式碼如下，當有新加入的使用者會呼叫Server端的<code>add_user</code>事件，Server端會將新加入的使用者加入到socket的session內，並呼叫Client端執行<code>update_chat_content</code>事件，並傳遞兩個參數，這是要用來讓Client端知道有新加入的使用者，例如當Tony加入時，在Client端頁面會顯示<code>SERVER:Tomy has connected</code>的訊息告知。其餘的就說明都寫在程式碼的註解上了，直接看程式碼可能會更清楚。</p>
+
+<figure class='code'><figcaption><span>Server.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="nx">server</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">io</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/html&#39;</span><span class="p">});</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//使用者名稱</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">user_name</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;socket.io&#39;</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">server</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//連線時會執行的內容</span>
+</span><span class='line'><span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//當client端emit &#39;send_chat&#39; 時執行</span>
+</span><span class='line'>  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;send_chat&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">user_name</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//當client端emit &#39;add_user&#39; 時執行</span>
+</span><span class='line'>  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;add_user&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user_name</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//儲存user_name到socket session</span>
+</span><span class='line'>    <span class="nx">socket</span><span class="p">.</span><span class="nx">user_name</span> <span class="o">=</span> <span class="nx">user_name</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//加入user_name 到 user_name list</span>
+</span><span class='line'>    <span class="nx">user_name</span><span class="p">[</span><span class="nx">user_name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">user_name</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//呼叫Client端的 update_chat事件</span>
+</span><span class='line'>    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="s1">&#39;SERVER:&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">user_name</span> <span class="o">+</span> <span class="s1">&#39; has connected&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//呼叫所有Client端的 update_chat事件</span>
+</span><span class='line'>    <span class="nx">socket</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="s1">&#39;SERVER:&#39;</span><span class="p">,</span><span class="nx">user_name</span> <span class="o">+</span> <span class="s1">&#39; has connected&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//呼叫Client端的 update_user事件</span>
+</span><span class='line'>    <span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_user&#39;</span><span class="p">,</span> <span class="nx">user_name</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//當Client端斷線時執行</span>
+</span><span class='line'>  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//從user_name list中刪除使用者</span>
+</span><span class='line'>    <span class="k">delete</span> <span class="nx">user_name</span><span class="p">[</span><span class="nx">socket</span><span class="p">.</span><span class="nx">user_name</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//呼叫Client端的 update_user事件更新使用者列表</span>
+</span><span class='line'>    <span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_user&#39;</span><span class="p">,</span> <span class="nx">user_name</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//廣播所有Client端的 update_chat_content事件，通知某某使用者離線</span>
+</span><span class='line'>    <span class="nx">socket</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="s1">&#39;SERVER:&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">user_name</span> <span class="o">+</span> <span class="s1">&#39; has disconnected&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>參考資料</h2>
+
+<p><a href="http://psitsmike.com/2011/09/node-js-and-socket-io-chat-tutorial/">node.js and socket.io chat tutorial</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Simple chat with Socket.io]]></title>

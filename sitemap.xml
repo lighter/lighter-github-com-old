@@ -59,8 +59,12 @@
         <lastmod>2012-08-24T13:52:34+08:00</lastmod>
     </url>
     <url>
+        <loc>http://lighter.github.com/blog/2012/08/26/nodejs-and-socket-dot-io-chat/</loc>
+        <lastmod>2012-08-26T09:33:10+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://lighter.github.com/blog/archives/</loc>
-        <lastmod>2012-08-24T13:52:34+08:00</lastmod>
+        <lastmod>2012-08-26T09:33:10+08:00</lastmod>
     </url>
     <url>
         <loc>http://lighter.github.com/feed/index.xml</loc>
@@ -68,6 +72,6 @@
     </url>
     <url>
         <loc>http://lighter.github.com/</loc>
-        <lastmod>2012-08-24T13:52:34+08:00</lastmod>
+        <lastmod>2012-08-26T09:33:10+08:00</lastmod>
     </url>
 </urlset>
