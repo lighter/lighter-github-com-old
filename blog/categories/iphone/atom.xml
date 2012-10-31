@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter's Blog]]></title>
   <link href="http://lighter.github.com/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-10-31T09:55:40+08:00</updated>
+  <updated>2012-10-31T12:30:45+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -18,7 +18,7 @@
     <link href="http://lighter.github.com/blog/2012/10/28/ios-with-dropbox/"/>
     <updated>2012-10-28T00:38:00+08:00</updated>
     <id>http://lighter.github.com/blog/2012/10/28/ios-with-dropbox</id>
-    <content type="html"><![CDATA[<p>{% img /images/iPhoneWithDropbox/1.png %}</p>
+    <content type="html"><![CDATA[<p><img src="/images/iPhoneWithDropbox/1.png"></p>
 
 <p>iPhone上已經有iCloud可以用來同步及備份資料了，但iCloud有空間的限制，而有在使用Dropbox的人，如果有參加一些特殊的活動或者是學生的身份，都可以多取得到一些額外的空間容量(或者是有邀請許多朋友加入也都可以額外增加空間)。雖然Dropbox官方的說明已經很清楚了，但是我還是記錄一下，免得之後要用忘記....</p>
 
@@ -31,7 +31,7 @@
 
 <p>這邊我使用三個<code>Round Rect Button</code>，分別用來建立檔案、檢驗檔案是否存在與上傳檔案</p>
 
-<p>{% img /images/iPhoneWithDropbox/2.png %}</p>
+<p><img src="/images/iPhoneWithDropbox/2.png"></p>
 
 <p><strong>Step 3.建置Dropbox App</strong></p>
 
@@ -39,45 +39,78 @@
 
 <p>下載Dropbox的Framework，並且加入到Xcode專案；還有要加入<code>Security.framework</code>與<code>QuartzCore.framework</code>到專案中。</p>
 
-<p>{% img /images/iPhoneWithDropbox/3.png %}</p>
+<p><img src="/images/iPhoneWithDropbox/3.png"></p>
 
 <p><strong>Step 4.編輯AppDelegate.m</strong></p>
 
 <p>在<code>AppDelegate.m</code>中加入下列程式碼</p>
 
-<p>{% codeblock AppDelegate.m lang:objc %}</p>
-
-<h1>import &lt;DropboxSDK/DropboxSDK.h></h1>
-
-<ul>
-<li><p>(BOOL)application:(UIApplication <em>)application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions
-{
-  DBSession* dbSession =</p>
-
-<pre><code>  [[DBSession alloc]
-      initWithAppKey:@"APP_KEY"
-      appSecret:@"APP_SECRET"
-      root:ACCESS_TYPE]; // either kDBRootAppFolder or kDBRootDropbox
-</code></pre>
-
-<p>  [DBSession setSharedSession:dbSession];
-  return YES;
-}</p></li>
-<li><p>(BOOL)application:(UIApplication <em>)application handleOpenURL:(NSURL </em>)url {
-if ([[DBSession sharedSession] handleOpenURL:url]) {
-  if ([[DBSession sharedSession] isLinked]) {</p>
-
-<pre><code>NSLog(@"App linked successfully!");
-// At this point you can start making API calls
-</code></pre>
-
-<p>  }
-  return YES;
-}
-// Add whatever other url handling code your app requires here
-return NO;
-}
-{% endcodeblock %}</p></li>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AppDelegate.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">DropboxSDK</span><span class="o">/</span><span class="n">DropboxSDK</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">application</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">launchOptions</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">DBSession</span><span class="o">*</span> <span class="n">dbSession</span> <span class="o">=&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="p">[[</span><span class="n">DBSession</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>      <span class="nl">initWithAppKey:</span><span class="s">@&quot;APP_KEY&quot;</span>
+</span><span class='line'>      <span class="nl">appSecret:</span><span class="s">@&quot;APP_SECRET&quot;</span>
+</span><span class='line'>      <span class="nl">root:</span><span class="n">ACCESS_TYPE</span><span class="p">];</span> <span class="c1">// either kDBRootAppFolder or kDBRootDropbox</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">DBSession</span> <span class="nl">setSharedSession:</span><span class="n">dbSession</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">application</span> <span class="nl">handleOpenURL:</span><span class="p">(</span><span class="n">NSURL</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">url</span> <span class="p">{</span>
+</span><span class='line'><span class="k">if</span> <span class="p">([[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="nl">handleOpenURL:</span><span class="n">url</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">([[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="n">isLinked</span><span class="p">])</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;App linked successfully!&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="c1">// At this point you can start making API calls</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// Add whatever other url handling code your app requires here</span>
+</span><span class='line'><span class="k">return</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
 </ul>
 
 
@@ -85,101 +118,184 @@ return NO;
 
 <p>使用<code>open source</code>開啟<code>專案名稱-Info.plist</code>，找到第一個<code><dict></code>在下方加入這段：</p>
 
-<p>{% codeblock 專案名稱-Info.plist lang:objc %}
-<key>CFBundleURLTypes</key>
-<array></p>
-
-<pre><code>&lt;dict&gt;
-    &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
-    &lt;array&gt;
-        &lt;string&gt;db-APP_KEY&lt;/string&gt;
-    &lt;/array&gt;
-&lt;/dict&gt;
-</code></pre>
-
-<p></array>
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>專案名稱-Info.plist  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="n">CFBundleURLTypes</span><span class="o">&lt;/</span><span class="n">key</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">dict</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">key</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">CFBundleURLSchemes</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">key</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">array</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+</span><span class='line'>        <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">string</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">db</span><span class="o">-</span><span class="n">APP_KEY</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">string</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">array</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">dict</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">array</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>**Step 6.編輯ViewController</p>
 
 <p>首先在<code>ViewController.h</code>程式碼如下：</p>
 
-<p>{% codeblock ViewController.h lang:objc %}</p>
-
-<h1>import &lt;UIKit/UIKit.h></h1>
-
-<h1>import &lt;DropboxSDK/DropboxSDK.h></h1>
-
-<p>@interface ViewController : UIViewController<DBRestClientDelegate>
-{
-  DBRestClient *restClient;
-}
-- (IBAction)loginDropbox:(id)sender;
-- (IBAction)upload:(id)sender;
-- (IBAction)creatFile:(id)sender;</p>
-
-<p>@end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ViewController.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">UIKit</span><span class="o">/</span><span class="n">UIKit</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">DropboxSDK</span><span class="o">/</span><span class="n">DropboxSDK</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">ViewController</span> <span class="o">:</span> <span class="n">UIViewController</span><span class="o">&lt;</span><span class="n">DBRestClientDelegate</span><span class="o">&gt;</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">DBRestClient</span> <span class="o">*</span><span class="n">restClient</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">loginDropbox:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">upload:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">creatFile:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>接著在<code>ViewController.m</code>撰寫三個方法的實作內容，並且撰寫一個<code>restClient</code>的getter方法。</p>
 
-<p>{% codeblock ViewController.m lang:objc %}
-- (DBRestClient *)restClient {
-  if (!restClient) {</p>
-
-<pre><code>restClient =
-[[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-restClient.delegate = self;
-</code></pre>
-
-<p>  }
-  return restClient;
-}</p>
-
-<ul>
-<li><p>(IBAction)loginDropbox:(id)sender {</p>
-
-<p>if (![[DBSession sharedSession] isLinked]) {
-  [[DBSession sharedSession] linkFromController:self];
-} else {
-  NSLog(@"linked");
-}
-}</p></li>
-<li><p>(IBAction)upload:(id)sender {</p>
-
-<p>NSArray <em>paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-NSString </em>path = [[paths objectAtIndex:0]stringByAppendingPathComponent:@"file1.txt"];;
-NSString *pathString = @"/";
-[self.restClient uploadFile:@"file1.txt" toPath:pathString fromPath:path];</p></li>
-</ul>
-
-
-<p>}</p>
-
-<ul>
-<li><p>(IBAction)creatFile:(id)sender {
-NSArray <em>paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-NSString </em>path = [[paths objectAtIndex:0]stringByAppendingPathComponent:@"file1.txt"];;</p>
-
-<p>// String to write
-NSString <em>str = @"iPhone Developer Tips\nhttp://iPhoneDevelopTips,com";
-NSError </em>error;
-// Write the file
-[str writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&amp;error];</p>
-
-<p>NSFileManager *filemgr;</p>
-
-<p>filemgr = [NSFileManager defaultManager];</p>
-
-<p>if ([filemgr fileExistsAtPath: path ] == YES)
-  NSLog (@"File exists");
-else
-  NSLog (@"File not found");</p></li>
-</ul>
-
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">DBRestClient</span> <span class="o">*</span><span class="p">)</span><span class="n">restClient</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">restClient</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">restClient</span> <span class="o">=</span>
+</span><span class='line'><span class="p">[[</span><span class="n">DBRestClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithSession:</span><span class="p">[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]];</span>
+</span><span class='line'><span class="n">restClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">restClient</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">loginDropbox:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="n">isLinked</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="nl">linkFromController:</span><span class="n">self</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;linked&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">upload:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">NSArray</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">paths</span> <span class="o">=</span> <span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]</span><span class="nl">stringByAppendingPathComponent:</span><span class="s">@&quot;file1.txt&quot;</span><span class="p">];;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">pathString</span> <span class="o">=</span> <span class="s">@&quot;/&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">restClient</span> <span class="nl">uploadFile:</span><span class="s">@&quot;file1.txt&quot;</span> <span class="nl">toPath:</span><span class="n">pathString</span> <span class="nl">fromPath:</span><span class="n">path</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">creatFile:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
+</span><span class='line'><span class="n">NSArray</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">paths</span> <span class="o">=</span> <span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]</span><span class="nl">stringByAppendingPathComponent:</span><span class="s">@&quot;file1.txt&quot;</span><span class="p">];;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// String to write</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">str</span> <span class="o">=</span> <span class="s">@&quot;iPhone Developer Tips</span><span class="se">\n</span><span class="s">http://iPhoneDevelopTips,com&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// Write the file</span>
+</span><span class='line'><span class="p">[</span><span class="n">str</span> <span class="nl">writeToFile:</span><span class="n">path</span> <span class="nl">atomically:</span><span class="n">YES</span> <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">NSFileManager</span> <span class="o">*</span><span class="n">filemgr</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">filemgr</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSFileManager</span> <span class="n">defaultManager</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">([</span><span class="n">filemgr</span> <span class="nl">fileExistsAtPath:</span> <span class="n">path</span> <span class="p">]</span> <span class="o">==</span> <span class="n">YES</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">NSLog</span> <span class="p">(</span><span class="s">@&quot;File exists&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">NSLog</span> <span class="p">(</span><span class="s">@&quot;File not found&quot;</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Step 7.編譯專案</strong></p>
 
@@ -208,15 +324,15 @@ else
 
 <p>首先在Finder的地方，點選前往 -> 工具程式。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone1.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone1.png"></p>
 
 <p>開啟鑰匙圈存取。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone2.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone2.png"></p>
 
 <p>選取鑰匙圈存取 -> 憑證輔助程式 -> 製作憑證。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone3.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone3.png"></p>
 
 <ul>
 <li>名稱：fake</li>
@@ -228,7 +344,7 @@ else
 
 <p>繼續之後會跳出一個對話視窗一樣選取繼續。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone4.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone4.png"></p>
 
 <ul>
 <li>序號：121212</li>
@@ -238,17 +354,17 @@ else
 
 <p>接著一直繼續到最後。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone5.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone5.png"></p>
 
 <p>Step 2.修改XCODE讓他可以抓取到我們的製作的假驗證。</p>
 
 <p>開啟應用程式資料夾，找到XCODE，右鍵 -> 顯示套件內容。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone6.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone6.png"></p>
 
 <p>依照Contents/Developer/Platforms/iPhoneOS.platform的路徑尋找到<code>Info.plist</code>。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone7.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone7.png"></p>
 
 <ol>
 <li>將<code>Info.plist</code>複製到桌面上開啟，使用<code>cmd+f</code>尋找<code>CODE_SIGN_CONTEST_CLASS</code>，將原本的預設值改為<code>XCCodeSignContext</code>(共有兩個地方要修改)。</li>
@@ -264,23 +380,23 @@ else
 
 <p>接著在你的<code>XCODE</code>專案，點選專案的設定檔<code>PROJECT</code> -> <code>Build Settings</code> -> <code>Code Signing</code> -> <code>Code Signing Identity</code>。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone8.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone8.png"></p>
 
 <p>將裡面的憑證選取您剛新增的金鑰名稱，這裡使用之前已經建立好的<code>fake code sign</code>，所以會跟前面有所不同！！</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone9.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone9.png"></p>
 
 <p>建立完之後在編譯專案的右邊，選取我們要發佈的裝置，記得裝置必須先與電腦連接。接著就可以編譯發佈到實體裝置上了。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone12.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone12.png"></p>
 
 <p>發佈的時候如果點選App後馬上閃退的話，這時修改一下<code>Scheme</code>。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone10.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone10.png"></p>
 
 <p>選擇第二個<code>Run XXX.app</code> -> <code>Info</code> -> <code>Debugger</code> -> 選取<code>GDB</code>，最後按下OK，再次重新編譯專案發佈到實體裝置，應該就可以解決閃退的問題了。</p>
 
-<p>{% img /images/xcodeToiPhone/xcodeToiPhone11.png %}</p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone11.png"></p>
 
 <h3>參考資料</h3>
 
@@ -301,9 +417,9 @@ else
 
 <p>最後的結果是希望可以在<code>Table View</code>中看到我新增的姓名，點選該姓名可以看到該姓名的電話。</p>
 
-<p>{% img /images/iPhone/coredata2-1.png 216px 390px %}
-{% img /images/iPhone/coredata2-2.png 216px 390px %}
-{% img /images/iPhone/coredata2-3.png 216px 390px %}</p>
+<p><img src="/images/iPhone/coredata2-1.png" width="216">
+<img src="/images/iPhone/coredata2-2.png" width="216">
+<img src="/images/iPhone/coredata2-3.png" width="216"></p>
 
 <!-- more -->
 
@@ -312,20 +428,20 @@ else
 
 <p><strong>Step 2.</strong>開啟<code>core_data_example.xcdatamodeld</code>，將原本專案預設的<code>Entity</code>刪除，另外新增一個<code>Phone</code>的<code>Entity</code>，並新增兩個<code>Attributes</code>，name、number，如下圖。</p>
 
-<p>{% img /images/iPhone/coredata2-4.png %}</p>
+<p><img src="/images/iPhone/coredata2-4.png"></p>
 
 <p><strong>Step 3.</strong>新增<code>Managed Object Model</code>，對著專案右鍵<code>New File</code>➔<code>iOS</code>➔<code>Core Data</code>➔<code>NSManagedObjectsubclass</code>，接著會自動新增二個檔案，<code>Phone.m</code>跟<code>Phone.h</code>。</p>
 
 <p>如果沒有直接自動產生，應該會出現以下的畫面，只需要勾選並且下一步即可。</p>
 
-<p>{% img /images/iPhone/coredata2-5.png %}
-{% img /images/iPhone/coredata2-6.png %}</p>
+<p><img src="/images/iPhone/coredata2-5.png">
+<img src="/images/iPhone/coredata2-6.png"></p>
 
 <p><strong>Step 4.</strong>修改<code>MainStoryboard.storyboard</code>。</p>
 
 <p>在<code>Navigation</code>的右方加入一個<code>Bar Button Item</code>，點選新增是會跑到上面的畫面，讓我們新增姓名還有電話，下面則是點選姓名時可以看到該姓名的電話。因此需要新增一個<code>AddDetailViewController</code>來控制該新增畫面。在此就不多贅述。</p>
 
-<p>{% img /images/iPhone/coredata2-7.png %}</p>
+<p><img src="/images/iPhone/coredata2-7.png"></p>
 
 <p><strong>Step 5.</strong>編輯<code>AddDetailViewController</code>。</p>
 
@@ -338,29 +454,52 @@ else
 </ol>
 
 
-<p>{% codeblock AddDetailViewController.h lang:objc %}</p>
-
-<h1>import &lt;UIKit/UIKit.h></h1>
-
-<h1>import "Phone.h"</h1>
-
-<h1>import "AppDelegate.h"</h1>
-
-<p>@interface AddDetailViewController : UIViewController
-{</p>
-
-<pre><code>UITextField *name_;
-UITextField *number_;
-</code></pre>
-
-<p>}
-@property (strong, nonatomic) IBOutlet UITextField <em>name;
-@property (strong, nonatomic) IBOutlet UITextField </em>number;
-@property (retain, nonatomic) AppDelegate *app;</p>
-
-<p>-(IBAction)save:(id)sender;
-@end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AddDetailViewController.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">UIKit</span><span class="o">/</span><span class="n">UIKit</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="s">&quot;Phone.h&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="s">&quot;AppDelegate.h&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">AddDetailViewController</span> <span class="o">:</span> <span class="n">UIViewController</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UITextField</span> <span class="o">*</span><span class="n">name_</span><span class="p">;</span>
+</span><span class='line'><span class="n">UITextField</span> <span class="o">*</span><span class="n">number_</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">name</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">number</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">app</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>第5行，取得AppDelegate的<code>delegate</code></p>
 
@@ -372,34 +511,60 @@ UITextField *number_;
 
 <p>第18~22，當寫入發生錯誤時才會執行。</p>
 
-<p>{% codeblock AddDetailViewController.m lang:objc %}
-@synthesize name = name<em>, number = number</em>, app;</p>
-
-<p>-(IBAction)save:(id)sender
-{</p>
-
-<pre><code>app = [[UIApplication sharedApplication] delegate];
-NSManagedObjectContext *context = [app managedObjectContext];
-Phone *phone = [NSEntityDescription insertNewObjectForEntityForName:@"Phone" inManagedObjectContext:context];
-
-if (name_.text.length &lt;= 0 || number_.text.length &lt;= 0 ) {
-    NSLog(@"Nope");
-}
-else {
-    phone.name = name_.text;
-    phone.number = [NSNumber numberWithInteger:[number_.text integerValue]];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-NSError *error;
-
-if (![context save:&amp;error]) {
-    NSLog(@"Woops");
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AddDetailViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">app</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">app</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">app</span> <span class="n">managedObjectContext</span><span class="p">];</span>
+</span><span class='line'><span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">number_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Nope&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">phone</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInteger:</span><span class="p">[</span><span class="n">number_</span><span class="p">.</span><span class="n">text</span> <span class="n">integerValue</span><span class="p">]];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">popViewControllerAnimated:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Woops&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Step 6.</strong>編輯<code>MasterViewController.m</code>。</p>
 
@@ -407,50 +572,84 @@ if (![context save:&amp;error]) {
 
 <p>最後記得要將<code>viewDidLoad</code>內的方法刪除，僅留下第一行即可(如下)。</p>
 
-<p>{% codeblock MasterViewController.m lang:objc %}
-- (void)viewDidLoad
-{</p>
-
-<pre><code>[super viewDidLoad];
-// Do any additional setup after loading the view, typically from a nib.
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Step 7.</strong>編輯<code>DetailViewController</code></p>
 
 <p>因為比原本的專案多了一個<code>UILabel</code>元件，所以要多定義一個，並且找到<code>configureView</code>方法，加入第8行設定<code>detailNumber</code>，而<code>valueForKey</code>記得要修改成跟<code>Entity</code>對應的name、number。</p>
 
-<p>{% codeblock DetailViewController.h lang:objc %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DetailViewController.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">UIKit</span><span class="o">/</span><span class="n">UIKit</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">DetailViewController</span> <span class="o">:</span> <span class="n">UIViewController</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">id</span> <span class="n">detailItem</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">detailDescriptionLabel</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">detailNumber</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<h1>import &lt;UIKit/UIKit.h></h1>
-
-<p>@interface DetailViewController : UIViewController</p>
-
-<p>@property (strong, nonatomic) id detailItem;</p>
-
-<p>@property (strong, nonatomic) IBOutlet UILabel <em>detailDescriptionLabel;
-@property (strong, nonatomic) IBOutlet UILabel </em>detailNumber;
-@end
-{% endcodeblock %}</p>
-
-<p>{% codeblock DetailViewController.m lang:objc %}
-@synthesize detailNumber = _detailNumber;</p>
-
-<ul>
-<li>(void)configureView
-{
-  // Update the user interface for the detail item.
-  if (self.detailItem) {
-
-<pre><code>  self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"name"] description];
-  self.detailNumber.text = [[self.detailItem valueForKey:@"number"] description];
-</code></pre>
-
-<p>  }
-}
-{% endcodeblock %}</p></li>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DetailViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">detailNumber</span> <span class="o">=</span> <span class="n">_detailNumber</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">configureView</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// Update the user interface for the detail item.</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="n">self</span><span class="p">.</span><span class="n">detailDescriptionLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;name&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">detailNumber</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;number&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
 </ul>
 
 
@@ -470,9 +669,9 @@ if (![context save:&amp;error]) {
     <content type="html"><![CDATA[<p><code>Map View</code>很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
 該範例使用<code>Segmented Contrl</code>來切換<code>Map View</code>的樣式，並且定位出目前的所在位址(如下第三張圖)。</p>
 
-<p>{%  img /images/iPhone/mapViews1.jpeg %}
-{%  img /images/iPhone/mapViews2.jpeg %}
-{%  img /images/iPhone/mapViews4.jpeg %}</p>
+<p><img src="/images/iPhone/mapViews1.jpeg">
+<img src="/images/iPhone/mapViews2.jpeg">
+<img src="/images/iPhone/mapViews4.jpeg"></p>
 
 <!-- more -->
 
@@ -492,13 +691,13 @@ if (![context save:&amp;error]) {
 </ol>
 
 
-<p>{% img /images/iPhone/mapViews5.jpeg %}</p>
+<p><img src="/images/iPhone/mapViews5.jpeg"></p>
 
 <p><strong>Step 3.</strong>加入<code>MapKit</code>的framework</p>
 
 <p>在檔案瀏覽的地方點選專案，接著畫面中間選擇<code>TARGETS</code>在往右邊上方找到<code>Build Phases</code>，下方可看到<code>Link Binary With Libraries</code>，點選下方的<cde>＋</code>加號，將<code>MapKit.framework</code>加進來。加入成功以後在你的專案資料夾內即可看到一個<code>MapKit.framework</code></p>
 
-<p>{% img /images/iPhone/mapViews6.jpeg %}</p>
+<p><img src="/images/iPhone/mapViews6.jpeg"></p>
 
 <p><strong>Step 4.</strong>編輯ViewController.h</p>
 
@@ -509,73 +708,121 @@ if (![context save:&amp;error]) {
 </ol>
 
 
-<p>{% codeblock lang:objc %}</p>
-
-<h1>import &lt;UIKit/UIKit.h></h1>
-
-<h1>import &lt;MapKit/MapKit.h></h1>
-
-<p>@interface ViewController : UIViewController
-{</p>
-
-<pre><code>MKMapView *mapView_;
-UISegmentedControl *segmented_;
-</code></pre>
-
-<p>}
-@property (strong, nonatomic) IBOutlet MKMapView <em>mapView;
-@property (strong, nonatomic) IBOutlet UISegmentedControl </em>segmented;</p>
-
-<p>-(IBAction)showLocation:(id)sender; //顯示定位
--(IBAction)changeMapType:(id)sender; //改變地圖的type
-@end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">UIKit</span><span class="o">/</span><span class="n">UIKit</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">MapKit</span><span class="o">/</span><span class="n">MapKit</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">ViewController</span> <span class="o">:</span> <span class="n">UIViewController</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">MKMapView</span> <span class="o">*</span><span class="n">mapView_</span><span class="p">;</span>
+</span><span class='line'><span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented_</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">MKMapView</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">mapView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UISegmentedControl</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">segmented</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//顯示定位</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//改變地圖的type</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Step 5.</strong>編輯ViewController.m</p>
 
 <p>一樣要先補上<code>synthesize</code>，接著是撰寫<code>showLocation:</code>，該方法很簡單，只要定義<code>mapView</code>的<code>showsUserLocation</code>為</code>YES</code>即可顯示目前該使用者的位址。</p>
 
-<p>{% codeblock lang:objc %}
-@synthesize mapView = mapView<em>, segmented = segmented</em>;</p>
-
-<p>-(IBAction)showLocation:(id)sender
-{</p>
-
-<pre><code>self.mapView.showsUserLocation = YES;
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">mapView</span> <span class="o">=</span> <span class="n">mapView</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">segmented</span> <span class="o">=</span> <span class="n">segmented</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">showsUserLocation</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>在改變地圖的模式，使用<code>Segmented Control</code>，操作的方式如同<a href="http://lighter.github.com/blog/2012/05/01/segmented-controller/">Segmented Control</a>，唯一不同的是在<code>case</code>內執行的東西；在<code>case</code>內去改變<code>mapView</code>的<code>mapType</code>，地圖模式一共有三種模式可以更換，因此您可以依自己的需求去做變換。</p>
 
-<p>{% codeblock lang:objc %}
--(IBAction)changeMapType:(id)sender
-{</p>
-
-<pre><code>NSInteger segmentedNum;
-segmentedNum = self.segmented.selectedSegmentIndex;
-switch (segmentedNum) {
-    case 0:
-        self.mapView.mapType = MKMapTypeStandard;
-        break;
-    case 1:
-        self.mapView.mapType = MKMapTypeSatellite;
-        break;
-    case 2:
-        self.mapView.mapType = MKMapTypeHybrid;
-        break;
-    default:
-        break;
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">NSInteger</span> <span class="n">segmentedNum</span><span class="p">;</span>
+</span><span class='line'><span class="n">segmentedNum</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">segmented</span><span class="p">.</span><span class="n">selectedSegmentIndex</span><span class="p">;</span>
+</span><span class='line'><span class="k">switch</span> <span class="p">(</span><span class="n">segmentedNum</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeStandard</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeSatellite</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeHybrid</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Step 6.</strong>建立關連</p>
 
-<p>{% img /images/iPhone/mapViews7.jpeg %}</p>
+<p><img src="/images/iPhone/mapViews7.jpeg"></p>
 ]]></content>
   </entry>
   
@@ -603,115 +850,176 @@ switch (segmentedNum) {
 
 <p>整個流程大致上如下圖：</p>
 
-<p>{% img /images/iPhone/coredatas1.jpeg %}</p>
+<p><img src="/images/iPhone/coredatas1.jpeg"></p>
 
 <!-- more -->
 
 
 <p><strong>Step 1.</strong>建立<code>Empty Application</code>，專案名稱為core data example</p>
 
-<p>{% img /images/iPhone/coredatas2.jpeg %}</p>
+<p><img src="/images/iPhone/coredatas2.jpeg"></p>
 
 <p>記得要將<code>Use Core Data</code>打勾。</p>
 
-<p>{% img /images/iPhone/coredatas3.jpeg %}</p>
+<p><img src="/images/iPhone/coredatas3.jpeg"></p>
 
 <p><strong>Step 2.</strong> 編輯core_data_sample.xcdatamodeld</p>
 
 <p>首先開啟<code>core_data_sample.xcdatamodeld</code>這個檔案，點選中間下方的<code>Add Entity</code>，並輸入<code>Phone</code>(註：第一個字要大寫)，接著在右邊可以找到<code>Attributes</code>，點選<code>＋</code>加號，加入兩個屬性分別為<code>name</code>、<code>number</code>，其型態分別為<code>String</code>
 、<code>Integer 32</code>。</p>
 
-<p>{% img /images/iPhone/coredatas4.jpeg %}</p>
+<p><img src="/images/iPhone/coredatas4.jpeg"></p>
 
 <p><strong>Step 3.</strong>建立<code>Phone.m、Phone.h</code></p>
 
 <p>點選專案資料夾，右鍵➔New File。</p>
 
-<p>{% img /images/iPhone/coredatas5.jpeg %}</p>
+<p><img src="/images/iPhone/coredatas5.jpeg"></p>
 
 <p>選擇iOS➔Core Data➔NSManagedObject subclass，接著都直接下一步。</p>
 
-<p>{% img /images/iPhone/coredatas6.jpeg %}</p>
+<p><img src="/images/iPhone/coredatas6.jpeg"></p>
 
 <p>接著可以在專案的資料夾內會出現<code>Phone.m、Phone.h</code></p>
 
-<p>{% img /images/iPhone/coredatas7.jpeg %}</p>
+<p><img src="/images/iPhone/coredatas7.jpeg"></p>
 
 <p>在這兩個檔案可看到裡面的變數都是跟xcdatamodeld內的有相關連的</p>
 
-<p>{% codeblock Phone.h lang:objc %}</p>
-
-<h1>import &lt;Foundation/Foundation.h></h1>
-
-<h1>import &lt;CoreData/CoreData.h></h1>
-
-<p>@interface Phone : NSManagedObject</p>
-
-<p>@property (nonatomic, retain)  NSString * name;
-@property (nonatomic, retain) NSNumber * number;</p>
-
-<p>@end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Phone.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">Foundation</span><span class="o">/</span><span class="n">Foundation</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">CoreData</span><span class="o">/</span><span class="n">CoreData</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">Phone</span> <span class="o">:</span> <span class="n">NSManagedObject</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span>  <span class="n">NSString</span> <span class="o">*</span> <span class="n">name</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSNumber</span> <span class="o">*</span> <span class="n">number</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>這邊的<code>@dynamic</code>主要是告知 compiler 不要產生<code>setter、getter</code>，而是由程式本身來實作甚至是直到 Runtime 時以 Dynamic Loading 方式連結。</p>
 
-<p>{% codeblock Phone.m lang:objc %}</p>
-
-<h1>import "Phone.h"</h1>
-
-<p>@implementation Phone</p>
-
-<p>@dynamic name;
-@dynamic number;</p>
-
-<p>@end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Phone.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="s">&quot;Phone.h&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">implementation</span> <span class="n">Phone</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@dynamic</span> <span class="n">name</span><span class="p">;</span>
+</span><span class='line'><span class="k">@dynamic</span> <span class="n">number</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Step .4</strong>編輯AppDelegate.m</p>
 
 <p>在該檔案內自行新增一個<code>creatData</code>方法
-{% codeblock AppDelegate.m lang:objc %}
--(void)creatData{</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AppDelegate.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">creatData</span><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="n">managedObjectContext</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Phone</span> <span class="o">*</span><span class="n">detail</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class='line'><span class="n">detail</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">@&quot;Mary&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">detail</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">323232123</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">]){</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;error&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//撈取資料</span>
+</span><span class='line'><span class="n">NSFetchRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSFetchRequest</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSEntityDescription</span> <span class="o">*</span><span class="n">entity</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">entityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">request</span> <span class="nl">setEntity:</span><span class="n">entity</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NSArray</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">context</span> <span class="nl">executeFetchRequest:</span><span class="n">request</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">Phone</span> <span class="o">*</span><span class="n">pho</span> <span class="k">in</span> <span class="n">array</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Name: %@&quot;</span><span class="p">,</span> <span class="n">pho</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Number: %@&quot;</span><span class="p">,</span> <span class="n">pho</span><span class="p">.</span><span class="n">number</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>NSManagedObjectContext *context = [self managedObjectContext];
-
-Phone *detail = [NSEntityDescription insertNewObjectForEntityForName:@"Phone" inManagedObjectContext:context];
-detail.name = @"Mary";
-detail.number = [NSNumber numberWithInt:323232123];
-
-NSError *error;
-if(![context save:&amp;error]){
-    NSLog(@"error");
-}
-
-//撈取資料
-NSFetchRequest *request = [[NSFetchRequest alloc] init];
-NSEntityDescription *entity = [NSEntityDescription entityForName:@"Phone" inManagedObjectContext:context];
-[request setEntity:entity];
-
-NSArray *array = [context executeFetchRequest:request error:&amp;error];
-for (Phone *pho in array) {
-    NSLog(@"Name: %@", pho.name);
-    NSLog(@"Number: %@", pho.number);
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
-
-<p>{% codeblock AppDelegate.m lang:objc %}
-- (BOOL)application:(UIApplication <em>)application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions
-{</p>
-
-<pre><code>[self creatData];   //加入這行
-self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-self.window.backgroundColor = [UIColor whiteColor];
-[self.window makeKeyAndVisible];
-return YES;
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AppDelegate.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">application</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">launchOptions</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span> <span class="n">creatData</span><span class="p">];</span>   <span class="c1">//加入這行</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">window</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIWindow</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="p">[[</span><span class="n">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">]];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">whiteColor</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">window</span> <span class="n">makeKeyAndVisible</span><span class="p">];</span>
+</span><span class='line'><span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>最後編譯後，可以在Debug的地方看到<code>NSLog</code>的訊息。</p>
 
