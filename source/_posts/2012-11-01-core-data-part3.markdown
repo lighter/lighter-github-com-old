@@ -8,8 +8,8 @@ categories: iPhone
 
 延續[Core Data-Part2](http://lighter.tw/blog/2012/06/02/core-data-part2/)的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。
 
-{% img images/CoreDataWithSearch/1.png 216px 390px %}
-{% img images/CoreDataWithSearch/2.png 216px 390px %}
+{% img /images/CoreDataWithSearch/1.png 216px 390px %}
+{% img /images/CoreDataWithSearch/2.png 216px 390px %}
 
 <!-- more -->
 
@@ -17,7 +17,7 @@ categories: iPhone
 
 加入<code>Search Bar and Search Display Controller</code>到<code>Table View</code>上方。
 
-{%img images/CoreDataWithSearch/3.png %}
+{%img /images/CoreDataWithSearch/3.png %}
 
 **Step 2.編輯MasterViewController.h檔案**
 
