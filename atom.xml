@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.github.com/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-10-31T12:30:45+08:00</updated>
+  <updated>2012-11-01T15:53:10+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,374 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Core Data-Part3]]></title>
+    <link href="http://lighter.github.com/blog/2012/11/01/core-data-part3/"/>
+    <updated>2012-11-01T11:48:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2012/11/01/core-data-part3</id>
+    <content type="html"><![CDATA[<p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
+
+<p><img src="images/CoreDataWithSearch/1.png" width="216">
+<img src="images/CoreDataWithSearch/2.png" width="216"></p>
+
+<!-- more -->
+
+
+<p><strong>Step 1.加入<code>Search Bar and Search Display Controller</code></strong></p>
+
+<p>加入<code>Search Bar and Search Display Controller</code>到<code>Table View</code>上方。</p>
+
+<p><img src="images/CoreDataWithSearch/3.png"></p>
+
+<p><strong>Step 2.編輯MasterViewController.h檔案</strong></p>
+
+<figure class='code'><figcaption><span>MasterViewController.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+</span><span class='line'><span class="cp">#import &lt;CoreData/CoreData.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">//1</span>
+</span><span class='line'><span class="cp">#import &quot;Phone.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//2</span>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">MasterViewController</span> : <span class="nc">UITableViewController</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">NSFetchedResultsControllerDelegate</span><span class="p">,</span> <span class="n">UISearchDisplayDelegate</span><span class="p">,</span> <span class="n">UISearchBarDelegate</span><span class="o">&gt;</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">//3</span>
+</span><span class='line'>  <span class="kt">BOOL</span> <span class="n">savedSearchTerm</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSFetchedResultsController</span> <span class="o">*</span><span class="n">fetchedResultsController</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">managedObjectContext</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//4</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">searchResults</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//5</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexP</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><ol>
+<li>引入<code>Phone.h</code>。</li>
+<li>加入<code>UISearchDisplayDelegate</code>、<code>UISearchBarDelegate</code>兩個協定。</li>
+<li><code>saveSearchTerm</code>用來判斷是否為搜尋狀態。</li>
+<li><code>searchResults</code>陣列是用來儲存搜尋的結果。</li>
+<li><code>indexP</code>是用來取得搜尋結果，點選cell的索引值。</li>
+</ol>
+</blockquote>
+
+<p><strong>Step 3.編輯MasterViewController.m</strong></p>
+
+<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">indexP</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>補上<code>synthesize</code>。</p></blockquote>
+
+<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//1</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithCapacity:</span><span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="n">fetchedObjects</span><span class="p">]</span> <span class="n">count</span><span class="p">]];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">reloadData</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//2</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidUnload</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidUnload</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><ol>
+<li>在<code>viewDidLoad</code>方法內對<code>searchResults</code>初始化，並且重新整理<code>Table View</code>。</li>
+<li><code>viewDidUnload</code>方法內，將<code>searchResults</code>釋放掉。</li>
+</ol>
+</blockquote>
+
+<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">numberOfRowsInSection:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">tableView</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">searchDisplayController</span><span class="p">.</span><span class="n">searchResultsTableView</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="n">count</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">id</span> <span class="o">&lt;</span><span class="n">NSFetchedResultsSectionInfo</span><span class="o">&gt;</span> <span class="n">sectionInfo</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="n">sections</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="n">section</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">sectionInfo</span> <span class="n">numberOfObjects</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><code>Table View</code>的<code>cell</code>個數，在搜尋的時候會不一樣，因此<code>tableView:numberOfRowsInSection:</code>方法需要做修改。
+如上當<code>if</code>判斷式條件成立時，會回傳<code>searchResults</code>陣列的個數，否則就回傳原本<code>fetchedResultsController</code>的個數。</p></blockquote>
+
+<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">[</span><span class="n">tableView</span> <span class="nl">dequeueReusableCellWithIdentifier:</span><span class="s">@&quot;Cell&quot;</span><span class="p">];</span>
+</span><span class='line'>  
+</span><span class='line'>    <span class="c1">//1</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cell</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">cell</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITableViewCell</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithStyle:</span><span class="n">UITableViewCellStyleDefault</span> <span class="nl">reuseIdentifier:</span><span class="s">@&quot;Cell&quot;</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">cell</span><span class="p">.</span><span class="n">accessoryType</span> <span class="o">=</span> <span class="n">UITableViewCellAccessoryDisclosureIndicator</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  
+</span><span class='line'>    <span class="c1">//2</span>
+</span><span class='line'>    <span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">tableView</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">searchDisplayController</span><span class="p">.</span><span class="n">searchResultsTableView</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="nl">objectAtIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="nl">objectAtIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//3</span>
+</span><span class='line'>    <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">phone</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><ol>
+<li>這邊需要額外使用程式碼的方式定義一個<code>cell</code>，並且初始化，因為在搜尋的時候並不知道<code>Storyboard</code>中的<code>cell</code>。</li>
+<li>當<code>tableView</code>是在搜尋的狀態時，指定<code>searchResults</code>搜尋結果給<code>phone</code>，反之將<code>fetchedResultsController</code>指定給<code>phone</code>。</li>
+<li>這邊改成直接指定<code>cell</code>的文字為<code>phone.name</code>。</li>
+</ol>
+</blockquote>
+
+<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark -</span>
+</span><span class='line'><span class="cp">#pragma mark UISearchDisplayController Delegate Methods</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">searchDisplayController:</span><span class="p">(</span><span class="n">UISearchDisplayController</span> <span class="o">*</span><span class="p">)</span><span class="nv">controller</span> <span class="nf">shouldReloadTableForSearchString:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">searchString</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="nl">filterContentForSearchText:</span><span class="n">searchString</span> <span class="nl">scope:</span><span class="s">@&quot;All&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">savedSearchTerm</span> <span class="o">=</span> <span class="nb">TRUE</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">searchDisplayController:</span><span class="p">(</span><span class="n">UISearchDisplayController</span> <span class="o">*</span><span class="p">)</span><span class="nv">controller</span> <span class="nf">shouldReloadTableForSearchScope:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">searchOption</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="nl">filterContentForSearchText:</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchDisplayController</span><span class="p">.</span><span class="n">searchBar</span> <span class="n">text</span><span class="p">]</span> <span class="nl">scope:</span><span class="s">@&quot;All&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">savedSearchTerm</span> <span class="o">=</span> <span class="nb">TRUE</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">searchDisplayControllerWillEndSearch:</span><span class="p">(</span><span class="n">UISearchDisplayController</span> <span class="o">*</span><span class="p">)</span><span class="nv">controller</span><span class="p">{</span>
+</span><span class='line'>  <span class="n">savedSearchTerm</span> <span class="o">=</span> <span class="nb">TRUE</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>加入上述三個<code>UISearchDisplayController</code>的方法，並且指定<code>savedSearchTerm</code>為<code>TRUE</code>，其中可以看到<code>filterContentForSearchText:scope:</code>這個方法，該方法是用來根據您輸入的文字做搜尋的。</p></blockquote>
+
+<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark -</span>
+</span><span class='line'><span class="cp">#pragma mark Content Filtering</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">filterContentForSearchText:</span><span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">searchText</span> <span class="nf">scope:</span><span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">scope</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="n">removeAllObjects</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;search text: %@&quot;</span><span class="p">,</span> <span class="n">searchText</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="k">in</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="n">fetchedObjects</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">([</span><span class="n">scope</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;All&quot;</span><span class="p">]</span> <span class="o">||</span> <span class="p">[</span><span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="nl">isEqualToString:</span><span class="n">scope</span><span class="p">])</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">NSComparisonResult</span> <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="nl">compare:</span><span class="n">searchText</span>
+</span><span class='line'>                                             <span class="nl">options:</span><span class="p">(</span><span class="n">NSCaseInsensitiveSearch</span><span class="o">|</span><span class="n">NSDiacriticInsensitiveSearch</span><span class="p">)</span>
+</span><span class='line'>                                               <span class="nl">range:</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="n">searchText</span> <span class="n">length</span><span class="p">])];</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">NSOrderedSame</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="nl">addObject:</span><span class="n">phone</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>該方法會根據您輸入的字串，尋找到符合的結果！</p></blockquote>
+
+<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//1</span>
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">didSelectRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">savedSearchTerm</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">indexP</span> <span class="o">=</span> <span class="n">indexPath</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="nl">performSegueWithIdentifier:</span><span class="s">@&quot;showDetail&quot;</span> <span class="nl">sender:</span><span class="n">self</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//2</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="n">UIStoryboardSegue</span> <span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">([[</span><span class="n">segue</span> <span class="n">identifier</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;showDetail&quot;</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">savedSearchTerm</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">NSManagedObject</span> <span class="o">*</span><span class="n">object</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">fetchedResultsController</span><span class="p">]</span> <span class="nl">objectAtIndexPath:</span><span class="n">indexP</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">]</span> <span class="nl">setDetailItem:</span><span class="n">object</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">indexPathForSelectedRow</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">NSManagedObject</span> <span class="o">*</span><span class="n">object</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">fetchedResultsController</span><span class="p">]</span> <span class="nl">objectAtIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">]</span> <span class="nl">setDetailItem:</span><span class="n">object</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><ol>
+<li>當你搜尋完畢後要可以點選<code>cell</code>，然後看到該<code>cell</code>的細部資訊，所以透過<code>tableView:didSelectRowAtIndexPath:</code>方法可以取得你點選<code>cell</code>的<code>indexPath</code>索引值，將該值指定給<code>indexP</code>，在呼叫到<code>perforSegueWithIdentifier:sender:</code>方法。</li>
+<li>該方法就是要用來傳遞參數到<code>DetailViewController</code>的，一樣需要判斷是否在搜尋的狀態，然後再傳遞對應的索引值(<code>indexPath</code>或<code>indexP</code>)。</li>
+</ol>
+</blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS With Dropbox]]></title>
