@@ -48,11 +48,11 @@ categories: iPhone
 @end
 {% endcodeblock %}
 
-> 1.	引入<code>Phone.h</code>。
-> 2.	加入<code>UISearchDisplayDelegate</code>、<code>UISearchBarDelegate</code>兩個協定。
-> 3.	<code>saveSearchTerm</code>用來判斷是否為搜尋狀態。
-> 4.	<code>searchResults</code>陣列是用來儲存搜尋的結果。
-> 5.	<code>indexP</code>是用來取得搜尋結果，點選cell的索引值。
+1.	引入<code>Phone.h</code>。
+2.	加入<code>UISearchDisplayDelegate</code>、<code>UISearchBarDelegate</code>兩個協定。
+3.	<code>saveSearchTerm</code>用來判斷是否為搜尋狀態。
+4.	<code>searchResults</code>陣列是用來儲存搜尋的結果。
+5.	<code>indexP</code>是用來取得搜尋結果，點選cell的索引值。
 
 **Step 3.編輯MasterViewController.m**
 
@@ -60,7 +60,7 @@ categories: iPhone
 @synthesize indexP;
 {% endcodeblock %}
 
-> 補上<code>synthesize</code>。
+補上<code>synthesize</code>。
 
 {% codeblock MasterViewController.m lang:objc %}
 //1
@@ -79,8 +79,8 @@ categories: iPhone
 }
 {% endcodeblock %}
 
-> 1.	在`viewDidLoad`方法內對`searchResults`初始化，並且重新整理`Table View`。
-> 2.	`viewDidUnload`方法內，將`searchResults`釋放掉。
+1.	在`viewDidLoad`方法內對`searchResults`初始化，並且重新整理`Table View`。
+2.	`viewDidUnload`方法內，將`searchResults`釋放掉。
 
 {% codeblock MasterViewController.m lang:objc %}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -95,8 +95,9 @@ categories: iPhone
 }
 {% endcodeblock %}
 
-> `Table View`的`cell`個數，在搜尋的時候會不一樣，因此`tableView:numberOfRowsInSection:`方法需要做修改。 
-> 如上當`if`判斷式條件成立時，會回傳`searchResults`陣列的個數，否則就回傳原本`fetchedResultsController`的個數。
+`Table View`的`cell`個數，在搜尋的時候會不一樣，因此`tableView:numberOfRowsInSection:`方法需要做修改。 
+
+如上當`if`判斷式條件成立時，會回傳`searchResults`陣列的個數，否則就回傳原本`fetchedResultsController`的個數。
 
 {% codeblock MasterViewController.m lang:objc %}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,9 +127,9 @@ categories: iPhone
 }
 {% endcodeblock %}
 
-> 1.	這邊需要額外使用程式碼的方式定義一個`cell`，並且初始化，因為在搜尋的時候並不知道`Storyboard`中的`cell`。
-> 2.	當`tableView`是在搜尋的狀態時，指定`searchResults`搜尋結果給`phone`，反之將`fetchedResultsController`指定給`phone`。
-> 3.	這邊改成直接指定`cell`的文字為`phone.name`。
+1.	這邊需要額外使用程式碼的方式定義一個`cell`，並且初始化，因為在搜尋的時候並不知道`Storyboard`中的`cell`。
+2.	當`tableView`是在搜尋的狀態時，指定`searchResults`搜尋結果給`phone`，反之將`fetchedResultsController`指定給`phone`。
+3.	這邊改成直接指定`cell`的文字為`phone.name`。
 
 {% codeblock MasterViewController.m lang:objc %}
 #pragma mark -
@@ -152,7 +153,7 @@ categories: iPhone
 }
 {% endcodeblock %}
 
-> 加入上述三個`UISearchDisplayController`的方法，並且指定`savedSearchTerm`為`TRUE`，其中可以看到`filterContentForSearchText:scope:`這個方法，該方法是用來根據您輸入的文字做搜尋的。
+加入上述三個`UISearchDisplayController`的方法，並且指定`savedSearchTerm`為`TRUE`，其中可以看到`filterContentForSearchText:scope:`這個方法，該方法是用來根據您輸入的文字做搜尋的。
 
 {% codeblock MasterViewController.m lang:objc %}
 #pragma mark -
@@ -178,7 +179,7 @@ categories: iPhone
 }
 {% endcodeblock %}
 
-> 該方法會根據您輸入的字串，尋找到符合的結果！
+該方法會根據您輸入的字串，尋找到符合的結果！
 
 {% codeblock MasterViewController.m lang:objc %}
 //1
@@ -206,5 +207,5 @@ categories: iPhone
 }
 {% endcodeblock %}
 
-> 1.	當你搜尋完畢後要可以點選`cell`，然後看到該`cell`的細部資訊，所以透過`tableView:didSelectRowAtIndexPath:`方法可以取得你點選`cell`的`indexPath`索引值，將該值指定給`indexP`，在呼叫到`perforSegueWithIdentifier:sender:`方法。
-> 2.	該方法就是要用來傳遞參數到`DetailViewController`的，一樣需要判斷是否在搜尋的狀態，然後再傳遞對應的索引值(`indexPath`或`indexP`)。
+1.	當你搜尋完畢後要可以點選`cell`，然後看到該`cell`的細部資訊，所以透過`tableView:didSelectRowAtIndexPath:`方法可以取得你點選`cell`的`indexPath`索引值，將該值指定給`indexP`，在呼叫到`perforSegueWithIdentifier:sender:`方法。
+2.	該方法就是要用來傳遞參數到`DetailViewController`的，一樣需要判斷是否在搜尋的狀態，然後再傳遞對應的索引值(`indexPath`或`indexP`)。
