@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.github.com/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2012-11-02T06:26:13+08:00</updated>
+  <updated>2012-11-02T16:40:40+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -86,14 +86,14 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><ol>
+<ol>
 <li>引入<code>Phone.h</code>。</li>
 <li>加入<code>UISearchDisplayDelegate</code>、<code>UISearchBarDelegate</code>兩個協定。</li>
 <li><code>saveSearchTerm</code>用來判斷是否為搜尋狀態。</li>
 <li><code>searchResults</code>陣列是用來儲存搜尋的結果。</li>
 <li><code>indexP</code>是用來取得搜尋結果，點選cell的索引值。</li>
 </ol>
-</blockquote>
+
 
 <p><strong>Step 3.編輯MasterViewController.m</strong></p>
 
@@ -103,7 +103,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><p>補上<code>synthesize</code>。</p></blockquote>
+<p>補上<code>synthesize</code>。</p>
 
 <figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -137,11 +137,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><ol>
+<ol>
 <li>在<code>viewDidLoad</code>方法內對<code>searchResults</code>初始化，並且重新整理<code>Table View</code>。</li>
 <li><code>viewDidUnload</code>方法內，將<code>searchResults</code>釋放掉。</li>
 </ol>
-</blockquote>
+
 
 <figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -167,8 +167,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><p><code>Table View</code>的<code>cell</code>個數，在搜尋的時候會不一樣，因此<code>tableView:numberOfRowsInSection:</code>方法需要做修改。
-如上當<code>if</code>判斷式條件成立時，會回傳<code>searchResults</code>陣列的個數，否則就回傳原本<code>fetchedResultsController</code>的個數。</p></blockquote>
+<p><code>Table View</code>的<code>cell</code>個數，在搜尋的時候會不一樣，因此<code>tableView:numberOfRowsInSection:</code>方法需要做修改。</p>
+
+<p>如上當<code>if</code>判斷式條件成立時，會回傳<code>searchResults</code>陣列的個數，否則就回傳原本<code>fetchedResultsController</code>的個數。</p>
 
 <figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -224,12 +225,12 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><ol>
+<ol>
 <li>這邊需要額外使用程式碼的方式定義一個<code>cell</code>，並且初始化，因為在搜尋的時候並不知道<code>Storyboard</code>中的<code>cell</code>。</li>
 <li>當<code>tableView</code>是在搜尋的狀態時，指定<code>searchResults</code>搜尋結果給<code>phone</code>，反之將<code>fetchedResultsController</code>指定給<code>phone</code>。</li>
 <li>這邊改成直接指定<code>cell</code>的文字為<code>phone.name</code>。</li>
 </ol>
-</blockquote>
+
 
 <figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -273,7 +274,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><p>加入上述三個<code>UISearchDisplayController</code>的方法，並且指定<code>savedSearchTerm</code>為<code>TRUE</code>，其中可以看到<code>filterContentForSearchText:scope:</code>這個方法，該方法是用來根據您輸入的文字做搜尋的。</p></blockquote>
+<p>加入上述三個<code>UISearchDisplayController</code>的方法，並且指定<code>savedSearchTerm</code>為<code>TRUE</code>，其中可以看到<code>filterContentForSearchText:scope:</code>這個方法，該方法是用來根據您輸入的文字做搜尋的。</p>
 
 <figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -321,7 +322,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><p>該方法會根據您輸入的字串，尋找到符合的結果！</p></blockquote>
+<p>該方法會根據您輸入的字串，尋找到符合的結果！</p>
 
 <figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -373,11 +374,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<blockquote><ol>
+<ol>
 <li>當你搜尋完畢後要可以點選<code>cell</code>，然後看到該<code>cell</code>的細部資訊，所以透過<code>tableView:didSelectRowAtIndexPath:</code>方法可以取得你點選<code>cell</code>的<code>indexPath</code>索引值，將該值指定給<code>indexP</code>，在呼叫到<code>perforSegueWithIdentifier:sender:</code>方法。</li>
 <li>該方法就是要用來傳遞參數到<code>DetailViewController</code>的，一樣需要判斷是否在搜尋的狀態，然後再傳遞對應的索引值(<code>indexPath</code>或<code>indexP</code>)。</li>
 </ol>
-</blockquote>
+
 ]]></content>
   </entry>
   
