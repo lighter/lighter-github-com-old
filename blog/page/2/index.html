@@ -9,7 +9,9 @@
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="Segmented Controller最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用Segmented Controller來切換網頁呈現網站內容。 以下使用3個Segments來做Google、Yahoo、Youtube的切換。 ">
+  <meta name="description" content="Core Data主要分成三個部分 Managed Object Context
+Persistent Store Coordinator
+Persistent Object Store Managed Object Context這類別記載了我們的App在記憶體中所有的Entity， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +80,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/08/core-data-part1/">Core Data-Part1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T10:52:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/08/core-data-part1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>Core Data</code>主要分成三個部分</p>
+
+<ol>
+<li>Managed Object Context</li>
+<li>Persistent Store Coordinator</li>
+<li>Persistent Object Store</li>
+</ol>
+
+
+<p><code>Managed Object Context</code>這類別記載了我們的App在記憶體中所有的<code>Entity</code>，當你要求Core Data載入物件時，你必須先向<code>Managed Object Context</code>提出要求。</p>
+
+<p>&#8230;假如不存在記憶體中的話，它會向<code>Persistent Store Coordinator</code>發出請求，試著嘗試尋找它。</p>
+
+<p><code>Persistent Store Coordinator</code>的任務是追蹤<code>Persistent Object Store</code>，而<code>Persistent Object Store</code>實際知道如何讀寫資料。</p>
+
+<p><code>Managed Object Model</code>則是用來處理資料的，這些元件都知道要如何處理資料。</p>
+
+<p>整個流程大致上如下圖：</p>
+
+<p><img src="/images/iPhone/coredatas1.jpeg"></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/08/core-data-part1/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -459,11 +523,15 @@
   
     <section>
   <h1>分類</h1>
-    <ul id="category-list"><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (12)</a></li><li><a href='/blog/categories/nodejs'>NodeJS (4)</a></li><li><a href='/blog/categories/octopress'>Octopress (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (13)</a></li><li><a href='/blog/categories/nodejs'>NodeJS (4)</a></li><li><a href='/blog/categories/octopress'>Octopress (1)</a></li></ul>
 </section>
 <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a>
@@ -479,10 +547,6 @@
     
       <li class="post">
         <a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple chat with Socket.io</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/23/socket-dot-io/">Socket.io</a>
       </li>
     
   </ul>
