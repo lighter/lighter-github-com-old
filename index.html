@@ -9,7 +9,7 @@
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="Core Data在前面的範例中並沒有使用到Relationship，如果你的資料結構是需要使用到兩個資料表時，這時可以透過Relationship，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢， &hellip;">
+  <meta name="description" content="Core Image是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自維基百科Core Image) 我們可以透過Core Image的框架(framework)來調整圖片的顏色、亮度…等。而Core &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/06/core-image/">Core Image</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T19:01:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/06/core-image/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>Core Image</code>是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自<a href="http://zh.wikipedia.org/wiki/Core_Image">維基百科Core Image</a>)</p>
+
+<p>我們可以透過<code>Core Image</code>的框架(framework)來調整圖片的顏色、亮度…等。而Core Image包含了很多的濾鏡的效果，這些都可以在Document中找到。</p>
+
+<p>而<code>Core Image</code>有幾個重要的類別</p>
+
+<ol>
+<li><code>CIContext</code>: 所有Core Image的處理都透過CIContext完成。這有點類似於Core Graphics或OpenGL的Context。</li>
+<li><code>CIImage</code>: 該類別可持有圖片檔案。它可透過UIImage、圖片檔案或者是像素檔案來建立。</li>
+<li><code>CIFilter</code>: 濾鏡類別擁有字典(dictionary)，可以指定濾鏡效果的，例如自然飽和度(vibrance)、色彩反轉(color inversion)、剪裁(cropping)&#8230;等。</li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/11/06/core-image/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -1050,54 +1104,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/08/map-view/">Map View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-08T11:13:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/08/map-view/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>Map View</code>很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
-該範例使用<code>Segmented Contrl</code>來切換<code>Map View</code>的樣式，並且定位出目前的所在位址(如下第三張圖)。</p>
-
-<p><img src="/images/iPhone/mapViews1.jpeg">
-<img src="/images/iPhone/mapViews2.jpeg">
-<img src="/images/iPhone/mapViews4.jpeg"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/08/map-view/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1110,11 +1116,15 @@
   
     <section>
   <h1>分類</h1>
-    <ul id="category-list"><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (13)</a></li><li><a href='/blog/categories/nodejs'>NodeJS (4)</a></li><li><a href='/blog/categories/octopress'>Octopress (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (14)</a></li><li><a href='/blog/categories/nodejs'>NodeJS (4)</a></li><li><a href='/blog/categories/octopress'>Octopress (1)</a></li></ul>
 </section>
 <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/06/core-image/">Core Image</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a>
@@ -1130,10 +1140,6 @@
     
       <li class="post">
         <a href="/blog/2012/08/26/nodejs-and-socket-dot-io-chat/">NodeJS and Socket.io chat</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple chat with Socket.io</a>
       </li>
     
   </ul>
