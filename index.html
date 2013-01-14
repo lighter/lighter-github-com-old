@@ -9,7 +9,7 @@
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="Core Image是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自維基百科Core Image) 我們可以透過Core Image的框架(framework)來調整圖片的顏色、亮度…等。而Core &hellip;">
+  <meta name="description" content="我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過Table View向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在Table View的部分會呈現名字，當點選名字後會看到該名字的電話號碼。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">JSON資料於TableView與Pull Refresh</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-10T17:11:00+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
+
+<p><img src="/images/json/json1.png" width="216"></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -1055,55 +1100,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/02/core-data-part2/">Core Data-Part2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-02T14:36:00+08:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/02/core-data-part2/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>上一篇中，僅對於基本的Core Data的流程有個初步的概念，但是光看<code>NSLog</code>訊息還是有點生疏，而且依照我目前的程度，是很少去修改到<code>AppDelegate</code>的部份，所以接著嘗試試著修改<code>Master Detail Application</code>看看。</p>
-
-<p>最後的結果是希望可以在<code>Table View</code>中看到我新增的姓名，點選該姓名可以看到該姓名的電話。</p>
-
-<p><img src="/images/iPhone/coredata2-1.png" width="216">
-<img src="/images/iPhone/coredata2-2.png" width="216">
-<img src="/images/iPhone/coredata2-3.png" width="216"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/02/core-data-part2/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1116,11 +1112,15 @@
   
     <section>
   <h1>分類</h1>
-    <ul id="category-list"><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (14)</a></li><li><a href='/blog/categories/nodejs'>NodeJS (4)</a></li><li><a href='/blog/categories/octopress'>Octopress (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (15)</a></li><li><a href='/blog/categories/nodejs'>NodeJS (4)</a></li><li><a href='/blog/categories/octopress'>Octopress (1)</a></li></ul>
 </section>
 <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">JSON資料於TableView與Pull Refresh</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/06/core-image/">Core Image</a>
@@ -1136,10 +1136,6 @@
     
       <li class="post">
         <a href="/blog/2012/10/28/ios-with-dropbox/">iOS With Dropbox</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/26/nodejs-and-socket-dot-io-chat/">NodeJS and Socket.io chat</a>
       </li>
     
   </ul>
@@ -1172,7 +1168,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Willy lighter -
+  Copyright &copy; 2013 - Willy lighter -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>.</span>
 </p>
 
