@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Whoops I couldn't find that page - Lighter's Blog</title>
+  <title>Lighter's Blog</title>
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="Whoops I Couldn't Find That Page You may want to try a search above, or visit the homepage. Also, here are some recent posts: express with post/get/ &hellip;">
+  <meta name="description" content="來記錄一下如何架設Octopress 我使用的是Mac OS X 10.7.3 Step 1.建立github page
+在github網站建立一個Repositories，project名稱為xxxxx.github.com Step 2.Octopress Setup 可參考Octopress &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lighter.github.com/404.html">
+  <link rel="canonical" href="http://lighter.github.com/blog/page/3/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,164 +77,87 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">Whoops I Couldn't Find That Page</h1>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/02/octopress-install/">Octopress Install With Github</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-02T21:41:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/04/02/octopress-install/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <p>You may want to try a search above, or <a href="/">visit the homepage</a>.</p>
-
-<p>Also, here are some recent posts:</p>
-
-<div id="blog-archives" class="missing">
-  
-  <article>
-    
-<h1><a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax/">express with post/get/ajax</a></h1>
-<time datetime="2013-02-04T16:55:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>04</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>NodeJS</a></span>
-</footer>
 
 
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">JSON資料於TableView與Pull Refresh</a></h1>
-<time datetime="2013-01-10T17:11:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>10</span> <span class='year'>2013</span></time>
+  <div class="entry-content"><p>來記錄一下如何架設Octopress</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/iphone/'>iPhone</a></span>
-</footer>
+<p>我使用的是Mac OS X 10.7.3</p>
 
+<p><strong>Step 1.</strong>建立github page
+在<a href="https://github.com/">github</a>網站建立一個Repositories，project名稱為xxxxx.github.com</p>
 
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/11/06/core-image/">Core Image</a></h1>
-<time datetime="2012-11-06T19:01:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>06</span> <span class='year'>2012</span></time>
+<p><strong>Step 2.</strong>Octopress Setup</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/iphone/'>iPhone</a></span>
-</footer>
+<p>可參考<a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
 
-
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a></h1>
-<time datetime="2012-11-03T17:40:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>03</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/iphone/'>iPhone</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.2 && rvm use 1.9.2
+</span><span class='line'>$ git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'>$ cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
+</span><span class='line'>$ ruby --version  # Should report Ruby 1.9.2
+</span><span class='line'>$ gem install bundler
+</span><span class='line'>$ bundle install
+</span><span class='line'>$ rake install</span></code></pre></td></tr></table></div></figure>
 
 
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a></h1>
-<time datetime="2012-11-01T11:48:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>01</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/iphone/'>iPhone</a></span>
-</footer>
 
 
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/10/28/ios-with-dropbox/">iOS With Dropbox</a></h1>
-<time datetime="2012-10-28T00:38:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>28</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/iphone/'>iPhone</a></span>
-</footer>
-
-
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/08/26/nodejs-and-socket-dot-io-chat/">NodeJS and Socket.io chat</a></h1>
-<time datetime="2012-08-26T08:48:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>26</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>NodeJS</a></span>
-</footer>
-
-
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple chat with Socket.io</a></h1>
-<time datetime="2012-08-24T13:32:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>24</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>NodeJS</a></span>
-</footer>
-
-
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/08/23/socket-dot-io/">Socket.io</a></h1>
-<time datetime="2012-08-23T01:56:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>23</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>NodeJS</a></span>
-</footer>
-
-
-  </article>
-  
-  <article>
-    
-<h1><a href="/blog/2012/08/10/nodejs/">NodeJS</a></h1>
-<time datetime="2012-08-10T13:34:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>10</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/nodejs/'>NodeJS</a></span>
-</footer>
-
-
-  </article>
-  
 </div>
-
-
+  
   
     <footer>
-      
-      
-        <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.github.com/404.html" data-via="lighter_lai" data-counturl="http://lighter.github.com/404.html" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
+      <a rel="full-article" href="/blog/2012/04/02/octopress-install/">Read on &rarr;</a>
     </footer>
   
-</article>
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -271,7 +195,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -290,7 +214,6 @@
 
   
 </aside>
-
 
     </div>
   </div>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: NodeJS | Lighter's Blog]]></title>
   <link href="http://lighter.github.com/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://lighter.github.com/"/>
-  <updated>2013-01-14T14:13:21+08:00</updated>
+  <updated>2013-02-06T14:16:32+08:00</updated>
   <id>http://lighter.github.com/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,390 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[express with post/get/ajax]]></title>
+    <link href="http://lighter.github.com/blog/2013/02/04/express-with-post-slash-get-slash-ajax/"/>
+    <updated>2013-02-04T16:55:00+08:00</updated>
+    <id>http://lighter.github.com/blog/2013/02/04/express-with-post-slash-get-slash-ajax</id>
+    <content type="html"><![CDATA[<p>使用NodeJS版本為<code>v0.8.18</code></p>
+
+<p>在終端機中輸入
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>express test -e</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>開啟<code>package.json</code>檔案，將版本都修改為<code>*</code>號。
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;application-name&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;private&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;pre&gt;&lt;code&gt;</span><span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;node app&quot;</span>
+</span><span class='line'><span class="err">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span>  <span class="p">},</span>
+</span><span class='line'>  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span><span class="err">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;pre&gt;&lt;code&gt;</span><span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="nt">&quot;ejs&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+</span><span class='line'><span class="err">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>完成後到終端機輸入
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -l</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>在<code>view</code>資料夾內新增<code>sign.ejs</code>與<code>sign2.ejs</code>兩個檔案，這兩個檔案是用來接收<code>post</code>與<code>get</code>的資料並且顯示出來。</p>
+
+<p><code>index.ejs</code>程式碼如下
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.ejs  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>!DOCTYPE html&gt;
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.github.com/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>script src=&quot;http://lighter.github.com//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js&quot;<span class="ni">&amp;gt;&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>script type=&quot;text/javascript&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>  jQuery(document).ready(function($) {
+</span><span class='line'>    $(&#39;#send&#39;).on(&#39;click&#39;,function(){
+</span><span class='line'>      var data = {
+</span><span class='line'>        &#39;account&#39;: $(&#39;#ajax_account&#39;).val(),
+</span><span class='line'>        &#39;pass&#39;: $(&#39;#ajax_pass&#39;).val()
+</span><span class='line'>      };
+</span><span class='line'>      $.post(&#39;/sign3&#39;, data ,function(data2) {
+</span><span class='line'>        $(&#39;#ajax&#39;).html(data2);
+</span><span class='line'>        console.log(data2);
+</span><span class='line'>      });
+</span><span class='line'>    });
+</span><span class='line'>  });
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>h1<span class="ni">&amp;gt;&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/h1<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span>Welcome to <span class="ni">&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/p<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>h1<span class="ni">&amp;gt;</span>GET Method<span class="ni">&amp;lt;</span>/h1<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>form action=&quot;/sign&quot; method=&quot;GET&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>table<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;</span>Accout<span class="ni">&amp;lt;</span>input type=&quot;text&quot; name=&quot;account&quot; /<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;</span>Password<span class="ni">&amp;lt;</span>input type=&quot;text&quot; name=&quot;pass&quot; /<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;&amp;lt;</span>input type=&quot;submit&quot; value=&quot;send&quot; /<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/table<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/form<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>h1<span class="ni">&amp;gt;</span>POST Method<span class="ni">&amp;lt;</span>/h1<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>form action=&quot;/sign2&quot; method=&quot;POST&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>table<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;</span>Account<span class="ni">&amp;lt;</span>input type=&quot;account&quot; name=&quot;account&quot; id=&quot;account&quot;<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;</span>Password<span class="ni">&amp;lt;</span>input type=&quot;pass&quot; name=&quot;pass&quot; id=&quot;pass&quot;<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;&amp;lt;</span>input type=&quot;submit&quot; value=&quot;send&quot;<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/table<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/form<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>h1<span class="ni">&amp;gt;</span>AJAX Method<span class="ni">&amp;lt;</span>/h1<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>form action=&quot;#&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>table<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;</span>Account<span class="ni">&amp;lt;</span>input type=&quot;account&quot; name=&quot;account&quot; id=&quot;ajax_account&quot;<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;</span>Password<span class="ni">&amp;lt;</span>input type=&quot;pass&quot; name=&quot;pass&quot; id=&quot;ajax_pass&quot;<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>td<span class="ni">&amp;gt;&amp;lt;</span>button type=&quot;button&quot; id=&quot;send&quot;<span class="ni">&amp;gt;</span>send<span class="ni">&amp;lt;</span>/button<span class="ni">&amp;gt;&amp;lt;</span>/td<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/tr<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/table<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/form<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>div id=&quot;ajax&quot;<span class="ni">&amp;gt;&amp;lt;</span>/div<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>接著開啟根目錄下的<code>app.js</code>加入<code>form</code>的<code>action</code>方法進去。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/sign&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">sign</span><span class="p">);</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/sign2&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">sign2</span><span class="p">);</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/sign3&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">sign3</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>定義好對應的方法後，在到<code>routes</code>資料夾內的<code>index.js</code>撰寫方法的執行內容，程式碼如下：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">//GET Method</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">sign</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Show Result&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">account</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">account</span><span class="p">,</span>
+</span><span class='line'><span class="nx">pass</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">pass</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span>
+</span><span class='line'><span class="p">};</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">//POST Method</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">sign2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;sign2&#39;</span><span class="p">,</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Show Result&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">account</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">account</span><span class="p">,</span>
+</span><span class='line'><span class="nx">pass</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pass</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">});</span>
+</span><span class='line'><span class="p">};</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">//AJAX Method</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">sign3</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Account:&#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">account</span> <span class="o">+</span> <span class="s1">&#39;, Pass:&#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pass</span><span class="p">)</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><code>sign.ejs</code>與<code>sign2.ejs</code>的內容分別為：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>sign.ejs  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>!DOCTYPE html&gt;
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.github.com/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>h1<span class="ni">&amp;gt;</span>Show Result<span class="ni">&amp;lt;</span>/h1<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span>Accout:<span class="ni">&amp;lt;</span>%= account%<span class="ni">&amp;gt;&amp;lt;</span>/p<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span>Password:<span class="ni">&amp;lt;</span>%= pass%<span class="ni">&amp;gt;&amp;lt;</span>/p<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>sign2.ejs  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>!DOCTYPE html&gt;
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.github.com/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>h1<span class="ni">&amp;gt;</span>Show Result<span class="ni">&amp;lt;</span>/h1<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span>Accout:<span class="ni">&amp;lt;</span>%= account%<span class="ni">&amp;gt;&amp;lt;</span>/p<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span>Password:<span class="ni">&amp;lt;</span>%= pass%<span class="ni">&amp;gt;&amp;lt;</span>/p<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>程式碼放在這：<a href="https://github.com/lighter/test">下載</a></p>
+
+<h2>參考資料</h2>
+
+<p><a href="http://book.nodejs.tw/zh-tw/node_express.html">Express 介紹</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NodeJS and Socket.io chat]]></title>
