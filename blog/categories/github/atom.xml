@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Github | Lighter's Blog]]></title>
-  <link href="http://lighter.github.com/blog/categories/github/atom.xml" rel="self"/>
-  <link href="http://lighter.github.com/"/>
-  <updated>2013-02-09T19:40:03+08:00</updated>
-  <id>http://lighter.github.com/</id>
+  <link href="http://lighter.tw/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2013-02-11T22:53:46+08:00</updated>
+  <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
     <email><![CDATA[apple.xva@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[octopress install with github]]></title>
-    <link href="http://lighter.github.com/blog/2012/04/02/octopress-install/"/>
+    <link href="http://lighter.tw/blog/2012/04/02/octopress-install/"/>
     <updated>2012-04-02T21:41:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/04/02/octopress-install</id>
+    <id>http://lighter.tw/blog/2012/04/02/octopress-install</id>
     <content type="html"><![CDATA[<p>來記錄一下如何架設Octopress</p>
 
 <p>我使用的是Mac OS X 10.7.3</p>

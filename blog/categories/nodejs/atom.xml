@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: NodeJS | Lighter's Blog]]></title>
-  <link href="http://lighter.github.com/blog/categories/nodejs/atom.xml" rel="self"/>
-  <link href="http://lighter.github.com/"/>
-  <updated>2013-02-09T19:40:03+08:00</updated>
-  <id>http://lighter.github.com/</id>
+  <link href="http://lighter.tw/blog/categories/nodejs/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2013-02-11T22:53:46+08:00</updated>
+  <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
     <email><![CDATA[apple.xva@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[express with post/get/ajax]]></title>
-    <link href="http://lighter.github.com/blog/2013/02/04/express-with-post-slash-get-slash-ajax/"/>
+    <link href="http://lighter.tw/blog/2013/02/04/express-with-post-slash-get-slash-ajax/"/>
     <updated>2013-02-04T16:55:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2013/02/04/express-with-post-slash-get-slash-ajax</id>
+    <id>http://lighter.tw/blog/2013/02/04/express-with-post-slash-get-slash-ajax</id>
     <content type="html"><![CDATA[<p>使用NodeJS版本為<code>v0.8.18</code></p>
 
 <p>在終端機中輸入
@@ -155,8 +155,8 @@
 </span><span class='line'>  <span class="nt">&lt;head&gt;&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.github.com/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>script src=&quot;http://lighter.github.com//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js&quot;<span class="ni">&amp;gt;&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.tw/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>script src=&quot;http://lighter.tw//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js&quot;<span class="ni">&amp;gt;&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
 </span><span class='line'><span class="ni">&amp;lt;</span>script type=&quot;text/javascript&quot;<span class="ni">&amp;gt;</span>
 </span><span class='line'>  jQuery(document).ready(function($) {
 </span><span class='line'>    $(&#39;#send&#39;).on(&#39;click&#39;,function(){
@@ -333,7 +333,7 @@
 </span><span class='line'>  <span class="nt">&lt;head&gt;&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.github.com/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.tw/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
 </span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/head&gt;</span>
@@ -374,7 +374,7 @@
 </span><span class='line'>  <span class="nt">&lt;head&gt;&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;&amp;lt;</span>%= title %<span class="ni">&amp;gt;&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.github.com/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>link rel=&#39;stylesheet&#39; href=&#39;http://lighter.tw/stylesheets/style.css&#39; /<span class="ni">&amp;gt;</span>
 </span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/head&gt;</span>
@@ -399,9 +399,9 @@
   
   <entry>
     <title type="html"><![CDATA[NodeJS and Socket.io chat]]></title>
-    <link href="http://lighter.github.com/blog/2012/08/26/nodejs-and-socket-dot-io-chat/"/>
+    <link href="http://lighter.tw/blog/2012/08/26/nodejs-and-socket-dot-io-chat/"/>
     <updated>2012-08-26T08:48:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/08/26/nodejs-and-socket-dot-io-chat</id>
+    <id>http://lighter.tw/blog/2012/08/26/nodejs-and-socket-dot-io-chat</id>
     <content type="html"><![CDATA[<p>有了簡單的聊天室的概念(<a href="http://lighter.github.com/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple Chat With Socket.io</a>)之後，我就在想，那同時有很多人時，要如何知道現在線上有誰呢？還有每次發言的人是誰呢？有了這些想法，那就開始繼續修改程式碼吧。</p>
 
 <h2>Client端</h2>
@@ -425,10 +425,10 @@
 </span><span class='line'><span class="nt">&lt;head&gt;</span>
 </span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;http://lighter.github.com/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;http://lighter.tw/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://lighter.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://lighter.tw//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;p&gt;</span>
@@ -748,9 +748,9 @@
   
   <entry>
     <title type="html"><![CDATA[Simple chat with Socket.io]]></title>
-    <link href="http://lighter.github.com/blog/2012/08/24/simple-chat-with-socket-dot-io/"/>
+    <link href="http://lighter.tw/blog/2012/08/24/simple-chat-with-socket-dot-io/"/>
     <updated>2012-08-24T13:32:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/08/24/simple-chat-with-socket-dot-io</id>
+    <id>http://lighter.tw/blog/2012/08/24/simple-chat-with-socket-dot-io</id>
     <content type="html"><![CDATA[<p>如果已我所學不多的情況下要製作一個簡單的聊天室，我大概能想到的方法就是將這些對話內容存入MySql，然後背後透過Ajax一直去撈取資料庫的內容然後一直更新畫面上的對話內容，這樣想想就覺得好麻煩…</p>
 
 <p>最近看到Socket.io這簡直真是好用，下面是一個簡單的聊天室程式碼。</p>
@@ -878,10 +878,10 @@
 </span><span class='line'><span class="nt">&lt;head&gt;</span>
 </span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;http://lighter.github.com/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;http://lighter.tw/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://lighter.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://lighter.tw//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;script&gt;</span>
@@ -927,9 +927,9 @@
   
   <entry>
     <title type="html"><![CDATA[Socket.io]]></title>
-    <link href="http://lighter.github.com/blog/2012/08/23/socket-dot-io/"/>
+    <link href="http://lighter.tw/blog/2012/08/23/socket-dot-io/"/>
     <updated>2012-08-23T01:56:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/08/23/socket-dot-io</id>
+    <id>http://lighter.tw/blog/2012/08/23/socket-dot-io</id>
     <content type="html"><![CDATA[<p><a href="http://socket.io/">Socket.io</a>的目的是提供即時通訊的套件，在官方網站上可以看到一些簡單的範例程式碼，但是我還是記錄一下簡單的操作。首先必須安裝Socket.io。</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1032,7 +1032,7 @@
 <span class='line-number'>15</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;http://lighter.github.com/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;http://lighter.tw/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;script&gt;</span>
@@ -1051,9 +1051,9 @@
   
   <entry>
     <title type="html"><![CDATA[NodeJS]]></title>
-    <link href="http://lighter.github.com/blog/2012/08/10/nodejs/"/>
+    <link href="http://lighter.tw/blog/2012/08/10/nodejs/"/>
     <updated>2012-08-10T13:34:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/08/10/nodejs</id>
+    <id>http://lighter.tw/blog/2012/08/10/nodejs</id>
     <content type="html"><![CDATA[<p><a href="http://nodejs.org/">Node.js</a>使以Javascript語言為基礎的框架，讓我覺得很神奇的是它可以拿來做網站，以往在寫網頁時是使用需要使用php、Apache、MySQL；而Node.js可以直接建立網站，真的蠻酷的！</p>
 
 <p>安裝完Node.js，在桌面上建立一個<code>hello.js</code>的檔案，程式碼內容如下

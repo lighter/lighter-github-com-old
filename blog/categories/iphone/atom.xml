@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: iPhone | Lighter's Blog]]></title>
-  <link href="http://lighter.github.com/blog/categories/iphone/atom.xml" rel="self"/>
-  <link href="http://lighter.github.com/"/>
-  <updated>2013-02-09T19:40:03+08:00</updated>
-  <id>http://lighter.github.com/</id>
+  <link href="http://lighter.tw/blog/categories/iphone/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2013-02-11T22:53:46+08:00</updated>
+  <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
     <email><![CDATA[apple.xva@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[JSON資料於TableView與Pull Refresh]]></title>
-    <link href="http://lighter.github.com/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/"/>
+    <link href="http://lighter.tw/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/"/>
     <updated>2013-01-10T17:11:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh</id>
+    <id>http://lighter.tw/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh</id>
     <content type="html"><![CDATA[<p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
 
 <p><img src="/images/json/json1.png" width="216"></p>
@@ -333,9 +333,9 @@
   
   <entry>
     <title type="html"><![CDATA[Core Image]]></title>
-    <link href="http://lighter.github.com/blog/2012/11/06/core-image/"/>
+    <link href="http://lighter.tw/blog/2012/11/06/core-image/"/>
     <updated>2012-11-06T19:01:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/11/06/core-image</id>
+    <id>http://lighter.tw/blog/2012/11/06/core-image</id>
     <content type="html"><![CDATA[<p><code>Core Image</code>是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自<a href="http://zh.wikipedia.org/wiki/Core_Image">維基百科Core Image</a>)</p>
 
 <p>我們可以透過<code>Core Image</code>的框架(framework)來調整圖片的顏色、亮度…等。而Core Image包含了很多的濾鏡的效果，這些都可以在Document中找到。</p>
@@ -546,9 +546,9 @@
   
   <entry>
     <title type="html"><![CDATA[Core Data Relationship]]></title>
-    <link href="http://lighter.github.com/blog/2012/11/03/core-data-relationship/"/>
+    <link href="http://lighter.tw/blog/2012/11/03/core-data-relationship/"/>
     <updated>2012-11-03T17:40:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/11/03/core-data-relationship</id>
+    <id>http://lighter.tw/blog/2012/11/03/core-data-relationship</id>
     <content type="html"><![CDATA[<p><code>Core Data</code>在前面的範例中並沒有使用到<code>Relationship</code>，如果你的資料結構是需要使用到兩個資料表時，這時可以透過<code>Relationship</code>，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢，這樣等於我要做兩次的SQL查詢(可能有更好的作法吧，我沒有特別去研究...)，所以當我用<code>Core Data</code>的時候，覺得這是一個很方便又快速的作法。</p>
 
 <p>接下來我們建立的資料表如下圖。</p>
@@ -876,9 +876,9 @@
   
   <entry>
     <title type="html"><![CDATA[Core Data-Part3]]></title>
-    <link href="http://lighter.github.com/blog/2012/11/01/core-data-part3/"/>
+    <link href="http://lighter.tw/blog/2012/11/01/core-data-part3/"/>
     <updated>2012-11-01T11:48:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/11/01/core-data-part3</id>
+    <id>http://lighter.tw/blog/2012/11/01/core-data-part3</id>
     <content type="html"><![CDATA[<p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
 
 <p><img src="/images/CoreDataWithSearch/1.png" width="216">
@@ -1311,9 +1311,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS With Dropbox]]></title>
-    <link href="http://lighter.github.com/blog/2012/10/28/ios-with-dropbox/"/>
+    <link href="http://lighter.tw/blog/2012/10/28/ios-with-dropbox/"/>
     <updated>2012-10-28T00:38:00+08:00</updated>
-    <id>http://lighter.github.com/blog/2012/10/28/ios-with-dropbox</id>
+    <id>http://lighter.tw/blog/2012/10/28/ios-with-dropbox</id>
     <content type="html"><![CDATA[<p><img src="/images/iPhoneWithDropbox/1.png"></p>
 
 <p>iPhone上已經有iCloud可以用來同步及備份資料了，但iCloud有空間的限制，而有在使用Dropbox的人，如果有參加一些特殊的活動或者是學生的身份，都可以多取得到一些額外的空間容量(或者是有邀請許多朋友加入也都可以額外增加空間)。雖然Dropbox官方的說明已經很清楚了，但是我還是記錄一下，免得之後要用忘記....</p>
