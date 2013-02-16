@@ -4,84 +4,88 @@
 <head>
 	<meta charset="utf-8">
 	<title>Category: iPhone - Lighter's Blog</title>
-    <meta name="author" content="Willy lighter">
-    
+	<meta name="author" content="Willy lighter">
+
+	
 	<meta name="description" content="Category: iPhone">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="Lighter's Blog" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-
-    <link href='http://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-    <script type="text/javascript" src="/javascripts/jquery-tapir.js"></script>
-
-    <!-- remove or comment it to disable ajaxification -->   
-    <script src="/javascripts/ajaxify.js"></script>
-   
-    
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
 </head>
 
-
 <body>
-    <div id="wrapper">
-    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
-<h1 class="animated bounceInDown">
-    <div id="headerbg">
-        Willy lighter
-    </div>
-</h1>
-<br>
-
-<ul id="social-links" style="text-align:center">
-  
-  
-  
-  
-  <!-- Twitter -->
-  <li>
-  <a href="http://www.twitter.com/lighter_lai" class="twitter" title="Twitter"></a>
-  </li>
-  
-  
-  
-  
-  
+	<header id="header" class="inner"><h1><a href="/">Lighter's Blog</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
-
-
-<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
-<ul id="nav">
-	<li id="ajax"><a href="/index.html">Home</a></li>
-	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
-    <li><a href="/atom.xml">RSS</a></li>
-    
-    <li>
-    <div id="dark">
-        <form method="get" action="/search.html" id="search">
-            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
-        </form>
-    </div>
-    </li>
-        
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
-
-
-
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:lighter.tw">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/lighter_lai" title="Twitter">Twitter</a>
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:lighter.tw">
+	</form>
+</nav>
 
 </header>
+	
+		
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/lighter_lai">lighter_lai</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('lighter_lai', 4, true);
+	})(jQuery);
+</script>
 
-<div id="toload">
-<!-- begin toload --> 
-    <div id="content" class="inner">
-        
+	
+	<div id="content" class="inner">
 	
 
 
@@ -90,7 +94,7 @@
 	<section class="archives"><h1 class="year">2013</h1>
 
 <article>
-	<h2 class="title"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">JSON資料於TableView與Pull Refresh</a></h2>
+	<h1 class="title"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">JSON資料於TableView與Pull Refresh</a></h1>
 	<div class="meta">
 		<span class="date">Jan 10</span>
 		<span class="tags">
@@ -116,7 +120,7 @@
 	<section class="archives"><h1 class="year">2012</h1>
 
 <article>
-	<h2 class="title"><a href="/blog/2012/11/06/core-image/">Core Image</a></h2>
+	<h1 class="title"><a href="/blog/2012/11/06/core-image/">Core Image</a></h1>
 	<div class="meta">
 		<span class="date">Nov  6</span>
 		<span class="tags">
@@ -136,7 +140,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a></h2>
+	<h1 class="title"><a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a></h1>
 	<div class="meta">
 		<span class="date">Nov  3</span>
 		<span class="tags">
@@ -156,7 +160,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a></h2>
+	<h1 class="title"><a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a></h1>
 	<div class="meta">
 		<span class="date">Nov  1</span>
 		<span class="tags">
@@ -176,7 +180,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/10/28/ios-with-dropbox/">iOS With Dropbox</a></h2>
+	<h1 class="title"><a href="/blog/2012/10/28/ios-with-dropbox/">iOS With Dropbox</a></h1>
 	<div class="meta">
 		<span class="date">Oct 28</span>
 		<span class="tags">
@@ -196,7 +200,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/">將XCODE的程式發佈到iOS裝置</a></h2>
+	<h1 class="title"><a href="/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/">將XCODE的程式發佈到iOS裝置</a></h1>
 	<div class="meta">
 		<span class="date">Jul 21</span>
 		<span class="tags">
@@ -216,7 +220,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/06/02/core-data-part2/">Core Data-Part2</a></h2>
+	<h1 class="title"><a href="/blog/2012/06/02/core-data-part2/">Core Data-Part2</a></h1>
 	<div class="meta">
 		<span class="date">Jun  2</span>
 		<span class="tags">
@@ -236,7 +240,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/05/08/map-view/">Map View</a></h2>
+	<h1 class="title"><a href="/blog/2012/05/08/map-view/">Map View</a></h1>
 	<div class="meta">
 		<span class="date">May  8</span>
 		<span class="tags">
@@ -256,7 +260,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/05/08/core-data-part1/">Core Data-Part1</a></h2>
+	<h1 class="title"><a href="/blog/2012/05/08/core-data-part1/">Core Data-Part1</a></h1>
 	<div class="meta">
 		<span class="date">May  8</span>
 		<span class="tags">
@@ -276,7 +280,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/05/01/segmented-controller/">Segmented Controller</a></h2>
+	<h1 class="title"><a href="/blog/2012/05/01/segmented-controller/">Segmented Controller</a></h1>
 	<div class="meta">
 		<span class="date">May  1</span>
 		<span class="tags">
@@ -296,7 +300,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/04/29/scroll-view/">Scroll View</a></h2>
+	<h1 class="title"><a href="/blog/2012/04/29/scroll-view/">Scroll View</a></h1>
 	<div class="meta">
 		<span class="date">Apr 29</span>
 		<span class="tags">
@@ -316,7 +320,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/04/26/image-view/">Image View</a></h2>
+	<h1 class="title"><a href="/blog/2012/04/26/image-view/">Image View</a></h1>
 	<div class="meta">
 		<span class="date">Apr 26</span>
 		<span class="tags">
@@ -336,7 +340,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/04/24/web-view/">Web View</a></h2>
+	<h1 class="title"><a href="/blog/2012/04/24/web-view/">Web View</a></h1>
 	<div class="meta">
 		<span class="date">Apr 24</span>
 		<span class="tags">
@@ -356,7 +360,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/04/24/slider-view/">Slider View</a></h2>
+	<h1 class="title"><a href="/blog/2012/04/24/slider-view/">Slider View</a></h1>
 	<div class="meta">
 		<span class="date">Apr 24</span>
 		<span class="tags">
@@ -376,7 +380,7 @@
 
 
 <article>
-	<h2 class="title"><a href="/blog/2012/04/24/action-sheet/">Action Sheet</a></h2>
+	<h1 class="title"><a href="/blog/2012/04/24/action-sheet/">Action Sheet</a></h1>
 	<div class="meta">
 		<span class="date">Apr 24</span>
 		<span class="tags">
@@ -392,20 +396,13 @@
 	</div>
 </article>
 
-
-    </div>
-    <footer id="footer">
-    <div style="display:inline">
-    Copyright &copy; 2013
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
 
     Willy lighter
-. Powered by <a href="http://octopress.org">Octopress</a> | 
-    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
-</div>
 
-
-    </footer>
-    <script src="/javascripts/fabric.js"></script>
+</footer>
+	<script src="/javascripts/slash.js"></script>
 <script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
@@ -443,16 +440,5 @@
 
 
 
-
-
-<!-- end toload --> 
-</div>
-</div>
-<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
-/*]]>*/
-</script><!-- remove it to remove the scroll to top button -->
 </body>
 </html>

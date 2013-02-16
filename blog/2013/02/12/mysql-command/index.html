@@ -3,11 +3,16 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: Octopress - Lighter's Blog</title>
+	<title>mysql command - Lighter's Blog</title>
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="Category: Octopress">
+	<meta name="description" content="登入 1
+mysql -u root -h localhost -p 顯示資料庫 1
+show databases; 選擇使用的資料庫 1
+use database; 顯示目前選擇的資料庫 1
+select database(); 顯示目前連線狀態 1
+status 顯示該資料庫的表單(Table &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -85,31 +90,93 @@
 </script>
 
 	
-	<div id="content" class="inner">
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">Mysql Command</h1>
+	<div class="entry-content"><h2>登入</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -u root -h localhost -p</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>顯示資料庫</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>show databases;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>選擇使用的資料庫</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use database;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>顯示目前選擇的資料庫</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>select database();</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>顯示目前連線狀態</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>status</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>顯示該資料庫的表單(Table)</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>show tables;</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-12T15:48:00+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>mysql</a>
+
+
+</div>
 	
+		<span class="comments"><a href="/blog/2013/02/12/mysql-command/#disqus_thread">Comments</a></span>
+	
+</div></article>
 
-
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 	
 	
-	<section class="archives"><h1 class="year">2012</h1>
-
-<article>
-	<h1 class="title"><a href="/blog/2012/04/02/octopress-install/">octopress install with github</a></h1>
-	<div class="meta">
-		<span class="date">Apr  2</span>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
-
-
-</span>
-	    
-	    <span class="comments"><a href="/blog/2012/04/02/octopress-install/#disqus_thread">Comments</a></span>
-	    
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
 	</div>
-</article>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
 
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2013
 
@@ -129,7 +196,10 @@
       var disqus_shortname = 'lighter';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lighter.tw/blog/2013/02/12/mysql-command/';
+        var disqus_url = 'http://lighter.tw/blog/2013/02/12/mysql-command/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
