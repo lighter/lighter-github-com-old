@@ -90,17 +90,15 @@ Persistent Object Store Managed Object Context這類別記載了我們的App在�
 	<div id="content" class="inner"><article class="post">
 	<h1 class="title">Core Data-Part1</h1>
 	<div class="entry-content"><p><code>Core Data</code>主要分成三個部分</p>
-
 <ol>
 <li>Managed Object Context</li>
 <li>Persistent Store Coordinator</li>
 <li>Persistent Object Store</li>
 </ol>
 
-
 <p><code>Managed Object Context</code>這類別記載了我們的App在記憶體中所有的<code>Entity</code>，當你要求Core Data載入物件時，你必須先向<code>Managed Object Context</code>提出要求。</p>
 
-<p>&#8230;假如不存在記憶體中的話，它會向<code>Persistent Store Coordinator</code>發出請求，試著嘗試尋找它。</p>
+<p>…假如不存在記憶體中的話，它會向<code>Persistent Store Coordinator</code>發出請求，試著嘗試尋找它。</p>
 
 <p><code>Persistent Store Coordinator</code>的任務是追蹤<code>Persistent Object Store</code>，而<code>Persistent Object Store</code>實際知道如何讀寫資料。</p>
 
@@ -108,173 +106,165 @@ Persistent Object Store Managed Object Context這類別記載了我們的App在�
 
 <p>整個流程大致上如下圖：</p>
 
-<p><img src="/images/iPhone/coredatas1.jpeg"></p>
+<p><img src="/images/iPhone/coredatas1.jpeg" /></p>
 
 <!-- more -->
 
-
 <p><strong>Step 1.</strong>建立<code>Empty Application</code>，專案名稱為core data example</p>
 
-<p><img src="/images/iPhone/coredatas2.jpeg"></p>
+<p><img src="/images/iPhone/coredatas2.jpeg" /></p>
 
 <p>記得要將<code>Use Core Data</code>打勾。</p>
 
-<p><img src="/images/iPhone/coredatas3.jpeg"></p>
+<p><img src="/images/iPhone/coredatas3.jpeg" /></p>
 
 <p><strong>Step 2.</strong> 編輯core_data_sample.xcdatamodeld</p>
 
 <p>首先開啟<code>core_data_sample.xcdatamodeld</code>這個檔案，點選中間下方的<code>Add Entity</code>，並輸入<code>Phone</code>(註：第一個字要大寫)，接著在右邊可以找到<code>Attributes</code>，點選<code>＋</code>加號，加入兩個屬性分別為<code>name</code>、<code>number</code>，其型態分別為<code>String</code>
 、<code>Integer 32</code>。</p>
 
-<p><img src="/images/iPhone/coredatas4.jpeg"></p>
+<p><img src="/images/iPhone/coredatas4.jpeg" /></p>
 
 <p><strong>Step 3.</strong>建立<code>Phone.m、Phone.h</code></p>
 
 <p>點選專案資料夾，右鍵➔New File。</p>
 
-<p><img src="/images/iPhone/coredatas5.jpeg"></p>
+<p><img src="/images/iPhone/coredatas5.jpeg" /></p>
 
 <p>選擇iOS➔Core Data➔NSManagedObject subclass，接著都直接下一步。</p>
 
-<p><img src="/images/iPhone/coredatas6.jpeg"></p>
+<p><img src="/images/iPhone/coredatas6.jpeg" /></p>
 
 <p>接著可以在專案的資料夾內會出現<code>Phone.m、Phone.h</code></p>
 
-<p><img src="/images/iPhone/coredatas7.jpeg"></p>
+<p><img src="/images/iPhone/coredatas7.jpeg" /></p>
 
 <p>在這兩個檔案可看到裡面的變數都是跟xcdatamodeld內的有相關連的</p>
 
-<figure class='code'><figcaption><span>Phone.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
-</span><span class='line'><span class="cp">#import &lt;CoreData/CoreData.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">Phone</span> : <span class="nc">NSManagedObject</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span>  <span class="n">NSString</span> <span class="o">*</span> <span class="n">name</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSNumber</span> <span class="o">*</span> <span class="n">number</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Phone.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+</span><span class="line"><span class="cp">#import &lt;CoreData/CoreData.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@interface</span> <span class="nc">Phone</span> : <span class="nc">NSManagedObject</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span>  <span class="n">NSString</span> <span class="o">*</span> <span class="n">name</span><span class="p">;</span>
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSNumber</span> <span class="o">*</span> <span class="n">number</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>這邊的<code>@dynamic</code>主要是告知 compiler 不要產生<code>setter、getter</code>，而是由程式本身來實作甚至是直到 Runtime 時以 Dynamic Loading 方式連結。</p>
 
-<figure class='code'><figcaption><span>Phone.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;Phone.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">Phone</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@dynamic</span> <span class="n">name</span><span class="p">;</span>
-</span><span class='line'><span class="k">@dynamic</span> <span class="n">number</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Phone.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &quot;Phone.h&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@implementation</span> <span class="nc">Phone</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@dynamic</span> <span class="n">name</span><span class="p">;</span>
+</span><span class="line"><span class="k">@dynamic</span> <span class="n">number</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>Step .4</strong>編輯AppDelegate.m</p>
 
 <p>在該檔案內自行新增一個<code>creatData</code>方法</p>
 
-<figure class='code'><figcaption><span>AppDelegate.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">creatData</span><span class="p">{</span>
-</span><span class='line'>    <span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="n">managedObjectContext</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">Phone</span> <span class="o">*</span><span class="n">detail</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">detail</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">@&quot;Mary&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">detail</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">323232123</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">]){</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;error&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">//撈取資料</span>
-</span><span class='line'>    <span class="n">NSFetchRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSFetchRequest</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSEntityDescription</span> <span class="o">*</span><span class="n">entity</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">entityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">request</span> <span class="nl">setEntity:</span><span class="n">entity</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">NSArray</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">context</span> <span class="nl">executeFetchRequest:</span><span class="n">request</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">Phone</span> <span class="o">*</span><span class="n">pho</span> <span class="k">in</span> <span class="n">array</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Name: %@&quot;</span><span class="p">,</span> <span class="n">pho</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Number: %@&quot;</span><span class="p">,</span> <span class="n">pho</span><span class="p">.</span><span class="n">number</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">creatData</span><span class="p">{</span>
+</span><span class="line">    <span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="n">managedObjectContext</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">Phone</span> <span class="o">*</span><span class="n">detail</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class="line">    <span class="n">detail</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">@&quot;Mary&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="n">detail</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">323232123</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+</span><span class="line">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">]){</span>
+</span><span class="line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;error&quot;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">//撈取資料</span>
+</span><span class="line">    <span class="n">NSFetchRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSFetchRequest</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class="line">    <span class="n">NSEntityDescription</span> <span class="o">*</span><span class="n">entity</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">entityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class="line">    <span class="p">[</span><span class="n">request</span> <span class="nl">setEntity:</span><span class="n">entity</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">NSArray</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">context</span> <span class="nl">executeFetchRequest:</span><span class="n">request</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</span><span class="line">    <span class="k">for</span> <span class="p">(</span><span class="n">Phone</span> <span class="o">*</span><span class="n">pho</span> <span class="k">in</span> <span class="n">array</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Name: %@&quot;</span><span class="p">,</span> <span class="n">pho</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+</span><span class="line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Number: %@&quot;</span><span class="p">,</span> <span class="n">pho</span><span class="p">.</span><span class="n">number</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-
-
-<figure class='code'><figcaption><span>AppDelegate.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">launchOptions</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="n">creatData</span><span class="p">];</span>   <span class="c1">//加入這行</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">window</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIWindow</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="p">[[</span><span class="n">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">]];</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">whiteColor</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">window</span> <span class="n">makeKeyAndVisible</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">launchOptions</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="p">[</span><span class="n">self</span> <span class="n">creatData</span><span class="p">];</span>   <span class="c1">//加入這行</span>
+</span><span class="line">    <span class="n">self</span><span class="p">.</span><span class="n">window</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIWindow</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="p">[[</span><span class="n">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">]];</span>
+</span><span class="line">    <span class="n">self</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">whiteColor</span><span class="p">];</span>
+</span><span class="line">    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">window</span> <span class="n">makeKeyAndVisible</span><span class="p">];</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>最後編譯後，可以在Debug的地方看到<code>NSLog</code>的訊息。</p>
 
 <p>參考資料：</p>
 
 <ol>
-<li><a href="http://www.youtube.com/watch?v=QBrkavVJsw0&amp;feature=relmfu">iPhone Core Data 1 - Intro</a></li>
-<li><a href="http://stackoverflow.com/questions/1160498/synthesize-vs-dynamic-what-are-the-differences">@synthesize vs @dynamic, what are the differences?</a></li>
-<li><a href="http://rintarou.dyndns.org/2011/07/12/the-objective-c-programming-guide-%E5%85%A5%E9%96%80%E7%AD%86%E8%A8%98/">The Objective-C Programming Guide 入門筆記</a></li>
-<li><a href="http://blog.csdn.net/zyc851224/article/details/7387805">iPhone开发之CoreData(基础篇)</a></li>
+  <li><a href="http://www.youtube.com/watch?v=QBrkavVJsw0&amp;feature=relmfu">iPhone Core Data 1 - Intro</a></li>
+  <li><a href="http://stackoverflow.com/questions/1160498/synthesize-vs-dynamic-what-are-the-differences">@synthesize vs @dynamic, what are the differences?</a></li>
+  <li><a href="http://rintarou.dyndns.org/2011/07/12/the-objective-c-programming-guide-%E5%85%A5%E9%96%80%E7%AD%86%E8%A8%98/">The Objective-C Programming Guide 入門筆記</a></li>
+  <li><a href="http://blog.csdn.net/zyc851224/article/details/7387805">iPhone开发之CoreData(基础篇)</a></li>
 </ol>
-
 </div>
 
 

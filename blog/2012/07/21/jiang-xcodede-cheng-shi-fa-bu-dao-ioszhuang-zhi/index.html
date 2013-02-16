@@ -7,9 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="以下是我使用的作業環境 Mac Lion 10.7.4
-XCODE 4.3.3
-iOS5.1 裝置為 iPhone 4 Step 1.製作假驗證 首先在Finder的地方，點選前往 -> 工具程式。 開啟鑰匙圈存取。 選取鑰匙圈存取 -> 憑證輔助程式 -> 製作憑證。 名稱：fake &hellip;">
+	<meta name="description" content="以下是我使用的作業環境 Mac Lion 10.7.4 XCODE 4.3.3 iOS5.1 裝置為 iPhone 4 Step 1.製作假驗證 首先在Finder的地方，點選前往 -&gt; 工具程式。 開啟鑰匙圈存取。 選取鑰匙圈存取 -&gt; 憑證輔助程式 -&gt; 製作憑證。 名稱： &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -92,66 +90,61 @@ iOS5.1 裝置為 iPhone 4 Step 1.製作假驗證 首先在Finder的地方，點�
 	<div class="entry-content"><p>以下是我使用的作業環境</p>
 
 <ul>
-<li>Mac Lion 10.7.4</li>
-<li>XCODE 4.3.3</li>
-<li>iOS5.1 裝置為 iPhone 4</li>
+  <li>Mac Lion 10.7.4</li>
+  <li>XCODE 4.3.3</li>
+  <li>iOS5.1 裝置為 iPhone 4</li>
 </ul>
-
 
 <!-- more -->
 
-
 <p><strong>Step 1.製作假驗證</strong></p>
 
-<p>首先在Finder的地方，點選前往 -> 工具程式。</p>
+<p>首先在Finder的地方，點選前往 -&gt; 工具程式。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone1.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone1.png" /></p>
 
 <p>開啟鑰匙圈存取。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone2.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone2.png" /></p>
 
-<p>選取鑰匙圈存取 -> 憑證輔助程式 -> 製作憑證。</p>
+<p>選取鑰匙圈存取 -&gt; 憑證輔助程式 -&gt; 製作憑證。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone3.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone3.png" /></p>
 
 <ul>
-<li>名稱：fake</li>
-<li>識別身分類型：自簽根</li>
-<li>憑證類型：代碼簽名
+  <li>名稱：fake</li>
+  <li>識別身分類型：自簽根</li>
+  <li>憑證類型：代碼簽名
 *覆蓋預設值(勾選)</li>
 </ul>
 
-
 <p>繼續之後會跳出一個對話視窗一樣選取繼續。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone4.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone4.png" /></p>
 
 <ul>
-<li>序號：121212</li>
-<li>有效時間：999</li>
+  <li>序號：121212</li>
+  <li>有效時間：999</li>
 </ul>
-
 
 <p>接著一直繼續到最後。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone5.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone5.png" /></p>
 
 <p>Step 2.修改XCODE讓他可以抓取到我們的製作的假驗證。</p>
 
-<p>開啟應用程式資料夾，找到XCODE，右鍵 -> 顯示套件內容。</p>
+<p>開啟應用程式資料夾，找到XCODE，右鍵 -&gt; 顯示套件內容。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone6.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone6.png" /></p>
 
 <p>依照Contents/Developer/Platforms/iPhoneOS.platform的路徑尋找到<code>Info.plist</code>。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone7.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone7.png" /></p>
 
 <ol>
-<li>將<code>Info.plist</code>複製到桌面上開啟，使用<code>cmd+f</code>尋找<code>CODE_SIGN_CONTEST_CLASS</code>，將原本的預設值改為<code>XCCodeSignContext</code>(共有兩個地方要修改)。</li>
-<li><code>RuntimeRequirements -> Classes -> item 0</code>的預設值也改為<code>XCCodeSignContext</code>。</li>
+  <li>將<code>Info.plist</code>複製到桌面上開啟，使用<code>cmd+f</code>尋找<code>CODE_SIGN_CONTEST_CLASS</code>，將原本的預設值改為<code>XCCodeSignContext</code>(共有兩個地方要修改)。</li>
+  <li><code>RuntimeRequirements -&gt; Classes -&gt; item 0</code>的預設值也改為<code>XCCodeSignContext</code>。</li>
 </ol>
-
 
 <p><strong>ps.這樣總共有三個地方要修改為<code>XCCodeSignContext</code>。</strong></p>
 
@@ -159,31 +152,31 @@ iOS5.1 裝置為 iPhone 4 Step 1.製作假驗證 首先在Finder的地方，點�
 
 <p>Step 3.修改專案。</p>
 
-<p>接著在你的<code>XCODE</code>專案，點選專案的設定檔<code>PROJECT</code> -> <code>Build Settings</code> -> <code>Code Signing</code> -> <code>Code Signing Identity</code>。</p>
+<p>接著在你的<code>XCODE</code>專案，點選專案的設定檔<code>PROJECT</code> -&gt; <code>Build Settings</code> -&gt; <code>Code Signing</code> -&gt; <code>Code Signing Identity</code>。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone8.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone8.png" /></p>
 
 <p>將裡面的憑證選取您剛新增的金鑰名稱，這裡使用之前已經建立好的<code>fake code sign</code>，所以會跟前面有所不同！！</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone9.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone9.png" /></p>
 
 <p>建立完之後在編譯專案的右邊，選取我們要發佈的裝置，記得裝置必須先與電腦連接。接著就可以編譯發佈到實體裝置上了。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone12.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone12.png" /></p>
 
 <p>發佈的時候如果點選App後馬上閃退的話，這時修改一下<code>Scheme</code>。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone10.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone10.png" /></p>
 
-<p>選擇第二個<code>Run XXX.app</code> -> <code>Info</code> -> <code>Debugger</code> -> 選取<code>GDB</code>，最後按下OK，再次重新編譯專案發佈到實體裝置，應該就可以解決閃退的問題了。</p>
+<p>選擇第二個<code>Run XXX.app</code> -&gt; <code>Info</code> -&gt; <code>Debugger</code> -&gt; 選取<code>GDB</code>，最後按下OK，再次重新編譯專案發佈到實體裝置，應該就可以解決閃退的問題了。</p>
 
-<p><img src="/images/xcodeToiPhone/xcodeToiPhone11.png"></p>
+<p><img src="/images/xcodeToiPhone/xcodeToiPhone11.png" /></p>
 
-<h3>參考資料</h3>
+<h3 id="section">參考資料</h3>
 
 <ol>
-<li><a href="http://tw.myblog.yahoo.com/pcman-128/article?mid=850&amp;prev=-2&amp;next=-2&amp;page=1&amp;sc=1#yartcmt">如何將Xcode的程式發布到iOS裝置(免年費)</a></li>
-<li><a href="http://wangshifuola.blogspot.tw/2012/04/ioserror-launching-remote-program.html">iOS學習_Error launching remote program: failed to get the task for process</a></li>
+  <li><a href="http://tw.myblog.yahoo.com/pcman-128/article?mid=850&amp;prev=-2&amp;next=-2&amp;page=1&amp;sc=1#yartcmt">如何將Xcode的程式發布到iOS裝置(免年費)</a></li>
+  <li><a href="http://wangshifuola.blogspot.tw/2012/04/ioserror-launching-remote-program.html">iOS學習_Error launching remote program: failed to get the task for process</a></li>
 </ol>
 
 </div>

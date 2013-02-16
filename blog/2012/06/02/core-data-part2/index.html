@@ -91,74 +91,71 @@
 
 <p>最後的結果是希望可以在<code>Table View</code>中看到我新增的姓名，點選該姓名可以看到該姓名的電話。</p>
 
-<p><img src="/images/iPhone/coredata2-1.png" width="216">
-<img src="/images/iPhone/coredata2-2.png" width="216">
-<img src="/images/iPhone/coredata2-3.png" width="216"></p>
+<p><img src="/images/iPhone/coredata2-1.png" width="216" />
+<img src="/images/iPhone/coredata2-2.png" width="216" />
+<img src="/images/iPhone/coredata2-3.png" width="216" /></p>
 
 <!-- more -->
-
 
 <p><strong>Step 1.</strong>建立<code>Master Detail Application</code>的專案，專案名稱為core data example。</p>
 
 <p><strong>Step 2.</strong>開啟<code>core_data_example.xcdatamodeld</code>，將原本專案預設的<code>Entity</code>刪除，另外新增一個<code>Phone</code>的<code>Entity</code>，並新增兩個<code>Attributes</code>，name、number，如下圖。</p>
 
-<p><img src="/images/iPhone/coredata2-4.png"></p>
+<p><img src="/images/iPhone/coredata2-4.png" /></p>
 
 <p><strong>Step 3.</strong>新增<code>Managed Object Model</code>，對著專案右鍵<code>New File</code>➔<code>iOS</code>➔<code>Core Data</code>➔<code>NSManagedObjectsubclass</code>，接著會自動新增二個檔案，<code>Phone.m</code>跟<code>Phone.h</code>。</p>
 
 <p>如果沒有直接自動產生，應該會出現以下的畫面，只需要勾選並且下一步即可。</p>
 
-<p><img src="/images/iPhone/coredata2-5.png">
-<img src="/images/iPhone/coredata2-6.png"></p>
+<p><img src="/images/iPhone/coredata2-5.png" />
+<img src="/images/iPhone/coredata2-6.png" /></p>
 
 <p><strong>Step 4.</strong>修改<code>MainStoryboard.storyboard</code>。</p>
 
 <p>在<code>Navigation</code>的右方加入一個<code>Bar Button Item</code>，點選新增是會跑到上面的畫面，讓我們新增姓名還有電話，下面則是點選姓名時可以看到該姓名的電話。因此需要新增一個<code>AddDetailViewController</code>來控制該新增畫面。在此就不多贅述。</p>
 
-<p><img src="/images/iPhone/coredata2-7.png"></p>
+<p><img src="/images/iPhone/coredata2-7.png" /></p>
 
 <p><strong>Step 5.</strong>編輯<code>AddDetailViewController</code>。</p>
 
 <ol>
-<li>import<code>Phone.h</code>，因為需要透過它來得知<code>Entity</code>的<code>name</code>、<code>number</code>。</li>
-<li>import<code>AppDelegate.h</code>，因為需要使用它裡面的<code>NSManagedObjectContext</code>，所以在此無需重複定義。</li>
-<li>二個<code>UITextField</code>顧名思義就是對應到畫面上二個Text使用的。</li>
-<li><code>app</code>就是要用來引用<code>NSManagedObjectContext</code>。</li>
-<li><code>save</code>就是在新增的畫面的Navigation右方，按下save按鈕儲存資料。</li>
+  <li>import<code>Phone.h</code>，因為需要透過它來得知<code>Entity</code>的<code>name</code>、<code>number</code>。</li>
+  <li>import<code>AppDelegate.h</code>，因為需要使用它裡面的<code>NSManagedObjectContext</code>，所以在此無需重複定義。</li>
+  <li>二個<code>UITextField</code>顧名思義就是對應到畫面上二個Text使用的。</li>
+  <li><code>app</code>就是要用來引用<code>NSManagedObjectContext</code>。</li>
+  <li><code>save</code>就是在新增的畫面的Navigation右方，按下save按鈕儲存資料。</li>
 </ol>
 
-
-<figure class='code'><figcaption><span>AddDetailViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class='line'><span class="cp">#import &quot;Phone.h&quot;</span>
-</span><span class='line'><span class="cp">#import &quot;AppDelegate.h&quot;</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">AddDetailViewController</span> : <span class="nc">UIViewController</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">name_</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">UITextField</span> <span class="o">*</span><span class="n">number_</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">number</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">app</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+</span><span class="line"><span class="cp">#import &quot;Phone.h&quot;</span>
+</span><span class="line"><span class="cp">#import &quot;AppDelegate.h&quot;</span>
+</span><span class="line"><span class="k">@interface</span> <span class="nc">AddDetailViewController</span> : <span class="nc">UIViewController</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="n">UITextField</span> <span class="o">*</span><span class="n">name_</span><span class="p">;</span>
+</span><span class="line">    <span class="n">UITextField</span> <span class="o">*</span><span class="n">number_</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">number</span><span class="p">;</span>
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">app</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class="line"><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>第5行，取得AppDelegate的<code>delegate</code></p>
 
@@ -170,55 +167,54 @@
 
 <p>第18~22，當寫入發生錯誤時才會執行。</p>
 
-<figure class='code'><figcaption><span>AddDetailViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">number_</span><span class="p">,</span> <span class="n">app</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">app</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">app</span> <span class="n">managedObjectContext</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">number_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Nope&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">phone</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInteger:</span><span class="p">[</span><span class="n">number_</span><span class="p">.</span><span class="n">text</span> <span class="n">integerValue</span><span class="p">]];</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">popViewControllerAnimated:</span><span class="n">YES</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Woops&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">number_</span><span class="p">,</span> <span class="n">app</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="n">app</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
+</span><span class="line">    <span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">app</span> <span class="n">managedObjectContext</span><span class="p">];</span>
+</span><span class="line">    <span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">number_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Nope&quot;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
+</span><span class="line">        <span class="n">phone</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInteger:</span><span class="p">[</span><span class="n">number_</span><span class="p">.</span><span class="n">text</span> <span class="n">integerValue</span><span class="p">]];</span>
+</span><span class="line">        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">popViewControllerAnimated:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">])</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Woops&quot;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>Step 6.</strong>編輯<code>MasterViewController.m</code>。</p>
 
@@ -226,75 +222,71 @@
 
 <p>最後記得要將<code>viewDidLoad</code>內的方法刪除，僅留下第一行即可(如下)。</p>
 
-<figure class='code'><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>  <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class="line">	<span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>Step 7.</strong>編輯<code>DetailViewController</code></p>
 
 <p>因為比原本的專案多了一個<code>UILabel</code>元件，所以要多定義一個，並且找到<code>configureView</code>方法，加入第8行設定<code>detailNumber</code>，而<code>valueForKey</code>記得要修改成跟<code>Entity</code>對應的name、number。</p>
 
-<figure class='code'><figcaption><span>DetailViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">DetailViewController</span> : <span class="nc">UIViewController</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">id</span> <span class="n">detailItem</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailDescriptionLabel</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailNumber</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+</span><span class="line"><span class="k">@interface</span> <span class="nc">DetailViewController</span> : <span class="nc">UIViewController</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">id</span> <span class="n">detailItem</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailDescriptionLabel</span><span class="p">;</span>
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailNumber</span><span class="p">;</span>
+</span><span class="line"><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-
-
-<figure class='code'><figcaption><span>DetailViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">detailNumber</span> <span class="o">=</span> <span class="n">_detailNumber</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">configureView</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Update the user interface for the detail item.</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">detailDescriptionLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;name&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
-</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">detailNumber</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;number&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">detailNumber</span> <span class="o">=</span> <span class="n">_detailNumber</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">configureView</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="c1">// Update the user interface for the detail item.</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="n">self</span><span class="p">.</span><span class="n">detailDescriptionLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;name&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
+</span><span class="line">        <span class="n">self</span><span class="p">.</span><span class="n">detailNumber</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;number&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Step 8.建立關連</p>
 
 <p>最後就是將元件跟<code>IBOutlet</code>、<code>IBAction</code>建立關連，在此就不多做贅述了。</p>
 
 <p>範例下載：<a href="https://lighter@github.com/lighter/Core-Data-Example.git">Download here</a></p>
+
 </div>
 
 

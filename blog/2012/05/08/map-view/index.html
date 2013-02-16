@@ -91,19 +91,17 @@
 	<div class="entry-content"><p><code>Map View</code>很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
 該範例使用<code>Segmented Contrl</code>來切換<code>Map View</code>的樣式，並且定位出目前的所在位址(如下第三張圖)。</p>
 
-<p><img src="/images/iPhone/mapViews1.jpeg">
-<img src="/images/iPhone/mapViews2.jpeg">
-<img src="/images/iPhone/mapViews4.jpeg"></p>
+<p><img src="/images/iPhone/mapViews1.jpeg" />
+<img src="/images/iPhone/mapViews2.jpeg" />
+<img src="/images/iPhone/mapViews4.jpeg" /></p>
 
 <!-- more -->
-
 
 <p><strong>Step 1.</strong>建立<code>Single View</code>專案，專案名稱為Map View</p>
 
 <p><strong>Step 2.</strong>編輯MainStoryboard.storyboard</p>
 
 <p>加入：</p>
-
 <ol>
 <li>Toolbar</li>
 <li>Segmented Control</li>
@@ -111,15 +109,13 @@
 <li>Flexible Space Bar Button Item</li>
 <li>Map View</li>
 </ol>
-
-
-<p><img src="/images/iPhone/mapViews5.jpeg"></p>
+<p><img src="/images/iPhone/mapViews5.jpeg" /></p>
 
 <p><strong>Step 3.</strong>加入<code>MapKit</code>的framework</p>
 
-<p>在檔案瀏覽的地方點選專案，接著畫面中間選擇<code>TARGETS</code>在往右邊上方找到<code>Build Phases</code>，下方可看到<code>Link Binary With Libraries</code>，點選下方的<cde>＋</code>加號，將<code>MapKit.framework</code>加進來。加入成功以後在你的專案資料夾內即可看到一個<code>MapKit.framework</code></p>
+<p>在檔案瀏覽的地方點選專案，接著畫面中間選擇<code>TARGETS</code>在往右邊上方找到<code>Build Phases</code>，下方可看到<code>Link Binary With Libraries</code>，點選下方的<cde>＋&lt;/code&gt;加號，將<code>MapKit.framework</code>加進來。加入成功以後在你的專案資料夾內即可看到一個<code>MapKit.framework</code></cde></p>
 
-<p><img src="/images/iPhone/mapViews6.jpeg"></p>
+<p><img src="/images/iPhone/mapViews6.jpeg" /></p>
 
 <p><strong>Step 4.</strong>編輯ViewController.h</p>
 
@@ -129,103 +125,97 @@
 <li>定義兩個<code>IBAction</code>，該用途如程式碼的註解</li>
 </ol>
 
-
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class='line'><span class="cp">#import &lt;MapKit/MapKit.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">MKMapView</span> <span class="o">*</span><span class="n">mapView_</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented_</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">MKMapView</span> <span class="o">*</span><span class="n">mapView</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//顯示定位</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//改變地圖的type</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+</span><span class="line"><span class="cp">#import &lt;MapKit/MapKit.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="n">MKMapView</span> <span class="o">*</span><span class="n">mapView_</span><span class="p">;</span>
+</span><span class="line">    <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented_</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">MKMapView</span> <span class="o">*</span><span class="n">mapView</span><span class="p">;</span>
+</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//顯示定位</span>
+</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//改變地圖的type</span>
+</span><span class="line"><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>Step 5.</strong>編輯ViewController.m</p>
 
-<p>一樣要先補上<code>synthesize</code>，接著是撰寫<code>showLocation:</code>，該方法很簡單，只要定義<code>mapView</code>的<code>showsUserLocation</code>為</code>YES</code>即可顯示目前該使用者的位址。</p>
+<p>一樣要先補上<code>synthesize</code>，接著是撰寫<code>showLocation:</code>，該方法很簡單，只要定義<code>mapView</code>的<code>showsUserLocation</code>為&lt;/code&gt;YES&lt;/code&gt;即可顯示目前該使用者的位址。</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">mapView</span> <span class="o">=</span> <span class="n">mapView_</span><span class="p">,</span> <span class="n">segmented</span> <span class="o">=</span> <span class="n">segmented_</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">showsUserLocation</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">mapView</span> <span class="o">=</span> <span class="n">mapView_</span><span class="p">,</span> <span class="n">segmented</span> <span class="o">=</span> <span class="n">segmented_</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">showLocation:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">showsUserLocation</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>在改變地圖的模式，使用<code>Segmented Control</code>，操作的方式如同<a href="http://lighter.github.com/blog/2012/05/01/segmented-controller/">Segmented Control</a>，唯一不同的是在<code>case</code>內執行的東西；在<code>case</code>內去改變<code>mapView</code>的<code>mapType</code>，地圖模式一共有三種模式可以更換，因此您可以依自己的需求去做變換。</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">NSInteger</span> <span class="n">segmentedNum</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">segmentedNum</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">segmented</span><span class="p">.</span><span class="n">selectedSegmentIndex</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">segmentedNum</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeStandard</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeSatellite</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
-</span><span class='line'>            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeHybrid</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">default</span><span class="o">:</span>
-</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">changeMapType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="n">NSInteger</span> <span class="n">segmentedNum</span><span class="p">;</span>
+</span><span class="line">    <span class="n">segmentedNum</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">segmented</span><span class="p">.</span><span class="n">selectedSegmentIndex</span><span class="p">;</span>
+</span><span class="line">    <span class="k">switch</span> <span class="p">(</span><span class="n">segmentedNum</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span><span class="line">            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeStandard</span><span class="p">;</span>
+</span><span class="line">            <span class="k">break</span><span class="p">;</span>
+</span><span class="line">        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class="line">            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeSatellite</span><span class="p">;</span>
+</span><span class="line">            <span class="k">break</span><span class="p">;</span>
+</span><span class="line">        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class="line">            <span class="n">self</span><span class="p">.</span><span class="n">mapView</span><span class="p">.</span><span class="n">mapType</span> <span class="o">=</span> <span class="n">MKMapTypeHybrid</span><span class="p">;</span>
+</span><span class="line">            <span class="k">break</span><span class="p">;</span>
+</span><span class="line">        <span class="k">default</span><span class="o">:</span>
+</span><span class="line">            <span class="k">break</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>Step 6.</strong>建立關連</p>
 
-<p><img src="/images/iPhone/mapViews7.jpeg"></p>
+<p><img src="/images/iPhone/mapViews7.jpeg" /></p>
 </div>
 
 

@@ -95,50 +95,46 @@
 
 <p>安裝完Node.js，在桌面上建立一個<code>hello.js</code>的檔案，程式碼內容如下</p>
 
-<figure class='code'><figcaption><span>hello.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">});</span>
-</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}}.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>hello.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">	<span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">});</span>
+</span><span class="line">	<span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="p">}}.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>接著在終端機切換到該檔案的路徑下輸入</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ node hello.js</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ node hello.js</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>開啟瀏覽器網址輸入http://127.0.0.1:8000，即可看到一個Hello World，就這麼簡單，但讓我覺得很厲害的地方是終端機使用，看到有人將終端機的操作透過Node.js即時的反應呈現在網路上！</p>
 
 <p>目前我也發現<code>Express</code>這個套件，這套件讓開發http server變得容易許多，修改<code>hello.js</code>(使用Express)。</p>
 
-<figure class='code'><figcaption><span>hello.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">).</span><span class="nx">createServer</span><span class="p">();</span>
-</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>hello.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">).</span><span class="nx">createServer</span><span class="p">();</span>
+</span><span class="line"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">	<span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="p">});</span>
+</span><span class="line"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>上面的程式碼可看到<code>app</code>還可以定義HTTP的路由，此例為<code>app.get</code>。</p>
 
-<h2>參考資料</h2>
-
+<h2 id="section">參考資料</h2>
 <p><a href="http://nodejs.org/">Node.js</a></p>
 
 <p><a href="http://book.nodejs.tw/">Node.js 中文電子書</a></p>
@@ -183,11 +179,10 @@
 		<p>以下是我使用的作業環境</p>
 
 <ul>
-<li>Mac Lion 10.7.4</li>
-<li>XCODE 4.3.3</li>
-<li>iOS5.1 裝置為 iPhone 4</li>
+  <li>Mac Lion 10.7.4</li>
+  <li>XCODE 4.3.3</li>
+  <li>iOS5.1 裝置為 iPhone 4</li>
 </ul>
-
 
 
 		
@@ -229,9 +224,9 @@
 
 <p>最後的結果是希望可以在<code>Table View</code>中看到我新增的姓名，點選該姓名可以看到該姓名的電話。</p>
 
-<p><img src="/images/iPhone/coredata2-1.png" width="216">
-<img src="/images/iPhone/coredata2-2.png" width="216">
-<img src="/images/iPhone/coredata2-3.png" width="216"></p>
+<p><img src="/images/iPhone/coredata2-1.png" width="216" />
+<img src="/images/iPhone/coredata2-2.png" width="216" />
+<img src="/images/iPhone/coredata2-3.png" width="216" /></p>
 
 
 		
@@ -272,9 +267,9 @@
 		<p><code>Map View</code>很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
 該範例使用<code>Segmented Contrl</code>來切換<code>Map View</code>的樣式，並且定位出目前的所在位址(如下第三張圖)。</p>
 
-<p><img src="/images/iPhone/mapViews1.jpeg">
-<img src="/images/iPhone/mapViews2.jpeg">
-<img src="/images/iPhone/mapViews4.jpeg"></p>
+<p><img src="/images/iPhone/mapViews1.jpeg" />
+<img src="/images/iPhone/mapViews2.jpeg" />
+<img src="/images/iPhone/mapViews4.jpeg" /></p>
 
 
 		
@@ -313,17 +308,15 @@
 	<h1 class="title"><a href="/blog/2012/05/08/core-data-part1/">Core Data-Part1</a></h1>
 	<div class="entry-content">
 		<p><code>Core Data</code>主要分成三個部分</p>
-
 <ol>
 <li>Managed Object Context</li>
 <li>Persistent Store Coordinator</li>
 <li>Persistent Object Store</li>
 </ol>
 
-
 <p><code>Managed Object Context</code>這類別記載了我們的App在記憶體中所有的<code>Entity</code>，當你要求Core Data載入物件時，你必須先向<code>Managed Object Context</code>提出要求。</p>
 
-<p>&#8230;假如不存在記憶體中的話，它會向<code>Persistent Store Coordinator</code>發出請求，試著嘗試尋找它。</p>
+<p>…假如不存在記憶體中的話，它會向<code>Persistent Store Coordinator</code>發出請求，試著嘗試尋找它。</p>
 
 <p><code>Persistent Store Coordinator</code>的任務是追蹤<code>Persistent Object Store</code>，而<code>Persistent Object Store</code>實際知道如何讀寫資料。</p>
 
@@ -331,7 +324,7 @@
 
 <p>整個流程大致上如下圖：</p>
 
-<p><img src="/images/iPhone/coredatas1.jpeg"></p>
+<p><img src="/images/iPhone/coredatas1.jpeg" /></p>
 
 
 		
@@ -373,9 +366,9 @@
 
 <p>以下使用3個<code>Segments</code>來做Google、Yahoo、Youtube的切換。</p>
 
-<p><img src="/images/iPhone/segmentedController1.jpeg">
-<img src="/images/iPhone/segmentedController2.jpeg">
-<img src="/images/iPhone/segmentedController3.jpeg"></p>
+<p><img src="/images/iPhone/segmentedController1.jpeg" />
+<img src="/images/iPhone/segmentedController2.jpeg" />
+<img src="/images/iPhone/segmentedController3.jpeg" /></p>
 
 
 		
@@ -417,9 +410,9 @@
 
 <p>最後的結果如下圖：(將圖片向右排列，手指將畫面往左拖曳，即可看到其他的圖片)。</p>
 
-<p><img src="/images/iPhone/scrollViews1.jpeg">
-<img src="/images/iPhone/scrollViews2.jpeg">
-<img src="/images/iPhone/scrollViews3.jpeg"></p>
+<p><img src="/images/iPhone/scrollViews1.jpeg" />
+<img src="/images/iPhone/scrollViews2.jpeg" />
+<img src="/images/iPhone/scrollViews3.jpeg" /></p>
 
 
 		
@@ -461,8 +454,8 @@
 
 <p>該範例以簡單的Button事件來改變Image View呈現的圖片。</p>
 
-<p><img src="/images/iPhone/imageViews1.jpeg">
-<img src="/images/iPhone/imageViews2.jpeg"></p>
+<p><img src="/images/iPhone/imageViews1.jpeg" />
+<img src="/images/iPhone/imageViews2.jpeg" /></p>
 
 
 		
@@ -510,9 +503,6 @@
 </ol>
 
 
-
-
-
 		
 		<a href="/blog/2012/04/24/web-view/" class="more-link">Read on &rarr;</a>
 	</div>
@@ -550,11 +540,9 @@
 	<div class="entry-content">
 		<p>Slider在iPhone比較常見是用來調整螢幕的明暗度，或是在某些圖片編輯app內用來調整RGB的比例，我們使用一個簡單的範例來操控Slider。</p>
 
-<p><img class="left" src="/images/iPhone/sliderViews1.jpeg">簡單的範例最後要達到的結果如左圖，拖拉Slider可以觀察到數值隨著Slider的變化跟著改變。</p>
+<p><img class="left" src="/images/iPhone/sliderViews1.jpeg" />簡單的範例最後要達到的結果如左圖，拖拉Slider可以觀察到數值隨著Slider的變化跟著改變。</p>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
+<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 		
 		<a href="/blog/2012/04/24/slider-view/" class="more-link">Read on &rarr;</a>

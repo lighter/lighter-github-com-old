@@ -87,12 +87,11 @@
 	
 	<div id="content" class="inner"><article class="post">
 	<h1 class="title">iOS With Dropbox</h1>
-	<div class="entry-content"><p><img src="/images/iPhoneWithDropbox/1.png"></p>
+	<div class="entry-content"><p><img src="/images/iPhoneWithDropbox/1.png" /></p>
 
-<p>iPhone上已經有iCloud可以用來同步及備份資料了，但iCloud有空間的限制，而有在使用Dropbox的人，如果有參加一些特殊的活動或者是學生的身份，都可以多取得到一些額外的空間容量(或者是有邀請許多朋友加入也都可以額外增加空間)。雖然Dropbox官方的說明已經很清楚了，但是我還是記錄一下，免得之後要用忘記&#8230;.</p>
+<p>iPhone上已經有iCloud可以用來同步及備份資料了，但iCloud有空間的限制，而有在使用Dropbox的人，如果有參加一些特殊的活動或者是學生的身份，都可以多取得到一些額外的空間容量(或者是有邀請許多朋友加入也都可以額外增加空間)。雖然Dropbox官方的說明已經很清楚了，但是我還是記錄一下，免得之後要用忘記….</p>
 
 <!-- more -->
-
 
 <p><strong>Step 1.建立Single View Application專案</strong></p>
 
@@ -100,7 +99,7 @@
 
 <p>這邊我使用三個<code>Round Rect Button</code>，分別用來建立檔案、檢驗檔案是否存在與上傳檔案</p>
 
-<p><img src="/images/iPhoneWithDropbox/2.png"></p>
+<p><img src="/images/iPhoneWithDropbox/2.png" /></p>
 
 <p><strong>Step 3.建置Dropbox App</strong></p>
 
@@ -108,219 +107,215 @@
 
 <p>下載Dropbox的Framework，並且加入到Xcode專案；還有要加入<code>Security.framework</code>與<code>QuartzCore.framework</code>到專案中。</p>
 
-<p><img src="/images/iPhoneWithDropbox/3.png"></p>
+<p><img src="/images/iPhoneWithDropbox/3.png" /></p>
 
 <p><strong>Step 4.編輯AppDelegate.m</strong></p>
 
 <p>在<code>AppDelegate.m</code>中加入下列程式碼</p>
 
-<figure class='code'><figcaption><span>AppDelegate.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;DropboxSDK/DropboxSDK.h&gt;</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">launchOptions</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">DBSession</span><span class="o">*</span> <span class="n">dbSession</span> <span class="o">=</span>
-</span><span class='line'>      <span class="p">[[</span><span class="n">DBSession</span> <span class="n">alloc</span><span class="p">]</span>
-</span><span class='line'>          <span class="nl">initWithAppKey:</span><span class="s">@&quot;APP_KEY&quot;</span>
-</span><span class='line'>          <span class="nl">appSecret:</span><span class="s">@&quot;APP_SECRET&quot;</span>
-</span><span class='line'>          <span class="nl">root:</span><span class="n">ACCESS_TYPE</span><span class="p">];</span> <span class="c1">// either kDBRootAppFolder or kDBRootDropbox</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">DBSession</span> <span class="nl">setSharedSession:</span><span class="n">dbSession</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nl">handleOpenURL:</span><span class="p">(</span><span class="n">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">url</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">([[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="nl">handleOpenURL:</span><span class="n">url</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">([[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="n">isLinked</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;App linked successfully!&quot;</span><span class="p">);</span>
-</span><span class='line'>      <span class="c1">// At this point you can start making API calls</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="c1">// Add whatever other url handling code your app requires here</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">NO</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;DropboxSDK/DropboxSDK.h&gt;</span>
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">launchOptions</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">	<span class="n">DBSession</span><span class="o">*</span> <span class="n">dbSession</span> <span class="o">=</span>
+</span><span class="line">		<span class="p">[[</span><span class="n">DBSession</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class="line">			<span class="nl">initWithAppKey:</span><span class="s">@&quot;APP_KEY&quot;</span>
+</span><span class="line">			<span class="nl">appSecret:</span><span class="s">@&quot;APP_SECRET&quot;</span>
+</span><span class="line">			<span class="nl">root:</span><span class="n">ACCESS_TYPE</span><span class="p">];</span> <span class="c1">// either kDBRootAppFolder or kDBRootDropbox</span>
+</span><span class="line">	<span class="p">[</span><span class="n">DBSession</span> <span class="nl">setSharedSession:</span><span class="n">dbSession</span><span class="p">];</span>
+</span><span class="line">	<span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nl">handleOpenURL:</span><span class="p">(</span><span class="n">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">url</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">if</span> <span class="p">([[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="nl">handleOpenURL:</span><span class="n">url</span><span class="p">])</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">([[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="n">isLinked</span><span class="p">])</span> <span class="p">{</span>
+</span><span class="line">      <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;App linked successfully!&quot;</span><span class="p">);</span>
+</span><span class="line">      <span class="c1">// At this point you can start making API calls</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">  <span class="c1">// Add whatever other url handling code your app requires here</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>**Step 5.編輯<code>專案名稱-Info.plist</code>檔案</p>
 
-<p>使用<code>open source</code>開啟<code>專案名稱-Info.plist</code>，找到第一個<code><dict></code>在下方加入這段：</p>
+<p>使用<code>open source</code>開啟<code>專案名稱-Info.plist</code>，找到第一個<code><dict>&lt;/code&gt;在下方加入這段：</dict></code></p>
 
-<figure class='code'><figcaption><span>專案名稱-Info.plist  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="n">CFBundleURLTypes</span><span class="o">&lt;/</span><span class="n">key</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">dict</span><span class="o">&gt;</span>
-</span><span class='line'>        <span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="n">CFBundleURLSchemes</span><span class="o">&lt;/</span><span class="n">key</span><span class="o">&gt;</span>
-</span><span class='line'>        <span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span>
-</span><span class='line'>            <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="n">db</span><span class="o">-</span><span class="n">APP_KEY</span><span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
-</span><span class='line'>        <span class="o">&lt;/</span><span class="n">array</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">dict</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">array</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>專案名稱-Info.plist  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="n">CFBundleURLTypes</span><span class="o">&lt;/</span><span class="n">key</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span>
+</span><span class="line">    <span class="o">&lt;</span><span class="n">dict</span><span class="o">&gt;</span>
+</span><span class="line">        <span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="n">CFBundleURLSchemes</span><span class="o">&lt;/</span><span class="n">key</span><span class="o">&gt;</span>
+</span><span class="line">        <span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span>
+</span><span class="line">            <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="n">db</span><span class="o">-</span><span class="n">APP_KEY</span><span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+</span><span class="line">        <span class="o">&lt;/</span><span class="n">array</span><span class="o">&gt;</span>
+</span><span class="line">    <span class="o">&lt;/</span><span class="n">dict</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;/</span><span class="n">array</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>**Step 6.編輯ViewController</p>
 
 <p>首先在<code>ViewController.h</code>程式碼如下：</p>
 
-<figure class='code'><figcaption><span>ViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class='line'><span class="cp">#import &lt;DropboxSDK/DropboxSDK.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">DBRestClientDelegate</span><span class="o">&gt;</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">DBRestClient</span> <span class="o">*</span><span class="n">restClient</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">loginDropbox:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">upload:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">creatFile:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+</span><span class="line"><span class="cp">#import &lt;DropboxSDK/DropboxSDK.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">DBRestClientDelegate</span><span class="o">&gt;</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="n">DBRestClient</span> <span class="o">*</span><span class="n">restClient</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">loginDropbox:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">upload:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">creatFile:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>接著在<code>ViewController.m</code>撰寫三個方法的實作內容，並且撰寫一個<code>restClient</code>的getter方法。</p>
 
-<figure class='code'><figcaption><span>ViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">DBRestClient</span> <span class="o">*</span><span class="p">)</span><span class="n">restClient</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">restClient</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">restClient</span> <span class="o">=</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">DBRestClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithSession:</span><span class="p">[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]];</span>
-</span><span class='line'>    <span class="n">restClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">restClient</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">loginDropbox:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="n">isLinked</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="nl">linkFromController:</span><span class="n">self</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;linked&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">upload:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]</span><span class="nl">stringByAppendingPathComponent:</span><span class="s">@&quot;file1.txt&quot;</span><span class="p">];;</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">pathString</span> <span class="o">=</span> <span class="s">@&quot;/&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">restClient</span> <span class="nl">uploadFile:</span><span class="s">@&quot;file1.txt&quot;</span> <span class="nl">toPath:</span><span class="n">pathString</span> <span class="nl">fromPath:</span><span class="n">path</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">creatFile:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]</span><span class="nl">stringByAppendingPathComponent:</span><span class="s">@&quot;file1.txt&quot;</span><span class="p">];;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// String to write</span>
-</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="s">@&quot;iPhone Developer Tips</span><span class="se">\n</span><span class="s">http://iPhoneDevelopTips,com&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">// Write the file</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">str</span> <span class="nl">writeToFile:</span><span class="n">path</span> <span class="nl">atomically:</span><span class="n">YES</span> <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">NSFileManager</span> <span class="o">*</span><span class="n">filemgr</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">filemgr</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSFileManager</span> <span class="n">defaultManager</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">([</span><span class="n">filemgr</span> <span class="nl">fileExistsAtPath:</span> <span class="n">path</span> <span class="p">]</span> <span class="o">==</span> <span class="n">YES</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">NSLog</span> <span class="p">(</span><span class="s">@&quot;File exists&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="n">NSLog</span> <span class="p">(</span><span class="s">@&quot;File not found&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">-</span> <span class="p">(</span><span class="n">DBRestClient</span> <span class="o">*</span><span class="p">)</span><span class="n">restClient</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">restClient</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">restClient</span> <span class="o">=</span>
+</span><span class="line">    <span class="p">[[</span><span class="n">DBRestClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithSession:</span><span class="p">[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]];</span>
+</span><span class="line">    <span class="n">restClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">restClient</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">loginDropbox:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="n">isLinked</span><span class="p">])</span> <span class="p">{</span>
+</span><span class="line">    <span class="p">[[</span><span class="n">DBSession</span> <span class="n">sharedSession</span><span class="p">]</span> <span class="nl">linkFromController:</span><span class="n">self</span><span class="p">];</span>
+</span><span class="line">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;linked&quot;</span><span class="p">);</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">upload:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">  <span class="n">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">);</span>
+</span><span class="line">  <span class="n">NSString</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]</span><span class="nl">stringByAppendingPathComponent:</span><span class="s">@&quot;file1.txt&quot;</span><span class="p">];;</span>
+</span><span class="line">  <span class="n">NSString</span> <span class="o">*</span><span class="n">pathString</span> <span class="o">=</span> <span class="s">@&quot;/&quot;</span><span class="p">;</span>
+</span><span class="line">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">restClient</span> <span class="nl">uploadFile:</span><span class="s">@&quot;file1.txt&quot;</span> <span class="nl">toPath:</span><span class="n">pathString</span> <span class="nl">fromPath:</span><span class="n">path</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">creatFile:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">);</span>
+</span><span class="line">  <span class="n">NSString</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]</span><span class="nl">stringByAppendingPathComponent:</span><span class="s">@&quot;file1.txt&quot;</span><span class="p">];;</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// String to write</span>
+</span><span class="line">  <span class="n">NSString</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="s">@&quot;iPhone Developer Tips</span><span class="se">\n</span><span class="s">http://iPhoneDevelopTips,com&quot;</span><span class="p">;</span>
+</span><span class="line">  <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+</span><span class="line">  <span class="c1">// Write the file</span>
+</span><span class="line">  <span class="p">[</span><span class="n">str</span> <span class="nl">writeToFile:</span><span class="n">path</span> <span class="nl">atomically:</span><span class="n">YES</span> <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">  <span class="n">NSFileManager</span> <span class="o">*</span><span class="n">filemgr</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line">  <span class="n">filemgr</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSFileManager</span> <span class="n">defaultManager</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">  <span class="k">if</span> <span class="p">([</span><span class="n">filemgr</span> <span class="nl">fileExistsAtPath:</span> <span class="n">path</span> <span class="p">]</span> <span class="o">==</span> <span class="n">YES</span><span class="p">)</span>
+</span><span class="line">    <span class="n">NSLog</span> <span class="p">(</span><span class="s">@&quot;File exists&quot;</span><span class="p">);</span>
+</span><span class="line">  <span class="k">else</span>
+</span><span class="line">    <span class="n">NSLog</span> <span class="p">(</span><span class="s">@&quot;File not found&quot;</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>Step 7.編譯專案</strong></p>
 
