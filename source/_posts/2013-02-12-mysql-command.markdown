@@ -9,14 +9,14 @@ categories: mysql
 ##登入
 {% codeblock %}
 
-    >	mysql -u root -h localhost -p
+	>mysql -u root -h localhost -p
 
 {%endcodeblock %}
 
 ##顯示資料庫
 {% codeblock %}
 
-    >	show databases;
+    >show databases;
 
 {% endcodeblock %}
 
@@ -24,34 +24,41 @@ categories: mysql
 ##選擇使用的資料庫
 {% codeblock %}
 
-    >	use database;
+    >use database;
 
 {% endcodeblock %}
 
 ##顯示目前選擇的資料庫
 {% codeblock %}
 
-    >	select database();
+    >select database();
     
 {% endcodeblock %}
 
 ##顯示目前連線狀態
 {% codeblock %}
 
-    >	status
+    >status
 
 {% endcodeblock %}
 
 ##顯示該資料庫的表單(Table)
 {% codeblock %}
 
-    >	show tables;
+    >show tables;
 
 {% endcodeblock %}
 
 ##顯示表單(Table)結構
 {% codeblock %}
 
-	>	describe 資料表明稱;
+	>describe 資料表明稱;
 	
+{% endcodeblock %}
+
+##顯示資料表所有內容
+{% codeblock %}
+
+	>select * from 資料表明稱;
+
 {% endcodeblock %}
