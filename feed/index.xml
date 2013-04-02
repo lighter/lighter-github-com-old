@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.tw/feed" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2013-03-02T00:53:43+08:00</updated>
+  <updated>2013-04-02T14:53:56+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NodeJS 安裝]]></title>
+    <link href="http://lighter.tw/blog/2013/03/31/nodejs-an-zhuang/"/>
+    <updated>2013-03-31T08:31:00+08:00</updated>
+    <id>http://lighter.tw/blog/2013/03/31/nodejs-an-zhuang</id>
+    <content type="html"><![CDATA[<p>系統：Mountain Lion</p>
+
+<p><a href="http://mxcl.github.com/homebrew/index_zh-tw.html">Homebrew</a>是一個Mac OS套件管理工具</p>
+
+<p>因為Mac上預設都有安裝Ruby了，所以可以直接用以下的指令安裝</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li>安裝node</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; brew update
+</span><span class="line">&gt; sudo brew install node</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li>安裝npm</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; sudo npm install express -g</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li>修改npm PATH，開啟<code>~/.bash_profile</code>，加入以下的代碼</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">export PATH=/usr/local/bin:$PATH:/usr/local/share/npm/bin</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li>接著就可以使用<code>express</code>指令來建立專案了</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">express new project</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[mysql command]]></title>
@@ -3556,89 +3603,6 @@
 </span><span class="line">    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadRequest:</span><span class="n">urlRequest</span><span class="p">];</span>
 </span><span class="line"><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Slider View]]></title>
-    <link href="http://lighter.tw/blog/2012/04/24/slider-view/"/>
-    <updated>2012-04-24T14:30:00+08:00</updated>
-    <id>http://lighter.tw/blog/2012/04/24/slider-view</id>
-    <content type="html"><![CDATA[<p>Slider在iPhone比較常見是用來調整螢幕的明暗度，或是在某些圖片編輯app內用來調整RGB的比例，我們使用一個簡單的範例來操控Slider。</p>
-
-<p><img class="left" src="http://lighter.tw/images/iPhone/sliderViews1.jpeg" />簡單的範例最後要達到的結果如左圖，拖拉Slider可以觀察到數值隨著Slider的變化跟著改變。</p>
-
-<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<!-- more -->
-<strong>Step 1.</strong>建立一個<code>SingleView</code>的專案，專案的名稱為Slider View</p>
-
-<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard</p>
-
-<p>加入<code>Slider</code>、<code>Label</code>兩個元件，當中的元件屬性設定你可以隨自己喜好去做設定。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/sliderViews2.jpeg" /></p>
-
-<p>比較需要注意的是<code>Slider</code>的屬性設定；設定它的最大值、最小值以及預設值。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/sliderViews3.jpeg" /></p>
-
-<p><strong>Step 3.</strong>編輯ViewController.h</p>
-
-<p>定義<code>UISlider</code>、<code>UILabel</code>兩個型態變數，<code>setSliderValue:</code>方法為Slider被拖拉時，會改變<code>UILabel</code>的數值。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">UISlider</span> <span class="o">*</span><span class="n">slider_</span><span class="p">;</span>
-</span><span class="line">    <span class="n">UILabel</span> <span class="o">*</span><span class="n">label_</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line"><span class="k">@property</span><span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span><span class="kt">IBOutlet</span> <span class="n">UISlider</span> <span class="o">*</span><span class="n">slider</span><span class="p">;</span>
-</span><span class="line"><span class="k">@property</span><span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span><span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">label</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">setSliderValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span><span class="line"><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>Step 4.</strong>編輯ViewController.m</p>
-
-<p><code>currentValue</code>用來取得<code>Slider</code>的值；取得值的結果在放到<code>NSString</code>型態的變數value，最後將value的結果指定給<code>UILabel</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">slider_</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label_</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">setSliderValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="kt">float</span> <span class="n">currentValue</span><span class="p">;</span>
-</span><span class="line">    <span class="n">currentValue</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">slider</span> <span class="n">value</span><span class="p">];</span>
-</span><span class="line">
-</span><span class="line">    <span class="n">NSString</span> <span class="o">*</span><span class="n">value</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat:</span><span class="s">@&quot;Value is %2.f&quot;</span><span class="p">,</span> <span class="n">currentValue</span><span class="p">];</span>
-</span><span class="line">    <span class="n">self</span><span class="p">.</span><span class="n">label</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在一開始<code>UILabel</code>是沒有數值的，只有當你拖拉Slider才會出現值，如果要讓一近到畫面時就要有初始值，可以複製<code>setSliderValue:</code>中的方法到<code>viewDidLoad</code>即可。</p>
-
-<p><strong>Step 5.</strong>最後建立<code>IBOutlet</code>、<code>IBAction</code>的關聯</p>
-
-<p><img src="http://lighter.tw/images/iPhone/sliderViews4.jpeg" /></p>
 ]]></content>
   </entry>
   
