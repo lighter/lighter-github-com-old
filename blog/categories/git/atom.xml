@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Git | Lighter's Blog]]></title>
+  <link href="http://lighter.tw/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2013-08-07T09:26:42+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[使用Dropbox架設私有Git]]></title>
+    <link href="http://lighter.tw/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/"/>
+    <updated>2013-08-07T09:11:00+08:00</updated>
+    <id>http://lighter.tw/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git</id>
+    <content type="html"><![CDATA[<p>首先需要在專案資料夾中初始化Git</p>
+
+<p>{% codeblock %}
+$ git init
+{% endcodeblock %}</p>
+
+<p>接著在Dropbox中建立你要共享Git的資料夾，並且輸入以下的指令來初始化</p>
+
+<p>{% codeblock %}
+$ git init –bare
+{% endcodeblock %}</p>
+
+<p>回到專案資料夾中，加入Dropbox這個遠端的repo</p>
+
+<p>{% codeblock %}
+$ git remote add origin ~/Dropbox/XXXX
+{% endcodeblock %}</p>
+
+<p>接著將專案推倒Dropbox中</p>
+
+<p>{% codeblock %}
+$ git push origin master
+{% endcodeblock %}</p>
+
+<p>在另外一台電腦則需要將Dropbox的Git專案clone下來</p>
+
+<p>{% codeblock %}
+$ git clone ~/Dropbox/XXXX
+{% endcodeblock %}</p>
+
+<p>如果A已經變動了專案並且push到Dropbox了，B要將Dropbox變動的取出來可使用</p>
+
+<p>{% codeblock %}
+$ git fetch origin master
+{% endcodeblock %}</p>
+
+]]></content>
+  </entry>
+  
+</feed>

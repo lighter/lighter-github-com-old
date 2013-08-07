@@ -9,8 +9,10 @@
   <meta name="author" content="Willy lighter">
 
   
-  <meta name="description" content="系統：Mountain Lion Homebrew是一個Mac OS套件管理工具 因為Mac上預設都有安裝Ruby了，所以可以直接用以下的指令安裝 1
-&gt; ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &hellip;">
+  <meta name="description" content="首先需要在專案資料夾中初始化Git 1
+$ git init 接著在Dropbox中建立你要共享Git的資料夾，並且輸入以下的指令來初始化 1
+$ git init --bare 回到專案資料夾中，加入Dropbox這個遠端的repo 1
+$ git remote add origin ~/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,16 +33,20 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lighter.tw/" />
-<meta property="og:description" content="系統：Mountain Lion Homebrew是一個Mac OS套件管理工具 因為Mac上預設都有安裝Ruby了，所以可以直接用以下的指令安裝 1
-&gt; ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &hellip;" />
+<meta property="og:description" content="首先需要在專案資料夾中初始化Git 1
+$ git init 接著在Dropbox中建立你要共享Git的資料夾，並且輸入以下的指令來初始化 1
+$ git init --bare 回到專案資料夾中，加入Dropbox這個遠端的repo 1
+$ git remote add origin ~/ &hellip;" />
 
 <meta property="og:site_name" content="http://lighter.tw" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="系統：Mountain Lion Homebrew是一個Mac OS套件管理工具 因為Mac上預設都有安裝Ruby了，所以可以直接用以下的指令安裝 1
-&gt; ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &hellip;" />
+<meta itemprop="description" content="首先需要在專案資料夾中初始化Git 1
+$ git init 接著在Dropbox中建立你要共享Git的資料夾，並且輸入以下的指令來初始化 1
+$ git init --bare 回到專案資料夾中，加入Dropbox這個遠端的repo 1
+$ git remote add origin ~/ &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -97,6 +103,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/">使用Dropbox架設私有Git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T09:11:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>首先需要在專案資料夾中初始化Git</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git init</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接著在Dropbox中建立你要共享Git的資料夾，並且輸入以下的指令來初始化</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git init --bare</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>回到專案資料夾中，加入Dropbox這個遠端的repo</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git remote add origin ~/Dropbox/XXXX</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接著將專案推倒Dropbox中</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git push origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>在另外一台電腦則需要將Dropbox的Git專案clone下來</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git clone ~/Dropbox/XXXX</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果A已經變動了專案並且push到Dropbox了，B要將Dropbox變動的取出來可使用</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git fetch origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1166,182 +1239,6 @@
 <h2 id="section">參考資料</h2>
 
 <p><a href="http://psitsmike.com/2011/09/node-js-and-socket-io-chat-tutorial/">node.js and socket.io chat tutorial</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple Chat With Socket.io</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-24T13:32:00+08:00" pubdate data-updated="true">Aug 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>如果已我所學不多的情況下要製作一個簡單的聊天室，我大概能想到的方法就是將這些對話內容存入MySql，然後背後透過Ajax一直去撈取資料庫的內容然後一直更新畫面上的對話內容，這樣想想就覺得好麻煩…</p>
-
-<p>最近看到Socket.io這簡直真是好用，下面是一個簡單的聊天室程式碼。</p>
-
-<h2 id="server">Server端</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Server.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="nx">server</span><span class="p">,</span>
-</span><span class="line">    <span class="nx">io</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
-</span><span class="line">  <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">){</span>
-</span><span class="line">    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/html&#39;</span><span class="p">});</span>
-</span><span class="line">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"><span class="p">});</span>
-</span><span class="line">
-</span><span class="line"><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
-</span><span class="line"><span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;socket.io&#39;</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">server</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">//連線時會執行的內容</span>
-</span><span class="line"><span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1">//當client端emit &#39;send_chat&#39;時執行</span>
-</span><span class="line">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;send_chat&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-</span><span class="line">    <span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line">
-</span><span class="line"><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="client">Client端</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class="line"><span class="nt">&lt;html&gt;</span>
-</span><span class="line"><span class="nt">&lt;head&gt;</span>
-</span><span class="line"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
-</span><span class="line"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="nt">&lt;script&gt;</span>
-</span><span class="line"> <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">&#39;http://localhost:8080&#39;</span><span class="p">);</span>
-</span><span class="line"> <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1">//由Server端emit &#39;update_chat_content&#39; 更新談話內容</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#chat_content&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class="line"> <span class="p">});</span>
-</span><span class="line">
-</span><span class="line"> <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send&quot;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class="line">
-</span><span class="line">    <span class="c1">//取得input text欄位的值後，將欄位內容清除</span>
-</span><span class="line">    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line">    <span class="c1">//呼叫Server端的emit &#39;send_chat&#39;</span>
-</span><span class="line">    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;send_chat&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"> <span class="p">});</span>
-</span><span class="line"><span class="nt">&lt;/script&gt;</span>
-</span><span class="line"><span class="nt">&lt;/head&gt;</span>
-</span><span class="line"><span class="nt">&lt;body&gt;</span>
-</span><span class="line">
-</span><span class="line"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row-fluid&quot;</span> <span class="na">style=</span><span class="s">&quot;text-align: center&quot;</span><span class="nt">&gt;</span>
-</span><span class="line">  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;span12&quot;</span> <span class="na">id=</span><span class="s">&quot;chat_content&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class="line">  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input-append&quot;</span><span class="nt">&gt;</span>
-</span><span class="line">    <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;span2&quot;</span> <span class="na">id=</span><span class="s">&quot;send_input&quot;</span> <span class="na">size=</span><span class="s">&quot;16&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">id=</span><span class="s">&quot;send&quot;</span><span class="nt">&gt;</span>Send!<span class="nt">&lt;/button&gt;</span>
-</span><span class="line">  <span class="nt">&lt;/div&gt;</span>
-</span><span class="line"><span class="nt">&lt;/div&gt;</span>
-</span><span class="line">
-</span><span class="line"><span class="nt">&lt;/body&gt;</span>
-</span><span class="line"><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>其實只要觀察一下<code>socket.emit</code>與<code>socket.on</code>裡面監聽的名稱就可以看出Server端與Client的執行時間順序了；最後執行<code>node Server.js</code>就可以看到一個簡單的聊天室。</p>
 </div>
   
   
