@@ -1,128 +1,93 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>學習iOS App 1 - Lighter's Blog</title>
-  <meta name="author" content="Willy lighter">
+	<meta charset="utf-8">
+	<title>學習iOS App 1 - Lighter's Blog</title>
+	<meta name="author" content="Willy lighter">
 
-  
-  <meta name="description" content="這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到Raywenderlich，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好… &hellip;">
-  
+	
+	<meta name="description" content="這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到Raywenderlich，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好… &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Lighter's Blog" type="application/atom+xml">
-  <!-- Facebook Open Graph
-     Facebook Debugger: https://developers.facebook.com/tools/debug -->
-<meta property="og:title" content="學習iOS App 1" /><meta itemprop="name" content="學習iOS App 1" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1/" />
-<meta property="og:description" content="這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到Raywenderlich，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好… &hellip;" />
-
-<meta property="og:site_name" content="http://lighter.tw" />
-<meta property="article:author" content="https://plus.google.com/114787528537231301324">
-<meta property="article:published_time" content="2013-09-16 19:47:00 +0800" />
-
-<meta property="article:section" content="iPhone" />
-<meta itemprop="description" content="這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到Raywenderlich，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好… &hellip;" />
-
-<!-- Combine multiple fonts into one request -->
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
-<!-- jQuery -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-30526664-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+	<link href="/atom.xml" rel="alternate" title="Lighter's Blog" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
 </head>
 
-<body    class="collapse-sidebar sidebar-footer" >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Lighter's Blog</a></h1>
-  
-    <h2>患難生忍耐,忍耐生老練,老練生盼望,盼望不至於羞恥</h2>
-  
-</hgroup>
+<body>
+	<header id="header" class="inner"><h1><a href="/">Lighter's Blog</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:lighter.tw">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/lighter_lai" title="Twitter">Twitter</a>
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:lighter.tw">
+	</form>
+</nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="apple.xva@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:lighter.tw" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/"><i class="icon-home"></i>Home</a></li>
-  <li><a href="/blog/archives"><i class="icon-book-alt"></i>Archives</a><span class="divider"></span></li>
-  <li><a href="/about"><i class="icon-user"></i>About</a><span class="divider"></span></li>
-</ul>
+	
+		
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/lighter_lai">lighter_lai</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('lighter_lai', 4, true);
+	})(jQuery);
+</script>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">學習iOS App 1</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-16T19:47:00+08:00" pubdate data-updated="true">Sep 16<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到<a href="http://www.raywenderlich.com/">Raywenderlich</a>，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好…而且有時英文要翻譯成中文真的蠻困難的，翻譯的過程中也曾想是否應該念過一次在用我理解的方式翻譯，還是要照字面上翻譯呢？這蠻苦惱的！由於自己英文不是很好，所以花了一點時間翻譯，然後檢查幾次，終於翻譯好一篇了！</p>
+	
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">學習iOS App 1</h1>
+	<div class="entry-content"><p>這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到<a href="http://www.raywenderlich.com/">Raywenderlich</a>，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好…而且有時英文要翻譯成中文真的蠻困難的，翻譯的過程中也曾想是否應該念過一次在用我理解的方式翻譯，還是要照字面上翻譯呢？這蠻苦惱的！由於自己英文不是很好，所以花了一點時間翻譯，然後檢查幾次，終於翻譯好一篇了！</p>
 
 <h1 id="ios-app-1welcome-to-programminghttpwwwraywenderlichcomzh-hans48771e5adb8e7bf92ios-app-1efbc9awelcome-to-programming"><a href="http://www.raywenderlich.com/zh-hans/48771/%E5%AD%B8%E7%BF%92ios-app-1%EF%BC%9Awelcome-to-programming">學習iOS App 1：Welcome to Programming</a></h1>
 
@@ -130,14 +95,8 @@
 </div>
 
 
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Willy lighter</span></span>
-
-      
+<div class="meta">
+	<div class="date">
 
 
 
@@ -149,64 +108,54 @@
   
 
 
-<time datetime="2013-09-16T19:47:00+08:00" pubdate data-updated="true">Sep 16<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
-  
-</span>
+<time datetime="2013-09-16T19:47:00+08:00" pubdate data-updated="true">Sep 16<span>th</span>, 2013</time></div>
+	<div class="tags">
 
 
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1/" data-via="lighter_lai" data-counturl="http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2013/09/16/xue-xi-ios-app-1/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
 </div>
 
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/" title="Previous Post: 使用Dropbox架設私有Git">&laquo; 使用Dropbox架設私有Git</a>
-      
-      
-    </p>
-  </footer>
-</article>
 
-  <section>
-    <h1>Comments</h1>
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
-
+</section>
 </div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
 
-<aside class="sidebar">
-  
-    
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Willy lighter<span class="theme-version">Dropbot 0.8</span>
-  <section class="contruction-wrap">
-    <div class="contruction"></div>
-  </section>
-</p>
+    Willy lighter
 
 </footer>
-  
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'lighter';
@@ -226,86 +175,18 @@
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-30526664-1']);
+		_gaq.push(['_trackPageview']);
 
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-<!--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            IIIIIIIIII       I
-                  II                     IIIIIIIIIIIIIIIIIIII
-                  IIII                  IIIIIIIIIIIIIIIIIIII
-                  IIIIII                IIIIIIIIIIIIIIIIII III
-                  IIIIIIII             IIIIIIIIIIIIIIIIIIIIII
-                  IIIIIIIIIII          IIIIIIIIIIIIIIIIIIIII
-                  IIIIIIIIIIIIII       IIIIIIIIIIIIIIIIIII
-                   IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                  I  IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                  IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                  IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                   IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                     IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                         IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                     IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                      IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                        IIIIIIIIIIIIIIIIIIIIIIIIIIIII
-                           IIIIIIIIIIIIIIIIIIIIIIIII
-                             IIIIIIIIIIIIIIIIIIIII
-                          IIIIIIIIIIIIIIIIIIIIIII
-                I   IIIIIIIIIIIIIIIIIIIIIIIIII
-                  IIIIIIIIIIIIIIIIIIIIIIIIII
-                      IIIIIIIIIIIIIIIIII
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- -->
 
 
 </body>

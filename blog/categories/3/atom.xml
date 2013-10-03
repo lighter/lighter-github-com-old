@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 3 | Lighter's Blog]]></title>
+  <link href="http://lighter.tw/blog/categories/3/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2013-10-03T16:55:58+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sublime Text 3 plugin]]></title>
+    <link href="http://lighter.tw/blog/2013/10/03/sublime-text-3-plugin/"/>
+    <updated>2013-10-03T14:22:00+08:00</updated>
+    <id>http://lighter.tw/blog/2013/10/03/sublime-text-3-plugin</id>
+    <content type="html"><![CDATA[<p>整理一下我常用的Sublime Text 3的plugin。</p>
+
+<p>套件安裝管理工具可以參考這個網址</p>
+
+<p><a href="https://sublime.wbond.net/installation">https://sublime.wbond.net/installation</a></p>
+
+<h2 id="section">主題</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">名稱</th>
+      <th style="text-align: left">說明</th>
+      <th style="text-align: left">ST2</th>
+      <th style="text-align: left">ST3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Theme%20-%20Soda">Theme - Soda</a></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Theme%20-%20Flatland">Theme - Flatland</a></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-1">工具</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">名稱</th>
+      <th style="text-align: left">說明</th>
+      <th style="text-align: left">ST2</th>
+      <th style="text-align: left">ST3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Emmet">Emmet</a></td>
+      <td style="text-align: left">開發HTML好用的工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/SideBarEnhancements">Side​Bar​Enhancements</a></td>
+      <td style="text-align: left">側邊欄位加強工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Alignment">Alignment</a></td>
+      <td style="text-align: left">等號對齊</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/BracketHighlighter">BracketHighlighter</a></td>
+      <td style="text-align: left">左右括號顯示強化</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Themr">Themr</a></td>
+      <td style="text-align: left">Theme管理工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/GitGutter">GitGutter</a></td>
+      <td style="text-align: left">可看到目前檔案新增及修改的地方</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/AdvancedNewFile">AdvancedNewFile</a></td>
+      <td style="text-align: left">新增檔案</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/YUI%20Compressor">YUI Compressor</a></td>
+      <td style="text-align: left">css, js 壓縮工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/EasyMotion">EasyMotion</a></td>
+      <td style="text-align: left">游標移動工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">需要切換banch</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Git">Git</a></td>
+      <td style="text-align: left">git工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Tag">Tag</a></td>
+      <td style="text-align: left">在使用html時很好用，只需要打一個”/”符號就會幫你自動完成html關閉的符號</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CTags">CTags</a></td>
+      <td style="text-align: left">可以直接跳到該函數的方法</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Bower">Bower</a></td>
+      <td style="text-align: left">套件管理工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/DocBlockr">DocBlockr</a></td>
+      <td style="text-align: left">註解工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Better%20CoffeeScript">Better Coffee​Script</a></td>
+      <td style="text-align: left">CoffeeScript 工具</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Clipboard%20Manager">Clipboard Manager</a></td>
+      <td style="text-align: left">複製記錄管理</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/My%20Snippets">My Snippets</a></td>
+      <td style="text-align: left">快速建立 Snippets</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/All%20Autocomplete">All Autocomplete</a></td>
+      <td style="text-align: left">自動補齊</td>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">v</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>BracketHighlighter在ST3的安裝無法直接使用<code>package install</code>直接去安裝
+需要參考這邊來安裝<a href="https://github.com/facelessuser/BracketHighlighter/tree/BH2ST3">https://github.com/facelessuser/BracketHighlighter/tree/BH2ST3</a></p>
+</blockquote>
+
+<blockquote>
+  <p>解決BracketHighlighter顏色的問題可以參考這篇<a href="http://stackoverflow.com/questions/15661731/sublime-bracket-highlighter-not-coloring-brackets">http://stackoverflow.com/questions/15661731/sublime-bracket-highlighter-not-coloring-brackets </a></p>
+</blockquote>
+
+<h2 id="snippet">Snippet</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">名稱</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CodeIgniter%20Snippets">Codeigniter Snippets</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Additional%20PHP%20Snippets">Additional PHP Snippets</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CodeIgniter%20Utilities">CodeIgniter Utilities</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/jQuery%20Snippets%20pack">jQuery Snippets pack</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CSS%20Snippets">CSS Snippets</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/JavaScript%20Console">JavaScript Console</a></td>
+    </tr>
+  </tbody>
+</table>
+]]></content>
+  </entry>
+  
+</feed>
