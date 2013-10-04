@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.tw/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2013-10-03T16:55:49+08:00</updated>
+  <updated>2013-10-04T14:04:08+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -31,22 +31,22 @@
     <tr>
       <th style="text-align: left">名稱</th>
       <th style="text-align: left">說明</th>
-      <th style="text-align: left">ST2</th>
-      <th style="text-align: left">ST3</th>
+      <th style="text-align: center">ST2</th>
+      <th style="text-align: center">ST3</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Theme%20-%20Soda">Theme - Soda</a></td>
       <td style="text-align: left"> </td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Theme%20-%20Flatland">Theme - Flatland</a></td>
       <td style="text-align: left"> </td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
   </tbody>
 </table>
@@ -58,118 +58,124 @@
     <tr>
       <th style="text-align: left">名稱</th>
       <th style="text-align: left">說明</th>
-      <th style="text-align: left">ST2</th>
-      <th style="text-align: left">ST3</th>
+      <th style="text-align: center">ST2</th>
+      <th style="text-align: center">ST3</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Emmet">Emmet</a></td>
       <td style="text-align: left">開發HTML好用的工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/SideBarEnhancements">Side​Bar​Enhancements</a></td>
       <td style="text-align: left">側邊欄位加強工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Alignment">Alignment</a></td>
       <td style="text-align: left">等號對齊</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/BracketHighlighter">BracketHighlighter</a></td>
       <td style="text-align: left">左右括號顯示強化</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left"> </td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Themr">Themr</a></td>
       <td style="text-align: left">Theme管理工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/GitGutter">GitGutter</a></td>
       <td style="text-align: left">可看到目前檔案新增及修改的地方</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/AdvancedNewFile">AdvancedNewFile</a></td>
       <td style="text-align: left">新增檔案</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/YUI%20Compressor">YUI Compressor</a></td>
       <td style="text-align: left">css, js 壓縮工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/EasyMotion">EasyMotion</a></td>
       <td style="text-align: left">游標移動工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">需要切換banch</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">需要切換banch</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Git">Git</a></td>
       <td style="text-align: left">git工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Tag">Tag</a></td>
       <td style="text-align: left">在使用html時很好用，只需要打一個”/”符號就會幫你自動完成html關閉的符號</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CTags">CTags</a></td>
       <td style="text-align: left">可以直接跳到該函數的方法</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Bower">Bower</a></td>
       <td style="text-align: left">套件管理工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/DocBlockr">DocBlockr</a></td>
       <td style="text-align: left">註解工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Better%20CoffeeScript">Better Coffee​Script</a></td>
       <td style="text-align: left">CoffeeScript 工具</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Clipboard%20Manager">Clipboard Manager</a></td>
       <td style="text-align: left">複製記錄管理</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/My%20Snippets">My Snippets</a></td>
       <td style="text-align: left">快速建立 Snippets</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://sublime.wbond.net/packages/All%20Autocomplete">All Autocomplete</a></td>
       <td style="text-align: left">自動補齊</td>
-      <td style="text-align: left">v</td>
-      <td style="text-align: left">v</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/SublimeCodeIntel">Sublime​Code​Intel</a></td>
+      <td style="text-align: left">支援多種程式自動提示功能</td>
+      <td style="text-align: center">v</td>
+      <td style="text-align: center">v</td>
     </tr>
   </tbody>
 </table>
