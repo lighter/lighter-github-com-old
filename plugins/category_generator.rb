@@ -160,7 +160,7 @@ ERR
         "<a class='category' href='/#{dir}/#{item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase}/'>#{item}</a>"
       end
 # =======
-#       categories = categories.sort!.map { |c| category_link c }
+      # categories = categories.sort!.map { |c| category_link c }
 # >>>>>>> 4fd754a76207c1c55f657891dc7049cf76f5f27e
 
       case categories.length
