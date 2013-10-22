@@ -53,7 +53,7 @@ Toolbar、Bar &hellip;">
 		
 		
 		
-		<a class="twitter" href="http://twitter.com/lighter_lai" title="Twitter">Twitter</a>
+		<a class="twitter" href="http://twitter.com/QWIllyQ" title="Twitter">Twitter</a>
 		
 		
 		
@@ -76,13 +76,13 @@ Toolbar、Bar &hellip;">
 	<div class="container">
 		<ul class="feed"></ul>
 	</div>
-	<small><a href="http://twitter.com/lighter_lai">lighter_lai</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<small><a href="http://twitter.com/QWIllyQ">QWIllyQ</a> @ <a href="http://twitter.com">Twitter</a></small>
 	<div class="loading">Loading...</div>
 </div>
 <script src="/javascripts/twitter.js"></script>
 <script type="text/javascript">
 	(function($){
-		$('#banner').getTwitterFeed('lighter_lai', 4, true);
+		$('#banner').getTwitterFeed('QWIllyQ', 4, true);
 	})(jQuery);
 </script>
 
@@ -124,7 +124,7 @@ Toolbar、Bar &hellip;">
 <li>定義<code>Bar Button Item</code>的<code>IBAction</code>事件。</li>
 </ol>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -164,13 +164,13 @@ Toolbar、Bar &hellip;">
 
 <p>完成<code>synthesize</code>的部份。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">webView</span> <span class="o">=</span> <span class="n">webView_</span><span class="p">,</span> <span class="n">urlTextField</span> <span class="o">=</span> <span class="n">urlTextField_</span><span class="p">,</span> <span class="n">activityView</span> <span class="o">=</span> <span class="n">activityView_</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>完成之後依序寫入<code>往下頁</code>、<code>往上頁</code>的事件，直接使用WebView元件提供的方法<code>goForward</code>、<code>goBack</code>來達到往下頁、往上頁的目的。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -194,7 +194,7 @@ Toolbar、Bar &hellip;">
 
 <p><code>[urlTextField_ resignFirstResponder];</code>是將<code>TextField</code>的鍵盤回到原本的狀態(原本狀態為隱藏)。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -222,7 +222,7 @@ Toolbar、Bar &hellip;">
 
 <p>透過<code>webViewDidStartLoad</code>、<code>webViewDidFinishLoad</code>這兩個方法，來設定<code>Activity Indicator View</code>是否為隱藏，並開始動畫的效果。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -248,7 +248,7 @@ Toolbar、Bar &hellip;">
 
 <p><code>hitReturn:</code>為鍵盤上的return被按下時要執行的事件，其內容都跟上面一樣！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -278,7 +278,7 @@ Toolbar、Bar &hellip;">
 
 <p>如果想要一近畫面時就啟動預設的網頁畫面，在<code>viewDidLoad</code>加入下列的程式碼，其運作過程都一樣。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>

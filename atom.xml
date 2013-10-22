@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter's Blog]]></title>
   <link href="http://lighter.tw/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2013-10-04T14:04:08+08:00</updated>
+  <updated>2013-10-22T16:28:07+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -381,7 +381,7 @@
 
 <p>開啟<code>package.json</code>檔案，將版本都修改為<code>*</code>號。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -416,8 +416,8 @@
 
 <p><code>index.ejs</code>程式碼如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.ejs  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.ejs </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -569,8 +569,8 @@
 
 <p>接著開啟根目錄下的<code>app.js</code>加入<code>form</code>的<code>action</code>方法進去。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>app.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>app.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -582,8 +582,8 @@
 
 <p>定義好對應的方法後，在到<code>routes</code>資料夾內的<code>index.js</code>撰寫方法的執行內容，程式碼如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -631,8 +631,8 @@
 
 <p><code>sign.ejs</code>與<code>sign2.ejs</code>的內容分別為：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>sign.ejs  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>sign.ejs </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -658,8 +658,8 @@
 </span><span class="line"><span class="nt">&lt;/html&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>sign2.ejs  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>sign2.ejs </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -705,7 +705,7 @@
 
 <h3 id="php">php程式碼</h3>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -727,8 +727,8 @@
 
 <p>建立完成專案後先開始編輯<code>MasterViewController.h</code>。建立一個<code>NSMutableArray</code>型態的<code>json_array</code>物件。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -742,8 +742,8 @@
 
 <p>在<code>viewDidLoad</code>方法內加入下面的程式碼</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -785,8 +785,8 @@
 
 <p>接著修改<code>Table View Cell</code>的回傳個數</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -798,8 +798,8 @@
 
 <p>修改<code>Cell</code>顯示的文字，這邊需要透過<code>objectForKey</code>方法指定Key值為。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -815,8 +815,8 @@
 
 <p>傳遞參數也需要修改一下。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -851,8 +851,8 @@
 
 <p>修改<code>MasterViewController.h</code>，程式碼如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -870,8 +870,8 @@
 
 <p>回到<code>MasterViewController.m</code>在<code>viewDidLoad</code>將<code>PullToRefresh</code>加入到<code>Table View</code>中。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -913,8 +913,8 @@
 
 <p>當資料更新結束後，呼叫<code>finishedLoading</code>方法，結束<code>Pull Refresh</code>的動作。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1007,8 +1007,8 @@
 
 <p>首先編輯<code>ViewController.h</code>，程式碼如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1042,8 +1042,8 @@
 
 <p>首先在<code>viewDidLoad</code>方法指定圖片給<code>imageView</code>。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1067,8 +1067,8 @@
 
 <p>接著開始撰寫濾鏡效果的按鈕方法，這邊只介紹一個，程式碼如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1136,7 +1136,7 @@
 
 <p>在這邊可以看到這兩個參數跟<code>forKey</code>值很像，這邊的方式就是透過setValue指定參數的值，在指定<code>forKey</code>值來指設定參數，所以當濾鏡效果不同時，會有不一樣的<code>forKey</code>值，這都需要參考到Document的說明！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="n">inputImage</span> <span class="nl">forKey:</span><span class="s">@&quot;inputImage&quot;</span><span class="p">];</span>
 </span><span class="line"><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.0</span><span class="p">]</span> <span class="nl">forKey:</span><span class="s">@&quot;inputLevels&quot;</span><span class="p">];</span>
@@ -1193,8 +1193,8 @@
 
 <p>找到下列三段程式碼，分別修改成對應的<code>Entity</code>名稱與<code>Key</code>值。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1224,8 +1224,8 @@
 
 <p>編輯程式如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1261,8 +1261,8 @@
 
 <p>編輯程式如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1314,8 +1314,8 @@
 
 <p>找到<code>prepareForSegue</code>方法，修改的程式如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1341,8 +1341,8 @@
 
 <p>編輯程式碼如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1380,8 +1380,8 @@
 
 <p>找到<code>configureView</code>方法，修改程式碼如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1407,8 +1407,8 @@
 
 <p>如果上述的程式碼有問題的話，不妨檢查一下<code>UserInfo.h</code>的檔案，這邊我發現到自動產生的檔案，他產生的形態並沒有如預期的型態，<code>detail</code>的形態應該是<code>UserDeatail</code>，程式碼如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>UserInfo.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>UserInfo.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1460,8 +1460,8 @@
 
 <p><strong>Step 2.編輯MasterViewController.h檔案</strong></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1521,15 +1521,15 @@
 
 <p><strong>Step 3.編輯MasterViewController.m</strong></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">indexP</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>補上<code>synthesize</code>。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1564,8 +1564,8 @@
   <li><code>viewDidUnload</code>方法內，將<code>searchResults</code>釋放掉。</li>
 </ol>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1591,8 +1591,8 @@
 
 <p>如上當<code>if</code>判斷式條件成立時，會回傳<code>searchResults</code>陣列的個數，否則就回傳原本<code>fetchedResultsController</code>的個數。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1650,8 +1650,8 @@
   <li>這邊改成直接指定<code>cell</code>的文字為<code>phone.name</code>。</li>
 </ol>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1693,8 +1693,8 @@
 
 <p>加入上述三個<code>UISearchDisplayController</code>的方法，並且指定<code>savedSearchTerm</code>為<code>TRUE</code>，其中可以看到<code>filterContentForSearchText:scope:</code>這個方法，該方法是用來根據您輸入的文字做搜尋的。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1740,8 +1740,8 @@
 
 <p>該方法會根據您輸入的字串，尋找到符合的結果！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1827,8 +1827,8 @@
 
 <p>在<code>AppDelegate.m</code>中加入下列程式碼</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1880,8 +1880,8 @@
 
 <p>使用<code>open source</code>開啟<code>專案名稱-Info.plist</code>，找到第一個<code><dict>&lt;/code&gt;在下方加入這段：</dict></code></p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>專案名稱-Info.plist  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>專案名稱-Info.plist </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1905,8 +1905,8 @@
 
 <p>首先在<code>ViewController.h</code>程式碼如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -1934,8 +1934,8 @@
 
 <p>接著在<code>ViewController.m</code>撰寫三個方法的實作內容，並且撰寫一個<code>restClient</code>的getter方法。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2048,8 +2048,8 @@
 
 <p>我將程式碼拆解幾個部分來看，先從Client端來看，一開始是引入<code>bootstrap</code>、<code>jQuery</code>等基本的<code>html</code>宣告</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2065,8 +2065,8 @@
 
 <p>再來就是<code>javascript</code>的部份，可看到<code>socket.on</code>監聽的是<code>connect</code>事件，當開啟網頁連現實，會呼應到Server端的<code>add_user</code>事件，並且執行<code>prompt()</code>。這邊暫且先不看到Server端，繼續往下看下去。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2088,8 +2088,8 @@
 
 <p>下面程式碼可看到<code>update_chat_content</code>如同之前的方式加入對話內容(<a href="http://lighter.github.com/blog/2012/08/24/simple-chat-with-socket-dot-io/">Here</a>)；接著<code>update_user</code>一開始先清空使用者列表所有內容，使用<code>$.each</code>一一將使用者重新加入列表中。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2133,8 +2133,8 @@
 
 <p>最後則是發送對話按鈕的觸發事件以及HTML的部份。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2213,8 +2213,8 @@
 
 <p>程式碼如下，當有新加入的使用者會呼叫Server端的<code>add_user</code>事件，Server端會將新加入的使用者加入到socket的session內，並呼叫Client端執行<code>update_chat_content</code>事件，並傳遞兩個參數，這是要用來讓Client端知道有新加入的使用者，例如當Tony加入時，在Client端頁面會顯示<code>SERVER:Tomy has connected</code>的訊息告知。其餘的就說明都寫在程式碼的註解上了，直接看程式碼可能會更清楚。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Server.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Server.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2351,8 +2351,8 @@
 
 <h2 id="server">Server端</h2>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Server.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Server.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2404,8 +2404,8 @@
 
 <h2 id="client">Client端</h2>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2499,8 +2499,8 @@
 
 <p>Server端程式碼</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>server.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>server.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2562,8 +2562,8 @@
 
 <p>Client端</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2592,8 +2592,8 @@
 
 <p>安裝完Node.js，在桌面上建立一個<code>hello.js</code>的檔案，程式碼內容如下</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>hello.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>hello.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2616,8 +2616,8 @@
 
 <p>目前我也發現<code>Express</code>這個套件，這套件讓開發http server變得容易許多，修改<code>hello.js</code>(使用Express)。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>hello.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>hello.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2784,8 +2784,8 @@
   <li><code>save</code>就是在新增的畫面的Navigation右方，按下save按鈕儲存資料。</li>
 </ol>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2825,8 +2825,8 @@
 
 <p>第18~22，當寫入發生錯誤時才會執行。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2880,8 +2880,8 @@
 
 <p>最後記得要將<code>viewDidLoad</code>內的方法刪除，僅留下第一行即可(如下)。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2897,8 +2897,8 @@
 
 <p>因為比原本的專案多了一個<code>UILabel</code>元件，所以要多定義一個，並且找到<code>configureView</code>方法，加入第8行設定<code>detailNumber</code>，而<code>valueForKey</code>記得要修改成跟<code>Entity</code>對應的name、number。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2916,8 +2916,8 @@
 </span><span class="line"><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -2990,7 +2990,7 @@
 <li>定義兩個<code>IBAction</code>，該用途如程式碼的註解</li>
 </ol>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3024,7 +3024,7 @@
 
 <p>一樣要先補上<code>synthesize</code>，接著是撰寫<code>showLocation:</code>，該方法很簡單，只要定義<code>mapView</code>的<code>showsUserLocation</code>為&lt;/code&gt;YES&lt;/code&gt;即可顯示目前該使用者的位址。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3040,7 +3040,7 @@
 
 <p>在改變地圖的模式，使用<code>Segmented Control</code>，操作的方式如同<a href="http://lighter.github.com/blog/2012/05/01/segmented-controller/">Segmented Control</a>，唯一不同的是在<code>case</code>內執行的東西；在<code>case</code>內去改變<code>mapView</code>的<code>mapType</code>，地圖模式一共有三種模式可以更換，因此您可以依自己的需求去做變換。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3141,8 +3141,8 @@
 
 <p>在這兩個檔案可看到裡面的變數都是跟xcdatamodeld內的有相關連的</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Phone.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Phone.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3164,8 +3164,8 @@
 
 <p>這邊的<code>@dynamic</code>主要是告知 compiler 不要產生<code>setter、getter</code>，而是由程式本身來實作甚至是直到 Runtime 時以 Dynamic Loading 方式連結。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Phone.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Phone.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3187,8 +3187,8 @@
 
 <p>在該檔案內自行新增一個<code>creatData</code>方法</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3236,8 +3236,8 @@
 </span><span class="line"><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AppDelegate.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3308,7 +3308,7 @@
 
 <p>定義的變數如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>內的，這裡多一個<code>UISegmentedControl</code>，<code>hitSegmented</code>是<code>Segmented Controller</code>的觸發事件。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -3352,7 +3352,7 @@
 
 <p>這裡則是多了一個<code>hitSegmented</code>的方法，載入網頁的過程都是使用相同的方法。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>

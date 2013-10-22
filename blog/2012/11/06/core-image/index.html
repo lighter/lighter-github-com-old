@@ -51,7 +51,7 @@
 		
 		
 		
-		<a class="twitter" href="http://twitter.com/lighter_lai" title="Twitter">Twitter</a>
+		<a class="twitter" href="http://twitter.com/QWIllyQ" title="Twitter">Twitter</a>
 		
 		
 		
@@ -74,13 +74,13 @@
 	<div class="container">
 		<ul class="feed"></ul>
 	</div>
-	<small><a href="http://twitter.com/lighter_lai">lighter_lai</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<small><a href="http://twitter.com/QWIllyQ">QWIllyQ</a> @ <a href="http://twitter.com">Twitter</a></small>
 	<div class="loading">Loading...</div>
 </div>
 <script src="/javascripts/twitter.js"></script>
 <script type="text/javascript">
 	(function($){
-		$('#banner').getTwitterFeed('lighter_lai', 4, true);
+		$('#banner').getTwitterFeed('QWIllyQ', 4, true);
 	})(jQuery);
 </script>
 
@@ -124,8 +124,8 @@
 
 <p>首先編輯<code>ViewController.h</code>，程式碼如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -159,8 +159,8 @@
 
 <p>首先在<code>viewDidLoad</code>方法指定圖片給<code>imageView</code>。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -184,8 +184,8 @@
 
 <p>接著開始撰寫濾鏡效果的按鈕方法，這邊只介紹一個，程式碼如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -253,7 +253,7 @@
 
 <p>在這邊可以看到這兩個參數跟<code>forKey</code>值很像，這邊的方式就是透過setValue指定參數的值，在指定<code>forKey</code>值來指設定參數，所以當濾鏡效果不同時，會有不一樣的<code>forKey</code>值，這都需要參考到Document的說明！</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="n">inputImage</span> <span class="nl">forKey:</span><span class="s">@&quot;inputImage&quot;</span><span class="p">];</span>
 </span><span class="line"><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.0</span><span class="p">]</span> <span class="nl">forKey:</span><span class="s">@&quot;inputLevels&quot;</span><span class="p">];</span>
