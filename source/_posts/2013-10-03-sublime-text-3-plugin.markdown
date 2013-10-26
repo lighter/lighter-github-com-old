@@ -42,6 +42,8 @@ categories: Sublime Text 3
 [All Autocomplete](https://sublime.wbond.net/packages/All%20Autocomplete) | 自動補齊 | v | v 
 [Sublime​Code​Intel](https://sublime.wbond.net/packages/SublimeCodeIntel) | 支援多種程式自動提示功能 | v | v
 
+###補充
+
 > BracketHighlighter在ST3的安裝無法直接使用`package install`直接去安裝
 需要參考這邊來安裝[https://github.com/facelessuser/BracketHighlighter/tree/BH2ST3](https://github.com/facelessuser/BracketHighlighter/tree/BH2ST3)
 
