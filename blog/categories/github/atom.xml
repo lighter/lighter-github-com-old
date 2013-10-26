@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Github | Lighter's Blog]]></title>
+  <title><![CDATA[Category: Github | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2013-10-22T20:43:14+08:00</updated>
+  <updated>2013-10-26T08:31:00+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
