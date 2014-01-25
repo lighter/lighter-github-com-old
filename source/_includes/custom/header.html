@@ -1,8 +1,16 @@
-<hgroup>
-  <h1>
-      <a href="{{ root_url }}/">{{ site.title }}</a>
+<div class="jumbotron">
+  <div class="container">
+    {% if site.title %}
+      {{ site.title }}
+    {% else %}
+      Hi. I'm {{ site.author }}.
+    {% endif %}
+    <h3 class="tagline">
       {% if site.subtitle %}
-        <span>{{ site.subtitle }}</span>
+        {{ site.subtitle }}
+      {% else %}
+         Here are some thoughts of mine.
       {% endif %}
-  </h1>
-</hgroup>
+    </h3>
+  </div>
+</div>
