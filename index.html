@@ -1,130 +1,81 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Lighter</title>
-  <meta name="author" content="Willy lighter">
+	<meta charset="utf-8">
+	<title>Lighter</title>
+	<meta name="author" content="Willy lighter">
 
-  
-  <meta name="description" content="整理一下我常用的Sublime Text 3的plugin。 套件安裝管理工具可以參考這個網址 https://sublime.wbond.net/installation 主題 名稱 說明 ST2 ST3 Theme - Soda   v v Theme - Flatland   v v 工具 &hellip;">
-  
+	
+	<meta name="description" content="整理一下我常用的Sublime Text 3的plugin。 套件安裝管理工具可以參考這個網址 https://sublime.wbond.net/installation 主題 名稱 說明 ST2 ST3 Theme - Soda   v v Theme - Flatland   v v 工具 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://lighter.tw/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Lighter" type="application/atom+xml">
-  <!-- font-family: 'Knewave', cursive; -->
-<link href='http://fonts.googleapis.com/css?family=Knewave' rel='stylesheet' type='text/css'>
-<!-- font-family: 'Cantata One', serif; -->
-<link href='http://fonts.googleapis.com/css?family=Cantata+One' rel='stylesheet' type='text/css'>
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-30526664-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+	<link href="/atom.xml" rel="alternate" title="Lighter" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
 </head>
 
-<body    class="collapse-sidebar sidebar-footer" >
-  <header role="banner"><hgroup>
-  <h1>
-      <a href="/">Lighter</a>
-      
-        <span>患難生忍耐,忍耐生老練,老練生盼望,盼望不至於羞恥</span>
-      
-  </h1>
-</hgroup>
+<body>
+	<header id="header" class="inner"><h1><a href="/">Lighter</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:lighter.tw">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:lighter.tw">
+	</form>
+</nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="apple.xva@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:lighter.tw" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/03/sublime-text-3-plugin/">Sublime Text 3 Plugin</a></h1>
-    
-    
-      <p class="meta">
-        
+	
+		
+	
+	<div id="content" class="inner">
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-03T14:22:00+08:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/03/sublime-text-3-plugin/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/3/'>3</a>, <a class='category' href='/blog/categories/sublime/'>Sublime</a>, <a class='category' href='/blog/categories/text/'>Text</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>整理一下我常用的Sublime Text 3的plugin。</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/10/03/sublime-text-3-plugin/">Sublime Text 3 Plugin</a></h1>
+	<div class="entry-content">
+		<p>整理一下我常用的Sublime Text 3的plugin。</p>
 
 <p>套件安裝管理工具可以參考這個網址</p>
 
@@ -326,108 +277,84 @@
     </tr>
   </tbody>
 </table>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-03T14:22:00+08:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/3/'>3</a>, <a class='category' href='/blog/categories/sublime/'>Sublime</a>, <a class='category' href='/blog/categories/text/'>Text</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/blog/2013/10/03/sublime-text-3-plugin//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/16/xue-xi-ios-app-1/">學習iOS App 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-16T19:47:00+08:00" pubdate data-updated="true">Sep 16<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/16/xue-xi-ios-app-1/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到<a href="http://www.raywenderlich.com/">Raywenderlich</a>，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好…而且有時英文要翻譯成中文真的蠻困難的，翻譯的過程中也曾想是否應該念過一次在用我理解的方式翻譯，還是要照字面上翻譯呢？這蠻苦惱的！由於自己英文不是很好，所以花了一點時間翻譯，然後檢查幾次，終於翻譯好一篇了！</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/09/16/xue-xi-ios-app-1/">學習iOS App 1</a></h1>
+	<div class="entry-content">
+		<p>這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到<a href="http://www.raywenderlich.com/">Raywenderlich</a>，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好…而且有時英文要翻譯成中文真的蠻困難的，翻譯的過程中也曾想是否應該念過一次在用我理解的方式翻譯，還是要照字面上翻譯呢？這蠻苦惱的！由於自己英文不是很好，所以花了一點時間翻譯，然後檢查幾次，終於翻譯好一篇了！</p>
 
 <h1 id="ios-app-1welcome-to-programminghttpwwwraywenderlichcomzh-hans48771e5adb8e7bf92ios-app-1efbc9awelcome-to-programming"><a href="http://www.raywenderlich.com/zh-hans/48771/%E5%AD%B8%E7%BF%92ios-app-1%EF%BC%9Awelcome-to-programming">學習iOS App 1：Welcome to Programming</a></h1>
 
 <p>或許你會覺得怎麼會跟簡體中文在一起呢？沒錯我也是翻譯完才發現這問題，我也寫信去跟他說繁體中文跟簡體中文是不一樣的，但是由於分配工作的問題，似乎也不能修改了。所以就這樣吧….現在還在翻譯第二篇中…其實翻譯還蠻有趣的說！</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-16T19:47:00+08:00" pubdate data-updated="true">Sep 16<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/blog/2013/09/16/xue-xi-ios-app-1//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/">使用Dropbox架設私有Git</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-07T09:11:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/git/'>Git</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>首先需要在專案資料夾中初始化Git</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/">使用Dropbox架設私有Git</a></h1>
+	<div class="entry-content">
+		<p>首先需要在專案資料夾中初始化Git</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">$ git init</span></code></pre></td></tr></table></div></figure></notextile></div>
@@ -457,55 +384,43 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">$ git fetch origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T09:11:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/git/'>Git</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/31/nodejs-an-zhuang/">NodeJS 安裝</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-31T08:31:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/31/nodejs-an-zhuang/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>系統：Mountain Lion</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/03/31/nodejs-an-zhuang/">NodeJS 安裝</a></h1>
+	<div class="entry-content">
+		<p>系統：Mountain Lion</p>
 
 <p><a href="http://mxcl.github.com/homebrew/index_zh-tw.html">Homebrew</a>是一個Mac OS套件管理工具</p>
 
@@ -544,55 +459,43 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">express new project</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-31T08:31:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/blog/2013/03/31/nodejs-an-zhuang//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/12/mysql-command/">Mysql Command</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-12T15:48:00+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/02/12/mysql-command/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/mysql/'>mysql</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="section">登入</h2>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/02/12/mysql-command/">Mysql Command</a></h1>
+	<div class="entry-content">
+		<h2 id="section">登入</h2>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">&gt;mysql -u root -h localhost -p</span></code></pre></td></tr></table></div></figure></notextile></div>
@@ -632,55 +535,43 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">&gt;select * from 資料表明稱;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-12T15:48:00+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>mysql</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/blog/2013/02/12/mysql-command//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax/">Express With Post/get/ajax</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-04T16:55:00+08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>使用NodeJS版本為<code>v0.8.18</code></p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax/">Express With Post/get/ajax</a></h1>
+	<div class="entry-content">
+		<p>使用NodeJS版本為<code>v0.8.18</code></p>
 
 <p>在終端機中輸入</p>
 
@@ -997,111 +888,83 @@
 
 <h2 id="section">參考資料</h2>
 <p><a href="http://book.nodejs.tw/zh-tw/node_express.html">Express 介紹</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-04T16:55:00+08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">JSON資料於TableView與Pull Refresh</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-10T17:11:00+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">JSON資料於TableView與Pull Refresh</a></h1>
+	<div class="entry-content">
+		<p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
 
 <p><img src="/images/json/json1.png" width="216" /></p>
 
+
+		
+		<a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-10T17:11:00+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">Read on &rarr;</a>
-    </footer>
-  
+	
+		<span class="comments"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/06/core-image/">Core Image</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T19:01:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/06/core-image/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>Core Image</code>是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自<a href="http://zh.wikipedia.org/wiki/Core_Image">維基百科Core Image</a>)</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/11/06/core-image/">Core Image</a></h1>
+	<div class="entry-content">
+		<p><code>Core Image</code>是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自<a href="http://zh.wikipedia.org/wiki/Core_Image">維基百科Core Image</a>)</p>
 
 <p>我們可以透過<code>Core Image</code>的框架(framework)來調整圖片的顏色、亮度…等。而Core Image包含了很多的濾鏡的效果，這些都可以在Document中找到。</p>
 
@@ -1113,186 +976,141 @@
   <li><code>CIFilter</code>: 濾鏡類別擁有字典(dictionary)，可以指定濾鏡效果的，例如自然飽和度(vibrance)、色彩反轉(color inversion)、剪裁(cropping)…等。</li>
 </ol>
 
+
+		
+		<a href="/blog/2012/11/06/core-image/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T19:01:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/06/core-image/">Read on &rarr;</a>
-    </footer>
-  
+	
+		<span class="comments"><a href="/blog/2012/11/06/core-image//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-03T17:40:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/03/core-data-relationship/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>Core Data</code>在前面的範例中並沒有使用到<code>Relationship</code>，如果你的資料結構是需要使用到兩個資料表時，這時可以透過<code>Relationship</code>，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢，這樣等於我要做兩次的SQL查詢(可能有更好的作法吧，我沒有特別去研究…)，所以當我用<code>Core Data</code>的時候，覺得這是一個很方便又快速的作法。</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a></h1>
+	<div class="entry-content">
+		<p><code>Core Data</code>在前面的範例中並沒有使用到<code>Relationship</code>，如果你的資料結構是需要使用到兩個資料表時，這時可以透過<code>Relationship</code>，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢，這樣等於我要做兩次的SQL查詢(可能有更好的作法吧，我沒有特別去研究…)，所以當我用<code>Core Data</code>的時候，覺得這是一個很方便又快速的作法。</p>
 
 <p>接下來我們建立的資料表如下圖。</p>
 
 <p><img src="/images/CoreDataRelationship/1.png" /></p>
 
+
+		
+		<a href="/blog/2012/11/03/core-data-relationship/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-03T17:40:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/03/core-data-relationship/">Read on &rarr;</a>
-    </footer>
-  
+	
+		<span class="comments"><a href="/blog/2012/11/03/core-data-relationship//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-01T11:48:00+08:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/01/core-data-part3/#disqus_thread">Comments</a>
-        
-        
-          | 
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iphone/'>iPhone</a>
-  
-</span>
-
-
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a></h1>
+	<div class="entry-content">
+		<p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
 
 <p><img src="/images/CoreDataWithSearch/1.png" width="216" />
 <img src="/images/CoreDataWithSearch/2.png" width="216" /></p>
 
+
+		
+		<a href="/blog/2012/11/01/core-data-part3/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-01T11:48:00+08:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/01/core-data-part3/">Read on &rarr;</a>
-    </footer>
-  
+	
+		<span class="comments"><a href="/blog/2012/11/01/core-data-part3//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
+<nav id="pagenavi">
+    
+    
+        <a href="/blog/page/2/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
 
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section class="first odd">
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/10/03/sublime-text-3-plugin/">Sublime Text 3 plugin</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/16/xue-xi-ios-app-1/">學習iOS App 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/">使用Dropbox架設私有Git</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/31/nodejs-an-zhuang/">NodeJS 安裝</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/12/mysql-command/">mysql command</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Willy lighter -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> and <a href="https://github.com/gluttony/object-octopress-theme">Object</a></span>
-</p>
+    Willy lighter
 
 </footer>
-  
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'lighter';
@@ -1309,20 +1127,17 @@
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-30526664-1']);
+		_gaq.push(['_trackPageview']);
 
-
-
-
-
-
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 
