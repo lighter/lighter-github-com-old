@@ -7,7 +7,8 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="整理一下我常用的Sublime Text 3的plugin。 套件安裝管理工具可以參考這個網址 https://sublime.wbond.net/installation 主題 名稱 說明 ST2 ST3 Theme - Soda   v v Theme - Flatland   v v 工具 &hellip;">
+	<meta name="description" content="之前就知道Koding這平台，也申請帳號了一陣子，但一直沒有特別去使用。最近因為想說來玩玩看吧，而且又是免費的，空間也很夠用！以下是自己記錄一下使用上遇到的一些問題，大概記錄一下。 列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的phpmyadmin 1
+&gt; help &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -70,6 +71,76 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2014/04/20/koding-note/">Koding Note</a></h1>
+	<div class="entry-content">
+		<p>之前就知道Koding這平台，也申請帳號了一陣子，但一直沒有特別去使用。最近因為想說來玩玩看吧，而且又是免費的，空間也很夠用！以下是自己記錄一下使用上遇到的一些問題，大概記錄一下。</p>
+
+<p>列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的<code>phpmyadmin</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help programs</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/koding/koding-2014-04-20_09-50-47.jpg" /></p>
+
+<p>可以看到你的phpmyadmin url及基本的mysql指令，你可以使用它提供的指令去修改密碼</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help phpmyadmin</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/koding/koding-2014-04-20_10-00-13.jpg" /></p>
+
+<p>修改mysql密碼</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mysqladmin -u root password YOUR_NEW_PASSWORD</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改mysql root的帳號</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; mysql -u root -p
+</span><span class="line">&gt; Enter password:
+</span><span class="line">mysql&gt; use mysql;
+</span><span class="line">mysql&gt; update user set user='admin' where user='root';
+</span><span class="line">mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+		
+		<a href="/blog/2014/04/20/koding-note/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-20T09:40:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/koding/'>koding</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2014/04/20/koding-note//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -1047,47 +1118,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2012/11/03/core-data-relationship//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a></h1>
-	<div class="entry-content">
-		<p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
-
-<p><img src="/images/CoreDataWithSearch/1.png" width="216" />
-<img src="/images/CoreDataWithSearch/2.png" width="216" /></p>
-
-
-		
-		<a href="/blog/2012/11/01/core-data-part3/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-01T11:48:00+08:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/11/01/core-data-part3//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

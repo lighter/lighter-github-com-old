@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/feed" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-01-25T10:49:47+08:00</updated>
+  <updated>2014-04-20T18:09:11+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Koding Note]]></title>
+    <link href="http://lighter.tw/blog/2014/04/20/koding-note/"/>
+    <updated>2014-04-20T09:40:00+08:00</updated>
+    <id>http://lighter.tw/blog/2014/04/20/koding-note</id>
+    <content type="html"><![CDATA[<p>之前就知道Koding這平台，也申請帳號了一陣子，但一直沒有特別去使用。最近因為想說來玩玩看吧，而且又是免費的，空間也很夠用！以下是自己記錄一下使用上遇到的一些問題，大概記錄一下。</p>
+
+<p>列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的<code>phpmyadmin</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help programs</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_09-50-47.jpg" /></p>
+
+<p>可以看到你的phpmyadmin url及基本的mysql指令，你可以使用它提供的指令去修改密碼</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help phpmyadmin</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_10-00-13.jpg" /></p>
+
+<p>修改mysql密碼</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mysqladmin -u root password YOUR_NEW_PASSWORD</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改mysql root的帳號</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; mysql -u root -p
+</span><span class="line">&gt; Enter password:
+</span><span class="line">mysql&gt; use mysql;
+</span><span class="line">mysql&gt; update user set user='admin' where user='root';
+</span><span class="line">mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!-- more -->
+
+<h2 id="laravel">安裝 Laravel</h2>
+
+<p>安裝<code>composer</code>(<a href="https://getcomposer.org/download/">連結</a>)</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; cd
+</span><span class="line">&gt; cd Web/
+</span><span class="line">&gt; curl -sS https://getcomposer.org/installer | php</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-31-50.jpg" /></p>
+
+<p>安裝<code>Laravel</code>(<a href="http://laravel.com/docs/quick#installation">連結</a>)</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; php composer.phar create-project laravel/laravel your-project-name --prefer-dist</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-38-03.jpg" /></p>
+
+<p>安裝<code>php5-mcrypt</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; sudo apt-get install php5-mcrypt</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-53-27.jpg" /></p>
+
+<p>設定<code>sessions</code>資料夾權限，路徑<code>/home/UserNmae/Web/laravel-sample/app/storage/sessions</code></p>
+
+<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-57-42.jpg" /></p>
+
+<p>最後試著在瀏覽器輸入<code>http://YourUserName.kd.io/laravel-sample/public/</code>，就可以看到<code>Laravel</code>的預設網頁。</p>
+
+<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_18-07-17.jpg" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sublime Text 3 plugin]]></title>
@@ -3267,151 +3345,6 @@
   <li><a href="http://rintarou.dyndns.org/2011/07/12/the-objective-c-programming-guide-%E5%85%A5%E9%96%80%E7%AD%86%E8%A8%98/">The Objective-C Programming Guide 入門筆記</a></li>
   <li><a href="http://blog.csdn.net/zyc851224/article/details/7387805">iPhone开发之CoreData(基础篇)</a></li>
 </ol>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Segmented Controller]]></title>
-    <link href="http://lighter.tw/blog/2012/05/01/segmented-controller/"/>
-    <updated>2012-05-01T10:07:00+08:00</updated>
-    <id>http://lighter.tw/blog/2012/05/01/segmented-controller</id>
-    <content type="html"><![CDATA[<p><code>Segmented Controller</code>最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用<code>Segmented Controller</code>來切換網頁呈現網站內容。</p>
-
-<p>以下使用3個<code>Segments</code>來做Google、Yahoo、Youtube的切換。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/segmentedController1.jpeg" />
-<img src="http://lighter.tw/images/iPhone/segmentedController2.jpeg" />
-<img src="http://lighter.tw/images/iPhone/segmentedController3.jpeg" /></p>
-
-<!-- more -->
-
-<p><strong>Step 1.</strong>建立<code>SingleView</code>專案，專案命名為<code>Segmented Contrller</code>。</p>
-
-<p><strong>Step 2.</strong>編輯MainStoryboard.storyboard。</p>
-
-<p>該專案會使用到的元件有：</p>
-<ol>
-	<li><code>Toolbar</code></li>
-	<li><code>Web View</code></li>
-	<li><code>TextField</code></li>
-	<li><code>Segmented Controller</code></li>
-	<li><code>Activity Indicator View</code></li>
-</ol>
-
-<p><code>Activity Indicator View</code>的設定如同之前<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>一樣。</p>
-
-<p><code>Segmented Controlle</code>在預設中只有兩個選項，要增加選項可在<code>Attributes inspector</code>的<code>Segments</code>設定成你要的數量，接著在下方<code>Segment</code>可以設定<code>Segment 0</code>的<code>Title</code>，根據你選擇到第幾個<code>Segment</code>可以個別去設定<code>Title</code>。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/segmentedController4.jpeg" />
-<img src="http://lighter.tw/images/iPhone/segmentedController5.jpeg" />
-<img src="http://lighter.tw/images/iPhone/segmentedController6.jpeg" /></p>
-
-<p><strong>Step 3.</strong>編輯ViewController.h。</p>
-
-<p>定義的變數如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>內的，這裡多一個<code>UISegmentedControl</code>，<code>hitSegmented</code>是<code>Segmented Controller</code>的觸發事件。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span><span class="o">&lt;</span><span class="n">UIWebViewDelegate</span><span class="o">&gt;</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">UIWebView</span> <span class="o">*</span><span class="n">webView_</span><span class="p">;</span>
-</span><span class="line">    <span class="n">UITextField</span> <span class="o">*</span><span class="n">urlTextField_</span><span class="p">;</span>
-</span><span class="line">    <span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView_</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line">    <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented_</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIWebView</span> <span class="o">*</span><span class="n">webView</span><span class="p">;</span>
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">urlTextField</span><span class="p">;</span>
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIActivityIndicatorView</span> <span class="o">*</span><span class="n">activityView</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UISegmentedControl</span> <span class="o">*</span><span class="n">segmented</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitReturn:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span> <span class="c1">//點選鍵盤的return的觸發事件</span>
-</span><span class="line">
-</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitSegmented:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span><span class="c1">//點選Segmented Controller的事件</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>Step 4.</strong>編輯ViewController.m。</p>
-
-<p>載入網頁的過程也如同<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>的說明，因此在<code>viewDidLoad</code>、<code>hitReturn</code>方法都與<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>相同；<code>UIActivityIndicatorView</code>的操作也一樣僅需將<a href="http://lighter.github.com/blog/2012/04/24/web-view/">Web View</a>中的<code>webViewDidStartLoad</code>、<code>webViewDidFinishLoad</code>複製過來即可。</p>
-
-<p>這裡則是多了一個<code>hitSegmented</code>的方法，載入網頁的過程都是使用相同的方法。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">hitSegmented:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">NSString</span> <span class="o">*</span><span class="n">urlString</span><span class="p">;</span>	<span class="c1">//網頁字串</span>
-</span><span class="line">
-</span><span class="line">    <span class="n">NSInteger</span> <span class="n">segmentedNum</span><span class="p">;</span>	<span class="c1">//Segmented的選項</span>
-</span><span class="line">
-</span><span class="line">    <span class="n">segmentedNum</span> <span class="o">=</span> <span class="n">segmented_</span><span class="p">.</span><span class="n">selectedSegmentIndex</span><span class="p">;</span>	<span class="c1">//取得點選的Segmented Index</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">switch</span> <span class="p">(</span><span class="n">segmentedNum</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">        <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
-</span><span class="line">            <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.google.com&quot;</span><span class="p">;</span>
-</span><span class="line">            <span class="k">break</span><span class="p">;</span>
-</span><span class="line">        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
-</span><span class="line">            <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.yahoo.com.tw&quot;</span><span class="p">;</span>
-</span><span class="line">            <span class="k">break</span><span class="p">;</span>
-</span><span class="line">        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
-</span><span class="line">            <span class="n">urlString</span> <span class="o">=</span> <span class="s">@&quot;http://www.youtube.com.tw&quot;</span><span class="p">;</span>
-</span><span class="line">            <span class="k">break</span><span class="p">;</span>
-</span><span class="line">        <span class="k">default</span><span class="o">:</span>
-</span><span class="line">            <span class="k">break</span><span class="p">;</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">    <span class="n">self</span><span class="p">.</span><span class="n">urlTextField</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">urlString</span><span class="p">;</span>
-</span><span class="line">    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">urlString</span><span class="p">];</span>
-</span><span class="line">    <span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">urlRequest</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class="line">    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadRequest:</span><span class="n">urlRequest</span><span class="p">];</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>Step 5.</strong>建立關連。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/segmentedController7.jpeg" /></p>
-
 ]]></content>
   </entry>
   

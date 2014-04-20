@@ -1,0 +1,241 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Koding Note - Lighter</title>
+	<meta name="author" content="Willy lighter">
+
+	
+	<meta name="description" content="之前就知道Koding這平台，也申請帳號了一陣子，但一直沒有特別去使用。最近因為想說來玩玩看吧，而且又是免費的，空間也很夠用！以下是自己記錄一下使用上遇到的一些問題，大概記錄一下。 列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的phpmyadmin 1
+&gt; help &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Lighter" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Lighter</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:lighter.tw">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:lighter.tw">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">Koding Note</h1>
+	<div class="entry-content"><p>之前就知道Koding這平台，也申請帳號了一陣子，但一直沒有特別去使用。最近因為想說來玩玩看吧，而且又是免費的，空間也很夠用！以下是自己記錄一下使用上遇到的一些問題，大概記錄一下。</p>
+
+<p>列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的<code>phpmyadmin</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help programs</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/koding/koding-2014-04-20_09-50-47.jpg" /></p>
+
+<p>可以看到你的phpmyadmin url及基本的mysql指令，你可以使用它提供的指令去修改密碼</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help phpmyadmin</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/koding/koding-2014-04-20_10-00-13.jpg" /></p>
+
+<p>修改mysql密碼</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mysqladmin -u root password YOUR_NEW_PASSWORD</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改mysql root的帳號</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; mysql -u root -p
+</span><span class="line">&gt; Enter password:
+</span><span class="line">mysql&gt; use mysql;
+</span><span class="line">mysql&gt; update user set user='admin' where user='root';
+</span><span class="line">mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!-- more -->
+
+<h2 id="laravel">安裝 Laravel</h2>
+
+<p>安裝<code>composer</code>(<a href="https://getcomposer.org/download/">連結</a>)</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; cd
+</span><span class="line">&gt; cd Web/
+</span><span class="line">&gt; curl -sS https://getcomposer.org/installer | php</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/koding/koding-2014-04-20_17-31-50.jpg" /></p>
+
+<p>安裝<code>Laravel</code>(<a href="http://laravel.com/docs/quick#installation">連結</a>)</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; php composer.phar create-project laravel/laravel your-project-name --prefer-dist</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/koding/koding-2014-04-20_17-38-03.jpg" /></p>
+
+<p>安裝<code>php5-mcrypt</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&gt; sudo apt-get install php5-mcrypt</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/koding/koding-2014-04-20_17-53-27.jpg" /></p>
+
+<p>設定<code>sessions</code>資料夾權限，路徑<code>/home/UserNmae/Web/laravel-sample/app/storage/sessions</code></p>
+
+<p><img src="/images/koding/koding-2014-04-20_17-57-42.jpg" /></p>
+
+<p>最後試著在瀏覽器輸入<code>http://YourUserName.kd.io/laravel-sample/public/</code>，就可以看到<code>Laravel</code>的預設網頁。</p>
+
+<p><img src="/images/koding/koding-2014-04-20_18-07-17.jpg" /></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-20T09:40:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/koding/'>koding</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2014/04/20/koding-note/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Willy lighter
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'lighter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lighter.tw/blog/2014/04/20/koding-note/';
+        var disqus_url = 'http://lighter.tw/blog/2014/04/20/koding-note/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-30526664-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
