@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: oracle | Lighter]]></title>
+  <link href="http://lighter.tw/blog/categories/oracle/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2014-04-29T23:43:33+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[php oracle oci_bind_by_name]]></title>
+    <link href="http://lighter.tw/blog/2014/04/29/php-oracle-oci-bind-by-name/"/>
+    <updated>2014-04-29T23:35:00+08:00</updated>
+    <id>http://lighter.tw/blog/2014/04/29/php-oracle-oci-bind-by-name</id>
+    <content type="html"><![CDATA[<p>原本使用<code>Codeigniter</code>的<code>bind</code>很簡單！</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$bind = array(‘:ID’ =&gt; ‘ABCDE12345’);
+</span><span class='line'>$sql = “SELECT * FROM {$this-&gt;db-&gt;dbprefix(‘TABLE’)} WHERE ID = :ID”;
+</span><span class='line'>$this-&gt;db-&gt;query($sql, $bind);</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>但今天改用<code>php</code>的方法來<code>bind</code>，使用<code>oci_bind_by_name</code>這方法，但是原本參考<a href="http://us2.php.net/manual/en/function.oci-bind-by-name.php">Document</a>很直覺就是帶參數進去，並沒想太多!</p>
+
+<p>但是發生了500 Error找了很久仔細看發現，其實是第三個參數的問題，在文件中第三個參數是使用Reference的方式，所以並不能使用字串，必須要在外面定義一個變數帶入。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 錯誤
+</span><span class='line'>oci_bind_by_name($stid, “:ID”, “ABCDE12345”);&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 正確
+</span><span class='line'>$id = “ABCDE12345”;
+</span><span class='line'>oci_bind_by_name($stid, “:ID”, $id);</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

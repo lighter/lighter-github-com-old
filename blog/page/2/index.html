@@ -7,7 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="Core Data在前面的範例中並沒有使用到Relationship，如果你的資料結構是需要使用到兩個資料表時，這時可以透過Relationship，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢， &hellip;">
+	<meta name="description" content="Core Image是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自維基百科Core Image) 我們可以透過Core Image的框架(framework)來調整圖片的顏色、亮度…等。而Core &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -70,6 +70,54 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/11/06/core-image/">Core Image</a></h1>
+	<div class="entry-content">
+		<p><code>Core Image</code>是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自<a href="http://zh.wikipedia.org/wiki/Core_Image">維基百科Core Image</a>)</p>
+
+<p>我們可以透過<code>Core Image</code>的框架(framework)來調整圖片的顏色、亮度…等。而Core Image包含了很多的濾鏡的效果，這些都可以在Document中找到。</p>
+
+<p>而<code>Core Image</code>有幾個重要的類別</p>
+
+<ol>
+  <li><code>CIContext</code>: 所有Core Image的處理都透過CIContext完成。這有點類似於Core Graphics或OpenGL的Context。</li>
+  <li><code>CIImage</code>: 該類別可持有圖片檔案。它可透過UIImage、圖片檔案或者是像素檔案來建立。</li>
+  <li><code>CIFilter</code>: 濾鏡類別擁有字典(dictionary)，可以指定濾鏡效果的，例如自然飽和度(vibrance)、色彩反轉(color inversion)、剪裁(cropping)…等。</li>
+</ol>
+
+
+		
+		<a href="/blog/2012/11/06/core-image/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T19:01:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/11/06/core-image//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -994,49 +1042,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2012/06/02/core-data-part2//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/05/08/map-view/">Map View</a></h1>
-	<div class="entry-content">
-		<p><code>Map View</code>很常在尋找定位或是路線導覽中看到，接著簡單示範Map View的操作。
-該範例使用<code>Segmented Contrl</code>來切換<code>Map View</code>的樣式，並且定位出目前的所在位址(如下第三張圖)。</p>
-
-<p><img src="/images/iPhone/mapViews1.jpeg" />
-<img src="/images/iPhone/mapViews2.jpeg" />
-<img src="/images/iPhone/mapViews4.jpeg" /></p>
-
-
-		
-		<a href="/blog/2012/05/08/map-view/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-08T11:13:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/05/08/map-view//blog/page/2/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 
