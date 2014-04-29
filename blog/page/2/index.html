@@ -7,7 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="延續Core Data-Part2的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。 Read on &rarr; Nov 1st, 2012 iPhone &hellip;">
+	<meta name="description" content="Core Data在前面的範例中並沒有使用到Relationship，如果你的資料結構是需要使用到兩個資料表時，這時可以透過Relationship，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -70,6 +70,48 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a></h1>
+	<div class="entry-content">
+		<p><code>Core Data</code>在前面的範例中並沒有使用到<code>Relationship</code>，如果你的資料結構是需要使用到兩個資料表時，這時可以透過<code>Relationship</code>，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢，這樣等於我要做兩次的SQL查詢(可能有更好的作法吧，我沒有特別去研究…)，所以當我用<code>Core Data</code>的時候，覺得這是一個很方便又快速的作法。</p>
+
+<p>接下來我們建立的資料表如下圖。</p>
+
+<p><img src="/images/CoreDataRelationship/1.png" /></p>
+
+
+		
+		<a href="/blog/2012/11/03/core-data-relationship/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-03T17:40:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/11/03/core-data-relationship//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -995,61 +1037,6 @@
 </div>
 	
 		<span class="comments"><a href="/blog/2012/05/08/map-view//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/05/08/core-data-part1/">Core Data-Part1</a></h1>
-	<div class="entry-content">
-		<p><code>Core Data</code>主要分成三個部分</p>
-<ol>
-<li>Managed Object Context</li>
-<li>Persistent Store Coordinator</li>
-<li>Persistent Object Store</li>
-</ol>
-
-<p><code>Managed Object Context</code>這類別記載了我們的App在記憶體中所有的<code>Entity</code>，當你要求Core Data載入物件時，你必須先向<code>Managed Object Context</code>提出要求。</p>
-
-<p>…假如不存在記憶體中的話，它會向<code>Persistent Store Coordinator</code>發出請求，試著嘗試尋找它。</p>
-
-<p><code>Persistent Store Coordinator</code>的任務是追蹤<code>Persistent Object Store</code>，而<code>Persistent Object Store</code>實際知道如何讀寫資料。</p>
-
-<p><code>Managed Object Model</code>則是用來處理資料的，這些元件都知道要如何處理資料。</p>
-
-<p>整個流程大致上如下圖：</p>
-
-<p><img src="/images/iPhone/coredatas1.jpeg" /></p>
-
-
-		
-		<a href="/blog/2012/05/08/core-data-part1/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-08T10:52:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/05/08/core-data-part1//blog/page/2/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

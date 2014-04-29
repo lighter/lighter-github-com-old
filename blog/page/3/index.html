@@ -7,7 +7,9 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="Segmented Controller最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用Segmented Controller來切換網頁呈現網站內容。 以下使用3個Segments來做Google、Yahoo、Youtube的切換。 Read on & &hellip;">
+	<meta name="description" content="Core Data主要分成三個部分 Managed Object Context
+Persistent Store Coordinator
+Persistent Object Store Managed Object Context這類別記載了我們的App在記憶體中所有的Entity， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -70,6 +72,61 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h1 class="title"><a href="/blog/2012/05/08/core-data-part1/">Core Data-Part1</a></h1>
+	<div class="entry-content">
+		<p><code>Core Data</code>主要分成三個部分</p>
+<ol>
+<li>Managed Object Context</li>
+<li>Persistent Store Coordinator</li>
+<li>Persistent Object Store</li>
+</ol>
+
+<p><code>Managed Object Context</code>這類別記載了我們的App在記憶體中所有的<code>Entity</code>，當你要求Core Data載入物件時，你必須先向<code>Managed Object Context</code>提出要求。</p>
+
+<p>…假如不存在記憶體中的話，它會向<code>Persistent Store Coordinator</code>發出請求，試著嘗試尋找它。</p>
+
+<p><code>Persistent Store Coordinator</code>的任務是追蹤<code>Persistent Object Store</code>，而<code>Persistent Object Store</code>實際知道如何讀寫資料。</p>
+
+<p><code>Managed Object Model</code>則是用來處理資料的，這些元件都知道要如何處理資料。</p>
+
+<p>整個流程大致上如下圖：</p>
+
+<p><img src="/images/iPhone/coredatas1.jpeg" /></p>
+
+
+		
+		<a href="/blog/2012/05/08/core-data-part1/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T10:52:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/blog/2012/05/08/core-data-part1//blog/page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">

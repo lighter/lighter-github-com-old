@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mongodb | Lighter]]></title>
+  <link href="http://lighter.tw/blog/categories/mongodb/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2014-04-29T23:28:22+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[mongodb note]]></title>
+    <link href="http://lighter.tw/blog/2014/04/29/mongodb-note/"/>
+    <updated>2014-04-29T23:00:00+08:00</updated>
+    <id>http://lighter.tw/blog/2014/04/29/mongodb-note</id>
+    <content type="html"><![CDATA[<p>記錄一下第一次使用MongoDB發生的蠢問題…</p>
+
+<!-- more -->
+
+<p>使用<code>brew</code>安裝</p>
+
+<p>{% codeblock %}
+$ brew install mongodb
+{% endcodeblock %}</p>
+
+<p>建立<code>dbpath</code>預設的路徑資料夾</p>
+
+<p>{% codeblock %}
+$ sudo mkdir -p /data/db
+{% endcodeblock %}</p>
+
+<p>執行<code>mongo</code></p>
+
+<p>{% codeblock %}
+$ mongo
+{% endcodeblock %}</p>
+
+<p>這時發生了無法連線的問題</p>
+
+<p>{% img /images/mongodb/mongdb_1.jpg %}</p>
+
+<p>似乎是並沒有啟動<code>mongodb</code>的服務，可以用這個指令看看</p>
+
+<p>{% codeblock %}
+$ ps -ef | grep [m]ongo
+{% endcodeblock %}</p>
+
+<p>啟動<code>mongod</code></p>
+
+<p>{% codeblock %}
+$ mongod –dbpath /data/db –journal
+{% endcodeblock %}</p>
+
+<p>再開啟一個新的<code>Terminal</code>輸入<code>mongo</code>，就連到了！</p>
+
+<p>{% codeblock %}
+[~] $ mongo
+MongoDB shell version: 2.6.0
+connecting to: test
+&gt; 
+{% endcodeblock %}</p>
+
+<h2 id="note"><strong>Note</strong></h2>
+<ol>
+  <li><code>mongod.conf</code>路徑位置<code>/usr/local/etc/</code></li>
+  <li>預設<code>mongod.lock</code>路徑位置<code>/usr/local/var/mongodb</code></li>
+</ol>
+]]></content>
+  </entry>
+  
+</feed>
