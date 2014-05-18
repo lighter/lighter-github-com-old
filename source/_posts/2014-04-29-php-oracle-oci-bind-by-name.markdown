@@ -26,3 +26,19 @@ oci_bind_by_name($stid, ":ID", "ABCDE12345");
 $id = "ABCDE12345";
 oci_bind_by_name($stid, ":ID", $id);
 {% endcodeblock %}
+
+##補充 2014/05/18
+
+這也是學長發現的問題，在這邊記錄一下！
+
+就是在`foreach`中使用並不能直接使用`$value`...看下面的code好了
+
+{% codeblock %}
+foreach($array as $key => $value) {
+    // 這邊的$value都只會抓到最後一個的值
+    // oci_bind_by_name($stid, ":ID", $value); // 會有問題
+
+    // 如果要正確取得每次迴圈的值應該修改成如下
+    oci_bind_by_name($stid, ":ID", $array[$key]); 
+}
+{% endcodeblock %}
