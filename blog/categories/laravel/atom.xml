@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: laravel | Lighter]]></title>
+  <link href="http://lighter.tw/blog/categories/laravel/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2014-05-31T15:05:14+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[laravel part 2]]></title>
+    <link href="http://lighter.tw/blog/2014/05/30/laravel-part-2/"/>
+    <updated>2014-05-30T23:16:00+08:00</updated>
+    <id>http://lighter.tw/blog/2014/05/30/laravel-part-2</id>
+    <content type="html"><![CDATA[<p>第二部分就是套用<a href="http://getbootstrap.com/">bootstrap</a>和<a href="http://jquery.com/">jquery</a>，我將檔案放到專案根目錄下的<code>public</code>資料夾內。或者你想引用CDN的也可以，這樣你就不用下載任何東西。</p>
+
+<blockquote>
+  <p>jquery其實應該是用不到，只是習慣都會載入而已，接下來也不會有任何event事件需要寫！</p>
+</blockquote>
+
+<p>所以我的檔案結構如下</p>
+
+<p><code>
+laravel_sample
+	⌞app
+	⌞public
+		⌞bootstrap-3.1.1-dist
+		⌞jquery-1.11.1.min.js	
+</code></p>
+
+<p>接著我想把首頁換掉，換成登入的畫面，所以先在<code>app/views</code>下建立一個<code>login.blade.php</code>，至於<code>blade</code>是什麼，請參考<a href="http://laravel.com/docs">laravel</a>的官方文件吧。</p>
+
+<p>然後輸入下面的code：</p>
+
+<p><div><script src='https://gist.github.com/fac184def5041dd0cdae.js?file=login.blade.php'></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Look at me Login&lt;/title&gt;
+    {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
+    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
+    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-2 col-md-offset-5&quot;&gt;
+    {{ Form::open(array('url' =&gt; 'login', 'class' =&gt; 'clearfix', 'role' =&gt; 'form' )) }}
+
+      &lt;h1&gt;Login&lt;/h1&gt;
+
+      &lt;p&gt;
+        {{ $errors-&gt;first('email') }}
+        {{ $errors-&gt;first('password') }}
+      &lt;/p&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;exampleInputEmail&quot;&gt; {{ Form::label('email', 'Email Address') }} &lt;/label&gt;
+        {{ Form::text('email', Input::old('email'), array('placeholder' =&gt; 'awesome@awesome.com', 'class' =&gt; 'form-control', 'id' =&gt; 'exampleInputEamil')) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;exampleInputPasword&quot;&gt; {{ Form::label('password', 'Password') }} &lt;/label&gt;
+        {{ Form::password('password', ['class' =&gt; 'form-control', 'id' =&gt; 'exampleInputPassword'])  }}
+      &lt;/div&gt;
+
+      &lt;p&gt;
+        {{ Form::submit('Submit!', ['class' =&gt; 'btn btn-default'])  }}
+      &lt;/p&gt;
+
+    {{ Form::close() }}
+
+    &lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;
+    &lt;/div&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></noscript></div>
+</p>
+
+<p>接著修改<code>routes.php</code>，把預設首頁換成<code>login</code>，code如下：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="err">‘</span><span class="o">/</span><span class="err">’</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="k">return</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="err">‘</span><span class="nx">login</span><span class="err">’</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>重新整理網頁，就可以看到登入的畫面啦！</p>
+
+<p><img src="/images/laravel_sample/laravel-5.jpg"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[laravel part 1]]></title>
+    <link href="http://lighter.tw/blog/2014/05/29/laravel-part-1/"/>
+    <updated>2014-05-29T13:16:00+08:00</updated>
+    <id>http://lighter.tw/blog/2014/05/29/laravel-part-1</id>
+    <content type="html"><![CDATA[<h2 id="laravel">安裝 Laravel</h2>
+
+<p>要在自己的電腦上先安裝<a href="https://getcomposer.org/">composer</a>。</p>
+
+<p>然後在終端機下這樣的指令</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>composer create-project laravel/laravel ProjectName</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>安裝完成後開啟網頁輸入網址 <code>http://localhost/laravel_sample/</code>，你會看到下面這樣的畫面</p>
+
+<p><img src="/images/laravel_sample/laravel-1.jpg"></p>
+
+<p>預設應該是在<code>public</code>資料夾下，所以改成這個路徑<code>http://localhost/laravel_sample/public/index.php</code>，但…還是一樣失敗了   囧rz</p>
+
+<p><img src="/images/laravel_sample/laravel-2.jpg"></p>
+
+<p>這似乎是<code>storage</code>資料夾權限的問題，所以用終端機切換到<code>app</code>這個路徑就可以看到<code>storage</code>資料夾，然後輸入下面的指令。</p>
+
+<blockquote>
+  <p>如果有權限上的問題在前面加個<code>sudo</code></p>
+</blockquote>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>chmod -R 777 storage</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>再次重整網頁！成功啦！</p>
+
+<p><img src="/images/laravel_sample/laravel-3.jpg"></p>
+
+<p>接著我想把public這層路徑拔掉，所以把這層資料夾的<code>.htaccess</code>, <code>index.php</code>, <code>favicon.ico</code>這三個主要的檔案搬到外面，接著開啟<code>index.php</code>做些小修整，主要是修改兩個路徑而已，程式碼如下：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>
+</span><span class='line'><span class="k">require</span> <span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="nx">DIR</span><span class="o">&lt;/</span><span class="nx">strong</span><span class="o">&gt;.</span><span class="err">’</span><span class="o">/</span><span class="nx">bootstrap</span><span class="o">/</span><span class="nx">autoload</span><span class="o">.</span><span class="nx">php</span><span class="err">’</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="nx">DIR</span><span class="o">&lt;/</span><span class="nx">strong</span><span class="o">&gt;.</span><span class="err">’</span><span class="o">/</span><span class="nx">bootstrap</span><span class="o">/</span><span class="nx">start</span><span class="o">.</span><span class="nx">php</span><span class="err">’</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>把路徑修改成 <code>http://localhost/laravel_sample/</code></p>
+
+<p><img src="/images/laravel_sample/laravel-4.jpg"></p>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -7,7 +7,20 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="Core Image是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自維基百科Core Image) 我們可以透過Core Image的框架(framework)來調整圖片的顏色、亮度…等。而Core &hellip;">
+	<meta name="description" content="使用NodeJS版本為v0.8.18 在終端機中輸入 1
+express test -e 開啟package.json檔案，將版本都修改為*號。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+{ &quot;name&quot;: &quot;application-name&quot &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -16,9 +29,10 @@
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
 </head>
+
 
 <body>
 	<header id="header" class="inner"><h1><a href="/">Lighter</a></h1>
@@ -52,19 +66,22 @@
 		
 		
 		
+    
+		
 		
 		
 		
 		
 		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
 		
+    
 	</div>
 	<form class="search" action="http://google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
 		<input type="hidden" name="q" value="site:lighter.tw">
 	</form>
 </nav>
-
+<a href="https://github.com/lighter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 </header>
 	
 		
@@ -73,7 +90,417 @@
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/11/06/core-image/">Core Image</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax/">
+		
+			Express With Post/get/ajax</a>
+	</h2>
+	<div class="entry-content">
+		<p>使用NodeJS版本為<code>v0.8.18</code></p>
+
+<p>在終端機中輸入</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">express test -e</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>開啟<code>package.json</code>檔案，將版本都修改為<code>*</code>號。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="json"><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;application-name&quot;</span><span class="p">,</span>
+</span><span class="line">  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+</span><span class="line">  <span class="nt">&quot;private&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class="line">  <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class="line">    <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;node app&quot;</span>
+</span><span class="line">  <span class="p">},</span>
+</span><span class="line">  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class="line">    <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class="line">    <span class="nt">&quot;ejs&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>完成後到終端機輸入</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">npm install -l</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>在<code>view</code>資料夾內新增<code>sign.ejs</code>與<code>sign2.ejs</code>兩個檔案，這兩個檔案是用來接收<code>post</code>與<code>get</code>的資料並且顯示出來。</p>
+
+<p><code>index.ejs</code>程式碼如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.ejs </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class="line"><span class="nt">&lt;html&gt;</span>
+</span><span class="line">  <span class="nt">&lt;head&gt;</span>
+</span><span class="line">    <span class="nt">&lt;title&gt;</span><span class="err">&lt;</span>%= title %&gt;<span class="nt">&lt;/title&gt;</span>
+</span><span class="line">    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">href=</span><span class="s">&#39;/stylesheets/style.css&#39;</span> <span class="nt">/&gt;</span>
+</span><span class="line">    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class="line">    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">      <span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#send&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">          <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">            <span class="s1">&#39;account&#39;</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#ajax_account&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class="line">            <span class="s1">&#39;pass&#39;</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#ajax_pass&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+</span><span class="line">          <span class="p">};</span>
+</span><span class="line">          <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/sign3&#39;</span><span class="p">,</span> <span class="nx">data</span> <span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#ajax&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">data2</span><span class="p">);</span>
+</span><span class="line">            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data2</span><span class="p">);</span>
+</span><span class="line">          <span class="p">});</span>
+</span><span class="line">        <span class="p">});</span>
+</span><span class="line">      <span class="p">});</span>
+</span><span class="line">
+</span><span class="line">    <span class="nt">&lt;/script&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/head&gt;</span>
+</span><span class="line">  <span class="nt">&lt;body&gt;</span>
+</span><span class="line">    <span class="nt">&lt;h1&gt;</span><span class="err">&lt;</span>%= title %&gt;<span class="nt">&lt;/h1&gt;</span>
+</span><span class="line">    <span class="nt">&lt;p&gt;</span>Welcome to <span class="err">&lt;</span>%= title %&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class="line">    <span class="nt">&lt;h1&gt;</span>GET Method<span class="nt">&lt;/h1&gt;</span>
+</span><span class="line">    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/sign&quot;</span> <span class="na">method=</span><span class="s">&quot;GET&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">      <span class="nt">&lt;table&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;</span>Accout<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;account&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;</span>Password<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;pass&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;send&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">      <span class="nt">&lt;/table&gt;</span>
+</span><span class="line">    <span class="nt">&lt;/form&gt;</span>
+</span><span class="line">
+</span><span class="line">    <span class="nt">&lt;h1&gt;</span>POST Method<span class="nt">&lt;/h1&gt;</span>
+</span><span class="line">    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/sign2&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">      <span class="nt">&lt;table&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;</span>Account<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;account&quot;</span> <span class="na">name=</span><span class="s">&quot;account&quot;</span> <span class="na">id=</span><span class="s">&quot;account&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;</span>Password<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;pass&quot;</span> <span class="na">name=</span><span class="s">&quot;pass&quot;</span> <span class="na">id=</span><span class="s">&quot;pass&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;send&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">      <span class="nt">&lt;/table&gt;</span>
+</span><span class="line">    <span class="nt">&lt;/form&gt;</span>
+</span><span class="line">
+</span><span class="line">    <span class="nt">&lt;h1&gt;</span>AJAX Method<span class="nt">&lt;/h1&gt;</span>
+</span><span class="line">    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">      <span class="nt">&lt;table&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;</span>Account<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;account&quot;</span> <span class="na">name=</span><span class="s">&quot;account&quot;</span> <span class="na">id=</span><span class="s">&quot;ajax_account&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;</span>Password<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;pass&quot;</span> <span class="na">name=</span><span class="s">&quot;pass&quot;</span> <span class="na">id=</span><span class="s">&quot;ajax_pass&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">        <span class="nt">&lt;tr&gt;</span>
+</span><span class="line">          <span class="nt">&lt;td&gt;&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">id=</span><span class="s">&quot;send&quot;</span><span class="nt">&gt;</span>send<span class="nt">&lt;/button&gt;&lt;/td&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/tr&gt;</span>
+</span><span class="line">      <span class="nt">&lt;/table&gt;</span>
+</span><span class="line">    <span class="nt">&lt;/form&gt;</span>
+</span><span class="line">
+</span><span class="line">    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;ajax&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="nt">&lt;/body&gt;</span>
+</span><span class="line"><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接著開啟根目錄下的<code>app.js</code>加入<code>form</code>的<code>action</code>方法進去。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>app.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+</span><span class="line"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/sign&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">sign</span><span class="p">);</span>
+</span><span class="line"><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/sign2&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">sign2</span><span class="p">);</span>
+</span><span class="line"><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/sign3&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">sign3</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>定義好對應的方法後，在到<code>routes</code>資料夾內的<code>index.js</code>撰寫方法的執行內容，程式碼如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+</pre></td><td class="code"><pre><code class="js"><span class="line"><span class="c1">//GET Method</span>
+</span><span class="line"><span class="nx">exports</span><span class="p">.</span><span class="nx">sign</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+</span><span class="line">  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Show Result&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">account</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">account</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">pass</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">pass</span>
+</span><span class="line">  <span class="p">});</span>
+</span><span class="line"><span class="p">};</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//POST Method</span>
+</span><span class="line"><span class="nx">exports</span><span class="p">.</span><span class="nx">sign2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+</span><span class="line">  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;sign2&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Show Result&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">account</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">account</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">pass</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pass</span>
+</span><span class="line">  <span class="p">});</span>
+</span><span class="line"><span class="p">};</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//AJAX Method</span>
+</span><span class="line"><span class="nx">exports</span><span class="p">.</span><span class="nx">sign3</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Account:&#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">account</span> <span class="o">+</span> <span class="s1">&#39;, Pass:&#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pass</span><span class="p">)</span>
+</span><span class="line"><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>sign.ejs</code>與<code>sign2.ejs</code>的內容分別為：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>sign.ejs </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class="line"><span class="nt">&lt;html&gt;</span>
+</span><span class="line">  <span class="nt">&lt;head&gt;</span>
+</span><span class="line">    <span class="nt">&lt;title&gt;</span><span class="err">&lt;</span>%= title %&gt;<span class="nt">&lt;/title&gt;</span>
+</span><span class="line">    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">href=</span><span class="s">&#39;/stylesheets/style.css&#39;</span> <span class="nt">/&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/head&gt;</span>
+</span><span class="line">  <span class="nt">&lt;body&gt;</span>
+</span><span class="line">    <span class="nt">&lt;h1&gt;</span>Show Result<span class="nt">&lt;/h1&gt;</span>
+</span><span class="line">    <span class="nt">&lt;p&gt;</span>Accout:<span class="err">&lt;</span>%= account%&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class="line">    <span class="nt">&lt;p&gt;</span>Password:<span class="err">&lt;</span>%= pass%&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/body&gt;</span>
+</span><span class="line"><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>sign2.ejs </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class="line"><span class="nt">&lt;html&gt;</span>
+</span><span class="line">  <span class="nt">&lt;head&gt;</span>
+</span><span class="line">    <span class="nt">&lt;title&gt;</span><span class="err">&lt;</span>%= title %&gt;<span class="nt">&lt;/title&gt;</span>
+</span><span class="line">    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">href=</span><span class="s">&#39;/stylesheets/style.css&#39;</span> <span class="nt">/&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/head&gt;</span>
+</span><span class="line">  <span class="nt">&lt;body&gt;</span>
+</span><span class="line">    <span class="nt">&lt;h1&gt;</span>Show Result<span class="nt">&lt;/h1&gt;</span>
+</span><span class="line">    <span class="nt">&lt;p&gt;</span>Accout:<span class="err">&lt;</span>%= account%&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class="line">    <span class="nt">&lt;p&gt;</span>Password:<span class="err">&lt;</span>%= pass%&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/body&gt;</span>
+</span><span class="line"><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>程式碼放在這：<a href="https://github.com/lighter/test">下載</a></p>
+
+<h2 id="section">參考資料</h2>
+<p><a href="http://book.nodejs.tw/zh-tw/node_express.html">Express 介紹</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-04T16:55:00+08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">
+		
+			JSON資料於TableView與Pull Refresh</a>
+	</h2>
+	<div class="entry-content">
+		<p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
+
+<p><img src="/images/json/json1.png" width="216" /></p>
+
+
+		
+		<a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-10T17:11:00+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/11/06/core-image/">
+		
+			Core Image</a>
+	</h2>
 	<div class="entry-content">
 		<p><code>Core Image</code>是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自<a href="http://zh.wikipedia.org/wiki/Core_Image">維基百科Core Image</a>)</p>
 
@@ -115,13 +542,19 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/11/06/core-image//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/11/06/core-image/#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/11/03/core-data-relationship/">Core Data Relationship</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2012/11/03/core-data-relationship/">
+		
+			Core Data Relationship</a>
+	</h2>
 	<div class="entry-content">
 		<p><code>Core Data</code>在前面的範例中並沒有使用到<code>Relationship</code>，如果你的資料結構是需要使用到兩個資料表時，這時可以透過<code>Relationship</code>，而且操作起來…我覺得方便很多！假如有表1跟表2是有相關連了，以往我在操作MySQL的時候，會先取得表1的Key值，在拿表1的Key值到表2查詢，這樣等於我要做兩次的SQL查詢(可能有更好的作法吧，我沒有特別去研究…)，所以當我用<code>Core Data</code>的時候，覺得這是一個很方便又快速的作法。</p>
 
@@ -157,13 +590,19 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/11/03/core-data-relationship//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/11/03/core-data-relationship/#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/11/01/core-data-part3/">Core Data-Part3</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2012/11/01/core-data-part3/">
+		
+			Core Data-Part3</a>
+	</h2>
 	<div class="entry-content">
 		<p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
 
@@ -198,13 +637,19 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/11/01/core-data-part3//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/11/01/core-data-part3/#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/10/28/ios-with-dropbox/">iOS With Dropbox</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2012/10/28/ios-with-dropbox/">
+		
+			iOS With Dropbox</a>
+	</h2>
 	<div class="entry-content">
 		<p><img src="/images/iPhoneWithDropbox/1.png" /></p>
 
@@ -238,13 +683,19 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/10/28/ios-with-dropbox//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/10/28/ios-with-dropbox/#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/26/nodejs-and-socket-dot-io-chat/">NodeJS and Socket.io Chat</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2012/08/26/nodejs-and-socket-dot-io-chat/">
+		
+			NodeJS and Socket.io Chat</a>
+	</h2>
 	<div class="entry-content">
 		<p>有了簡單的聊天室的概念(<a href="http://lighter.github.com/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple Chat With Socket.io</a>)之後，我就在想，那同時有很多人時，要如何知道現在線上有誰呢？還有每次發言的人是誰呢？有了這些想法，那就開始繼續修改程式碼吧。</p>
 
@@ -569,13 +1020,19 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/08/26/nodejs-and-socket-dot-io-chat//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/08/26/nodejs-and-socket-dot-io-chat/#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/">Simple Chat With Socket.io</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/">
+		
+			Simple Chat With Socket.io</a>
+	</h2>
 	<div class="entry-content">
 		<p>如果已我所學不多的情況下要製作一個簡單的聊天室，我大概能想到的方法就是將這些對話內容存入MySql，然後背後透過Ajax一直去撈取資料庫的內容然後一直更新畫面上的對話內容，這樣想想就覺得好麻煩…</p>
 
@@ -744,13 +1201,19 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/08/24/simple-chat-with-socket-dot-io//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/08/24/simple-chat-with-socket-dot-io/#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/23/socket-dot-io/">Socket.io</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2012/08/23/socket-dot-io/">
+		
+			Socket.io</a>
+	</h2>
 	<div class="entry-content">
 		<p><a href="http://socket.io/">Socket.io</a>的目的是提供即時通訊的套件，在官方網站上可以看到一些簡單的範例程式碼，但是我還是記錄一下簡單的操作。首先必須安裝Socket.io。</p>
 
@@ -868,13 +1331,19 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/08/23/socket-dot-io//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/08/23/socket-dot-io/#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 
     <article class="post">
-	<h1 class="title"><a href="/blog/2012/08/10/nodejs/">NodeJS</a></h1>
+	<h2 class="title">
+		
+		<a href="/blog/2012/08/10/nodejs/">
+		
+			NodeJS</a>
+	</h2>
 	<div class="entry-content">
 		<p><a href="http://nodejs.org/">Node.js</a>使以Javascript語言為基礎的框架，讓我覺得很神奇的是它可以拿來做網站，以往在寫網頁時是使用需要使用php、Apache、MySQL；而Node.js可以直接建立網站，真的蠻酷的！</p>
 
@@ -953,97 +1422,10 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2012/08/10/nodejs//blog/page/2/index.html#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="/blog/2012/08/10/nodejs/#disqus_thread">Comments</a></div>
 	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/">將XCODE的程式發佈到iOS裝置</a></h1>
-	<div class="entry-content">
-		<p>以下是我使用的作業環境</p>
-
-<ul>
-  <li>Mac Lion 10.7.4</li>
-  <li>XCODE 4.3.3</li>
-  <li>iOS5.1 裝置為 iPhone 4</li>
-</ul>
-
-
-		
-		<a href="/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-21T15:52:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
-
-
 </div>
-	
-		<span class="comments"><a href="/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/06/02/core-data-part2/">Core Data-Part2</a></h1>
-	<div class="entry-content">
-		<p>上一篇中，僅對於基本的Core Data的流程有個初步的概念，但是光看<code>NSLog</code>訊息還是有點生疏，而且依照我目前的程度，是很少去修改到<code>AppDelegate</code>的部份，所以接著嘗試試著修改<code>Master Detail Application</code>看看。</p>
-
-<p>最後的結果是希望可以在<code>Table View</code>中看到我新增的姓名，點選該姓名可以看到該姓名的電話。</p>
-
-<p><img src="/images/iPhone/coredata2-1.png" width="216" />
-<img src="/images/iPhone/coredata2-2.png" width="216" />
-<img src="/images/iPhone/coredata2-3.png" width="216" /></p>
-
-
-		
-		<a href="/blog/2012/06/02/core-data-part2/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-02T14:36:00+08:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/blog/2012/06/02/core-data-part2//blog/page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
+</article>
 
 <nav id="pagenavi">
     
@@ -1076,7 +1458,7 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//go.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

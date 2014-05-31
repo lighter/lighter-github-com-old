@@ -17,9 +17,10 @@
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
 </head>
+
 
 <body>
 	<header id="header" class="inner"><h1><a href="/">Lighter</a></h1>
@@ -53,25 +54,28 @@
 		
 		
 		
+    
+		
 		
 		
 		
 		
 		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
 		
+    
 	</div>
 	<form class="search" action="http://google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
 		<input type="hidden" name="q" value="site:lighter.tw">
 	</form>
 </nav>
-
+<a href="https://github.com/lighter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 </header>
 	
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h1 class="title">Koding Note</h1>
+	<h2 class="title">Koding Note</h2>
 	<div class="entry-content"><p>之前就知道Koding這平台，也申請帳號了一陣子，但一直沒有特別去使用。最近因為想說來玩玩看吧，而且又是免費的，空間也很夠用！以下是自己記錄一下使用上遇到的一些問題，大概記錄一下。</p>
 
 <p>列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的<code>phpmyadmin</code></p>
@@ -167,26 +171,27 @@
 
 </div>
 	
-		<span class="comments"><a href="/blog/2014/04/20/koding-note/#disqus_thread">Comments</a></span>
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
 	
-</div></article>
+</div>
+</article>
 
 	<div class="share">
 	<div class="addthis_toolbox addthis_default_style ">
-	
-	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-	
-	
-	
-	<a class="addthis_counter addthis_pill_style"></a>
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		
+		
 	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+	
 </div>
 
 
 
 <section id="comment">
-    <h1 class="title">Comments</h1>
+    <h2 class="title">Comments</h2>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
@@ -216,7 +221,7 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//go.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

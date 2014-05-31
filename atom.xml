@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-05-31T14:10:51+08:00</updated>
+  <updated>2014-05-31T15:05:14+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,149 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[laravel part 2]]></title>
+    <link href="http://lighter.tw/blog/2014/05/30/laravel-part-2/"/>
+    <updated>2014-05-30T23:16:00+08:00</updated>
+    <id>http://lighter.tw/blog/2014/05/30/laravel-part-2</id>
+    <content type="html"><![CDATA[<p>第二部分就是套用<a href="http://getbootstrap.com/">bootstrap</a>和<a href="http://jquery.com/">jquery</a>，我將檔案放到專案根目錄下的<code>public</code>資料夾內。或者你想引用CDN的也可以，這樣你就不用下載任何東西。</p>
+
+<blockquote>
+  <p>jquery其實應該是用不到，只是習慣都會載入而已，接下來也不會有任何event事件需要寫！</p>
+</blockquote>
+
+<p>所以我的檔案結構如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">laravel_sample
+</span><span class="line">	⌞app
+</span><span class="line">	⌞public
+</span><span class="line">		⌞bootstrap-3.1.1-dist
+</span><span class="line">		⌞jquery-1.11.1.min.js	</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接著我想把首頁換掉，換成登入的畫面，所以先在<code>app/views</code>下建立一個<code>login.blade.php</code>，至於<code>blade</code>是什麼，請參考<a href="http://laravel.com/docs">laravel</a>的官方文件吧。</p>
+
+<p>然後輸入下面的code：</p>
+
+<div><script src="https://gist.github.com/fac184def5041dd0cdae.js?file=login.blade.php"></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Look at me Login&lt;/title&gt;
+    {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
+    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
+    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-2 col-md-offset-5&quot;&gt;
+    {{ Form::open(array('url' =&gt; 'login', 'class' =&gt; 'clearfix', 'role' =&gt; 'form' )) }}
+
+      &lt;h1&gt;Login&lt;/h1&gt;
+
+      &lt;p&gt;
+        {{ $errors-&gt;first('email') }}
+        {{ $errors-&gt;first('password') }}
+      &lt;/p&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;exampleInputEmail&quot;&gt; {{ Form::label('email', 'Email Address') }} &lt;/label&gt;
+        {{ Form::text('email', Input::old('email'), array('placeholder' =&gt; 'awesome@awesome.com', 'class' =&gt; 'form-control', 'id' =&gt; 'exampleInputEamil')) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;exampleInputPasword&quot;&gt; {{ Form::label('password', 'Password') }} &lt;/label&gt;
+        {{ Form::password('password', ['class' =&gt; 'form-control', 'id' =&gt; 'exampleInputPassword'])  }}
+      &lt;/div&gt;
+
+      &lt;p&gt;
+        {{ Form::submit('Submit!', ['class' =&gt; 'btn btn-default'])  }}
+      &lt;/p&gt;
+
+    {{ Form::close() }}
+
+    &lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;
+    &lt;/div&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></noscript></div>
+
+<p>接著修改<code>routes.php</code>，把預設首頁換成<code>login</code>，code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">	<span class="k">return</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>重新整理網頁，就可以看到登入的畫面啦！</p>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-5.jpg" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[laravel part 1]]></title>
+    <link href="http://lighter.tw/blog/2014/05/29/laravel-part-1/"/>
+    <updated>2014-05-29T13:16:00+08:00</updated>
+    <id>http://lighter.tw/blog/2014/05/29/laravel-part-1</id>
+    <content type="html"><![CDATA[<h2 id="laravel">安裝 Laravel</h2>
+
+<p>要在自己的電腦上先安裝<a href="https://getcomposer.org/">composer</a>。</p>
+
+<p>然後在終端機下這樣的指令</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">composer create-project laravel/laravel ProjectName</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>安裝完成後開啟網頁輸入網址 <code>http://localhost/laravel_sample/</code>，你會看到下面這樣的畫面</p>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-1.jpg" /></p>
+
+<p>預設應該是在<code>public</code>資料夾下，所以改成這個路徑<code>http://localhost/laravel_sample/public/index.php</code>，但…還是一樣失敗了   囧rz</p>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-2.jpg" /></p>
+
+<p>這似乎是<code>storage</code>資料夾權限的問題，所以用終端機切換到<code>app</code>這個路徑就可以看到<code>storage</code>資料夾，然後輸入下面的指令。</p>
+
+<blockquote>
+  <p>如果有權限上的問題在前面加個<code>sudo</code></p>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">chmod -R 777 storage</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>再次重整網頁！成功啦！</p>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-3.jpg" /></p>
+
+<p>接著我想把public這層路徑拔掉，所以把這層資料夾的<code>.htaccess</code>, <code>index.php</code>, <code>favicon.ico</code>這三個主要的檔案搬到外面，接著開啟<code>index.php</code>做些小修整，主要是修改兩個路徑而已，程式碼如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line">
+</span><span class="line"><span class="k">require</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/bootstrap/autoload.php&#39;</span><span class="p">;</span>
+</span><span class="line"><span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/bootstrap/start.php&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>把路徑修改成 <code>http://localhost/laravel_sample/</code></p>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-4.jpg" /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[php oracle oci_bind_by_name]]></title>
@@ -2828,314 +2971,6 @@
 <p><a href="http://book.nodejs.tw/">Node.js 中文電子書</a></p>
 
 <p><a href="http://www.csser.com/board/4f77e6f996ca600f78000936">Express.js 中文入門指引手冊</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[將XCODE的程式發佈到iOS裝置]]></title>
-    <link href="http://lighter.tw/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi/"/>
-    <updated>2012-07-21T15:52:00+08:00</updated>
-    <id>http://lighter.tw/blog/2012/07/21/jiang-xcodede-cheng-shi-fa-bu-dao-ioszhuang-zhi</id>
-    <content type="html"><![CDATA[<p>以下是我使用的作業環境</p>
-
-<ul>
-  <li>Mac Lion 10.7.4</li>
-  <li>XCODE 4.3.3</li>
-  <li>iOS5.1 裝置為 iPhone 4</li>
-</ul>
-
-<!-- more -->
-
-<p><strong>Step 1.製作假驗證</strong></p>
-
-<p>首先在Finder的地方，點選前往 -&gt; 工具程式。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone1.png" /></p>
-
-<p>開啟鑰匙圈存取。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone2.png" /></p>
-
-<p>選取鑰匙圈存取 -&gt; 憑證輔助程式 -&gt; 製作憑證。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone3.png" /></p>
-
-<ul>
-  <li>名稱：fake</li>
-  <li>識別身分類型：自簽根</li>
-  <li>憑證類型：代碼簽名
-*覆蓋預設值(勾選)</li>
-</ul>
-
-<p>繼續之後會跳出一個對話視窗一樣選取繼續。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone4.png" /></p>
-
-<ul>
-  <li>序號：121212</li>
-  <li>有效時間：999</li>
-</ul>
-
-<p>接著一直繼續到最後。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone5.png" /></p>
-
-<p>Step 2.修改XCODE讓他可以抓取到我們的製作的假驗證。</p>
-
-<p>開啟應用程式資料夾，找到XCODE，右鍵 -&gt; 顯示套件內容。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone6.png" /></p>
-
-<p>依照Contents/Developer/Platforms/iPhoneOS.platform的路徑尋找到<code>Info.plist</code>。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone7.png" /></p>
-
-<ol>
-  <li>將<code>Info.plist</code>複製到桌面上開啟，使用<code>cmd+f</code>尋找<code>CODE_SIGN_CONTEST_CLASS</code>，將原本的預設值改為<code>XCCodeSignContext</code>(共有兩個地方要修改)。</li>
-  <li><code>RuntimeRequirements -&gt; Classes -&gt; item 0</code>的預設值也改為<code>XCCodeSignContext</code>。</li>
-</ol>
-
-<p><strong>ps.這樣總共有三個地方要修改為<code>XCCodeSignContext</code>。</strong></p>
-
-<p>修改完後將該檔案貼回原本的地方並且取代掉。</p>
-
-<p>Step 3.修改專案。</p>
-
-<p>接著在你的<code>XCODE</code>專案，點選專案的設定檔<code>PROJECT</code> -&gt; <code>Build Settings</code> -&gt; <code>Code Signing</code> -&gt; <code>Code Signing Identity</code>。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone8.png" /></p>
-
-<p>將裡面的憑證選取您剛新增的金鑰名稱，這裡使用之前已經建立好的<code>fake code sign</code>，所以會跟前面有所不同！！</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone9.png" /></p>
-
-<p>建立完之後在編譯專案的右邊，選取我們要發佈的裝置，記得裝置必須先與電腦連接。接著就可以編譯發佈到實體裝置上了。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone12.png" /></p>
-
-<p>發佈的時候如果點選App後馬上閃退的話，這時修改一下<code>Scheme</code>。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone10.png" /></p>
-
-<p>選擇第二個<code>Run XXX.app</code> -&gt; <code>Info</code> -&gt; <code>Debugger</code> -&gt; 選取<code>GDB</code>，最後按下OK，再次重新編譯專案發佈到實體裝置，應該就可以解決閃退的問題了。</p>
-
-<p><img src="http://lighter.tw/images/xcodeToiPhone/xcodeToiPhone11.png" /></p>
-
-<h3 id="section">參考資料</h3>
-
-<ol>
-  <li><a href="http://tw.myblog.yahoo.com/pcman-128/article?mid=850&amp;prev=-2&amp;next=-2&amp;page=1&amp;sc=1#yartcmt">如何將Xcode的程式發布到iOS裝置(免年費)</a></li>
-  <li><a href="http://wangshifuola.blogspot.tw/2012/04/ioserror-launching-remote-program.html">iOS學習_Error launching remote program: failed to get the task for process</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Core Data-Part2]]></title>
-    <link href="http://lighter.tw/blog/2012/06/02/core-data-part2/"/>
-    <updated>2012-06-02T14:36:00+08:00</updated>
-    <id>http://lighter.tw/blog/2012/06/02/core-data-part2</id>
-    <content type="html"><![CDATA[<p>上一篇中，僅對於基本的Core Data的流程有個初步的概念，但是光看<code>NSLog</code>訊息還是有點生疏，而且依照我目前的程度，是很少去修改到<code>AppDelegate</code>的部份，所以接著嘗試試著修改<code>Master Detail Application</code>看看。</p>
-
-<p>最後的結果是希望可以在<code>Table View</code>中看到我新增的姓名，點選該姓名可以看到該姓名的電話。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/coredata2-1.png" width="216" />
-<img src="http://lighter.tw/images/iPhone/coredata2-2.png" width="216" />
-<img src="http://lighter.tw/images/iPhone/coredata2-3.png" width="216" /></p>
-
-<!-- more -->
-
-<p><strong>Step 1.</strong>建立<code>Master Detail Application</code>的專案，專案名稱為core data example。</p>
-
-<p><strong>Step 2.</strong>開啟<code>core_data_example.xcdatamodeld</code>，將原本專案預設的<code>Entity</code>刪除，另外新增一個<code>Phone</code>的<code>Entity</code>，並新增兩個<code>Attributes</code>，name、number，如下圖。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/coredata2-4.png" /></p>
-
-<p><strong>Step 3.</strong>新增<code>Managed Object Model</code>，對著專案右鍵<code>New File</code>➔<code>iOS</code>➔<code>Core Data</code>➔<code>NSManagedObjectsubclass</code>，接著會自動新增二個檔案，<code>Phone.m</code>跟<code>Phone.h</code>。</p>
-
-<p>如果沒有直接自動產生，應該會出現以下的畫面，只需要勾選並且下一步即可。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/coredata2-5.png" />
-<img src="http://lighter.tw/images/iPhone/coredata2-6.png" /></p>
-
-<p><strong>Step 4.</strong>修改<code>MainStoryboard.storyboard</code>。</p>
-
-<p>在<code>Navigation</code>的右方加入一個<code>Bar Button Item</code>，點選新增是會跑到上面的畫面，讓我們新增姓名還有電話，下面則是點選姓名時可以看到該姓名的電話。因此需要新增一個<code>AddDetailViewController</code>來控制該新增畫面。在此就不多贅述。</p>
-
-<p><img src="http://lighter.tw/images/iPhone/coredata2-7.png" /></p>
-
-<p><strong>Step 5.</strong>編輯<code>AddDetailViewController</code>。</p>
-
-<ol>
-  <li>import<code>Phone.h</code>，因為需要透過它來得知<code>Entity</code>的<code>name</code>、<code>number</code>。</li>
-  <li>import<code>AppDelegate.h</code>，因為需要使用它裡面的<code>NSManagedObjectContext</code>，所以在此無需重複定義。</li>
-  <li>二個<code>UITextField</code>顧名思義就是對應到畫面上二個Text使用的。</li>
-  <li><code>app</code>就是要用來引用<code>NSManagedObjectContext</code>。</li>
-  <li><code>save</code>就是在新增的畫面的Navigation右方，按下save按鈕儲存資料。</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class="line"><span class="cp">#import &quot;Phone.h&quot;</span>
-</span><span class="line"><span class="cp">#import &quot;AppDelegate.h&quot;</span>
-</span><span class="line"><span class="k">@interface</span> <span class="nc">AddDetailViewController</span> : <span class="nc">UIViewController</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">UITextField</span> <span class="o">*</span><span class="n">name_</span><span class="p">;</span>
-</span><span class="line">    <span class="n">UITextField</span> <span class="o">*</span><span class="n">number_</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">number</span><span class="p">;</span>
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">app</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span><span class="line"><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>第5行，取得AppDelegate的<code>delegate</code></p>
-
-<p>第6行，透過app取得AppDelegete的<code>NSManagedObjectContext</code></p>
-
-<p>第7行，定義要加入的Entity是Phone。</p>
-
-<p>第9行，用一個<code>if</code>檢查欄位的值是否為空白，當不是空白的時候才寫入。</p>
-
-<p>第18~22，當寫入發生錯誤時才會執行。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AddDetailViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">number_</span><span class="p">,</span> <span class="n">app</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="o">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">app</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
-</span><span class="line">    <span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">app</span> <span class="n">managedObjectContext</span><span class="p">];</span>
-</span><span class="line">    <span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="s">@&quot;Phone&quot;</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">number_</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class="line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Nope&quot;</span><span class="p">);</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">    <span class="k">else</span> <span class="p">{</span>
-</span><span class="line">        <span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name_</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
-</span><span class="line">        <span class="n">phone</span><span class="p">.</span><span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInteger:</span><span class="p">[</span><span class="n">number_</span><span class="p">.</span><span class="n">text</span> <span class="n">integerValue</span><span class="p">]];</span>
-</span><span class="line">        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">popViewControllerAnimated:</span><span class="n">YES</span><span class="p">];</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line">
-</span><span class="line">    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">])</span> <span class="p">{</span>
-</span><span class="line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Woops&quot;</span><span class="p">);</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>Step 6.</strong>編輯<code>MasterViewController.m</code>。</p>
-
-<p>這裡僅需要搜尋<code>Event</code>，並且改成<code>Phone</code>取代(因為Entity已經被我換掉了)，還有搜尋<code>timeStamp</code>，並且改成<code>name</code>取代(因為Attribute已經不是timeStamp，我們在<code>Table View</code>中希望呈現姓名，因此改成<code>name</code>)。</p>
-
-<p>最後記得要將<code>viewDidLoad</code>內的方法刪除，僅留下第一行即可(如下)。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class="line">	<span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>Step 7.</strong>編輯<code>DetailViewController</code></p>
-
-<p>因為比原本的專案多了一個<code>UILabel</code>元件，所以要多定義一個，並且找到<code>configureView</code>方法，加入第8行設定<code>detailNumber</code>，而<code>valueForKey</code>記得要修改成跟<code>Entity</code>對應的name、number。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class="line"><span class="k">@interface</span> <span class="nc">DetailViewController</span> : <span class="nc">UIViewController</span>
-</span><span class="line">
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">id</span> <span class="n">detailItem</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailDescriptionLabel</span><span class="p">;</span>
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailNumber</span><span class="p">;</span>
-</span><span class="line"><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DetailViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@synthesize</span> <span class="n">detailNumber</span> <span class="o">=</span> <span class="n">_detailNumber</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">configureView</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="c1">// Update the user interface for the detail item.</span>
-</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">        <span class="n">self</span><span class="p">.</span><span class="n">detailDescriptionLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;name&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
-</span><span class="line">        <span class="n">self</span><span class="p">.</span><span class="n">detailNumber</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="s">@&quot;number&quot;</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Step 8.建立關連</p>
-
-<p>最後就是將元件跟<code>IBOutlet</code>、<code>IBAction</code>建立關連，在此就不多做贅述了。</p>
-
-<p>範例下載：<a href="https://lighter@github.com/lighter/Core-Data-Example.git">Download here</a></p>
-
 ]]></content>
   </entry>
   
