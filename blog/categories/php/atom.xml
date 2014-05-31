@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: php, | Lighter]]></title>
+  <title><![CDATA[Category: php | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-05-31T15:05:14+08:00</updated>
+  <updated>2014-05-31T18:43:11+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -14,196 +14,225 @@
 
   
   <entry>
-    <title type="html"><![CDATA[laravel part 2]]></title>
-    <link href="http://lighter.tw/blog/2014/05/30/laravel-part-2/"/>
-    <updated>2014-05-30T23:16:00+08:00</updated>
-    <id>http://lighter.tw/blog/2014/05/30/laravel-part-2</id>
-    <content type="html"><![CDATA[<p>第二部分就是套用<a href="http://getbootstrap.com/">bootstrap</a>和<a href="http://jquery.com/">jquery</a>，我將檔案放到專案根目錄下的<code>public</code>資料夾內。或者你想引用CDN的也可以，這樣你就不用下載任何東西。</p>
+    <title type="html"><![CDATA[laravel part 3]]></title>
+    <link href="http://lighter.tw/blog/2014/05/31/laravel-part-3/"/>
+    <updated>2014-05-31T17:18:37+08:00</updated>
+    <id>http://lighter.tw/blog/2014/05/31/laravel-part-3</id>
+    <content type="html"><![CDATA[<p>接著就是建立資料方面的事情啦！登入總要有先有資料對吧！</p>
 
-<blockquote>
-  <p>jquery其實應該是用不到，只是習慣都會載入而已，接下來也不會有任何event事件需要寫！</p>
-</blockquote>
+<h2 id="step-1-mysql">Step 1. Mysql設定</h2>
 
-<p>所以我的檔案結構如下</p>
+<p>開啓<code>phpmyadmin</code>，建立一個新的Database，這邊取名為<code>laravel_sample</code>，如下圖</p>
 
-<p><code>
-laravel_sample
-	⌞app
-	⌞public
-		⌞bootstrap-3.1.1-dist
-		⌞jquery-1.11.1.min.js	
-</code></p>
+<p><img src="/images/laravel_sample/laravel-6.jpg"></p>
 
-<p>接著我想把首頁換掉，換成登入的畫面，所以先在<code>app/views</code>下建立一個<code>login.blade.php</code>，至於<code>blade</code>是什麼，請參考<a href="http://laravel.com/docs">laravel</a>的官方文件吧。</p>
+<p>再來就是設定<code>laravel</code>的資料庫連線，開啓<code>database.php</code>，找到<code>mysql</code>的設定，輸入<code>database</code>名稱還有連線的帳號密碼</p>
 
-<p>然後輸入下面的code：</p>
-
-<p><div><script src='https://gist.github.com/fac184def5041dd0cdae.js?file=login.blade.php'></script>
-<noscript><pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Look at me Login&lt;/title&gt;
-    {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
-    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
-    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;col-md-2 col-md-offset-5&quot;&gt;
-    {{ Form::open(array('url' =&gt; 'login', 'class' =&gt; 'clearfix', 'role' =&gt; 'form' )) }}
-
-      &lt;h1&gt;Login&lt;/h1&gt;
-
-      &lt;p&gt;
-        {{ $errors-&gt;first('email') }}
-        {{ $errors-&gt;first('password') }}
-      &lt;/p&gt;
-
-      &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;exampleInputEmail&quot;&gt; {{ Form::label('email', 'Email Address') }} &lt;/label&gt;
-        {{ Form::text('email', Input::old('email'), array('placeholder' =&gt; 'awesome@awesome.com', 'class' =&gt; 'form-control', 'id' =&gt; 'exampleInputEamil')) }}
-      &lt;/div&gt;
-
-      &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;exampleInputPasword&quot;&gt; {{ Form::label('password', 'Password') }} &lt;/label&gt;
-        {{ Form::password('password', ['class' =&gt; 'form-control', 'id' =&gt; 'exampleInputPassword'])  }}
-      &lt;/div&gt;
-
-      &lt;p&gt;
-        {{ Form::submit('Submit!', ['class' =&gt; 'btn btn-default'])  }}
-      &lt;/p&gt;
-
-    {{ Form::close() }}
-
-    &lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;
-    &lt;/div&gt;&lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></noscript></div>
-</p>
-
-<p>接著修改<code>routes.php</code>，把預設首頁換成<code>login</code>，code如下：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>routes.php </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>database.php </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="err">‘</span><span class="o">/</span><span class="err">’</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">driver</span><span class="err">’</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">host</span><span class="err">’</span>      <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">localhost</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">database</span><span class="err">’</span>  <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">laravel_sample</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">username</span><span class="err">’</span>  <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">root</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">password</span><span class="err">’</span>  <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">password</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">charset</span><span class="err">’</span>   <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">utf8</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">collation</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">utf8_unicode_ci</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">prefix</span><span class="err">’</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘’</span><span class="p">,</span>
+</span><span class='line'><span class="p">),</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2 id="step-2-table">Step 2. 建立Table</h2>
+
+<p><code>laravel</code>的<code>artisan</code>很方便，這邊你不需要自己在<code>phpmyadmin</code>手動一個一個輸入column name和type，也不用自己寫mysql的create，可以透過指令和一些code來幫你完成建立Table。</p>
+
+<p>開啟終端機，切換到專案的路徑下，以我的環境來說，我的的專案是在<code>/Application/XAMPP/htdocs/laravel_sample/</code>；然後輸入下面的指令：</p>
+
+<p><code>php artisan migrate:make create-users-table</code></p>
+
+<p>實際上會幫你建立一個 <code>時間</code> 加上 <code>create-users-table</code>的一個檔案，如下圖：</p>
+
+<p><img src="/images/laravel_sample/laravel-7.jpg"></p>
+
+<p>接著開啟這個檔案，這個檔案的路徑會在<code>app/database/migrations/</code>下</p>
+
+<p>在這檔案會看到兩個method，一個是用來建立，另一個當然就是拿來還原的囉！建立的程式主要就是用來建立Table，直接看code吧，如下：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/**
+</span><span class='line'> * Run the migrations.
+</span><span class='line'> *
+</span><span class='line'> * @return void
+</span><span class='line'> */
+</span><span class='line'>public function up()
+</span><span class='line'>{
+</span><span class='line'>	Schema::create(‘users’, function(Blueprint $table)
+</span><span class='line'>	{
+</span><span class='line'>		$table-&gt;increments(‘id’);
+</span><span class='line'>		$table-&gt;string(‘name’, 32);
+</span><span class='line'>		$table-&gt;string(‘username’, 32);
+</span><span class='line'>		$table-&gt;string(‘email’, 320);
+</span><span class='line'>		$table-&gt;string(‘password’, 64);
+</span><span class='line'>		$table-&gt;timestamps();
+</span><span class='line'>	});
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>/**
+</span><span class='line'> * Reverse the migrations.
+</span><span class='line'> *
+</span><span class='line'> * @return void
+</span><span class='line'> */
+</span><span class='line'>public function down()
+</span><span class='line'>{
+</span><span class='line'>	Schema::drop(‘users’);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>再次回到終端機，輸入下面的指令來建立Table</p>
+
+<p><code>php artisan migrate</code></p>
+
+<p>阿…發生錯誤了！</p>
+
+<p><img src="/images/laravel_sample/laravel-8.jpg"></p>
+
+<p>似乎是無法跟mysql連線，請試著修改<code>database.php</code>的<code>host</code>，修改為<code>127.0.0.1</code>，或者你可以參考這篇<a href="http://stackoverflow.com/questions/14219692/laravel-setup-of-migrations-using-artisan-is-failing">Laravel setup of migrations using Artisan is failing</a>，直接指定<code>unix_socket</code>的路徑，因為我有在遠端安裝的時候遇過這情形。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>database.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">driver</span><span class="err">’</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>	<span class="err">‘</span><span class="nx">host</span><span class="err">’</span>      <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="err">’</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>修改完再執行一次吧！</p>
+
+<p><img src="/images/laravel_sample/laravel-9.jpg"></p>
+
+<p>成功囉~</p>
+
+<p>來看看<code>phpmyadmin</code>是不是真的出現<code>users</code>的Table呢！？</p>
+
+<p><img src="/images/laravel_sample/laravel-10.jpg"></p>
+
+<h2 id="step-3-">Step 3. 建立資料</h2>
+
+<p>建立資料的部分也不用你自己到資料庫裡面一筆一筆key，一樣可以透過<code>artisan</code>幫你完成，但你要先寫好code！在<code>app/database/seeds/</code>下建立一個<code>UsersTableSeeder.php</code>(注意：<code>U</code>要大寫)。建立完成後先不急著開起它來編輯，先看到<code>DatabaseSeeder.php</code>這隻檔案，預設執行時來執行這隻檔案，再由這隻檔案的內容去看你要執行哪隻檔案…直接看code吧！</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DatabaseSeeder.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>	<span class="k">return</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="err">‘</span><span class="nx">login</span><span class="err">’</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span><span class='line'>	<span class="nx">Eloquent</span><span class="o">::</span><span class="na">unguard</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$this</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;UsersTableSeeder&#39;</span><span class="p">);</span> <span class="c1">// 拿掉原本的註解，注意這邊預設User後是沒有加`s`的記得自己補上，跟檔案名稱對應 } </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
 
-<p>重新整理網頁，就可以看到登入的畫面啦！</p>
+<p>接下來就是編輯你要寫的內容了，開啟<code>UsersTableSeeder.php</code>，code如下：</p>
 
-<p><img src="/images/laravel_sample/laravel-5.jpg"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[laravel part 1]]></title>
-    <link href="http://lighter.tw/blog/2014/05/29/laravel-part-1/"/>
-    <updated>2014-05-29T13:16:00+08:00</updated>
-    <id>http://lighter.tw/blog/2014/05/29/laravel-part-1</id>
-    <content type="html"><![CDATA[<h2 id="laravel">安裝 Laravel</h2>
-
-<p>要在自己的電腦上先安裝<a href="https://getcomposer.org/">composer</a>。</p>
-
-<p>然後在終端機下這樣的指令</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>composer create-project laravel/laravel ProjectName</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>安裝完成後開啟網頁輸入網址 <code>http://localhost/laravel_sample/</code>，你會看到下面這樣的畫面</p>
-
-<p><img src="/images/laravel_sample/laravel-1.jpg"></p>
-
-<p>預設應該是在<code>public</code>資料夾下，所以改成這個路徑<code>http://localhost/laravel_sample/public/index.php</code>，但…還是一樣失敗了   囧rz</p>
-
-<p><img src="/images/laravel_sample/laravel-2.jpg"></p>
-
-<p>這似乎是<code>storage</code>資料夾權限的問題，所以用終端機切換到<code>app</code>這個路徑就可以看到<code>storage</code>資料夾，然後輸入下面的指令。</p>
-
-<blockquote>
-  <p>如果有權限上的問題在前面加個<code>sudo</code></p>
-</blockquote>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>chmod -R 777 storage</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>再次重整網頁！成功啦！</p>
-
-<p><img src="/images/laravel_sample/laravel-3.jpg"></p>
-
-<p>接著我想把public這層路徑拔掉，所以把這層資料夾的<code>.htaccess</code>, <code>index.php</code>, <code>favicon.ico</code>這三個主要的檔案搬到外面，接著開啟<code>index.php</code>做些小修整，主要是修改兩個路徑而已，程式碼如下：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.php </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>UsersTableSeeder.php </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'>
-</span><span class='line'><span class="k">require</span> <span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="nx">DIR</span><span class="o">&lt;/</span><span class="nx">strong</span><span class="o">&gt;.</span><span class="err">’</span><span class="o">/</span><span class="nx">bootstrap</span><span class="o">/</span><span class="nx">autoload</span><span class="o">.</span><span class="nx">php</span><span class="err">’</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="nx">DIR</span><span class="o">&lt;/</span><span class="nx">strong</span><span class="o">&gt;.</span><span class="err">’</span><span class="o">/</span><span class="nx">bootstrap</span><span class="o">/</span><span class="nx">start</span><span class="o">.</span><span class="nx">php</span><span class="err">’</span><span class="p">;</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">UsersTableSeeder</span> <span class="k">extends</span> <span class="nx">Seeder</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nx">DB</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">delete</span><span class="p">();</span> <span class="c1">// 每次執行都先清理資料表單</span>
+</span><span class='line'>    <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;lighter&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;username&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;awesome&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;email&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;test@gmail.com&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;password&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;awesome&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;Tom&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;username&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;email&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;test2@gmail.com&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;password&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;awesome&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>把路徑修改成 <code>http://localhost/laravel_sample/</code></p>
+<p>完成之後到終端機輸入下面的指令</p>
 
-<p><img src="/images/laravel_sample/laravel-4.jpg"></p>
+<p><code>php artisan db:seed</code></p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php oracle oci_bind_by_name]]></title>
-    <link href="http://lighter.tw/blog/2014/04/29/php-oracle-oci-bind-by-name/"/>
-    <updated>2014-04-29T23:35:00+08:00</updated>
-    <id>http://lighter.tw/blog/2014/04/29/php-oracle-oci-bind-by-name</id>
-    <content type="html"><![CDATA[<p>原本使用<code>Codeigniter</code>的<code>bind</code>很簡單！</p>
+<p>成功囉～這樣以後如果需要很多測試資料，就不用手動一筆一筆操作建立了！而且轉換資料庫也方便很多，不用寫多套SQL語法。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$bind = array(‘:ID’ =&gt; ‘ABCDE12345’);
-</span><span class='line'>$sql = “SELECT * FROM {$this-&gt;db-&gt;dbprefix(‘TABLE’)} WHERE ID = :ID”;
-</span><span class='line'>$this-&gt;db-&gt;query($sql, $bind);</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p><img src="/images/laravel_sample/laravel-11.jpg"></p>
 
-<p>但今天改用<code>php</code>的方法來<code>bind</code>，使用<code>oci_bind_by_name</code>這方法，但是原本參考<a href="http://us2.php.net/manual/en/function.oci-bind-by-name.php">Document</a>很直覺就是帶參數進去，並沒想太多!</p>
-
-<p>但是發生了500 Error找了很久仔細看發現，其實是第三個參數的問題，在文件中第三個參數是使用Reference的方式，所以並不能使用字串，必須要在外面定義一個變數帶入。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// 錯誤
-</span><span class='line'>oci_bind_by_name($stid, “:ID”, “ABCDE12345”);&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>// 正確
-</span><span class='line'>$id = “ABCDE12345”;
-</span><span class='line'>oci_bind_by_name($stid, “:ID”, $id);</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<h2 id="section">補充 2014/05/18</h2>
-
-<p>這也是學長發現的問題，在這邊記錄一下！</p>
-
-<p>就是在<code>foreach</code>中使用並不能直接使用<code>$value</code>…看下面的code好了</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>foreach($array as $key =&gt; $value) {
-</span><span class='line'>    // 這邊的$value都只會抓到最後一個的值
-</span><span class='line'>    // oci_bind_by_name($stid, “:ID”, $value); // 會有問題&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;pre>&lt;code>// 如果要正確取得每次迴圈的值應該修改成如下
-</span><span class='line'>oci_bind_by_name($stid, ":ID", $array[$key]);  }</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
+<p><img src="/images/laravel_sample/laravel-12.jpg"></p>
 ]]></content>
   </entry>
   
