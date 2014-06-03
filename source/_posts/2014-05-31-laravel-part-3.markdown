@@ -3,7 +3,7 @@ layout: post
 title: "laravel part 3"
 date: 2014-05-31 17:18:37 +0800
 comments: true
-categories: laravel, php
+categories: [laravel, php]
 ---
 
 接著就是建立資料方面的事情啦！登入總要有先有資料對吧！

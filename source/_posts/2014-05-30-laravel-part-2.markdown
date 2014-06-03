@@ -3,7 +3,7 @@ layout: post
 title: "laravel part 2"
 date: 2014-05-30 23:16
 comments: true
-categories: php, laravel
+categories: [php, laravel]
 ---
 
 第二部分就是套用[bootstrap](http://getbootstrap.com/)和[jquery](http://jquery.com/)，我將檔案放到專案根目錄下的`public`資料夾內。或者你想引用CDN的也可以，這樣你就不用下載任何東西。

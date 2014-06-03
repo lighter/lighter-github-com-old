@@ -3,7 +3,7 @@ layout: post
 title: "php oracle oci_bind_by_name"
 date: 2014-04-29 23:35
 comments: true
-categories: php, oracle
+categories: [php, oracle]
 ---
 
 原本使用`Codeigniter`的`bind`很簡單！

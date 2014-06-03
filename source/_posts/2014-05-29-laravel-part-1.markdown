@@ -3,7 +3,7 @@ layout: post
 title: "laravel part 1"
 date: 2014-05-29 13:16
 comments: true
-categories: php, laravel
+categories: [php, laravel]
 ---
 
 ##安裝 Laravel
