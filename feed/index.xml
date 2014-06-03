@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/feed" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-05-31T18:43:11+08:00</updated>
+  <updated>2014-06-03T16:10:28+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,203 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[laravel part 4]]></title>
+    <link href="http://lighter.tw/blog/2014/06/02/laravel-part-4/"/>
+    <updated>2014-06-02T09:16:15+08:00</updated>
+    <id>http://lighter.tw/blog/2014/06/02/laravel-part-4</id>
+    <content type="html"><![CDATA[<p>這篇會展是簡單的登入檢查、登入的<code>Session</code>建立、登出，這三個；主要是會使用到一些簡單的<code>route</code>、<code>laravel</code>的驗證、<code>Session</code>的建立。廢話不多說，往下看吧。</p>
+
+<p>首先建立一個簡單的<code>view</code>用來查看目前登入狀態，建立的路徑是<code>app/views/show/index.blade.php</code>，我刻意多開了一個<code>show</code>資料夾。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">app
+</span><span class="line">  ⌞views
+</span><span class="line">    ⌞show
+</span><span class="line">      ⌞index.blade.php</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>show/index.blade.php</code>的code如下(這邊可以先忽略變數怎麼來的…往下看你就可以知道了)：</p>
+
+<div><script src="https://gist.github.com/38e234e12e9e98652d5a.js"></script>
+<noscript><pre><code>&lt;h1&gt;This is show sample&lt;/h1&gt;
+&lt;p&gt;
+  Login_status:
+  {{ $login_status }}
+&lt;/p&gt;</code></pre></noscript></div>
+
+<p>再來就是增加<code>route</code>的設定，開啓<code>routes.php</code>，加入下面的code：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">// 登入</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uses&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HomeController@doLogin&#39;</span><span class="p">]);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// 登出</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uses&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HomeController@doLogout&#39;</span><span class="p">]);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// show</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uses&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HomeController@show&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>這邊我都香要使用的方法都寫在<code>HomeController</code>內。因此會依據網址的不同執行<code>HomeController</code>內對應的方法。</p>
+
+<p><code>HomeController.php</code>加入的code如下，解釋我都寫在註解上了。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>HomeController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">// 登入</span>
+</span><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">doLogin</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="c1">// 驗證規則</span>
+</span><span class="line">  <span class="nv">$rules</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">    <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;required|email&#39;</span><span class="p">,</span> <span class="c1">// 必填欄位，email格式</span>
+</span><span class="line">    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|alphaNum|min:3&#39;</span> <span class="c1">// 必填欄位，必須是字母或數字，不得小於3位</span>
+</span><span class="line">  <span class="p">);</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 驗證</span>
+</span><span class="line">  <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 規則驗證失敗</span>
+</span><span class="line">  <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// 回到首頁，並回傳錯誤訊息，與所有輸入的欄位，除了密碼</span>
+</span><span class="line">    <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span><span class="line">      <span class="o">-&gt;</span><span class="na">withErrors</span><span class="p">(</span><span class="nv">$validator</span><span class="p">)</span>
+</span><span class="line">      <span class="o">-&gt;</span><span class="na">withInput</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">except</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">));</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">  <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$userdata</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">        <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">),</span>
+</span><span class="line">        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+</span><span class="line">      <span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// 與資料庫驗證</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="nx">Auth</span><span class="o">::</span><span class="na">attempt</span><span class="p">(</span><span class="nv">$userdata</span><span class="p">))</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">      <span class="c1">// 驗證成功，並增加一個session key value值</span>
+</span><span class="line">      <span class="nx">Session</span><span class="o">::</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;login_success&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">      <span class="c1">// 導向show/index.blade.php</span>
+</span><span class="line">      <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/show&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">      <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">doLogout</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="nx">Auth</span><span class="o">::</span><span class="na">logout</span><span class="p">();</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 刪除登入成功的key 值</span>
+</span><span class="line">  <span class="nx">Session</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="s1">&#39;login_seuccess&#39;</span><span class="p">);</span>
+</span><span class="line">  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="c1">// 取得所有session的資料</span>
+</span><span class="line">  <span class="nv">$all_session_data</span> <span class="o">=</span> <span class="nx">Session</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+</span><span class="line">  <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;all_session_data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$all_session_data</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line">  <span class="k">if</span> <span class="p">(</span> <span class="nx">Session</span><span class="o">::</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;login_success&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">check</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;login_status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;success&#39;</span><span class="p">;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">  <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;login_status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;failure&#39;</span><span class="p">;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 這邊可以注意$data的login_status這個key值</span>
+</span><span class="line">  <span class="c1">// 跟 show/index.blade.php 使用的變數做對應</span>
+</span><span class="line">  <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;show.index&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+</span><span class="line">  <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果登入成功的話，可以看到登入成功的訊息</p>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-13.jpg" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[laravel part 3]]></title>
@@ -3040,102 +3237,6 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>其實只要觀察一下<code>socket.emit</code>與<code>socket.on</code>裡面監聽的名稱就可以看出Server端與Client的執行時間順序了；最後執行<code>node Server.js</code>就可以看到一個簡單的聊天室。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Socket.io]]></title>
-    <link href="http://lighter.tw/blog/2012/08/23/socket-dot-io/"/>
-    <updated>2012-08-23T01:56:00+08:00</updated>
-    <id>http://lighter.tw/blog/2012/08/23/socket-dot-io</id>
-    <content type="html"><![CDATA[<p><a href="http://socket.io/">Socket.io</a>的目的是提供即時通訊的套件，在官方網站上可以看到一些簡單的範例程式碼，但是我還是記錄一下簡單的操作。首先必須安裝Socket.io。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">npm install socket.io</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Server端程式碼</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>server.js </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="nx">server</span><span class="p">,</span>
-</span><span class="line">    <span class="nx">io</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
-</span><span class="line">  <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">){</span>
-</span><span class="line">    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
-</span><span class="line">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"><span class="p">});</span>
-</span><span class="line">
-</span><span class="line"><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">//引入socket.io並且聽取server的服務</span>
-</span><span class="line"><span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;socket.io&#39;</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">server</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">//當連線時(connection)執行的動作</span>
-</span><span class="line"><span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1">//讓Client端監聽&#39;news&#39;方法，並傳送值({hello:&#39;world&#39;})</span>
-</span><span class="line">  <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;news&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">hello</span><span class="o">:</span><span class="s1">&#39;world&#39;</span><span class="p">});</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1">//監聽Client發送的&#39;my other event&#39;，並將Client端發送的值印出</span>
-</span><span class="line">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;my other event&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Server端與Client端對照<code>.on</code>與<code>.emit</code>兩個方法內的名稱，可看出Server端與Client的互相對應關係。</p>
-
-<p>Client端</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="nt">&lt;script&gt;</span>
-</span><span class="line"> <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">&#39;http://localhost:8080&#39;</span><span class="p">);</span>
-</span><span class="line"> <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;news&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-</span><span class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</span><span class="line">  <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;my other event&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">my</span><span class="o">:</span> <span class="s1">&#39;data&#39;</span><span class="p">});</span>
-</span><span class="line"> <span class="p">});</span>
-</span><span class="line"><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
   </entry>
   
