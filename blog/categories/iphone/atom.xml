@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-06-03T16:10:28+08:00</updated>
+  <updated>2014-06-04T23:21:09+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -33,80 +33,53 @@
     <id>http://lighter.tw/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh</id>
     <content type="html"><![CDATA[<p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
 
-<p><img src="/images/json/json1.png" width="216"></p>
+<p>{% img /images/json/json1.png 216px 390px %}</p>
 
 <!-- more -->
 
 <h3 id="php">php程式碼</h3>
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&amp;lt;?php</span>
-</span><span class='line'><span class="x">include(‘db.php’);</span>
-</span><span class='line'><span class="x">$query = mysql_query(‘SELECT * FROM user’);</span>
-</span><span class='line'><span class="x">$json_data = array();</span>
-</span><span class='line'><span class="x">while($row = mysql_fetch_assoc($query)) {</span>
-</span><span class='line'><span class="x">  $json_data[] = $row;</span>
-</span><span class='line'><span class="x">}</span>
-</span><span class='line'><span class="x">echo json_encode($json_data);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:php %}
+&lt;?php
+include(‘db.php’);
+$query = mysql_query(‘SELECT * FROM user’);
+$json_data = array();
+while($row = mysql_fetch_assoc($query)) {
+  $json_data[] = $row;
+}
+echo json_encode($json_data);
+{% endcodeblock %}</p>
 
 <p><strong>Step 1.</strong>建立<code>Master Detail Application</code>專案。</p>
 
 <p>建立完成專案後先開始編輯<code>MasterViewController.h</code>。建立一個<code>NSMutableArray</code>型態的<code>json_array</code>物件。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">MasterViewController</span> : <span class="nc">UITableViewController</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">json_array</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.h lang:objc %}
+#import &lt;UIKit/UIKit.h&gt;
+@interface MasterViewController : UITableViewController
+@property (strong, nonatomic) NSMutableArray *json_array;
+@end
+{% endcodeblock %}</p>
 
 <p><strong>Step 2.</strong>編輯<code>MasterViewController.m</code></p>
 
 <p>在<code>viewDidLoad</code>方法內加入下面的程式碼</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">MasterViewController</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">json_array</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>    <span class="c1">//1</span>
-</span><span class='line'>     <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span>
-</span><span class='line'>                  <span class="nl">URLWithString:</span><span class="err">@”</span><span class="nl">http:</span><span class="c1">//XXX.XXX/json.php”];</span>
-</span><span class='line'>    <span class="c1">//2</span>
-</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">jsonData</span><span class="o">=</span><span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">//3</span>
-</span><span class='line'><span class="n">json_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSJSONSerialization</span> <span class="nl">JSONObjectWithData:</span><span class="n">jsonData</span> <span class="nl">options:</span>
-</span><span class='line'>        <span class="n">NSJSONReadingMutableContainers</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>{% codeblock MasterViewController.m lang:objc %}
+@implementation MasterViewController
+@synthesize json_array;
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    //1
+     NSURL *url = [NSURL
+                  URLWithString:@”http://XXX.XXX/json.php”];
+    //2
+    NSData *jsonData=[NSData dataWithContentsOfURL:url];
+    NSError *error = nil;</p>
+
+<pre><code>//3
+json_array = [NSJSONSerialization JSONObjectWithData:jsonData options:
+        NSJSONReadingMutableContainers error:&amp;error]; } {% endcodeblock %}
 </code></pre>
 
 <ol>
@@ -117,174 +90,110 @@
 
 <p>接著修改<code>Table View Cell</code>的回傳個數</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">numberOfRowsInSection:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">json_array</span><span class="p">.</span><span class="n">count</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return json_array.count;
+}
+{% endcodeblock %}</p>
 
 <p>修改<code>Cell</code>顯示的文字，這邊需要透過<code>objectForKey</code>方法指定Key值為。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">[</span><span class="n">tableView</span> <span class="nl">dequeueReusableCellWithIdentifier:</span><span class="err">@”</span><span class="n">Cell</span><span class="err">”</span> <span class="nl">forIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">json_array</span> <span class="nl">objectAtIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="err">@”</span><span class="n">u_name</span><span class="err">”</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@”Cell” forIndexPath:indexPath];
+    cell.textLabel.text = [[json_array objectAtIndex:indexPath.row] objectForKey:@”u_name”];
+    return cell;
+}
+{% endcodeblock %}</p>
 
 <p>傳遞參數也需要修改一下。
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="n">UIStoryboardSegue</span> <span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">([[</span><span class="n">segue</span> <span class="n">identifier</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="err">@”</span><span class="n">showDetail</span><span class="err">”</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">indexPathForSelectedRow</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">[[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">]</span> <span class="nl">setDetailItem:</span><span class="p">[</span><span class="n">json_array</span>
-</span><span class='line'>                                                          <span class="nl">objectAtIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock MasterViewController.m lang:objc %}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@”showDetail”]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        [[segue destinationViewController] setDetailItem:[json_array
+                                                          objectAtIndex:indexPath.row]];
+    }
+}
+{% endcodeblock %}</p>
 
 <p>將<code>JSON</code>的資料放入<code>Table View</code>中會如下圖所示(資料內容有新增修改過)。</p>
 
-<p><img src="/images/json/json2.png" width="216">
-<img src="/images/json/json3.png" width="216"></p>
+<p>{% img /images/json/json2.png 216px 390px %}
+{% img /images/json/json3.png 216px 390px %}</p>
 
 <p>接下來當我<code>MySql</code>有新增資料，或是刪除資料時，我想要同步更新到<code>Table View</code>中，所以我使用了<code>PullToRefresh</code>這個套件。網路上蠻多人都說<code>EGOTableViewPullRefresh</code>這套，但是它似乎不支援<code>ARC</code>，所以我就改用別的了。</p>
 
 <p>這個套件使用上很簡單！首先下載好它的檔案<a href="https://github.com/sonnyparlin/PullToRefresh">Here</a>，並加入專案內。</p>
 
-<p><img src="/images/json/json4.png"></p>
+<p>{% img /images/json/json4.png %}</p>
 
 <p>接著加入<code>QuartzCore.framework</code>。</p>
 
-<p><img src="/images/json/json5.png"></p>
+<p>{% img /images/json/json5.png %}</p>
 
 <p>修改<code>MasterViewController.h</code>，程式碼如下：
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;</span>
-</span><span class='line'><span class="cp">#import “PullToRefreshView.h” </span><span class="c1">//1&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">MasterViewController</span> <span class="o">:</span> <span class="n">UITableViewController</span><span class="o">&lt;</span><span class="n">pulltorefreshviewdelegate</span><span class="o">&gt;</span> <span class="c1">//2</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">json_array</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">PullToRefreshView</span> <span class="o">*</span><span class="n">pull</span><span class="p">;</span> <span class="c1">//3</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></pulltorefreshviewdelegate></p>
+{% codeblock MasterViewController.m lang:objc %}
+#import &lt;UIKit/UIKit.h&gt;
+#import “PullToRefreshView.h” //1</p>
+
+<p>@interface MasterViewController : UITableViewController<pulltorefreshviewdelegate> //2
+@property (strong, nonatomic) NSMutableArray *json_array;
+@property (strong, nonatomic) PullToRefreshView *pull; //3
+@end
+{% endcodeblock %}</pulltorefreshviewdelegate></p>
 
 <p>回到<code>MasterViewController.m</code>在<code>viewDidLoad</code>將<code>PullToRefresh</code>加入到<code>Table View</code>中。
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">MasterViewController</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">json_array</span><span class="p">,</span> <span class="n">pull</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>	<span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span>
-</span><span class='line'>                  <span class="nl">URLWithString:</span><span class="err">@”</span><span class="nl">http:</span><span class="c1">//lighter.cp22.secserverpros.com/lighter127/JSON/json.php”];</span>
-</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">jsonData</span><span class="o">=</span><span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">json_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSJSONSerialization</span> <span class="nl">JSONObjectWithData:</span><span class="n">jsonData</span> <span class="nl">options:</span>
-</span><span class='line'>            <span class="n">NSJSONReadingMutableContainers</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">//pull refresh</span>
-</span><span class='line'><span class="n">pull</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PullToRefreshView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithScrollView:</span><span class="p">(</span><span class="n">UIScrollView</span> <span class="o">*</span><span class="p">)</span> <span class="n">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">pull</span> <span class="nl">setDelegate:</span><span class="n">self</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="nl">addSubview:</span><span class="n">pull</span><span class="p">];</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+{% codeblock MasterViewController.m lang:objc %}
+@implementation MasterViewController
+@synthesize json_array, pull;
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    NSURL *url = [NSURL
+                  URLWithString:@”http://lighter.cp22.secserverpros.com/lighter127/JSON/json.php”];
+    NSData *jsonData=[NSData dataWithContentsOfURL:url];
+    NSError *error = nil;
+    json_array = [NSJSONSerialization JSONObjectWithData:jsonData options:
+            NSJSONReadingMutableContainers error:&amp;error];</p>
+
+<pre><code>//pull refresh
+pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+[pull setDelegate:self];
+[self.tableView addSubview:pull]; } {% endcodeblock %}
 </code></pre>
 
 <p>當<code>Table View</code>往下拉的時候會呼叫<code>pullToRefreshViewShouldRefresh:</code>方法。這裡我會呼叫另一個自定的方法<code>reloadTableData</code>，而在該方法內我重新再連一次<code>json.php</code>的網頁並更新<code>json_array</code>的內容，最後才呼叫<code>tableView</code>的<code>reloadData</code>。</p>
 
 <p>當資料更新結束後，呼叫<code>finishedLoading</code>方法，結束<code>Pull Refresh</code>的動作。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Table View Pull Refresh&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">pullToRefreshViewShouldRefresh:</span><span class="p">(</span><span class="n">PullToRefreshView</span> <span class="o">*</span><span class="p">)</span><span class="n">view</span><span class="p">;</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">reloadTableData</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">reloadTableData</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span>
-</span><span class='line'>                <span class="nl">URLWithString:</span><span class="err">@”</span><span class="nl">http:</span><span class="c1">//XXX.XXX/json.php”];</span>
-</span><span class='line'>  <span class="n">NSData</span> <span class="o">*</span><span class="n">jsonData</span><span class="o">=</span><span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">json_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSJSONSerialization</span> <span class="nl">JSONObjectWithData:</span><span class="n">jsonData</span> <span class="nl">options:</span>
-</span><span class='line'>                <span class="n">NSJSONReadingMutableContainers</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">reloadData</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">pull</span> <span class="n">finishedLoading</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+#pragma mark - Table View Pull Refresh</p>
+
+<ul>
+  <li>
+    <p>(void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+  [self reloadTableData];
+}</p>
+  </li>
+  <li>
+    <p>(void)reloadTableData
+{
+  NSURL *url = [NSURL
+                URLWithString:@”http://XXX.XXX/json.php”];
+  NSData *jsonData=[NSData dataWithContentsOfURL:url];
+  NSError *error = nil;
+  json_array = [NSJSONSerialization JSONObjectWithData:jsonData options:
+                NSJSONReadingMutableContainers error:&amp;error];
+  [self.tableView reloadData];
+  [pull finishedLoading];
+}
+{% endcodeblock %}</p>
   </li>
 </ul>
 
@@ -324,7 +233,7 @@
 
 <p>加入CoreImage.framework，並且準備好一張圖片加入到專案中。</p>
 
-<p><img src="/images/CoreImage/1.png"></p>
+<p>{% img /images/CoreImage/1.png %}</p>
 
 <p><strong>Step 2. 編輯<code>MainStoryboard.storyboard</code></strong></p>
 
@@ -335,7 +244,7 @@
   <li>Round Rect Button</li>
 </ol>
 
-<p><img src="/images/CoreImage/2.png"></p>
+<p>{% img /images/CoreImage/2.png %}</p>
 
 <p>這邊加入3個按鈕，分別用來呈現不同的效果。</p>
 
@@ -343,97 +252,57 @@
 
 <p>首先編輯<code>ViewController.h</code>，程式碼如下：</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">ViewController</span> <span class="o">:</span> <span class="n">UIViewController</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">CIContext</span> <span class="o">*</span><span class="n">context</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">CIFilter</span> <span class="o">*</span><span class="n">filter</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">CIImage</span> <span class="o">*</span><span class="n">inputImage</span><span class="p">;</span>    <span class="c1">//輸入的圖片</span>
-</span><span class='line'>    <span class="n">CIImage</span> <span class="o">*</span><span class="n">outputImage</span><span class="p">;</span>   <span class="c1">//輸出濾鏡效果的圖片</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIImageView</span> <span class="o">*</span><span class="n">imageView</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter1:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span> <span class="c1">//濾鏡效果1</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter2:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span> <span class="c1">//濾鏡效果2</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter3:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span> <span class="c1">//濾鏡效果3</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock ViewController.h lang:objc %}
+#import &lt;UIKit/UIKit.h&gt;</p>
+
+<p>@interface ViewController : UIViewController
+{
+    CIContext *context;
+    CIFilter *filter;
+    CIImage *inputImage;    //輸入的圖片
+    CIImage *outputImage;   //輸出濾鏡效果的圖片
+}
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+- (IBAction)filter1:(id)sender; //濾鏡效果1
+- (IBAction)filter2:(id)sender; //濾鏡效果2
+- (IBAction)filter3:(id)sender; //濾鏡效果3
+@end
+{% endcodeblock %}</p>
 
 <p><code>ViewController.m</code>的程式碼如下：</p>
 
 <p>首先在<code>viewDidLoad</code>方法指定圖片給<code>imageView</code>。
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">ViewController</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">imageView</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">UIImage</span> <span class="o">*</span><span class="n">img</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="err">@”</span><span class="n">test</span><span class="p">.</span><span class="n">jpg</span><span class="err">”</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">imageView</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">img</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">inputImage</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CIImage</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="err">@”</span><span class="n">test</span><span class="p">.</span><span class="n">jpg</span><span class="err">”</span><span class="p">]];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="err">略</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock ViewController.m lang:objc %}
+@implementation ViewController
+@synthesize imageView;
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UIImage *img = [UIImage imageNamed:@”test.jpg”];
+    imageView.image = img;
+    inputImage = [[CIImage alloc] initWithImage:[UIImage imageNamed:@”test.jpg”]];
+}
+. . . . . 略
+{% endcodeblock %}</p>
 
 <p>接著開始撰寫濾鏡效果的按鈕方法，這邊只介紹一個，程式碼如下：</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter1:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-</span><span class='line'>	<span class="c1">//1</span>
-</span><span class='line'>    <span class="n">inputImage</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CIImage</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="err">@”</span><span class="n">test</span><span class="p">.</span><span class="n">jpg</span><span class="err">”</span><span class="p">]];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">//2</span>
-</span><span class='line'><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">CIContext</span> <span class="nl">contextWithOptions:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//3</span>
-</span><span class='line'><span class="n">filter</span> <span class="o">=</span> <span class="p">[</span><span class="n">CIFilter</span> <span class="nl">filterWithName:</span><span class="s">@&quot;CIColorPosterize&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="n">inputImage</span> <span class="nl">forKey:</span><span class="s">@&quot;inputImage&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.0</span><span class="p">]</span> <span class="nl">forKey:</span><span class="s">@&quot;inputLevels&quot;</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'> <span class="c1">//4</span>
-</span><span class='line'><span class="n">outputImage</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter</span> <span class="n">outputImage</span><span class="p">];</span>
-</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageWithCGImage:</span><span class="p">[</span><span class="n">context</span> <span class="nl">createCGImage:</span><span class="n">outputImage</span> <span class="nl">fromRect:</span><span class="n">outputImage</span><span class="p">.</span><span class="n">extent</span><span class="p">]];</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>{% codeblock ViewController.m lang:objc %}
+- (IBAction)filter1:(id)sender {
+	//1
+    inputImage = [[CIImage alloc] initWithImage:[UIImage imageNamed:@”test.jpg”]];</p>
+
+<pre><code>//2
+context = [CIContext contextWithOptions:nil];
+
+//3
+filter = [CIFilter filterWithName:@"CIColorPosterize"];
+[filter setValue:inputImage forKey:@"inputImage"];
+[filter setValue:[NSNumber numberWithFloat:3.0] forKey:@"inputLevels"];
+
+ //4
+outputImage = [filter outputImage];
+imageView.image = [UIImage imageWithCGImage:[context createCGImage:outputImage fromRect:outputImage.extent]]; } {% endcodeblock %}
 </code></pre>
 
 <ol>
@@ -447,34 +316,33 @@
 
 <p>在一開始可以看到<code>UIImageView</code>的原始圖案，點下濾鏡效果按鈕後可以看到圖片改變了！！</p>
 
-<p><img src="/images/CoreImage/3.png" width="216">
-<img src="/images/CoreImage/4.png" width="216"></p>
+<p>{% img /images/CoreImage/3.png 216px %}
+{% img /images/CoreImage/4.png 216px %}</p>
 
 <p>就這麼簡單吧！但是一開始困擾我的問題是，我怎麼知道CoreImage有提供哪些濾鏡效果呢？其實這在Document都有詳細的說明，但要如何尋找呢？下面的方法其實我也是看過人家影片教學，才知道有這樣的尋找方式！我覺得非常方便。</p>
 
 <p>首先開啟到<code>ViewController.m</code>，並找到<code>CIFilter</code>，為了強調要選取它，所以在此將它反白，不然將游標移到<code>CIFilter</code>上就可以了。接著選取到右上方的<code>Show Quick Help Inspector</code>，在下方可以看到<code>Core Image Filter Reference</code>，如下圖：</p>
 
-<p><img src="/images/CoreImage/5.png"></p>
+<p>{% img /images/CoreImage/5.png %}</p>
 
 <p>點選<code>Core Image Filter Reference</code>後會跳出一個新的視窗，會顯示<code>Filter</code>效果有哪些，如下圖：</p>
 
-<p><img src="/images/CoreImage/6.png"></p>
+<p>{% img /images/CoreImage/6.png %}</p>
 
 <p>接著先找尋到先前使用到的<code>CIColorPosterize</code>這個濾鏡效果，點選下去</p>
 
-<p><img src="/images/CoreImage/7.png"></p>
+<p>{% img /images/CoreImage/7.png %}</p>
 
 <p>點選後會看到<code>CIColorPosterize</code>這個濾鏡效果的參數有哪些，這個效果的參數只有兩個，分別為<code>inputImage</code>與<code>inputLevels</code>，除了參數，下方也會有簡單的圖示呈現該濾鏡的效果如何，如下圖：</p>
 
-<p><img src="/images/CoreImage/8.png"></p>
+<p>{% img /images/CoreImage/8.png %}</p>
 
 <p>在這邊可以看到這兩個參數跟<code>forKey</code>值很像，這邊的方式就是透過setValue指定參數的值，在指定<code>forKey</code>值來指設定參數，所以當濾鏡效果不同時，會有不一樣的<code>forKey</code>值，這都需要參考到Document的說明！</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="n">inputImage</span> <span class="nl">forKey:</span><span class="err">@”</span><span class="n">inputImage</span><span class="err">”</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.0</span><span class="p">]</span> <span class="nl">forKey:</span><span class="err">@”</span><span class="n">inputLevels</span><span class="err">”</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:objc %}
+[filter setValue:inputImage forKey:@”inputImage”];
+[filter setValue:[NSNumber numberWithFloat:3.0] forKey:@”inputLevels”];
+{% endcodeblock %}</p>
 
 <h1 id="section">參考資料</h1>
 <ol>
@@ -495,7 +363,7 @@
 
 <p>接下來我們建立的資料表如下圖。</p>
 
-<p><img src="/images/CoreDataRelationship/1.png"></p>
+<p>{% img /images/CoreDataRelationship/1.png %}</p>
 
 <!-- more -->
 
@@ -505,21 +373,21 @@
 
 <p><code>Entity</code>、<code>Attribute</code>、<code>Relationship</code>的新增就跳過了；這邊需注意的是<code>Relationship</code>設定，除了<code>Destination</code>還須設定<code>Inverse</code>，如下圖。</p>
 
-<p><img src="/images/CoreDataRelationship/2.png"></p>
+<p>{% img /images/CoreDataRelationship/2.png %}</p>
 
-<p><img src="/images/CoreDataRelationship/3.png"></p>
+<p>{% img /images/CoreDataRelationship/3.png %}</p>
 
 <p><strong>Step 2.新增<code>Model</code>檔案。</strong></p>
 
 <p>點選<code>UserInfo</code>，在對著專案<code>右鍵</code>/<code>New File</code>/<code>iOS</code>/<code>Core Data</code>/<code>NSManagedObject subclass</code>/<code>Next</code>，接著自動就會產生UserInfo.h與.m的檔案；<code>UserDetail</code>一樣的操作，完成後應該會有四個檔案，分別為UserInfo與UserDetail的.h與.m檔案。</p>
 
-<p><img src="/images/CoreDataRelationship/5.png"></p>
+<p>{% img /images/CoreDataRelationship/5.png %}</p>
 
 <p><strong>Step 3.編輯<code>MainStoryboard.storyboard</code>檔案。</strong></p>
 
 <p>完成如下圖，新增的時候要輸入姓名、email、電話、地址；顯示則是顯示這四個值。</p>
 
-<p><img src="/images/CoreDataRelationship/4.png"></p>
+<p>{% img /images/CoreDataRelationship/4.png %}</p>
 
 <p><strong>Step 4.修改<code>MasterViewController.m</code>。</strong></p>
 
@@ -527,122 +395,76 @@
 
 <p>找到下列三段程式碼，分別修改成對應的<code>Entity</code>名稱與<code>Key</code>值。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//1</span>
-</span><span class='line'><span class="n">NSEntityDescription</span> <span class="o">*</span><span class="n">entity</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">entityForName:</span><span class="err">@”</span><span class="n">UserInfo</span><span class="err">”</span> <span class="nl">inManagedObjectContext:</span><span class="n">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//2</span>
-</span><span class='line'><span class="n">NSSortDescriptor</span> <span class="o">*</span><span class="n">sortDescriptor</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSSortDescriptor</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithKey:</span><span class="err">@”</span><span class="n">name</span><span class="err">”</span> <span class="nl">ascending:</span><span class="n">NO</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//3</span>
-</span><span class='line'><span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">object</span> <span class="nl">valueForKey:</span><span class="err">@”</span><span class="n">name</span><span class="err">”</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+//1
+NSEntityDescription *entity = [NSEntityDescription entityForName:@”UserInfo” inManagedObjectContext:self.managedObjectContext];</p>
+
+<p>//2
+NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@”name” ascending:NO];</p>
+
+<p>//3
+cell.textLabel.text = [[object valueForKey:@”name”] description];
+{% endcodeblock %}</p>
 
 <p><strong>Step 5.新增<code>AddViewController</code>檔案。</strong></p>
 
 <p>新增一個<code>UIViewController</code>的檔案，class名稱為<code>AddViewController</code>。
-<img src="/images/CoreDataRelationship/6.png"></p>
+{% img /images/CoreDataRelationship/6.png %}</p>
 
 <p>指定該檔案為新增資料頁面的<code>Class</code>。
-<img src="/images/CoreDataRelationship/7.png"></p>
+{% img /images/CoreDataRelationship/7.png %}</p>
 
 <p><strong>Step 6.編輯<code>AddViewController.h</code>。</strong></p>
 
 <p>編輯程式如下
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AddViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;</span>
-</span><span class='line'><span class="cp">#import “AppDelegate.h”</span>
-</span><span class='line'><span class="cp">#import “UserInfo.h”</span>
-</span><span class='line'><span class="cp">#import “UserDetail.h”&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">AddViewController</span> <span class="o">:</span> <span class="n">UIViewController</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">phone</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">email</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">address</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">app</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock AddViewController.h lang:objc %}
+#import &lt;UIKit/UIKit.h&gt;
+#import “AppDelegate.h”
+#import “UserInfo.h”
+#import “UserDetail.h”</p>
+
+<p>@interface AddViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITextField *name;
+@property (strong, nonatomic) IBOutlet UITextField *phone;
+@property (strong, nonatomic) IBOutlet UITextField *email;
+@property (strong, nonatomic) IBOutlet UITextField *address;
+- (IBAction)save:(id)sender;</p>
+
+<p>@property (strong, nonatomic) AppDelegate *app;
+@end
+{% endcodeblock %}</p>
 
 <p>分別定義四個<code>UITextField</code>的<code>property</code>，一個<code>IBAtcion</code>的save:方法；<code>AppDelegate</code>如同之前說的是要使用<code>AppDelegate</code>內的<code>managedObjectContext</code>。</p>
 
 <p><strong>Step 7.編輯AddViewController.m。</strong></p>
 
 <p>編輯程式如下
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AddViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">app</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">save:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
-</span><span class='line'><span class="n">app</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">app</span> <span class="n">managedObjectContext</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">UserInfo</span> <span class="o">*</span><span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="err">@”</span><span class="n">UserInfo</span><span class="err">”</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
-</span><span class='line'><span class="n">info</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">text</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">UserDetail</span> <span class="o">*</span><span class="n">detail</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSEntityDescription</span> <span class="nl">insertNewObjectForEntityForName:</span><span class="err">@”</span><span class="n">UserDetail</span><span class="err">”</span> <span class="nl">inManagedObjectContext:</span><span class="n">context</span><span class="p">];</span>
-</span><span class='line'><span class="n">detail</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">address</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
-</span><span class='line'><span class="n">detail</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
-</span><span class='line'><span class="n">detail</span><span class="p">.</span><span class="n">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
-</span><span class='line'><span class="n">info</span><span class="p">.</span><span class="n">detail</span> <span class="o">=</span> <span class="n">detail</span><span class="p">;</span> <span class="c1">//關連&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">context</span> <span class="nl">save:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="err">@”</span><span class="n">Save</span> <span class="n">Error</span> <span class="o">:</span> <span class="o">%</span><span class="err">@”</span><span class="p">,</span> <span class="p">[</span><span class="n">error</span> <span class="n">localizedDescription</span><span class="p">]);</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">popViewControllerAnimated:</span><span class="n">YES</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock AddViewController.m lang:objc %}
+@synthesize name, email, phone, address, app;</p>
+
+<ul>
+  <li>
+    <p>(IBAction)save:(id)sender {
+app = [[UIApplication sharedApplication] delegate];
+NSManagedObjectContext *context = [app managedObjectContext];</p>
+
+    <p>UserInfo *info = [NSEntityDescription insertNewObjectForEntityForName:@”UserInfo” inManagedObjectContext:context];
+info.name = name.text;</p>
+
+    <p>UserDetail *detail = [NSEntityDescription insertNewObjectForEntityForName:@”UserDetail” inManagedObjectContext:context];
+detail.address = address.text;
+detail.email = email.text;
+detail.phone = phone.text;
+info.detail = detail; //關連</p>
+
+    <p>NSError *error;
+if (![context save:&amp;error]) {
+  NSLog(@”Save Error : %@”, [error localizedDescription]);
+} else {
+  [self.navigationController popViewControllerAnimated:YES];
+}
+}
+{% endcodeblock %}</p>
   </li>
 </ul>
 
@@ -651,128 +473,81 @@
 <p><strong>Step 8.修改<code>MasterViewController.m</code>。</strong></p>
 
 <p>找到<code>prepareForSegue</code>方法，修改的程式如下
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="n">UIStoryboardSegue</span> <span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">([[</span><span class="n">segue</span> <span class="n">identifier</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="err">@”</span><span class="n">showDetail</span><span class="err">”</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">indexPathForSelectedRow</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="c1">//修改成UserInfo</span>
-</span><span class='line'>    <span class="n">UserInfo</span> <span class="o">*</span><span class="n">object</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">fetchedResultsController</span><span class="p">]</span> <span class="nl">objectAtIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">]</span> <span class="nl">setDetailItem:</span><span class="n">object</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+{% codeblock MasterViewController.m lang:objc %}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@”showDetail”]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];</p>
+
+<pre><code>    //修改成UserInfo
+    UserInfo *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    [[segue destinationViewController] setDetailItem:object];
+} } {% endcodeblock %}
 </code></pre>
 
 <p><strong>Step 9.修改<code>DetailViewController.h</code>。</strong></p>
 
 <p>編輯程式碼如下</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DetailViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;</span>
-</span><span class='line'><span class="cp">#import “UserInfo.h”&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">DetailViewController</span> <span class="o">:</span> <span class="n">UIViewController</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//修改detailItem的形態為UserInfo</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">UserInfo</span> <span class="o">*</span><span class="n">detailItem</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">weak</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailDescriptionLabel</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//多定義3個UILabel元件</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailEmail</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailPhone</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UILabel</span> <span class="o">*</span><span class="n">detailAddress</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock DetailViewController.h lang:objc %}
+#import &lt;UIKit/UIKit.h&gt;
+#import “UserInfo.h”</p>
+
+<p>@interface DetailViewController : UIViewController</p>
+
+<p>//修改detailItem的形態為UserInfo
+@property (strong, nonatomic) UserInfo *detailItem;</p>
+
+<p>@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;</p>
+
+<p>//多定義3個UILabel元件
+@property (strong, nonatomic) IBOutlet UILabel *detailEmail;
+@property (strong, nonatomic) IBOutlet UILabel *detailPhone;
+@property (strong, nonatomic) IBOutlet UILabel *detailAddress;</p>
+
+<p>@end
+{% endcodeblock %}</p>
 
 <p><strong>Step 10.修改<code>DetailViewController.m</code>。</strong></p>
 
 <p>找到<code>configureView</code>方法，修改程式碼如下</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DetailViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">configureView</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Update the user interface for the detail item.&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">detailDescriptionLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">detailItem</span> <span class="nl">valueForKey:</span><span class="err">@”</span><span class="n">name</span><span class="err">”</span><span class="p">]</span> <span class="n">description</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">detailEmail</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">.</span><span class="n">detail</span><span class="p">.</span><span class="n">email</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">detailPhone</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">.</span><span class="n">detail</span><span class="p">.</span><span class="n">phone</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">detailAddress</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">detailItem</span><span class="p">.</span><span class="n">detail</span><span class="p">.</span><span class="n">address</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock DetailViewController.m lang:objc %}
+- (void)configureView
+{
+    // Update the user interface for the detail item.</p>
+
+<p>if (self.detailItem) {
+    self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@”name”] description];
+    self.detailEmail.text = self.detailItem.detail.email;
+    self.detailPhone.text = self.detailItem.detail.phone;
+    self.detailAddress.text = self.detailItem.detail.address;
+  }
+}
+{% endcodeblock %}</p>
 
 <p>如果上述的程式碼有問題的話，不妨檢查一下<code>UserInfo.h</code>的檔案，這邊我發現到自動產生的檔案，他產生的形態並沒有如預期的型態，<code>detail</code>的形態應該是<code>UserDeatail</code>，程式碼如下</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>UserInfo.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;Foundation/Foundation.h&amp;gt;</span>
-</span><span class='line'><span class="cp">#import &amp;lt;CoreData/CoreData.h&amp;gt;</span>
-</span><span class='line'><span class="cp">#import “UserDetail.h”&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">UserInfo</span> <span class="o">:</span> <span class="n">NSManagedObject</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span> <span class="n">name</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">UserDetail</span> <span class="o">*</span><span class="n">detail</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock UserInfo.h lang:objc %}
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;CoreData/CoreData.h&gt;
+#import “UserDetail.h”</p>
+
+<p>@interface UserInfo : NSManagedObject</p>
+
+<p>@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) UserDetail *detail;</p>
+
+<p>@end
+{% endcodeblock %}</p>
 
 <p><strong>Step 11.編譯專案。</strong></p>
 
 <p>最後編譯專案時，記得檢查一下IBOutlet的關聯是否都建立了，如果沒問題，就可以開始新增資料與檢視資料了。</p>
 
-<p><img src="/images/CoreDataRelationship/8.png" width="216">
-<img src="/images/CoreDataRelationship/9.png" width="216">
-<img src="/images/CoreDataRelationship/10.png" width="216"></p>
+<p>{% img /images/CoreDataRelationship/8.png 216px 390px %}
+{% img /images/CoreDataRelationship/9.png 216px 390px %}
+{% img /images/CoreDataRelationship/10.png 216px 390px %}</p>
 ]]></content>
   </entry>
   
@@ -783,8 +558,8 @@
     <id>http://lighter.tw/blog/2012/11/01/core-data-part3</id>
     <content type="html"><![CDATA[<p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
 
-<p><img src="/images/CoreDataWithSearch/1.png" width="216">
-<img src="/images/CoreDataWithSearch/2.png" width="216"></p>
+<p>{% img /images/CoreDataWithSearch/1.png 216px 390px %}
+{% img /images/CoreDataWithSearch/2.png 216px 390px %}</p>
 
 <!-- more -->
 
@@ -792,60 +567,36 @@
 
 <p>加入<code>Search Bar and Search Display Controller</code>到<code>Table View</code>上方。</p>
 
-<p><img src="/images/CoreDataWithSearch/3.png"></p>
+<p>{%img /images/CoreDataWithSearch/3.png %}</p>
 
 <p><strong>Step 2.編輯MasterViewController.h檔案</strong></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;</span>
-</span><span class='line'><span class="cp">#import &amp;lt;CoreData/CoreData.h&amp;gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//1</span>
-</span><span class='line'><span class="cp">#import “Phone.h”&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//2</span>
-</span><span class='line'><span class="err">@</span><span class="n">interface</span> <span class="n">MasterViewController</span> <span class="o">:</span> <span class="n">UITableViewController</span>
-</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">NSFetchedResultsControllerDelegate</span><span class="p">,</span> <span class="n">UISearchDisplayDelegate</span><span class="p">,</span> <span class="n">UISearchBarDelegate</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="c1">//3</span>
-</span><span class='line'>  <span class="kt">BOOL</span> <span class="n">savedSearchTerm</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSFetchedResultsController</span> <span class="o">*</span><span class="n">fetchedResultsController</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="n">managedObjectContext</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//4</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">searchResults</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//5</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexP</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.h lang:objc %}
+#import &lt;UIKit/UIKit.h&gt;
+#import &lt;CoreData/CoreData.h&gt;</p>
+
+<p>//1
+#import “Phone.h”</p>
+
+<p>//2
+@interface MasterViewController : UITableViewController 
+&lt;NSFetchedResultsControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate&gt;
+{
+  //3
+  BOOL savedSearchTerm;
+}</p>
+
+<p>@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;</p>
+
+<p>//4
+@property (nonatomic, retain) NSMutableArray *searchResults;</p>
+
+<p>//5
+@property (nonatomic, retain) NSIndexPath *indexP;</p>
+
+<p>@end
+{% endcodeblock %}</p>
 
 <ol>
   <li>引入<code>Phone.h</code>。</li>
@@ -857,126 +608,76 @@
 
 <p><strong>Step 3.編輯MasterViewController.m</strong></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">indexP</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+@synthesize indexP;
+{% endcodeblock %}</p>
 
 <p>補上<code>synthesize</code>。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//1</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithCapacity:</span><span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="n">fetchedObjects</span><span class="p">]</span> <span class="n">count</span><span class="p">]];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">reloadData</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//2</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidUnload</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidUnload</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+//1
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.searchResults = [NSMutableArray arrayWithCapacity:[[self.fetchedResultsController fetchedObjects] count]];
+    [self.tableView reloadData];
+}</p>
+
+<p>//2
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.searchResults = nil;
+}
+{% endcodeblock %}</p>
 
 <ol>
   <li>在<code>viewDidLoad</code>方法內對<code>searchResults</code>初始化，並且重新整理<code>Table View</code>。</li>
   <li><code>viewDidUnload</code>方法內，將<code>searchResults</code>釋放掉。</li>
 </ol>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">numberOfRowsInSection:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">tableView</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">searchDisplayController</span><span class="p">.</span><span class="n">searchResultsTableView</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="n">count</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kt">id</span> <span class="o">&lt;</span><span class="n">nsfetchedresultssectioninfo</span><span class="o">&gt;</span> <span class="n">sectionInfo</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="n">sections</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="n">section</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">sectionInfo</span> <span class="n">numberOfObjects</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></nsfetchedresultssectioninfo></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  if (tableView == self.searchDisplayController.searchResultsTableView) {
+    return [self.searchResults count];
+  }
+  else {
+    id <nsfetchedresultssectioninfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+  }
+}
+{% endcodeblock %}</nsfetchedresultssectioninfo></p>
 
 <p><code>Table View</code>的<code>cell</code>個數，在搜尋的時候會不一樣，因此<code>tableView:numberOfRowsInSection:</code>方法需要做修改。 </p>
 
 <p>如上當<code>if</code>判斷式條件成立時，會回傳<code>searchResults</code>陣列的個數，否則就回傳原本<code>fetchedResultsController</code>的個數。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">[</span><span class="n">tableView</span> <span class="nl">dequeueReusableCellWithIdentifier:</span><span class="err">@”</span><span class="n">Cell</span><span class="err">”</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">//1</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">cell</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">cell</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITableViewCell</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithStyle:</span><span class="n">UITableViewCellStyleDefault</span> <span class="nl">reuseIdentifier:</span><span class="s">@&quot;Cell&quot;</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">cell</span><span class="p">.</span><span class="n">accessoryType</span> <span class="o">=</span> <span class="n">UITableViewCellAccessoryDisclosureIndicator</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//2</span>
-</span><span class='line'><span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">tableView</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">searchDisplayController</span><span class="p">.</span><span class="n">searchResultsTableView</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="nl">objectAtIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">phone</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="nl">objectAtIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//3</span>
-</span><span class='line'><span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">phone</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
-</span><span class='line'><span class="k">return</span> <span class="n">cell</span><span class="p">;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>{% codeblock MasterViewController.m lang:objc %}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@”Cell”];</p>
+
+<pre><code>//1
+if (cell == nil) {
+  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+}
+
+//2
+Phone *phone = nil;
+if (tableView == self.searchDisplayController.searchResultsTableView)
+{
+  phone = [self.searchResults objectAtIndex:indexPath.row];
+}
+else
+{
+  phone = [self.fetchedResultsController objectAtIndexPath:indexPath];
+}
+
+//3
+cell.textLabel.text = phone.name;
+return cell; } {% endcodeblock %}
 </code></pre>
 
 <ol>
@@ -985,155 +686,88 @@
   <li>這邊改成直接指定<code>cell</code>的文字為<code>phone.name</code>。</li>
 </ol>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark -</span>
-</span><span class='line'><span class="cp">#pragma mark UISearchDisplayController Delegate Methods&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">searchDisplayController:</span><span class="p">(</span><span class="n">UISearchDisplayController</span> <span class="o">*</span><span class="p">)</span><span class="n">controller</span> <span class="nl">shouldReloadTableForSearchString:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">searchString</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">filterContentForSearchText:</span><span class="n">searchString</span> <span class="nl">scope:</span><span class="err">@”</span><span class="n">All</span><span class="err">”</span><span class="p">];</span>
-</span><span class='line'><span class="n">savedSearchTerm</span> <span class="o">=</span> <span class="nb">TRUE</span><span class="p">;</span>
-</span><span class='line'><span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">searchDisplayController:</span><span class="p">(</span><span class="n">UISearchDisplayController</span> <span class="o">*</span><span class="p">)</span><span class="n">controller</span> <span class="nl">shouldReloadTableForSearchScope:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">searchOption</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">filterContentForSearchText:</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchDisplayController</span><span class="p">.</span><span class="n">searchBar</span> <span class="n">text</span><span class="p">]</span> <span class="nl">scope:</span><span class="err">@”</span><span class="n">All</span><span class="err">”</span><span class="p">];</span>
-</span><span class='line'><span class="n">savedSearchTerm</span> <span class="o">=</span> <span class="nb">TRUE</span><span class="p">;</span>
-</span><span class='line'><span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nl">searchDisplayControllerWillEndSearch:</span><span class="p">(</span><span class="n">UISearchDisplayController</span> <span class="o">*</span><span class="p">)</span><span class="n">controller</span><span class="p">{</span>
-</span><span class='line'><span class="n">savedSearchTerm</span> <span class="o">=</span> <span class="nb">TRUE</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+#pragma mark -
+#pragma mark UISearchDisplayController Delegate Methods</p>
+
+<ul>
+  <li>
+    <p>(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+[self filterContentForSearchText:searchString scope:@”All”];
+savedSearchTerm = TRUE;
+return YES;
+}</p>
+  </li>
+  <li>
+    <p>(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+[self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:@”All”];
+savedSearchTerm = TRUE;
+return YES;
+}
+-(void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller{
+savedSearchTerm = TRUE;
+}
+{% endcodeblock %}</p>
   </li>
 </ul>
 
 <p>加入上述三個<code>UISearchDisplayController</code>的方法，並且指定<code>savedSearchTerm</code>為<code>TRUE</code>，其中可以看到<code>filterContentForSearchText:scope:</code>這個方法，該方法是用來根據您輸入的文字做搜尋的。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark -</span>
-</span><span class='line'><span class="cp">#pragma mark Content Filtering&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">filterContentForSearchText:</span><span class="p">(</span><span class="n">NSString</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">searchText</span> <span class="nl">scope:</span><span class="p">(</span><span class="n">NSString</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">scope</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="n">removeAllObjects</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="err">@”</span><span class="n">search</span> <span class="nl">text:</span> <span class="o">%</span><span class="err">@”</span><span class="p">,</span> <span class="n">searchText</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">Phone</span> <span class="o">*</span><span class="n">phone</span> <span class="k">in</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">fetchedResultsController</span> <span class="n">fetchedObjects</span><span class="p">])</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">([</span><span class="n">scope</span> <span class="nl">isEqualToString:</span><span class="err">@”</span><span class="n">All</span><span class="err">”</span><span class="p">]</span> <span class="o">||</span> <span class="p">[</span><span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="nl">isEqualToString:</span><span class="n">scope</span><span class="p">])</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>          <span class="n">NSComparisonResult</span> <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">phone</span><span class="p">.</span><span class="n">name</span> <span class="nl">compare:</span><span class="n">searchText</span>
-</span><span class='line'>                                           <span class="nl">options:</span><span class="p">(</span><span class="n">NSCaseInsensitiveSearch</span><span class="o">|</span><span class="n">NSDiacriticInsensitiveSearch</span><span class="p">)</span>
-</span><span class='line'>                                             <span class="nl">range:</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="n">searchText</span> <span class="n">length</span><span class="p">])];</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">NSOrderedSame</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">{</span>
-</span><span class='line'>              <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">searchResults</span> <span class="nl">addObject:</span><span class="n">phone</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+<p>{% codeblock MasterViewController.m lang:objc %}
+#pragma mark -
+#pragma mark Content Filtering</p>
+
+<ul>
+  <li>(void)filterContentForSearchText:(NSString<em>)searchText scope:(NSString</em>)scope
+{
+  [self.searchResults removeAllObjects];
+NSLog(@”search text: %@”, searchText);
+  for (Phone *phone in [self.fetchedResultsController fetchedObjects])
+  {
+      if ([scope isEqualToString:@”All”] || [phone.name isEqualToString:scope])
+      {
+          NSComparisonResult result = [phone.name compare:searchText
+                                           options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch)
+                                             range:NSMakeRange(0, [searchText length])];
+    if (result == NSOrderedSame)
+          {
+              [self.searchResults addObject:phone];
+    }
+      }
+  }
+}
+{% endcodeblock %}</li>
 </ul>
 
 <p>該方法會根據您輸入的字串，尋找到符合的結果！</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//1</span>
-</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">didSelectRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">savedSearchTerm</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">indexP</span> <span class="o">=</span> <span class="n">indexPath</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="nl">performSegueWithIdentifier:</span><span class="err">@”</span><span class="n">showDetail</span><span class="err">”</span> <span class="nl">sender:</span><span class="n">self</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//2</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">prepareForSegue:</span><span class="p">(</span><span class="n">UIStoryboardSegue</span> <span class="o">*</span><span class="p">)</span><span class="n">segue</span> <span class="nl">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">([[</span><span class="n">segue</span> <span class="n">identifier</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="err">@”</span><span class="n">showDetail</span><span class="err">”</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">savedSearchTerm</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSManagedObject</span> <span class="o">*</span><span class="n">object</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">fetchedResultsController</span><span class="p">]</span> <span class="nl">objectAtIndexPath:</span><span class="n">indexP</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">[[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">]</span> <span class="nl">setDetailItem:</span><span class="n">object</span><span class="p">];</span>
-</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">indexPathForSelectedRow</span><span class="p">];</span>
-</span><span class='line'>        <span class="n">NSManagedObject</span> <span class="o">*</span><span class="n">object</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">fetchedResultsController</span><span class="p">]</span> <span class="nl">objectAtIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">[[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">]</span> <span class="nl">setDetailItem:</span><span class="n">object</span><span class="p">];</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock MasterViewController.m lang:objc %}
+//1
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (savedSearchTerm) {
+    indexP = indexPath;
+    [self performSegueWithIdentifier:@”showDetail” sender:self];
+  }
+}</p>
+
+<p>//2
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@”showDetail”]) {
+      if (savedSearchTerm) {
+        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexP];
+        [[segue destinationViewController] setDetailItem:object];
+      } else {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        [[segue destinationViewController] setDetailItem:object];
+      }
+    }
+}
+{% endcodeblock %}</p>
 
 <ol>
   <li>當你搜尋完畢後要可以點選<code>cell</code>，然後看到該<code>cell</code>的細部資訊，所以透過<code>tableView:didSelectRowAtIndexPath:</code>方法可以取得你點選<code>cell</code>的<code>indexPath</code>索引值，將該值指定給<code>indexP</code>，在呼叫到<code>perforSegueWithIdentifier:sender:</code>方法。</li>

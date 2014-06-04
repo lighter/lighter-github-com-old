@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-06-03T16:10:28+08:00</updated>
+  <updated>2014-06-04T23:20:52+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,336 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[laravel part 5]]></title>
+    <link href="http://lighter.tw/blog/2014/06/04/laravel-part-5/"/>
+    <updated>2014-06-04T22:12:39+08:00</updated>
+    <id>http://lighter.tw/blog/2014/06/04/laravel-part-5</id>
+    <content type="html"><![CDATA[<h2 id="controller">建立新的Controller</h2>
+
+<p>這部分主要是介紹樣板使用，主要是可以避免相同的code一再重複，只是要換掉中間的內容！首先我想要建立一個<code>帳號</code>的新增修改刪除的頁面，所以我先建立一個<code>Controller</code>；一樣使用<code>artisan</code>，開啟終端機輸入下列指令：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">php artisan controller:make AccountController</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-14.jpg" /></p>
+
+<!-- more -->
+
+<h2 id="routes">修改Routes</h2>
+
+<p>再來就是加入新的<code>route</code>啦！開啟<code>routes.php</code>，新增的code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">// Account</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">resource</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">,</span> <span class="s1">&#39;AccountController&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>這樣一來就會幫我們建立好對應的<code>RESTFul</code>。</p>
+
+<h2 id="view">建立新的View</h2>
+
+<p>首先我建立一個樣板，這樣大家只要引用他，就可以擁有整個頁面的框架，僅需要各自修改各自的內容即可！</p>
+
+<p>首先我建立的的路徑跟檔案是這樣的：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">app
+</span><span class="line">  ⌞ views
+</span><span class="line">    ⌞ layouts
+</span><span class="line">      ⌞ base.blade.php</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接下在<code>base.blade.php</code>輸入下面的code</p>
+
+<div><script src="https://gist.github.com/43bda04901e61d152711.js?file=base.blade.php"></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Show&lt;/title&gt;
+  {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
+  {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
+  {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
+  &lt;style&gt;
+    body {
+      padding-top: 50px;
+    }
+    .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&quot;navbar navbar-inverse navbar-fixed-top&quot; role=&quot;navigation&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+
+      &lt;div class=&quot;navbar-header&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot; data-target=&quot;.navbar-collapse&quot;&gt;
+          &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Show&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;collapse navbar-collapse&quot;&gt;
+        &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+          &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;&lt;!--/.nav-collapse --&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;starter-template&quot; style=&quot;position: relative;&quot;&gt;
+      @yield('content')
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></noscript></div>
+
+<p>需特別留意的是第45行，你會更動的內容都跟這有關係！</p>
+
+<p>接著就是建立各自功能的畫面啦！我的檔案結構如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">app
+</span><span class="line">  ⌞ views
+</span><span class="line">    ⌞ account
+</span><span class="line">      ⌞ create.blade.php // 建立
+</span><span class="line">      ⌞ edit.blade.php   // 修改
+</span><span class="line">      ⌞ list.blade.php   // 列表所有帳號
+</span><span class="line">      ⌞ show.blade.php   // 該帳號細部資訊</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接著就各自修改這四個檔案吧，很簡單！先舉一個例，先以<code>list.blade.php</code>為例，code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>list.blade.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">@</span><span class="k">extends</span><span class="p">(</span><span class="s1">&#39;layouts.base&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="o">@</span><span class="nx">section</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">)</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="k">List</span> <span class="nx">Account</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">@</span><span class="nx">stop</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li><code>@extends(layouts.base)</code>就是引用原本的頁面基本的架構，這樣一來你就不用再寫一堆html header了。</li>
+  <li><code>@section('content')</code>跟剛剛的<code>yield('content')</code>是做相呼應的！因此<code>content</code>可由你自己決定，但最後不要忘記加上<code>@stop</code>了。</li>
+</ol>
+
+<h2 id="accountcontroller">修改AccountController</h2>
+
+<p>最後修改<code>AccountController</code>，各自對應的方法要顯示的<code>view</code>，code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">AccountController</span> <span class="k">extends</span> <span class="nx">\BaseController</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Display a listing of the resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.list&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Show the form for creating a new resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.create&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Store a newly created resource in storage.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">store</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="c1">//</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Display the specified resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.show&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Show the form for editing the specified resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.edit&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Update the specified resource in storage.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="c1">//</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Remove the specified resource from storage.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="c1">//</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以注意到<code>View::make()</code>內都是用<code>account.XXX</code>，<code>account</code>代表的就是<code>account</code>目錄路徑下的各自的檔案。</p>
+
+<p>如果成功的話可以看到這樣的畫面</p>
+
+<p><img src="http://lighter.tw/images/laravel_sample/laravel-15.jpg" /></p>
+
+<p>功能的話…to be continued</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[laravel part 4]]></title>
@@ -3090,153 +3420,6 @@
 <h2 id="section">參考資料</h2>
 
 <p><a href="http://psitsmike.com/2011/09/node-js-and-socket-io-chat-tutorial/">node.js and socket.io chat tutorial</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Simple chat with Socket.io]]></title>
-    <link href="http://lighter.tw/blog/2012/08/24/simple-chat-with-socket-dot-io/"/>
-    <updated>2012-08-24T13:32:00+08:00</updated>
-    <id>http://lighter.tw/blog/2012/08/24/simple-chat-with-socket-dot-io</id>
-    <content type="html"><![CDATA[<p>如果已我所學不多的情況下要製作一個簡單的聊天室，我大概能想到的方法就是將這些對話內容存入MySql，然後背後透過Ajax一直去撈取資料庫的內容然後一直更新畫面上的對話內容，這樣想想就覺得好麻煩…</p>
-
-<p>最近看到Socket.io這簡直真是好用，下面是一個簡單的聊天室程式碼。</p>
-
-<h2 id="server">Server端</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Server.js </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="nx">server</span><span class="p">,</span>
-</span><span class="line">    <span class="nx">io</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
-</span><span class="line">  <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">){</span>
-</span><span class="line">    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/html&#39;</span><span class="p">});</span>
-</span><span class="line">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"><span class="p">});</span>
-</span><span class="line">
-</span><span class="line"><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
-</span><span class="line"><span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;socket.io&#39;</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">server</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">//連線時會執行的內容</span>
-</span><span class="line"><span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1">//當client端emit &#39;send_chat&#39;時執行</span>
-</span><span class="line">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;send_chat&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-</span><span class="line">    <span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line">
-</span><span class="line"><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="client">Client端</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class="line"><span class="nt">&lt;html&gt;</span>
-</span><span class="line"><span class="nt">&lt;head&gt;</span>
-</span><span class="line"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
-</span><span class="line"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&#39;/socket.io/socket.io.js&#39;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class="line"><span class="nt">&lt;script&gt;</span>
-</span><span class="line"> <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">&#39;http://localhost:8080&#39;</span><span class="p">);</span>
-</span><span class="line"> <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update_chat_content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1">//由Server端emit &#39;update_chat_content&#39; 更新談話內容</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#chat_content&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class="line"> <span class="p">});</span>
-</span><span class="line">
-</span><span class="line"> <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send&quot;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class="line">
-</span><span class="line">    <span class="c1">//取得input text欄位的值後，將欄位內容清除</span>
-</span><span class="line">    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#send_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line">    <span class="c1">//呼叫Server端的emit &#39;send_chat&#39;</span>
-</span><span class="line">    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;send_chat&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"> <span class="p">});</span>
-</span><span class="line"><span class="nt">&lt;/script&gt;</span>
-</span><span class="line"><span class="nt">&lt;/head&gt;</span>
-</span><span class="line"><span class="nt">&lt;body&gt;</span>
-</span><span class="line">
-</span><span class="line"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row-fluid&quot;</span> <span class="na">style=</span><span class="s">&quot;text-align: center&quot;</span><span class="nt">&gt;</span>
-</span><span class="line">  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;span12&quot;</span> <span class="na">id=</span><span class="s">&quot;chat_content&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class="line">  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input-append&quot;</span><span class="nt">&gt;</span>
-</span><span class="line">    <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;span2&quot;</span> <span class="na">id=</span><span class="s">&quot;send_input&quot;</span> <span class="na">size=</span><span class="s">&quot;16&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">id=</span><span class="s">&quot;send&quot;</span><span class="nt">&gt;</span>Send!<span class="nt">&lt;/button&gt;</span>
-</span><span class="line">  <span class="nt">&lt;/div&gt;</span>
-</span><span class="line"><span class="nt">&lt;/div&gt;</span>
-</span><span class="line">
-</span><span class="line"><span class="nt">&lt;/body&gt;</span>
-</span><span class="line"><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>其實只要觀察一下<code>socket.emit</code>與<code>socket.on</code>裡面監聽的名稱就可以看出Server端與Client的執行時間順序了；最後執行<code>node Server.js</code>就可以看到一個簡單的聊天室。</p>
 ]]></content>
   </entry>
   

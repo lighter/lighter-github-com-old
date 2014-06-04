@@ -1,0 +1,498 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>laravel part 5 - Lighter</title>
+	<meta name="author" content="Willy lighter">
+
+	
+	<meta name="description" content="建立新的Controller 這部分主要是介紹樣板使用，主要是可以避免相同的code一再重複，只是要換掉中間的內容！首先我想要建立一個帳號的新增修改刪除的頁面，所以我先建立一個Controller；一樣使用artisan，開啟終端機輸入下列指令： 1
+php artisan controller: &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Lighter" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Lighter</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:lighter.tw">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:lighter.tw">
+	</form>
+</nav>
+<a href="https://github.com/lighter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Laravel Part 5</h2>
+	<div class="entry-content"><h2 id="controller">建立新的Controller</h2>
+
+<p>這部分主要是介紹樣板使用，主要是可以避免相同的code一再重複，只是要換掉中間的內容！首先我想要建立一個<code>帳號</code>的新增修改刪除的頁面，所以我先建立一個<code>Controller</code>；一樣使用<code>artisan</code>，開啟終端機輸入下列指令：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">php artisan controller:make AccountController</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/laravel_sample/laravel-14.jpg" /></p>
+
+<!-- more -->
+
+<h2 id="routes">修改Routes</h2>
+
+<p>再來就是加入新的<code>route</code>啦！開啟<code>routes.php</code>，新增的code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">// Account</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">resource</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">,</span> <span class="s1">&#39;AccountController&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>這樣一來就會幫我們建立好對應的<code>RESTFul</code>。</p>
+
+<h2 id="view">建立新的View</h2>
+
+<p>首先我建立一個樣板，這樣大家只要引用他，就可以擁有整個頁面的框架，僅需要各自修改各自的內容即可！</p>
+
+<p>首先我建立的的路徑跟檔案是這樣的：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">app
+</span><span class="line">  ⌞ views
+</span><span class="line">    ⌞ layouts
+</span><span class="line">      ⌞ base.blade.php</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接下在<code>base.blade.php</code>輸入下面的code</p>
+
+<div><script src="https://gist.github.com/43bda04901e61d152711.js?file=base.blade.php"></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Show&lt;/title&gt;
+  {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
+  {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
+  {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
+  &lt;style&gt;
+    body {
+      padding-top: 50px;
+    }
+    .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&quot;navbar navbar-inverse navbar-fixed-top&quot; role=&quot;navigation&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+
+      &lt;div class=&quot;navbar-header&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot; data-target=&quot;.navbar-collapse&quot;&gt;
+          &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Show&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;collapse navbar-collapse&quot;&gt;
+        &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+          &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;&lt;!--/.nav-collapse --&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;starter-template&quot; style=&quot;position: relative;&quot;&gt;
+      @yield('content')
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></noscript></div>
+
+<p>需特別留意的是第45行，你會更動的內容都跟這有關係！</p>
+
+<p>接著就是建立各自功能的畫面啦！我的檔案結構如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">app
+</span><span class="line">  ⌞ views
+</span><span class="line">    ⌞ account
+</span><span class="line">      ⌞ create.blade.php // 建立
+</span><span class="line">      ⌞ edit.blade.php   // 修改
+</span><span class="line">      ⌞ list.blade.php   // 列表所有帳號
+</span><span class="line">      ⌞ show.blade.php   // 該帳號細部資訊</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接著就各自修改這四個檔案吧，很簡單！先舉一個例，先以<code>list.blade.php</code>為例，code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>list.blade.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">@</span><span class="k">extends</span><span class="p">(</span><span class="s1">&#39;layouts.base&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="o">@</span><span class="nx">section</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">)</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="k">List</span> <span class="nx">Account</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">@</span><span class="nx">stop</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li><code>@extends(layouts.base)</code>就是引用原本的頁面基本的架構，這樣一來你就不用再寫一堆html header了。</li>
+  <li><code>@section('content')</code>跟剛剛的<code>yield('content')</code>是做相呼應的！因此<code>content</code>可由你自己決定，但最後不要忘記加上<code>@stop</code>了。</li>
+</ol>
+
+<h2 id="accountcontroller">修改AccountController</h2>
+
+<p>最後修改<code>AccountController</code>，各自對應的方法要顯示的<code>view</code>，code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">AccountController</span> <span class="k">extends</span> <span class="nx">\BaseController</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Display a listing of the resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.list&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Show the form for creating a new resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.create&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Store a newly created resource in storage.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">store</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="c1">//</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Display the specified resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.show&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Show the form for editing the specified resource.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.edit&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Update the specified resource in storage.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="c1">//</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Remove the specified resource from storage.</span>
+</span><span class="line"><span class="sd">     *</span>
+</span><span class="line"><span class="sd">     * @param  int  $id</span>
+</span><span class="line"><span class="sd">     * @return Response</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="c1">//</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以注意到<code>View::make()</code>內都是用<code>account.XXX</code>，<code>account</code>代表的就是<code>account</code>目錄路徑下的各自的檔案。</p>
+
+<p>如果成功的話可以看到這樣的畫面</p>
+
+<p><img src="/images/laravel_sample/laravel-15.jpg" /></p>
+
+<p>功能的話…to be continued</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-04T22:12:39+08:00" pubdate data-updated="true">Jun 4<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Willy lighter
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'lighter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lighter.tw/blog/2014/06/04/laravel-part-5/';
+        var disqus_url = 'http://lighter.tw/blog/2014/06/04/laravel-part-5/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-30526664-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

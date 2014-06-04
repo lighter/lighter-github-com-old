@@ -7,7 +7,8 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="這篇會展是簡單的登入檢查、登入的Session建立、登出，這三個；主要是會使用到一些簡單的route、laravel的驗證、Session的建立。廢話不多說，往下看吧。 首先建立一個簡單的view用來查看目前登入狀態，建立的路徑是app/views/show/index.blade.php， &hellip;">
+	<meta name="description" content="建立新的Controller 這部分主要是介紹樣板使用，主要是可以避免相同的code一再重複，只是要換掉中間的內容！首先我想要建立一個帳號的新增修改刪除的頁面，所以我先建立一個Controller；一樣使用artisan，開啟終端機輸入下列指令： 1
+php artisan controller &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,6 +75,57 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/04/laravel-part-5/">
+		
+			Laravel Part 5</a>
+	</h2>
+	<div class="entry-content">
+		<h2 id="controller">建立新的Controller</h2>
+
+<p>這部分主要是介紹樣板使用，主要是可以避免相同的code一再重複，只是要換掉中間的內容！首先我想要建立一個<code>帳號</code>的新增修改刪除的頁面，所以我先建立一個<code>Controller</code>；一樣使用<code>artisan</code>，開啟終端機輸入下列指令：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">php artisan controller:make AccountController</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="/images/laravel_sample/laravel-14.jpg" /></p>
+
+
+		
+		<a href="/blog/2014/06/04/laravel-part-5/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-04T22:12:39+08:00" pubdate data-updated="true">Jun 4<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/06/04/laravel-part-5/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -1268,78 +1320,6 @@
 </div>
 	
 	<div class="comments"><a href="/blog/2013/09/16/xue-xi-ios-app-1/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/">
-		
-			使用Dropbox架設私有Git</a>
-	</h2>
-	<div class="entry-content">
-		<p>首先需要在專案資料夾中初始化Git</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ git init</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>接著在Dropbox中建立你要共享Git的資料夾，並且輸入以下的指令來初始化</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ git init --bare</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>回到專案資料夾中，加入Dropbox這個遠端的repo</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ git remote add origin ~/Dropbox/XXXX</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>接著將專案推倒Dropbox中</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ git push origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在另外一台電腦則需要將Dropbox的Git專案clone下來</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ git clone ~/Dropbox/XXXX</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果A已經變動了專案並且push到Dropbox了，B要將Dropbox變動的取出來可使用</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ git fetch origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-07T09:11:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/git/'>Git</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>
