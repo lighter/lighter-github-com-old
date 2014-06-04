@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-06-04T23:21:09+08:00</updated>
+  <updated>2014-06-04T23:37:32+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -20,39 +20,33 @@
     <id>http://lighter.tw/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git</id>
     <content type="html"><![CDATA[<p>首先需要在專案資料夾中初始化Git</p>
 
-<p>{% codeblock %}
-$ git init
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git init</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>接著在Dropbox中建立你要共享Git的資料夾，並且輸入以下的指令來初始化</p>
 
-<p>{% codeblock %}
-$ git init –bare
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git init –bare</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>回到專案資料夾中，加入Dropbox這個遠端的repo</p>
 
-<p>{% codeblock %}
-$ git remote add origin ~/Dropbox/XXXX
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin ~/Dropbox/XXXX</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>接著將專案推倒Dropbox中</p>
 
-<p>{% codeblock %}
-$ git push origin master
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push origin master</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>在另外一台電腦則需要將Dropbox的Git專案clone下來</p>
 
-<p>{% codeblock %}
-$ git clone ~/Dropbox/XXXX
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone ~/Dropbox/XXXX</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>如果A已經變動了專案並且push到Dropbox了，B要將Dropbox變動的取出來可使用</p>
 
-<p>{% codeblock %}
-$ git fetch origin master
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git fetch origin master</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 ]]></content>
   </entry>
