@@ -56,11 +56,37 @@ Note:如果你的code有錯誤,在網頁出現到下圖的錯誤訊息,但卻沒
 
 > 下面數字列表請依照code上的註解數字.
 
-1. 用來顯示`session`的訊息, 例如建立帳號時回到這頁要顯示建立成功的字樣，這在之後會用到.
+1. 用來顯示`session`的訊息, 例如建立帳號時回到這頁要顯示建立成功的字樣,這在之後會用到.
 2. 這裡使用'URL`來建立連結, 前面網頁漏漏長的http也不用你寫了.
-3. 這裡的`$accounts`跟controller內的key值是相對應的. 因為回傳的是多比陣列並且是依照資料表的column欄位名稱，所以後面都適用`$value->COLUMN_NAME`.
-4. 這裡`Show`跟`Edit`都很單純用網址的方式就可以, 刪除就比較特別了, 因為Laravel是遵照`REST`, 一般的連結是發出`GET request`, 無法發出`Delete request`，所以需要借由`form`內的`button`來產生`Delete request`(參考[這篇](http://stackoverflow.com/a/19645142/685060))
+3. 這裡的`$accounts`跟controller內的key值是相對應的. 因為回傳的是多比陣列並且是依照資料表的column欄位名稱,所以後面都適用`$value->COLUMN_NAME`.
+4. 這裡`Show`跟`Edit`都很單純用網址的方式就可以, 刪除就比較特別了, 因為Laravel是遵照`RESTful`, 一般的連結是發出`GET request`, 無法發出`Delete request`,所以需要借由`form`內的`button`來產生`Delete request`(參考[這篇](http://stackoverflow.com/a/19645142/685060))
 
 如果都沒問題的話應該可以看到下面的畫面
 
 {% img /images/laravel_sample/laravel-18.jpg %}
+
+##建立帳號
+
+首先先來編輯建立帳號的畫面! 開啟`app/views/account/create.blade.php`, 輸入下面的code
+
+{% gist aa6f3eb91ff6f2e0a03e create.blade.php %}
+
+這邊並沒有什麼太複雜的,大概依照註解的號碼解釋一下
+
+1. 有錯誤訊息時,會使用`ul`的條列出你輸入的資料哪裡有問題.
+2. 表單要送出的`url`路徑,可以直接指定`controller`,無需其他的參數.
+3. 這邊我覺得好用的地方是`Input::old()`,取回就資料,以往我為了要保留住舊資料,所以就將`button`寫成`ajax`的方式送出資料.
+4. 表單的送出按鈕.
+
+{% img /images/laravel_sample/laravel-19.jpg %}
+
+接下來就是寫入資料庫的動作,開啟`app/controller/AccountController.php`,因為`laravel`是使用`RESTful`,所以預設會使用`store`這個function. code如下:
+
+{% gist d28b28c4c16ccd04c40b AccountController.php %}
+
+1. 驗證規則: 我個人覺得很方便,不然以往我都是使用`empty`等php的function一個一個條件檢查.而且連Email檢查也不用寫正規式檢查,可以看到密碼的部分`min:3`,最少為3個數字.
+2. 返回舊資料: 這樣在返回建立帳號頁面時,也不會遺漏使用原本輸入的資料,就不用全部重新輸入了!
+3. 建立帳號: 這邊也不用自己寫sql語法,整個很直覺,指定好sql欄位的值,最後`save`.
+4. 返回建立成功訊息: 使用flash的session,至於在哪顯示?可以在`list.blade.php`中找到`@if (Session::has('message'))`這區塊的code,就是用來顯示這邊的`message`.
+
+{% img /images/laravel_sample/laravel-20.jpg %}
