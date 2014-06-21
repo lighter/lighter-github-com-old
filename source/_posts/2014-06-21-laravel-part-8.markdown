@@ -9,10 +9,10 @@ categories: [laravel, php]
 
 目前使用比較多的還是codeigniter，相較之下laravel的debug比ci界面好看多了，還有`artisan`也真的蠻好用的。`Eloquent`真的是很好用，但是我不太確定當複雜的sql查詢時，很多大量的子查詢，還有個家sql提供的內件方法也都不一樣時，是否也可寫的這麼容易?就我目前工作上使用ci，我都是自己寫sql使用bind的方式，至於為什麼要用bind，似乎也是oracle的重複查詢時速度會比較快(因為cache)，有時間再來查查資料吧。
 
-整個完整的code我也放在GIT上供大家參考囉
+整個完整的code我也放在GIT上供大家參考囉[\[Laravel GIT\]](https://github.com/lighter/Laravel_sample)
 
 1. [Laravel part 1](http://lighter.tw/blog/2014/05/29/laravel-part-1/) - 安裝 `Laravel`
-> 2. [Laravel part 2](http://lighter.tw/blog/2014/05/30/laravel-part-2/) - 安裝`jquery`、`bootstrap`
+2. [Laravel part 2](http://lighter.tw/blog/2014/05/30/laravel-part-2/) - 安裝`jquery`、`bootstrap`
 3. [Laravel part 3](http://lighter.tw/blog/2014/05/31/laravel-part-3/) - 建立資料庫
 4. [Laravel part 4](http://lighter.tw/blog/2014/06/02/laravel-part-4/) - 登入 & 簡易Session操作
 5. [Laravel part 5](http://lighter.tw/blog/2014/06/04/laravel-part-5/) - 簡單的樣板使用
