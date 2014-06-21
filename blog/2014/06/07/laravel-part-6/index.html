@@ -198,15 +198,117 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </blockquote>
 
 <ol>
-  <li>用來顯示<code>session</code>的訊息, 例如建立帳號時回到這頁要顯示建立成功的字樣，這在之後會用到.</li>
+  <li>用來顯示<code>session</code>的訊息, 例如建立帳號時回到這頁要顯示建立成功的字樣,這在之後會用到.</li>
   <li>這裡使用’URL`來建立連結, 前面網頁漏漏長的http也不用你寫了.</li>
-  <li>這裡的<code>$accounts</code>跟controller內的key值是相對應的. 因為回傳的是多比陣列並且是依照資料表的column欄位名稱，所以後面都適用<code>$value-&gt;COLUMN_NAME</code>.</li>
-  <li>這裡<code>Show</code>跟<code>Edit</code>都很單純用網址的方式就可以, 刪除就比較特別了, 因為Laravel是遵照<code>REST</code>, 一般的連結是發出<code>GET request</code>, 無法發出<code>Delete request</code>，所以需要借由<code>form</code>內的<code>button</code>來產生<code>Delete request</code>(參考<a href="http://stackoverflow.com/a/19645142/685060">這篇</a>)</li>
+  <li>這裡的<code>$accounts</code>跟controller內的key值是相對應的. 因為回傳的是多比陣列並且是依照資料表的column欄位名稱,所以後面都適用<code>$value-&gt;COLUMN_NAME</code>.</li>
+  <li>這裡<code>Show</code>跟<code>Edit</code>都很單純用網址的方式就可以, 刪除就比較特別了, 因為Laravel是遵照<code>RESTful</code>, 一般的連結是發出<code>GET request</code>, 無法發出<code>Delete request</code>,所以需要借由<code>form</code>內的<code>button</code>來產生<code>Delete request</code>(參考<a href="http://stackoverflow.com/a/19645142/685060">這篇</a>)</li>
 </ol>
 
 <p>如果都沒問題的話應該可以看到下面的畫面</p>
 
 <p><img src="/images/laravel_sample/laravel-18.jpg" /></p>
+
+<h2 id="section-1">建立帳號</h2>
+
+<p>首先先來編輯建立帳號的畫面! 開啟<code>app/views/account/create.blade.php</code>, 輸入下面的code</p>
+
+<div><script src="https://gist.github.com/aa6f3eb91ff6f2e0a03e.js?file=create.blade.php"></script>
+<noscript><pre><code>@extends('layouts.base')
+
+@section('content')
+  &lt;h1&gt;Create Account&lt;/h1&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-6 col-md-offset-3&quot; style=&quot;text-align: left;&quot;&gt;
+      
+      // 1
+      {{ HTML::ul($errors-&gt;all()) }}
+      
+      // 2
+      {{ Form::open(['url' =&gt; 'account']) }}
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('name','Name') }}
+        
+        // 3
+        {{ Form::text('name', Input::old('name'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('username','Username') }}
+        {{ Form::text('username', Input::old('username'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('email','Email') }}
+        {{ Form::text('email', Input::old('email'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('password','Password') }}
+        {{ Form::password('password', ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      // 4
+      {{ Form::submit('Create Account', ['class' =&gt; 'btn btn-primary']) }}
+
+      {{ Form::close() }}
+    &lt;/div&gt;
+  &lt;/div&gt;
+@stop</code></pre></noscript></div>
+
+<p>這邊並沒有什麼太複雜的,大概依照註解的號碼解釋一下</p>
+
+<ol>
+  <li>有錯誤訊息時,會使用<code>ul</code>的條列出你輸入的資料哪裡有問題.</li>
+  <li>表單要送出的<code>url</code>路徑,可以直接指定<code>controller</code>,無需其他的參數.</li>
+  <li>這邊我覺得好用的地方是<code>Input::old()</code>,取回就資料,以往我為了要保留住舊資料,所以就將<code>button</code>寫成<code>ajax</code>的方式送出資料.</li>
+  <li>表單的送出按鈕.</li>
+</ol>
+
+<p><img src="/images/laravel_sample/laravel-19.jpg" /></p>
+
+<p>接下來就是寫入資料庫的動作,開啟<code>app/controller/AccountController.php</code>,因為<code>laravel</code>是使用<code>RESTful</code>,所以預設會使用<code>store</code>這個function. code如下:</p>
+
+<div><script src="https://gist.github.com/d28b28c4c16ccd04c40b.js?file=AccountController.php"></script>
+<noscript><pre><code>public function store()
+{
+  // 1. 
+  $rules = array(
+    'email' =&gt; 'required|email',
+    'password' =&gt; 'required|alphaNum|min:3',
+    'name' =&gt; 'required',
+    'username' =&gt; 'required'
+  );
+
+  $validator = Validator::make(Input::all(), $rules);
+
+  if ($validator-&gt;fails()) {
+    return Redirect::to('account/create')
+      -&gt;withErrors($validator)
+      -&gt;withInput(Input::except('password')); // 2.
+  }
+  else {
+    // 3.
+    $account = new User;
+    $account-&gt;email = Input::get('email');
+    $account-&gt;password = Hash::make(Input::get('password'));
+    $account-&gt;name = Input::get('name');
+    $account-&gt;username = Input::get('username');
+    $account-&gt;save();
+  
+  // 4.
+    Session::flash('message', 'Created success');
+    return Redirect::to('account');
+  }
+}</code></pre></noscript></div>
+
+<ol>
+  <li>驗證規則: 我個人覺得很方便,不然以往我都是使用<code>empty</code>等php的function一個一個條件檢查.而且連Email檢查也不用寫正規式檢查,可以看到密碼的部分<code>min:3</code>,最少為3個數字.</li>
+  <li>返回舊資料: 這樣在返回建立帳號頁面時,也不會遺漏使用原本輸入的資料,就不用全部重新輸入了!</li>
+  <li>建立帳號: 這邊也不用自己寫sql語法,整個很直覺,指定好sql欄位的值,最後<code>save</code>.</li>
+  <li>返回建立成功訊息: 使用flash的session,至於在哪顯示?可以在<code>list.blade.php</code>中找到<code>@if (Session::has('message'))</code>這區塊的code,就是用來顯示這邊的<code>message</code>.</li>
+</ol>
+
+<p><img src="/images/laravel_sample/laravel-20.jpg" /></p>
 </div>
 
 

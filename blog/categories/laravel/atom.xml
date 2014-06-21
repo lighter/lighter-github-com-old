@@ -4,7 +4,7 @@
   <title><![CDATA[Category: laravel | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/laravel/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-06-08T20:30:12+08:00</updated>
+  <updated>2014-06-21T23:13:06+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,245 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel part 8]]></title>
+    <link href="http://lighter.tw/blog/2014/06/21/laravel-part-8/"/>
+    <updated>2014-06-21T22:37:03+08:00</updated>
+    <id>http://lighter.tw/blog/2014/06/21/laravel-part-8</id>
+    <content type="html"><![CDATA[<p>這章節只是想做個整理，這些只是我根據官方文件還有一些影片自己實做，然後加以整理大概記錄一下，主要是釐清一些過程使用，所以幾乎都不會詳細的描述。如果有問題歡迎一起討論。</p>
+
+<p>目前使用比較多的還是codeigniter，相較之下laravel的debug比ci界面好看多了，還有<code>artisan</code>也真的蠻好用的。<code>Eloquent</code>真的是很好用，但是我不太確定當複雜的sql查詢時，很多大量的子查詢，還有個家sql提供的內件方法也都不一樣時，是否也可寫的這麼容易?就我目前工作上使用ci，我都是自己寫sql使用bind的方式，至於為什麼要用bind，似乎也是oracle的重複查詢時速度會比較快(因為cache)，有時間再來查查資料吧。</p>
+
+<p>整個完整的code我也放在GIT上供大家參考囉<a href="https://github.com/lighter/Laravel_sample">[Laravel GIT]</a></p>
+
+<ol>
+  <li><a href="http://lighter.tw/blog/2014/05/29/laravel-part-1/">Laravel part 1</a> - 安裝 <code>Laravel</code></li>
+  <li><a href="http://lighter.tw/blog/2014/05/30/laravel-part-2/">Laravel part 2</a> - 安裝<code>jquery</code>、<code>bootstrap</code></li>
+  <li><a href="http://lighter.tw/blog/2014/05/31/laravel-part-3/">Laravel part 3</a> - 建立資料庫</li>
+  <li><a href="http://lighter.tw/blog/2014/06/02/laravel-part-4/">Laravel part 4</a> - 登入 &amp; 簡易Session操作</li>
+  <li><a href="http://lighter.tw/blog/2014/06/04/laravel-part-5/">Laravel part 5</a> - 簡單的樣板使用</li>
+  <li><a href="http://lighter.tw/blog/2014/06/07/laravel-part-6/">Laravel part 6</a> - 帳號建立 &amp; 列表</li>
+  <li><a href="http://lighter.tw/blog/2014/06/09/laravel-part-7/">Laravel part 7</a> - 帳號修改 &amp; 顯示帳號資訊 &amp; 修改帳號 &amp; 刪除帳號</li>
+</ol>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[laravel part 7]]></title>
+    <link href="http://lighter.tw/blog/2014/06/09/laravel-part-7/"/>
+    <updated>2014-06-09T00:02:13+08:00</updated>
+    <id>http://lighter.tw/blog/2014/06/09/laravel-part-7</id>
+    <content type="html"><![CDATA[<p>這也是最後一個章節了，將會介紹到</p>
+
+<ol>
+  <li>顯示帳號資訊</li>
+  <li>修改帳號資訊</li>
+  <li>刪除帳號</li>
+</ol>
+
+<!-- more -->
+
+<h2 id="section">顯示帳號資訊</h2>
+
+<p>開啓<code>AccountController.php</code>，找到<code>show</code>這個方法，修改的code如下</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="err">‘</span><span class="nx">account</span><span class="o">.</span><span class="nx">show</span><span class="err">’</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">with</span><span class="p">(</span><span class="err">‘</span><span class="nx">account</span><span class="err">’</span><span class="p">,</span> <span class="nv">$account</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>這邊要搜尋帳號也很簡單，使用<code>User::find($id)</code>就可以根據<code>ID</code>找到對應的帳號資料，也不用特地去寫些sql語法，但這應該只單存這種簡單的情況下使用吧！如果有多個Table要Join，或是有些特殊的欄位條件要篩選應該就沒這容易了。</p>
+
+<p>最後將這個搜尋結果塞到<code>view</code>裡面使用，所以接下來就是編輯view的部分；開啓<code>app/views/account/show.blade.php</code>，輸入的code如下</p>
+
+<p><div><script src='https://gist.github.com/941fbf8d6296043346f6.js?file=show.blade.php'></script>
+<noscript><pre><code>@extends('layouts.base')
+
+@section('content')
+  &lt;h1&gt;Show Account&lt;/h1&gt;
+  {{ Form::open(['class' =&gt; 'form-horizontal', 'role' =&gt; 'form']) }}
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;col-sm-2 control-label&quot; for=&quot;inputEmail3&quot;&gt;Email&lt;/label&gt;
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        &lt;input id=&quot;inputEmail3&quot; class=&quot;form-control&quot; type=&quot;email&quot; value=&quot;{{ $account-&gt;email }}&quot; disabled&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;col-sm-2 control-label&quot; for=&quot;inputUsername&quot;&gt;Username&lt;/label&gt;
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        &lt;input id=&quot;inputUsername&quot; class=&quot;form-control&quot; type=&quot;text&quot; value=&quot;{{ $account-&gt;username }}&quot; disabled&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;col-sm-2 control-label&quot; for=&quot;inputname&quot;&gt;name&lt;/label&gt;
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        &lt;input id=&quot;inputname&quot; class=&quot;form-control&quot; type=&quot;text&quot; value=&quot;{{ $account-&gt;name }}&quot; disabled&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  {{ Form::close() }}
+@stop</code></pre></noscript></div>
+</p>
+
+<p>這邊很簡單你要顯示的欄位資料就使用<code>-&gt;</code>這樣的方式操作，example: <code>$account-&gt;email</code></p>
+
+<h2 id="section-1">修改帳號資訊</h2>
+
+<p>編輯會呼叫到<code>AccountController.php</code>的<code>edit</code>方法，code如下</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.edit&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">with</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">,</span> <span class="nv">$account</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>   <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
+
+<p>這邊跟顯示的地方並沒有什麼不同！接著就來看<code>app/views/account/edit.blade.php</code>吧</p>
+
+<p><div><script src='https://gist.github.com/f5984711c8d1a80d48fe.js?file=edit.blade.php'></script>
+<noscript><pre><code>@extends('layouts.base')
+
+@section('content')
+  &lt;h1&gt;Edit Account&lt;/h1&gt;
+  {{ HTML::ul($errors-&gt;all()) }}
+  &lt;!-- 1 --&gt;
+  {{ Form::model($account, array('route' =&gt; array('account.update', $account-&gt;id), 'method' =&gt; 'PUT', 'class' =&gt; 'form-horizontal', 'role' =&gt; 'form')) }}
+    &lt;div class=&quot;form-group&quot;&gt;
+      {{ Form::label('email', 'Email', ['class' =&gt; 'col-sm-2 control-label']) }}
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        {{ Form::text('email', $account-&gt;email, ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+     &lt;div class=&quot;form-group&quot;&gt;
+      {{ Form::label('username', 'Username', ['class' =&gt; 'col-sm-2 control-label']) }}
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        {{ Form::text('username', $account-&gt;username, ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+     &lt;div class=&quot;form-group&quot;&gt;
+      {{ Form::label('name', 'Name', ['class' =&gt; 'col-sm-2 control-label']) }}
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        {{ Form::text('name', $account-&gt;name, ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;div class=&quot;col-sm-offset-2 col-sm-10&quot;&gt;
+        {{ Form::submit('Edit the Account!', array('class' =&gt; 'btn btn-primary')) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  {{ Form::close() }}
+@stop</code></pre></noscript></div>
+</p>
+
+<p>這邊大致上跟新增很像！唯一比較不一樣的是<code></code>(可以看到註解1的地方)，這邊要指定更新的方法，<code>account.update</code>就是呼叫<code>AccountController</code>的<code>update</code>方法，並帶入<code>$account-&gt;id</code>帳號ID；還有設定<code>'method' =&gt; 'PUT'</code>，這是因為要符合<code>restful</code>。</p>
+
+<p>接下來就來寫更新資料的<code>update</code>方法吧！code如下</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$rules</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="err">‘</span><span class="nx">email</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="o">|</span><span class="nx">email</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>      <span class="err">‘</span><span class="nx">username</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>      <span class="err">‘</span><span class="nx">name</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="err">’</span>
+</span><span class='line'>    <span class="p">);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$validator</span> <span class="o">=</span>  <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">fails</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;account/&#39;</span> <span class="o">.</span> <span class="nv">$id</span> <span class="o">.</span> <span class="s1">&#39;/edit&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">withErrors</span><span class="p">(</span><span class="nv">$validator</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">withInput</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">());</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">email</span> <span class="o">=</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">save</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Session</span><span class="o">::</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;修改成功&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>   <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
+
+<p>這邊幾乎都跟建立資料時一樣，我就不再贅述了。</p>
+
+<h2 id="section-2">刪除帳號</h2>
+
+<p>前一個章節已經建立好了刪除的連結，但是尚未在controller內寫方法，其實也很簡單，刪除預設會去呼叫<code>destroy</code>這個方法，所以找到<code>AccountController.php</code>內的<code>destroy</code>，code如下</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">delete</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">Session</span><span class="o">::</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;刪除成功&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">);</span>   <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</code></pre>
+
+<p>直接看code就可以理解！找到該筆帳號(根據ID)，最後<code>delete</code>！很簡單吧…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[laravel part 6]]></title>
@@ -127,15 +366,119 @@
 </blockquote>
 
 <ol>
-  <li>用來顯示<code>session</code>的訊息, 例如建立帳號時回到這頁要顯示建立成功的字樣，這在之後會用到.</li>
+  <li>用來顯示<code>session</code>的訊息, 例如建立帳號時回到這頁要顯示建立成功的字樣,這在之後會用到.</li>
   <li>這裡使用’URL`來建立連結, 前面網頁漏漏長的http也不用你寫了.</li>
-  <li>這裡的<code>$accounts</code>跟controller內的key值是相對應的. 因為回傳的是多比陣列並且是依照資料表的column欄位名稱，所以後面都適用<code>$value-&gt;COLUMN_NAME</code>.</li>
-  <li>這裡<code>Show</code>跟<code>Edit</code>都很單純用網址的方式就可以, 刪除就比較特別了, 因為Laravel是遵照<code>REST</code>, 一般的連結是發出<code>GET request</code>, 無法發出<code>Delete request</code>，所以需要借由<code>form</code>內的<code>button</code>來產生<code>Delete request</code>(參考<a href="http://stackoverflow.com/a/19645142/685060">這篇</a>)</li>
+  <li>這裡的<code>$accounts</code>跟controller內的key值是相對應的. 因為回傳的是多比陣列並且是依照資料表的column欄位名稱,所以後面都適用<code>$value-&gt;COLUMN_NAME</code>.</li>
+  <li>這裡<code>Show</code>跟<code>Edit</code>都很單純用網址的方式就可以, 刪除就比較特別了, 因為Laravel是遵照<code>RESTful</code>, 一般的連結是發出<code>GET request</code>, 無法發出<code>Delete request</code>,所以需要借由<code>form</code>內的<code>button</code>來產生<code>Delete request</code>(參考<a href="http://stackoverflow.com/a/19645142/685060">這篇</a>)</li>
 </ol>
 
 <p>如果都沒問題的話應該可以看到下面的畫面</p>
 
 <p><img src="/images/laravel_sample/laravel-18.jpg"></p>
+
+<h2 id="section-1">建立帳號</h2>
+
+<p>首先先來編輯建立帳號的畫面! 開啟<code>app/views/account/create.blade.php</code>, 輸入下面的code</p>
+
+<p><div><script src='https://gist.github.com/aa6f3eb91ff6f2e0a03e.js?file=create.blade.php'></script>
+<noscript><pre><code>@extends('layouts.base')
+
+@section('content')
+  &lt;h1&gt;Create Account&lt;/h1&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-6 col-md-offset-3&quot; style=&quot;text-align: left;&quot;&gt;
+      
+      // 1
+      {{ HTML::ul($errors-&gt;all()) }}
+      
+      // 2
+      {{ Form::open(['url' =&gt; 'account']) }}
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('name','Name') }}
+        
+        // 3
+        {{ Form::text('name', Input::old('name'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('username','Username') }}
+        {{ Form::text('username', Input::old('username'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('email','Email') }}
+        {{ Form::text('email', Input::old('email'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('password','Password') }}
+        {{ Form::password('password', ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      // 4
+      {{ Form::submit('Create Account', ['class' =&gt; 'btn btn-primary']) }}
+
+      {{ Form::close() }}
+    &lt;/div&gt;
+  &lt;/div&gt;
+@stop</code></pre></noscript></div>
+</p>
+
+<p>這邊並沒有什麼太複雜的,大概依照註解的號碼解釋一下</p>
+
+<ol>
+  <li>有錯誤訊息時,會使用<code>ul</code>的條列出你輸入的資料哪裡有問題.</li>
+  <li>表單要送出的<code>url</code>路徑,可以直接指定<code>controller</code>,無需其他的參數.</li>
+  <li>這邊我覺得好用的地方是<code>Input::old()</code>,取回就資料,以往我為了要保留住舊資料,所以就將<code>button</code>寫成<code>ajax</code>的方式送出資料.</li>
+  <li>表單的送出按鈕.</li>
+</ol>
+
+<p><img src="/images/laravel_sample/laravel-19.jpg"></p>
+
+<p>接下來就是寫入資料庫的動作,開啟<code>app/controller/AccountController.php</code>,因為<code>laravel</code>是使用<code>RESTful</code>,所以預設會使用<code>store</code>這個function. code如下:</p>
+
+<p><div><script src='https://gist.github.com/d28b28c4c16ccd04c40b.js?file=AccountController.php'></script>
+<noscript><pre><code>public function store()
+{
+  // 1. 
+  $rules = array(
+    'email' =&gt; 'required|email',
+    'password' =&gt; 'required|alphaNum|min:3',
+    'name' =&gt; 'required',
+    'username' =&gt; 'required'
+  );
+
+  $validator = Validator::make(Input::all(), $rules);
+
+  if ($validator-&gt;fails()) {
+    return Redirect::to('account/create')
+      -&gt;withErrors($validator)
+      -&gt;withInput(Input::except('password')); // 2.
+  }
+  else {
+    // 3.
+    $account = new User;
+    $account-&gt;email = Input::get('email');
+    $account-&gt;password = Hash::make(Input::get('password'));
+    $account-&gt;name = Input::get('name');
+    $account-&gt;username = Input::get('username');
+    $account-&gt;save();
+  
+  // 4.
+    Session::flash('message', 'Created success');
+    return Redirect::to('account');
+  }
+}</code></pre></noscript></div>
+</p>
+
+<ol>
+  <li>驗證規則: 我個人覺得很方便,不然以往我都是使用<code>empty</code>等php的function一個一個條件檢查.而且連Email檢查也不用寫正規式檢查,可以看到密碼的部分<code>min:3</code>,最少為3個數字.</li>
+  <li>返回舊資料: 這樣在返回建立帳號頁面時,也不會遺漏使用原本輸入的資料,就不用全部重新輸入了!</li>
+  <li>建立帳號: 這邊也不用自己寫sql語法,整個很直覺,指定好sql欄位的值,最後<code>save</code>.</li>
+  <li>返回建立成功訊息: 使用flash的session,至於在哪顯示?可以在<code>list.blade.php</code>中找到<code>@if (Session::has('message'))</code>這區塊的code,就是用來顯示這邊的<code>message</code>.</li>
+</ol>
+
+<p><img src="/images/laravel_sample/laravel-20.jpg"></p>
 ]]></content>
   </entry>
   
@@ -658,317 +1001,6 @@
 <p>如果登入成功的話，可以看到登入成功的訊息</p>
 
 <p><img src="/images/laravel_sample/laravel-13.jpg"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[laravel part 3]]></title>
-    <link href="http://lighter.tw/blog/2014/05/31/laravel-part-3/"/>
-    <updated>2014-05-31T17:18:37+08:00</updated>
-    <id>http://lighter.tw/blog/2014/05/31/laravel-part-3</id>
-    <content type="html"><![CDATA[<p>接著就是建立資料方面的事情啦！登入總要有先有資料對吧！</p>
-
-<h2 id="step-1-mysql">Step 1. Mysql設定</h2>
-
-<p>開啓<code>phpmyadmin</code>，建立一個新的Database，這邊取名為<code>laravel_sample</code>，如下圖</p>
-
-<p><img src="/images/laravel_sample/laravel-6.jpg"></p>
-
-<p>再來就是設定<code>laravel</code>的資料庫連線，開啓<code>database.php</code>，找到<code>mysql</code>的設定，輸入<code>database</code>名稱還有連線的帳號密碼</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>database.php </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">driver</span><span class="err">’</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">host</span><span class="err">’</span>      <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">localhost</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">database</span><span class="err">’</span>  <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">laravel_sample</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">username</span><span class="err">’</span>  <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">root</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">password</span><span class="err">’</span>  <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">password</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">charset</span><span class="err">’</span>   <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">utf8</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">collation</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">utf8_unicode_ci</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">prefix</span><span class="err">’</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘’</span><span class="p">,</span>
-</span><span class='line'><span class="p">),</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<h2 id="step-2-table">Step 2. 建立Table</h2>
-
-<p><code>laravel</code>的<code>artisan</code>很方便，這邊你不需要自己在<code>phpmyadmin</code>手動一個一個輸入column name和type，也不用自己寫mysql的create，可以透過指令和一些code來幫你完成建立Table。</p>
-
-<p>開啟終端機，切換到專案的路徑下，以我的環境來說，我的的專案是在<code>/Application/XAMPP/htdocs/laravel_sample/</code>；然後輸入下面的指令：</p>
-
-<p><code>php artisan migrate:make create-users-table</code></p>
-
-<p>實際上會幫你建立一個 <code>時間</code> 加上 <code>create-users-table</code>的一個檔案，如下圖：</p>
-
-<p><img src="/images/laravel_sample/laravel-7.jpg"></p>
-
-<p>接著開啟這個檔案，這個檔案的路徑會在<code>app/database/migrations/</code>下</p>
-
-<p>在這檔案會看到兩個method，一個是用來建立，另一個當然就是拿來還原的囉！建立的程式主要就是用來建立Table，直接看code吧，如下：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/**
-</span><span class='line'> * Run the migrations.
-</span><span class='line'> *
-</span><span class='line'> * @return void
-</span><span class='line'> */
-</span><span class='line'>public function up()
-</span><span class='line'>{
-</span><span class='line'>	Schema::create(‘users’, function(Blueprint $table)
-</span><span class='line'>	{
-</span><span class='line'>		$table-&gt;increments(‘id’);
-</span><span class='line'>		$table-&gt;string(‘name’, 32);
-</span><span class='line'>		$table-&gt;string(‘username’, 32);
-</span><span class='line'>		$table-&gt;string(‘email’, 320);
-</span><span class='line'>		$table-&gt;string(‘password’, 64);
-</span><span class='line'>		$table-&gt;timestamps();
-</span><span class='line'>	});
-</span><span class='line'>}&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>/**
-</span><span class='line'> * Reverse the migrations.
-</span><span class='line'> *
-</span><span class='line'> * @return void
-</span><span class='line'> */
-</span><span class='line'>public function down()
-</span><span class='line'>{
-</span><span class='line'>	Schema::drop(‘users’);
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>再次回到終端機，輸入下面的指令來建立Table</p>
-
-<p><code>php artisan migrate</code></p>
-
-<p>阿…發生錯誤了！</p>
-
-<p><img src="/images/laravel_sample/laravel-8.jpg"></p>
-
-<p>似乎是無法跟mysql連線，請試著修改<code>database.php</code>的<code>host</code>，修改為<code>127.0.0.1</code>，或者你可以參考這篇<a href="http://stackoverflow.com/questions/14219692/laravel-setup-of-migrations-using-artisan-is-failing">Laravel setup of migrations using Artisan is failing</a>，直接指定<code>unix_socket</code>的路徑，因為我有在遠端安裝的時候遇過這情形。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>database.php </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">driver</span><span class="err">’</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">mysql</span><span class="err">’</span><span class="p">,</span>
-</span><span class='line'>	<span class="err">‘</span><span class="nx">host</span><span class="err">’</span>      <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="err">’</span><span class="p">,</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>修改完再執行一次吧！</p>
-
-<p><img src="/images/laravel_sample/laravel-9.jpg"></p>
-
-<p>成功囉~</p>
-
-<p>來看看<code>phpmyadmin</code>是不是真的出現<code>users</code>的Table呢！？</p>
-
-<p><img src="/images/laravel_sample/laravel-10.jpg"></p>
-
-<h2 id="step-3-">Step 3. 建立資料</h2>
-
-<p>建立資料的部分也不用你自己到資料庫裡面一筆一筆key，一樣可以透過<code>artisan</code>幫你完成，但你要先寫好code！在<code>app/database/seeds/</code>下建立一個<code>UsersTableSeeder.php</code>(注意：<code>U</code>要大寫)。建立完成後先不急著開起它來編輯，先看到<code>DatabaseSeeder.php</code>這隻檔案，預設執行時來執行這隻檔案，再由這隻檔案的內容去看你要執行哪隻檔案…直接看code吧！</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DatabaseSeeder.php </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>	<span class="nx">Eloquent</span><span class="o">::</span><span class="na">unguard</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$this</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;UsersTableSeeder&#39;</span><span class="p">);</span> <span class="c1">// 拿掉原本的註解，注意這邊預設User後是沒有加`s`的記得自己補上，跟檔案名稱對應 } </span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<p>接下來就是編輯你要寫的內容了，開啟<code>UsersTableSeeder.php</code>，code如下：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>UsersTableSeeder.php </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">UsersTableSeeder</span> <span class="k">extends</span> <span class="nx">Seeder</span>
-</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="nx">DB</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">delete</span><span class="p">();</span> <span class="c1">// 每次執行都先清理資料表單</span>
-</span><span class='line'>    <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;lighter&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;username&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;awesome&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;email&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;test@gmail.com&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;password&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;awesome&#39;</span><span class="p">),</span>
-</span><span class='line'>    <span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;Tom&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;username&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;email&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;test2@gmail.com&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;password&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;awesome&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">));</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>完成之後到終端機輸入下面的指令</p>
-
-<p><code>php artisan db:seed</code></p>
-
-<p>成功囉～這樣以後如果需要很多測試資料，就不用手動一筆一筆操作建立了！而且轉換資料庫也方便很多，不用寫多套SQL語法。</p>
-
-<p><img src="/images/laravel_sample/laravel-11.jpg"></p>
-
-<p><img src="/images/laravel_sample/laravel-12.jpg"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[laravel part 2]]></title>
-    <link href="http://lighter.tw/blog/2014/05/30/laravel-part-2/"/>
-    <updated>2014-05-30T23:16:00+08:00</updated>
-    <id>http://lighter.tw/blog/2014/05/30/laravel-part-2</id>
-    <content type="html"><![CDATA[<p>第二部分就是套用<a href="http://getbootstrap.com/">bootstrap</a>和<a href="http://jquery.com/">jquery</a>，我將檔案放到專案根目錄下的<code>public</code>資料夾內。或者你想引用CDN的也可以，這樣你就不用下載任何東西。</p>
-
-<blockquote>
-  <p>jquery其實應該是用不到，只是習慣都會載入而已，接下來也不會有任何event事件需要寫！</p>
-</blockquote>
-
-<p>所以我的檔案結構如下</p>
-
-<p><code>
-laravel_sample
-	⌞app
-	⌞public
-		⌞bootstrap-3.1.1-dist
-		⌞jquery-1.11.1.min.js	
-</code></p>
-
-<p>接著我想把首頁換掉，換成登入的畫面，所以先在<code>app/views</code>下建立一個<code>login.blade.php</code>，至於<code>blade</code>是什麼，請參考<a href="http://laravel.com/docs">laravel</a>的官方文件吧。</p>
-
-<p>然後輸入下面的code：</p>
-
-<p><div><script src='https://gist.github.com/fac184def5041dd0cdae.js?file=login.blade.php'></script>
-<noscript><pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Look at me Login&lt;/title&gt;
-    {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
-    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
-    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;col-md-2 col-md-offset-5&quot;&gt;
-    {{ Form::open(array('url' =&gt; 'login', 'class' =&gt; 'clearfix', 'role' =&gt; 'form' )) }}
-
-      &lt;h1&gt;Login&lt;/h1&gt;
-
-      &lt;p&gt;
-        {{ $errors-&gt;first('email') }}
-        {{ $errors-&gt;first('password') }}
-      &lt;/p&gt;
-
-      &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;exampleInputEmail&quot;&gt; {{ Form::label('email', 'Email Address') }} &lt;/label&gt;
-        {{ Form::text('email', Input::old('email'), array('placeholder' =&gt; 'awesome@awesome.com', 'class' =&gt; 'form-control', 'id' =&gt; 'exampleInputEamil')) }}
-      &lt;/div&gt;
-
-      &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;exampleInputPasword&quot;&gt; {{ Form::label('password', 'Password') }} &lt;/label&gt;
-        {{ Form::password('password', ['class' =&gt; 'form-control', 'id' =&gt; 'exampleInputPassword'])  }}
-      &lt;/div&gt;
-
-      &lt;p&gt;
-        {{ Form::submit('Submit!', ['class' =&gt; 'btn btn-default'])  }}
-      &lt;/p&gt;
-
-    {{ Form::close() }}
-
-    &lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;
-    &lt;/div&gt;&lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></noscript></div>
-</p>
-
-<p>接著修改<code>routes.php</code>，把預設首頁換成<code>login</code>，code如下：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>routes.php </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="err">‘</span><span class="o">/</span><span class="err">’</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>	<span class="k">return</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="err">‘</span><span class="nx">login</span><span class="err">’</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>重新整理網頁，就可以看到登入的畫面啦！</p>
-
-<p><img src="/images/laravel_sample/laravel-5.jpg"></p>
 ]]></content>
   </entry>
   
