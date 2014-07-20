@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vagrant | Lighter]]></title>
+  <link href="http://lighter.tw/blog/categories/vagrant/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2014-07-20T15:21:57+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記] 安裝 Vagrant]]></title>
+    <link href="http://lighter.tw/blog/2014/06/27/bi-ji-an-zhuang-vagrant/"/>
+    <updated>2014-06-27T22:36:58+08:00</updated>
+    <id>http://lighter.tw/blog/2014/06/27/bi-ji-an-zhuang-vagrant</id>
+    <content type="html"><![CDATA[<p>安裝環境 OS X 10.9.3</p>
+
+<p>Step 1. 下載 <a href="http://www.vagrantup.com/downloads.html">Vagrant</a></p>
+
+<p>Step 2. 下載OS</p>
+
+<p>開啟終端機，建立好一個<code>vagrant</code>的資料夾</p>
+
+<p><code>
+$ mkdir vagrant
+$ cd vagrant
+</code></p>
+
+<p><a href="http://www.vagrantbox.es/">Vagrantbox</a>，這邊有很多已經裝好的box，你可以自己找行你需要的。</p>
+
+<p>這邊我安裝的是<code>Ubuntu precise 64 VirtualBox</code>，他的網址是<code>http://files.vagrantup.com/precise64.box</code>。接著在終端機輸入下面的指令安裝</p>
+
+<p><code>
+$ vagrant box add Ubuntu64 http://files.vagrantup.com/precise64.box
+</code></p>
+
+<p>安裝完畢後，需將這個虛擬機初始化並且啟動</p>
+
+<p><code>
+$ vagrant box init Ubuntu64
+$ vagrant up #啟動
+</code></p>
+
+<p>啟動完成後，需要連線到這台虛擬機</p>
+
+<p><code>
+$ vagrant ssh
+</code></p>
+
+<h2 id="vagrant-">Vagrant 指令</h2>
+
+<p><code>
+$ vagrant halt #關閉
+$ vagrant reload #重啟
+$ vagrant status #狀態
+$ vagrant destroy #刪除
+$ vagrant list #列出虛擬機
+</code></p>
+
+<h3 id="section">參考資料</h3>
+
+<ul>
+  <li><a href="http://www.vagrantup.com/">Vagrant</a></li>
+  <li><a href="http://vinn.logdown.com/posts/2014/05/22/note-use-of-vagrant-deployment">[Note] 使用 Vagrant進行部署練習</a></li>
+  <li><a href="http://www.vagrantbox.es/">Vagrantbox.es</a></li>
+  <li><a href="http://eva0919.github.io/2013/04/26/%E7%94%A8vm%E6%89%8D%E6%98%AF%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B8%AB-vagrant%E7%AF%87%E5%85%A5%E9%96%80%E7%89%88/">用VM才是好的工程師-vagrant篇(入門版)</a></li>
+  <li><a href="http://gogojimmy.net/2013/05/26/vagrant-tutorial/">[教學]使用Vagrant練習環境佈署</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

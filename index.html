@@ -7,7 +7,10 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="這章節只是想做個整理，這些只是我根據官方文件還有一些影片自己實做，然後加以整理大概記錄一下，主要是釐清一些過程使用，所以幾乎都不會詳細的描述。如果有問題歡迎一起討論。 目前使用比較多的還是codeigniter，相較之下laravel的debug比ci界面好看多了， &hellip;">
+	<meta name="description" content="安裝環境 OS X 10.9.3 Step 1. 下載 Vagrant Step 2. 下載OS 開啟終端機，建立好一個vagrant的資料夾 1
+2
+$ mkdir vagrant
+$ cd vagrant Vagrantbox，這邊有很多已經裝好的box，你可以自己找行你需要的。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +86,103 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/27/bi-ji-an-zhuang-vagrant/">
+		
+			[筆記] 安裝 Vagrant</a>
+	</h2>
+	<div class="entry-content">
+		<p>安裝環境 OS X 10.9.3</p>
+
+<p>Step 1. 下載 <a href="http://www.vagrantup.com/downloads.html">Vagrant</a></p>
+
+<p>Step 2. 下載OS</p>
+
+<p>開啟終端機，建立好一個<code>vagrant</code>的資料夾</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ mkdir vagrant
+</span><span class="line">$ cd vagrant</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="http://www.vagrantbox.es/">Vagrantbox</a>，這邊有很多已經裝好的box，你可以自己找行你需要的。</p>
+
+<p>這邊我安裝的是<code>Ubuntu precise 64 VirtualBox</code>，他的網址是<code>http://files.vagrantup.com/precise64.box</code>。接著在終端機輸入下面的指令安裝</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ vagrant box add Ubuntu64 http://files.vagrantup.com/precise64.box</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>安裝完畢後，需將這個虛擬機初始化並且啟動</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ vagrant box init Ubuntu64
+</span><span class="line">$ vagrant up #啟動</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>啟動完成後，需要連線到這台虛擬機</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ vagrant ssh</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="vagrant-">Vagrant 指令</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ vagrant halt #關閉
+</span><span class="line">$ vagrant reload #重啟
+</span><span class="line">$ vagrant status #狀態
+</span><span class="line">$ vagrant destroy #刪除
+</span><span class="line">$ vagrant list #列出虛擬機</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section">參考資料</h3>
+
+<ul>
+  <li><a href="http://www.vagrantup.com/">Vagrant</a></li>
+  <li><a href="http://vinn.logdown.com/posts/2014/05/22/note-use-of-vagrant-deployment">[Note] 使用 Vagrant進行部署練習</a></li>
+  <li><a href="http://www.vagrantbox.es/">Vagrantbox.es</a></li>
+  <li><a href="http://eva0919.github.io/2013/04/26/%E7%94%A8vm%E6%89%8D%E6%98%AF%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B8%AB-vagrant%E7%AF%87%E5%85%A5%E9%96%80%E7%89%88/">用VM才是好的工程師-vagrant篇(入門版)</a></li>
+  <li><a href="http://gogojimmy.net/2013/05/26/vagrant-tutorial/">[教學]使用Vagrant練習環境佈署</a></li>
+</ul>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T22:36:58+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/vagrant/'>vagrant</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/06/27/bi-ji-an-zhuang-vagrant/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -1075,50 +1175,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2014/04/29/php-oracle-oci-bind-by-name/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/04/29/mongodb-note/">
-		
-			Mongodb Note</a>
-	</h2>
-	<div class="entry-content">
-		<p>記錄一下第一次使用MongoDB發生的蠢問題…</p>
-
-
-		
-		<a href="/blog/2014/04/29/mongodb-note/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-29T23:00:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/mongodb/'>mongodb</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2014/04/29/mongodb-note/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>
