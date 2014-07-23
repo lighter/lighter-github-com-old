@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-07-20T15:21:57+08:00</updated>
+  <updated>2014-07-23T16:15:38+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 1]]></title>
+    <link href="http://lighter.tw/blog/2014/07/20/bi-ji-swift-part-1/"/>
+    <updated>2014-07-20T15:26:30+08:00</updated>
+    <id>http://lighter.tw/blog/2014/07/20/bi-ji-swift-part-1</id>
+    <content type="html"><![CDATA[<p>最近看了一下<code>swift</code>，順手記錄一下，一開始當然是最基本的語法囉，在新的<code>xcode</code>中出現了<code>playground</code>，這是一個很適合用來練習基本的語法，不用特地去建立一個大專案，也不用特地去編譯整個專案才能得到結果，這感覺跟其他語言在終端機下執行很像。以下就是簡單的記錄</p>
+
+<!-- more -->
+
+<p>一開始建立好<code>playground</code>的檔案就可以看到他已經為你建立好基本的範例了！但這裡並不需要使用到<code>Cocoa</code>，因為基礎的語法練習似乎還不會用到內建的東西，所以其實可以把它刪除。</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-1.jpg" /></p>
+
+<h2 id="var">var(變數)</h2>
+<p>變數的定義格式如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">var VAR_NAME:TYPE = ASSIGN_VALUE</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>一開始需要使用<code>var</code>來定義這是一個變數，至於變數的形態你可以自行定義或是交由編譯器來辨別，然後變數顧名思義就是會變得數，所以之後變數的直可以任意給予新的值。變數的值可以變，但變數的形態不能變，看到<code>str3</code>為<code>string</code>的形態，後面要assign一個數字就會出現錯誤。</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-2.jpg" /></p>
+
+<h2 id="let">let(常數)</h2>
+<p>常數的定義與變數不同，是使用<code>let</code>這個keyword，而且常數只能在一開始assign值，事後並不能更改他</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-3.jpg" /></p>
+
+<h2 id="for">for(回圈)</h2>
+
+<p>下面這個範例很明顯要印出1到5的數字但不包含5(也就是1到4)，但這裡有個小小不一樣的地方，在之前的版本使用<code>1..5</code>就可以了，這根<code>ruby</code>很像，但是後來在beta3就不能使用了，要改用<code>..&lt;</code></p>
+
+<p><img src="http://lighter.tw/images/swift/swift-4.jpg" /></p>
+
+<p>如果單存只是想要跑回圈並無任何變數可以將<code>i</code>取代為<code>_</code>(底線)</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-5.jpg" /></p>
+
+<p>現在要包含最後一個數字的範圍也要跑，可以改用<code>...</code>(三個點)</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-6.jpg" /></p>
+
+<p>如果不想遞增的跑回圈，例如基數偶數，可以改用下面這種方式來寫，這跟以前原本的<code>for</code>回圈一樣，差別就是不用小括號</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-7.jpg" /></p>
+
+<h2 id="if">if(如果…)</h2>
+
+<p><code>if</code>，如果條件成立，就會進去執行，這很簡單啦！就不再費言了！</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-8.jpg" /></p>
+
+<p>我覺得比較特別也比較好的地方是這個！以往<code>1</code>也就是會被認作為<code>true</code>，所以不小心該變數的值就是<code>1</code>，那這樣判斷一定會通過，但是你並不是因為該變數為<code>1</code>就想讓它通過。但swift似乎不允許這樣，所以當你這樣定義的時候就會出現錯誤訊息，如下圖</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-9.jpg" /></p>
+
+<h2 id="switch">switch(選擇)</h2>
+
+<p>這裡可以看到我將<code>money</code>變數定義為<code>3_000_000</code>，這個<code>_</code>底線，在swift終是被允許的，主要是讓數字容易閱讀。而swift裡的<code>switch case</code>內是不需要寫<code>break</code>的，它自行會為每個<code>case</code>做<code>break</code>。</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-10.jpg" /></p>
+
+<p>多條件的要執行同一個的情況呢？直接在<code>case</code>內定義多個條件，用逗點隔開，甚至你可以使用範圍的方式<code>..&lt;</code>，如下圖</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-11.jpg" /></p>
+
+<h2 id="fallthrough">Fallthrough(貫穿)</h2>
+
+<p>如果你希望繼續往下執行下一個<code>case</code>，你可以使用<code>fallthrough</code>，就會繼續往下一個<code>case</code>執行，但下一個如果沒有<code>fallthrough</code>就會停止，也就是說他只會執行到下一個就停止，除非你每一個<code>case</code>內都有宣告</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-12.jpg" /></p>
+
+<h2 id="tuple-use-with-switch">Tuple(元組、組值) use with Switch</h2>
+
+<p>這給我的感覺有點像是陣列，但其實不是，我覺得這很好用，尤其是在回傳值得時候。下面這個範例結合<code>switch</code>來使用，這邊定義一個<code>tuple</code>的變數，裡面存放了兩個數字！很簡單吧</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-13.jpg" /></p>
+
+<p>也可以使用條<code>where</code>條件檢查</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-14.jpg" /></p>
+
+<h2 id="labeled-statements">Labeled Statements(帶標簽的語句)</h2>
+
+<p>這個我覺得蠻有趣的！可以去控制區塊的回圈，直接看code可能比較清楚了</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-15.jpg" /></p>
+
+<h2 id="array">Array(陣列)</h2>
+
+<p>這邊我覺得比較不一樣的是，陣列可以用<code>+=</code>直接在陣列後面加上(也就是串聯起來)，其他都蠻好理解的！</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-16.jpg" /></p>
+
+<p>清空陣列</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-17.jpg" /></p>
+
+<p>重複建立同樣的值，如果要將兩個陣列串聯起來，一樣使用<code>+</code>號就可以，但需注意這兩個陣咧的形態必須都一樣，下列這個範例一個是<code>Int</code>另一個是<code>Double</code>那這樣就不能串聯起來了。</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-18.jpg" /></p>
+
+<h2 id="dictionary">Dictionary(字典)</h2>
+
+<p>定義方式有兩種，如下圖</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-19.jpg" /></p>
+
+<p>字典的操作也很簡單</p>
+
+<p><img src="http://lighter.tw/images/swift/swift-20.jpg" /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記] 安裝 Vagrant]]></title>
@@ -2577,193 +2692,6 @@
   <li><a href="https://github.com/sonnyparlin/PullToRefresh">PullToRefresh</a></li>
   <li><a href="https://github.com/enormego/EGOTableViewPullRefresh">EGOTableViewPullRefresh</a></li>
 </ol>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Core Image]]></title>
-    <link href="http://lighter.tw/blog/2012/11/06/core-image/"/>
-    <updated>2012-11-06T19:01:00+08:00</updated>
-    <id>http://lighter.tw/blog/2012/11/06/core-image</id>
-    <content type="html"><![CDATA[<p><code>Core Image</code>是一項Mac OS X的技術，利用機器的繪圖處理器來作影像相關特效。於2004年8月的世界開發者大會(WWDC)中展示。(引用自<a href="http://zh.wikipedia.org/wiki/Core_Image">維基百科Core Image</a>)</p>
-
-<p>我們可以透過<code>Core Image</code>的框架(framework)來調整圖片的顏色、亮度…等。而Core Image包含了很多的濾鏡的效果，這些都可以在Document中找到。</p>
-
-<p>而<code>Core Image</code>有幾個重要的類別</p>
-
-<ol>
-  <li><code>CIContext</code>: 所有Core Image的處理都透過CIContext完成。這有點類似於Core Graphics或OpenGL的Context。</li>
-  <li><code>CIImage</code>: 該類別可持有圖片檔案。它可透過UIImage、圖片檔案或者是像素檔案來建立。</li>
-  <li><code>CIFilter</code>: 濾鏡類別擁有字典(dictionary)，可以指定濾鏡效果的，例如自然飽和度(vibrance)、色彩反轉(color inversion)、剪裁(cropping)…等。</li>
-</ol>
-
-<!-- more -->
-
-<p><strong>Step 1. 加入<code>CoreImage.framework</code></strong></p>
-
-<p>加入CoreImage.framework，並且準備好一張圖片加入到專案中。</p>
-
-<p><img src="http://lighter.tw/images/CoreImage/1.png" /></p>
-
-<p><strong>Step 2. 編輯<code>MainStoryboard.storyboard</code></strong></p>
-
-<p>加入</p>
-
-<ol>
-  <li>UIImageView</li>
-  <li>Round Rect Button</li>
-</ol>
-
-<p><img src="http://lighter.tw/images/CoreImage/2.png" /></p>
-
-<p>這邊加入3個按鈕，分別用來呈現不同的效果。</p>
-
-<p><strong>Step 3. 編輯ViewController</strong></p>
-
-<p>首先編輯<code>ViewController.h</code>，程式碼如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-</span><span class="line">
-</span><span class="line"><span class="k">@interface</span> <span class="nc">ViewController</span> : <span class="nc">UIViewController</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="n">CIContext</span> <span class="o">*</span><span class="n">context</span><span class="p">;</span>
-</span><span class="line">    <span class="n">CIFilter</span> <span class="o">*</span><span class="n">filter</span><span class="p">;</span>
-</span><span class="line">    <span class="n">CIImage</span> <span class="o">*</span><span class="n">inputImage</span><span class="p">;</span>    <span class="c1">//輸入的圖片</span>
-</span><span class="line">    <span class="n">CIImage</span> <span class="o">*</span><span class="n">outputImage</span><span class="p">;</span>   <span class="c1">//輸出濾鏡效果的圖片</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line"><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIImageView</span> <span class="o">*</span><span class="n">imageView</span><span class="p">;</span>
-</span><span class="line"><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter1:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span> <span class="c1">//濾鏡效果1</span>
-</span><span class="line"><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter2:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span> <span class="c1">//濾鏡效果2</span>
-</span><span class="line"><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter3:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span> <span class="c1">//濾鏡效果3</span>
-</span><span class="line"><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><code>ViewController.m</code>的程式碼如下：</p>
-
-<p>首先在<code>viewDidLoad</code>方法指定圖片給<code>imageView</code>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">@implementation</span> <span class="nc">ViewController</span>
-</span><span class="line"><span class="k">@synthesize</span> <span class="n">imageView</span><span class="p">;</span>
-</span><span class="line"><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class="line">    <span class="n">UIImage</span> <span class="o">*</span><span class="n">img</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;test.jpg&quot;</span><span class="p">];</span>
-</span><span class="line">    <span class="n">imageView</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">img</span><span class="p">;</span>
-</span><span class="line">    <span class="n">inputImage</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CIImage</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;test.jpg&quot;</span><span class="p">]];</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line"><span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="err">略</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>接著開始撰寫濾鏡效果的按鈕方法，這邊只介紹一個，程式碼如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>ViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">filter1:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-</span><span class="line">	<span class="c1">//1</span>
-</span><span class="line">    <span class="n">inputImage</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CIImage</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;test.jpg&quot;</span><span class="p">]];</span>
-</span><span class="line">
-</span><span class="line">    <span class="c1">//2</span>
-</span><span class="line">    <span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">CIContext</span> <span class="nl">contextWithOptions:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class="line">
-</span><span class="line">    <span class="c1">//3</span>
-</span><span class="line">    <span class="n">filter</span> <span class="o">=</span> <span class="p">[</span><span class="n">CIFilter</span> <span class="nl">filterWithName:</span><span class="s">@&quot;CIColorPosterize&quot;</span><span class="p">];</span>
-</span><span class="line">    <span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="n">inputImage</span> <span class="nl">forKey:</span><span class="s">@&quot;inputImage&quot;</span><span class="p">];</span>
-</span><span class="line">    <span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.0</span><span class="p">]</span> <span class="nl">forKey:</span><span class="s">@&quot;inputLevels&quot;</span><span class="p">];</span>
-</span><span class="line">	
-</span><span class="line">	 <span class="c1">//4</span>
-</span><span class="line">    <span class="n">outputImage</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter</span> <span class="n">outputImage</span><span class="p">];</span>
-</span><span class="line">    <span class="n">imageView</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageWithCGImage:</span><span class="p">[</span><span class="n">context</span> <span class="nl">createCGImage:</span><span class="n">outputImage</span> <span class="nl">fromRect:</span><span class="n">outputImage</span><span class="p">.</span><span class="n">extent</span><span class="p">]];</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>指定輸入的圖片。</li>
-  <li><code>CIContext</code>指定要使用CPU或是GPU來處理，這裡使用預設值就可以，所以指定為<code>nil</code>。</li>
-  <li>設定濾鏡效果，後面會介紹如何知道有哪些濾鏡效果及參數的設定。</li>
-  <li>透過<code>outputImage</code>這個方法可以取得濾鏡效果處理後的<code>CIImage</code>，最後將處理過後的圖片指定給<code>imageView</code>。</li>
-</ol>
-
-<p><strong>Step 4. 編譯專案</strong></p>
-
-<p>在一開始可以看到<code>UIImageView</code>的原始圖案，點下濾鏡效果按鈕後可以看到圖片改變了！！</p>
-
-<p><img src="http://lighter.tw/images/CoreImage/3.png" width="216" />
-<img src="http://lighter.tw/images/CoreImage/4.png" width="216" /></p>
-
-<p>就這麼簡單吧！但是一開始困擾我的問題是，我怎麼知道CoreImage有提供哪些濾鏡效果呢？其實這在Document都有詳細的說明，但要如何尋找呢？下面的方法其實我也是看過人家影片教學，才知道有這樣的尋找方式！我覺得非常方便。</p>
-
-<p>首先開啟到<code>ViewController.m</code>，並找到<code>CIFilter</code>，為了強調要選取它，所以在此將它反白，不然將游標移到<code>CIFilter</code>上就可以了。接著選取到右上方的<code>Show Quick Help Inspector</code>，在下方可以看到<code>Core Image Filter Reference</code>，如下圖：</p>
-
-<p><img src="http://lighter.tw/images/CoreImage/5.png" /></p>
-
-<p>點選<code>Core Image Filter Reference</code>後會跳出一個新的視窗，會顯示<code>Filter</code>效果有哪些，如下圖：</p>
-
-<p><img src="http://lighter.tw/images/CoreImage/6.png" /></p>
-
-<p>接著先找尋到先前使用到的<code>CIColorPosterize</code>這個濾鏡效果，點選下去</p>
-
-<p><img src="http://lighter.tw/images/CoreImage/7.png" /></p>
-
-<p>點選後會看到<code>CIColorPosterize</code>這個濾鏡效果的參數有哪些，這個效果的參數只有兩個，分別為<code>inputImage</code>與<code>inputLevels</code>，除了參數，下方也會有簡單的圖示呈現該濾鏡的效果如何，如下圖：</p>
-
-<p><img src="http://lighter.tw/images/CoreImage/8.png" /></p>
-
-<p>在這邊可以看到這兩個參數跟<code>forKey</code>值很像，這邊的方式就是透過setValue指定參數的值，在指定<code>forKey</code>值來指設定參數，所以當濾鏡效果不同時，會有不一樣的<code>forKey</code>值，這都需要參考到Document的說明！</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="n">inputImage</span> <span class="nl">forKey:</span><span class="s">@&quot;inputImage&quot;</span><span class="p">];</span>
-</span><span class="line"><span class="p">[</span><span class="n">filter</span> <span class="nl">setValue:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.0</span><span class="p">]</span> <span class="nl">forKey:</span><span class="s">@&quot;inputLevels&quot;</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h1 id="section">參考資料</h1>
-<ol>
-  <li><a href="http://www.raywenderlich.com/5689/beginning-core-image-in-ios-5">Beginning Core Image in iOS 5 Tutorial</a></li>
-  <li><a href="http://www.raywenderlich.com/22167/beginning-core-image-in-ios-6">Beginning Core Image in iOS 6</a></li>
-  <li><a href="http://itouchs.blogspot.tw/2011/12/filter4cam-core-image-tutorial.html">Filter4Cam 學習之 Core Image Tutorial</a></li>
-</ol>
-
 ]]></content>
   </entry>
   
