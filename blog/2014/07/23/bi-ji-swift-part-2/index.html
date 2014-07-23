@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Categories - Lighter</title>
+	<title>[筆記]swift part 2 - Lighter</title>
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="Github [ 1 ] Octopress [ 1 ] Iphone [ 17 ] Nodejs [ 6 ] Mysql [ 1 ] Git [ 1 ] 3 [ 1 ] Sublime [ 1 ] Text [ 1 ] Koding [ 1 ] Mongodb [ 1 ] Oracle [ 1 &hellip;">
+	<meta name="description" content="Function(函式，方法) 方法的一開始前面一定有func這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成func。 External Parameter Names(外部參數名) func要帶入參數直接在( )內寫入，其中比較不同的是否有宣告外部參數， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -82,59 +82,100 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 	
 		
 	
-	<div id="content" class="inner"><article class="page">
-    
-    <h1 class="title">Categories</h1>
-    
-    <div class="entry-content"><ul>
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">[筆記]swift Part 2</h2>
+	<div class="entry-content"><h2 id="function">Function(函式，方法)</h2>
 
-    <li><a href="/blog/categories/Github/">Github</a> [ 1 ]</li>
+<p>方法的一開始前面一定有<code>func</code>這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成<code>func</code>。</p>
 
-    <li><a href="/blog/categories/Octopress/">Octopress</a> [ 1 ]</li>
+<p><img src="/images/swift/swift-21.jpg" /></p>
 
-    <li><a href="/blog/categories/iPhone/">Iphone</a> [ 17 ]</li>
+<!-- more -->
 
-    <li><a href="/blog/categories/NodeJS/">Nodejs</a> [ 6 ]</li>
+<h2 id="external-parameter-names">External Parameter Names(外部參數名)</h2>
 
-    <li><a href="/blog/categories/mysql/">Mysql</a> [ 1 ]</li>
+<p><code>func</code>要帶入參數直接在<code>( )</code>內寫入，其中比較不同的是否有宣告外部參數，為了code的可讀性，加上外部參數名，可以直接了解該參數的作用，外部參數名跟參數名稱可以不一樣，如果你要將外部參數跟參數名稱設定一樣可以在參數名稱前面加上一個<code>#</code>號，這樣可省去重複打一樣的名稱。</p>
 
-    <li><a href="/blog/categories/Git/">Git</a> [ 1 ]</li>
+<p><img src="/images/swift/swift-22.jpg" /></p>
 
-    <li><a href="/blog/categories/3/">3</a> [ 1 ]</li>
+<h2 id="section">回傳值</h2>
 
-    <li><a href="/blog/categories/Sublime/">Sublime</a> [ 1 ]</li>
+<p>一個<code>func</code>要有回傳值，直接在<code>( )</code>後加上<code>-&gt; TYPE</code></p>
 
-    <li><a href="/blog/categories/Text/">Text</a> [ 1 ]</li>
+<p><img src="/images/swift/swift-23.jpg" /></p>
 
-    <li><a href="/blog/categories/koding/">Koding</a> [ 1 ]</li>
+<p>如果有多個值要回傳，可以使用<code>Tuple</code></p>
 
-    <li><a href="/blog/categories/mongodb/">Mongodb</a> [ 1 ]</li>
+<p><img src="/images/swift/swift-24.jpg" /></p>
 
-    <li><a href="/blog/categories/oracle/">Oracle</a> [ 1 ]</li>
+<p>方法也可以當作參數傳入</p>
 
-    <li><a href="/blog/categories/php/">Php</a> [ 9 ]</li>
+<p><img src="/images/swift/swift-25.jpg" /></p>
 
-    <li><a href="/blog/categories/laravel/">Laravel</a> [ 8 ]</li>
+<h2 id="nested-function">Nested Function(嵌套函式)</h2>
 
-    <li><a href="/blog/categories/vagrant/">Vagrant</a> [ 1 ]</li>
+<p><code>func</code>回傳除了一般的<code>Int</code>, <code>String</code>，也可以回傳<code>func</code></p>
 
-    <li><a href="/blog/categories/iPone/">Ipone</a> [ 1 ]</li>
+<p><img src="/images/swift/swift-26.jpg" /></p>
 
-    <li><a href="/blog/categories/swift/">Swift</a> [ 2 ]</li>
+<p>如果有多個參數要傳入，除了可以考慮組成一個陣列在傳入，或是可以用<code>...</code>當作有多個參數要傳入</p>
 
-    <li><a href="/blog/categories/xcode/">Xcode</a> [ 2 ]</li>
+<p><img src="/images/swift/swift-27.jpg" /></p>
 
-</ul>
+<h2 id="inout">inout</h2>
+
+<p>這其實跟指標很像，下面的範例可以看到<code>sum</code>傳入的是<code>&amp;sum</code>也就是該參數的位置，所以計算的結果也會改變<code>sum</code>的值</p>
+
+<p><img src="/images/swift/swift-28.jpg" /></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T16:29:37+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>, <a class='category' href='/blog/categories/swift/'>swift</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
+
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
 </div>
 </article>
 
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		
+		
+	</div>
+	
+</div>
+
+
 
 <section id="comment">
-    <h1 class="title">Comments</h1>
+    <h2 class="title">Comments</h2>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
-
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2014
 
@@ -155,8 +196,8 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://lighter.tw/blog/categories/index.html';
-        var disqus_url = 'http://lighter.tw/blog/categories/index.html';
+        var disqus_identifier = 'http://lighter.tw/blog/2014/07/23/bi-ji-swift-part-2/';
+        var disqus_url = 'http://lighter.tw/blog/2014/07/23/bi-ji-swift-part-2/';
         var disqus_script = 'embed.js';
       
     (function () {

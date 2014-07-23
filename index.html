@@ -7,7 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="最近看了一下swift，順手記錄一下，一開始當然是最基本的語法囉，在新的xcode中出現了playground，這是一個很適合用來練習基本的語法，不用特地去建立一個大專案，也不用特地去編譯整個專案才能得到結果，這感覺跟其他語言在終端機下執行很像。以下就是簡單的記錄 Read on &rarr; &hellip;">
+	<meta name="description" content=" Function(函式，方法) 方法的一開始前面一定有func這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成func。 Read on &rarr; Jul 23rd, 2014 iPhone, swift, xcode Comments ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +83,54 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/23/bi-ji-swift-part-2/">
+		
+			[筆記]swift Part 2</a>
+	</h2>
+	<div class="entry-content">
+		<h2 id="function">Function(函式，方法)</h2>
+
+<p>方法的一開始前面一定有<code>func</code>這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成<code>func</code>。</p>
+
+<p><img src="/images/swift/swift-21.jpg" /></p>
+
+
+		
+		<a href="/blog/2014/07/23/bi-ji-swift-part-2/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T16:29:37+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>, <a class='category' href='/blog/categories/swift/'>swift</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/07/23/bi-ji-swift-part-2/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -1041,93 +1089,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2014/05/30/laravel-part-2/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/05/29/laravel-part-1/">
-		
-			Laravel Part 1</a>
-	</h2>
-	<div class="entry-content">
-		<h2 id="laravel">安裝 Laravel</h2>
-
-<p>要在自己的電腦上先安裝<a href="https://getcomposer.org/">composer</a>。</p>
-
-<p>然後在終端機下這樣的指令</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">composer create-project laravel/laravel ProjectName</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>安裝完成後開啟網頁輸入網址 <code>http://localhost/laravel_sample/</code>，你會看到下面這樣的畫面</p>
-
-<p><img src="/images/laravel_sample/laravel-1.jpg" /></p>
-
-<p>預設應該是在<code>public</code>資料夾下，所以改成這個路徑<code>http://localhost/laravel_sample/public/index.php</code>，但…還是一樣失敗了   囧rz</p>
-
-<p><img src="/images/laravel_sample/laravel-2.jpg" /></p>
-
-<p>這似乎是<code>storage</code>資料夾權限的問題，所以用終端機切換到<code>app</code>這個路徑就可以看到<code>storage</code>資料夾，然後輸入下面的指令。</p>
-
-<blockquote>
-  <p>如果有權限上的問題在前面加個<code>sudo</code></p>
-</blockquote>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">chmod -R 777 storage</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>再次重整網頁！成功啦！</p>
-
-<p><img src="/images/laravel_sample/laravel-3.jpg" /></p>
-
-<p>接著我想把public這層路徑拔掉，所以把這層資料夾的<code>.htaccess</code>, <code>index.php</code>, <code>favicon.ico</code>這三個主要的檔案搬到外面，接著開啟<code>index.php</code>做些小修整，主要是修改兩個路徑而已，程式碼如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.php </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="php"><span class="line">
-</span><span class="line"><span class="k">require</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/bootstrap/autoload.php&#39;</span><span class="p">;</span>
-</span><span class="line"><span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/bootstrap/start.php&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>把路徑修改成 <code>http://localhost/laravel_sample/</code></p>
-
-<p><img src="/images/laravel_sample/laravel-4.jpg" /></p>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-29T13:16:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2014/05/29/laravel-part-1/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>

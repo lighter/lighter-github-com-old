@@ -7,11 +7,8 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="原本使用Codeigniter的bind很簡單！ 1
-2
-3
-$bind = array(':ID' =&gt; 'ABCDE12345');
-$sql = "SELECT * FROM {$this-&gt;db-&gt;dbprefix('TABLE')} WHERE ID = :ID &hellip;">
+	<meta name="description" content="安裝 Laravel 要在自己的電腦上先安裝composer。 然後在終端機下這樣的指令 1
+composer create-project laravel/laravel ProjectName 安裝完成後開啟網頁輸入網址 http://localhost/laravel_sample/， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -87,6 +84,93 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/29/laravel-part-1/">
+		
+			Laravel Part 1</a>
+	</h2>
+	<div class="entry-content">
+		<h2 id="laravel">安裝 Laravel</h2>
+
+<p>要在自己的電腦上先安裝<a href="https://getcomposer.org/">composer</a>。</p>
+
+<p>然後在終端機下這樣的指令</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">composer create-project laravel/laravel ProjectName</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>安裝完成後開啟網頁輸入網址 <code>http://localhost/laravel_sample/</code>，你會看到下面這樣的畫面</p>
+
+<p><img src="/images/laravel_sample/laravel-1.jpg" /></p>
+
+<p>預設應該是在<code>public</code>資料夾下，所以改成這個路徑<code>http://localhost/laravel_sample/public/index.php</code>，但…還是一樣失敗了   囧rz</p>
+
+<p><img src="/images/laravel_sample/laravel-2.jpg" /></p>
+
+<p>這似乎是<code>storage</code>資料夾權限的問題，所以用終端機切換到<code>app</code>這個路徑就可以看到<code>storage</code>資料夾，然後輸入下面的指令。</p>
+
+<blockquote>
+  <p>如果有權限上的問題在前面加個<code>sudo</code></p>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">chmod -R 777 storage</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>再次重整網頁！成功啦！</p>
+
+<p><img src="/images/laravel_sample/laravel-3.jpg" /></p>
+
+<p>接著我想把public這層路徑拔掉，所以把這層資料夾的<code>.htaccess</code>, <code>index.php</code>, <code>favicon.ico</code>這三個主要的檔案搬到外面，接著開啟<code>index.php</code>做些小修整，主要是修改兩個路徑而已，程式碼如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>index.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line">
+</span><span class="line"><span class="k">require</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/bootstrap/autoload.php&#39;</span><span class="p">;</span>
+</span><span class="line"><span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/bootstrap/start.php&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>把路徑修改成 <code>http://localhost/laravel_sample/</code></p>
+
+<p><img src="/images/laravel_sample/laravel-4.jpg" /></p>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-29T13:16:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/05/29/laravel-part-1/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -1177,52 +1261,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2013/02/04/express-with-post-slash-get-slash-ajax/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/">
-		
-			JSON資料於TableView與Pull Refresh</a>
-	</h2>
-	<div class="entry-content">
-		<p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
-
-<p><img src="/images/json/json1.png" width="216" /></p>
-
-
-		
-		<a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-10T17:11:00+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>

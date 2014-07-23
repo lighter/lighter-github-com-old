@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xcode | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/xcode/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-07-23T16:15:38+08:00</updated>
+  <updated>2014-07-23T21:01:20+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 2]]></title>
+    <link href="http://lighter.tw/blog/2014/07/23/bi-ji-swift-part-2/"/>
+    <updated>2014-07-23T16:29:37+08:00</updated>
+    <id>http://lighter.tw/blog/2014/07/23/bi-ji-swift-part-2</id>
+    <content type="html"><![CDATA[<h2 id="function">Function(函式，方法)</h2>
+
+<p>方法的一開始前面一定有<code>func</code>這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成<code>func</code>。</p>
+
+<p><img src="/images/swift/swift-21.jpg"></p>
+
+<!-- more -->
+
+<h2 id="external-parameter-names">External Parameter Names(外部參數名)</h2>
+
+<p><code>func</code>要帶入參數直接在<code>( )</code>內寫入，其中比較不同的是否有宣告外部參數，為了code的可讀性，加上外部參數名，可以直接了解該參數的作用，外部參數名跟參數名稱可以不一樣，如果你要將外部參數跟參數名稱設定一樣可以在參數名稱前面加上一個<code>#</code>號，這樣可省去重複打一樣的名稱。</p>
+
+<p><img src="/images/swift/swift-22.jpg"></p>
+
+<h2 id="section">回傳值</h2>
+
+<p>一個<code>func</code>要有回傳值，直接在<code>( )</code>後加上<code>-&gt; TYPE</code></p>
+
+<p><img src="/images/swift/swift-23.jpg"></p>
+
+<p>如果有多個值要回傳，可以使用<code>Tuple</code></p>
+
+<p><img src="/images/swift/swift-24.jpg"></p>
+
+<p>方法也可以當作參數傳入</p>
+
+<p><img src="/images/swift/swift-25.jpg"></p>
+
+<h2 id="nested-function">Nested Function(嵌套函式)</h2>
+
+<p><code>func</code>回傳除了一般的<code>Int</code>, <code>String</code>，也可以回傳<code>func</code></p>
+
+<p><img src="/images/swift/swift-26.jpg"></p>
+
+<p>如果有多個參數要傳入，除了可以考慮組成一個陣列在傳入，或是可以用<code>...</code>當作有多個參數要傳入</p>
+
+<p><img src="/images/swift/swift-27.jpg"></p>
+
+<h2 id="inout">inout</h2>
+
+<p>這其實跟指標很像，下面的範例可以看到<code>sum</code>傳入的是<code>&amp;sum</code>也就是該參數的位置，所以計算的結果也會改變<code>sum</code>的值</p>
+
+<p><img src="/images/swift/swift-28.jpg"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 1]]></title>
