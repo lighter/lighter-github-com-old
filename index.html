@@ -7,7 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content=" Function(函式，方法) 方法的一開始前面一定有func這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成func。 Read on &rarr; Jul 23rd, 2014 iPhone, swift, xcode Comments ">
+	<meta name="description" content="Struct(結構) 在swift，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個car的結構，裡面包含了color和number，接著實立化這個car結構，整個跟類別很像吧！ Read on &rarr; Jul 26th, 2014 iPhone, swift, &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +83,54 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/26/bi-ji-swift-part-3/">
+		
+			[筆記]swift Part 3</a>
+	</h2>
+	<div class="entry-content">
+		<h2 id="struct">Struct(結構)</h2>
+
+<p>在<code>swift</code>，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個<code>car</code>的結構，裡面包含了<code>color</code>和<code>number</code>，接著實立化這個<code>car</code>結構，整個跟類別很像吧！</p>
+
+<p><img src="/images/swift/swift-29.jpg" /></p>
+
+
+		
+		<a href="/blog/2014/07/26/bi-ji-swift-part-3/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T11:18:42+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>, <a class='category' href='/blog/categories/swift/'>swift</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/07/26/bi-ji-swift-part-3/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -965,130 +1013,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2014/05/31/laravel-part-3/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/05/30/laravel-part-2/">
-		
-			Laravel Part 2</a>
-	</h2>
-	<div class="entry-content">
-		<p>第二部分就是套用<a href="http://getbootstrap.com/">bootstrap</a>和<a href="http://jquery.com/">jquery</a>，我將檔案放到專案根目錄下的<code>public</code>資料夾內。或者你想引用CDN的也可以，這樣你就不用下載任何東西。</p>
-
-<blockquote>
-  <p>jquery其實應該是用不到，只是習慣都會載入而已，接下來也不會有任何event事件需要寫！</p>
-</blockquote>
-
-<p>所以我的檔案結構如下</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">laravel_sample
-</span><span class="line">	⌞app
-</span><span class="line">	⌞public
-</span><span class="line">		⌞bootstrap-3.1.1-dist
-</span><span class="line">		⌞jquery-1.11.1.min.js	</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>接著我想把首頁換掉，換成登入的畫面，所以先在<code>app/views</code>下建立一個<code>login.blade.php</code>，至於<code>blade</code>是什麼，請參考<a href="http://laravel.com/docs">laravel</a>的官方文件吧。</p>
-
-<p>然後輸入下面的code：</p>
-
-<div><script src="https://gist.github.com/fac184def5041dd0cdae.js?file=login.blade.php"></script>
-<noscript><pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Look at me Login&lt;/title&gt;
-    {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
-    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
-    {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;col-md-2 col-md-offset-5&quot;&gt;
-    {{ Form::open(array('url' =&gt; 'login', 'class' =&gt; 'clearfix', 'role' =&gt; 'form' )) }}
-
-      &lt;h1&gt;Login&lt;/h1&gt;
-
-      &lt;p&gt;
-        {{ $errors-&gt;first('email') }}
-        {{ $errors-&gt;first('password') }}
-      &lt;/p&gt;
-
-      &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;exampleInputEmail&quot;&gt; {{ Form::label('email', 'Email Address') }} &lt;/label&gt;
-        {{ Form::text('email', Input::old('email'), array('placeholder' =&gt; 'awesome@awesome.com', 'class' =&gt; 'form-control', 'id' =&gt; 'exampleInputEamil')) }}
-      &lt;/div&gt;
-
-      &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;exampleInputPasword&quot;&gt; {{ Form::label('password', 'Password') }} &lt;/label&gt;
-        {{ Form::password('password', ['class' =&gt; 'form-control', 'id' =&gt; 'exampleInputPassword'])  }}
-      &lt;/div&gt;
-
-      &lt;p&gt;
-        {{ Form::submit('Submit!', ['class' =&gt; 'btn btn-default'])  }}
-      &lt;/p&gt;
-
-    {{ Form::close() }}
-
-    &lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;
-    &lt;/div&gt;&lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></noscript></div>
-
-<p>接著修改<code>routes.php</code>，把預設首頁換成<code>login</code>，code如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>routes.php </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class="line"><span class="p">{</span>
-</span><span class="line">	<span class="k">return</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">);</span>
-</span><span class="line"><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>重新整理網頁，就可以看到登入的畫面啦！</p>
-
-<p><img src="/images/laravel_sample/laravel-5.jpg" /></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-30T23:16:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2014/05/30/laravel-part-2/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>

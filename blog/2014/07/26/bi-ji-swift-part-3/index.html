@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: swift - Lighter</title>
+	<title>[筆記]swift part 3 - Lighter</title>
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="Category: swift">
+	<meta name="description" content="Struct(結構) 在swift，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個car的結構，裡面包含了color和number，接著實立化這個car結構，整個跟類別很像吧！ 接著再一個簡單的範例，struct裡面使用了別的struct，以及struct內含有方法 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -82,76 +82,79 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 	
 		
 	
-	<div id="content" class="inner">
-	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">[筆記]swift Part 3</h2>
+	<div class="entry-content"><h2 id="struct">Struct(結構)</h2>
+
+<p>在<code>swift</code>，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個<code>car</code>的結構，裡面包含了<code>color</code>和<code>number</code>，接著實立化這個<code>car</code>結構，整個跟類別很像吧！</p>
+
+<p><img src="/images/swift/swift-29.jpg" /></p>
+
+<!-- more -->
+
+<p>接著再一個簡單的範例，<code>struct</code>裡面使用了別的<code>struct</code>，以及<code>struct</code>內含有方法</p>
+
+<p><img src="/images/swift/swift-30.jpg" /></p>
+
+<p>接這個範例能夠顯現<code>struct</code>跟類別不同的地方，在下面這個範例中可以看到<code>strunct</code>內的方法，會去操作內部的屬性，也就是<code>myName</code>，只要會去操作到內部的屬性值，在方法前面都需要加上<code>mutating</code>這個 keyword !</p>
+
+<p><img src="/images/swift/swift-31.jpg" /></p>
+
+<p>這是我參考stackoverflow這篇答案的[<a href="http://stackoverflow.com/a/24035861/685060">http://stackoverflow.com/a/24035861/685060</a>]，以下是我大意理解的節錄</p>
+
+<blockquote>
+  <p>結構跟類別(class)很像，不同的地方是結構有兩種模式，<code> immutable</code>/<code>mutable</code>，而類別通常的操作是用<code>reference</code>，而這種操作方式算是<code>mutable</code>，因為使用<code>reference</code>的方式操作，如果又是<code>immutable</code>的情況，這樣顯得非常困難。</p>
+</blockquote>
+
+</div>
 
 
-	
-	
-	<section class="archives"><h1 class="year">2014</h1>
+<div class="meta">
+	<div class="date">
 
-<article>
-	<h2 class="title"><a href="/blog/2014/07/26/bi-ji-swift-part-3/">[筆記]swift part 3</a></h2>
-	<div class="meta">
-		<div class="date">Jul 26</div>
-		<div class="tags">
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T11:18:42+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time></div>
+	<div class="tags">
 
 
 	<a class='category' href='/blog/categories/iphone/'>iPhone</a>, <a class='category' href='/blog/categories/swift/'>swift</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
 
 
 </div>
-	    
-	    <div class="comments"><a href="/blog/2014/07/26/bi-ji-swift-part-3/#disqus_thread">Comments</a></div>
-	    
-	</div>
-</article>
 	
-
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
 	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/07/23/bi-ji-swift-part-2/">[筆記]swift part 2</a></h2>
-	<div class="meta">
-		<div class="date">Jul 23</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>, <a class='category' href='/blog/categories/swift/'>swift</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
-
-
 </div>
-	    
-	    <div class="comments"><a href="/blog/2014/07/23/bi-ji-swift-part-2/#disqus_thread">Comments</a></div>
-	    
-	</div>
 </article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		
+		
+	</div>
 	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/07/20/bi-ji-swift-part-1/">[筆記]swift part 1</a></h2>
-	<div class="meta">
-		<div class="date">Jul 20</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ipone/'>iPone</a>, <a class='category' href='/blog/categories/swift/'>swift</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
-
-
 </div>
-	    
-	    <div class="comments"><a href="/blog/2014/07/20/bi-ji-swift-part-1/#disqus_thread">Comments</a></div>
-	    
-	</div>
-</article>
-	
-	</section>
-	
 
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2014
 
@@ -171,7 +174,10 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
       var disqus_shortname = 'lighter';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lighter.tw/blog/2014/07/26/bi-ji-swift-part-3/';
+        var disqus_url = 'http://lighter.tw/blog/2014/07/26/bi-ji-swift-part-3/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

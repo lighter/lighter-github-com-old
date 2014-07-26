@@ -4,7 +4,7 @@
   <title><![CDATA[Category: swift | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/swift/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-07-23T21:01:20+08:00</updated>
+  <updated>2014-07-26T12:44:08+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 3]]></title>
+    <link href="http://lighter.tw/blog/2014/07/26/bi-ji-swift-part-3/"/>
+    <updated>2014-07-26T11:18:42+08:00</updated>
+    <id>http://lighter.tw/blog/2014/07/26/bi-ji-swift-part-3</id>
+    <content type="html"><![CDATA[<h2 id="struct">Struct(結構)</h2>
+
+<p>在<code>swift</code>，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個<code>car</code>的結構，裡面包含了<code>color</code>和<code>number</code>，接著實立化這個<code>car</code>結構，整個跟類別很像吧！</p>
+
+<p><img src="/images/swift/swift-29.jpg"></p>
+
+<!-- more -->
+
+<p>接著再一個簡單的範例，<code>struct</code>裡面使用了別的<code>struct</code>，以及<code>struct</code>內含有方法</p>
+
+<p><img src="/images/swift/swift-30.jpg"></p>
+
+<p>接這個範例能夠顯現<code>struct</code>跟類別不同的地方，在下面這個範例中可以看到<code>strunct</code>內的方法，會去操作內部的屬性，也就是<code>myName</code>，只要會去操作到內部的屬性值，在方法前面都需要加上<code>mutating</code>這個 keyword !</p>
+
+<p><img src="/images/swift/swift-31.jpg"></p>
+
+<p>這是我參考stackoverflow這篇答案的[<a href="http://stackoverflow.com/a/24035861/685060">http://stackoverflow.com/a/24035861/685060</a>]，以下是我大意理解的節錄</p>
+
+<blockquote>
+  <p>結構跟類別(class)很像，不同的地方是結構有兩種模式，<code> immutable</code>/<code>mutable</code>，而類別通常的操作是用<code>reference</code>，而這種操作方式算是<code>mutable</code>，因為使用<code>reference</code>的方式操作，如果又是<code>immutable</code>的情況，這樣顯得非常困難。</p>
+</blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 2]]></title>
