@@ -7,11 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="第二部分就是套用bootstrap和jquery，我將檔案放到專案根目錄下的public資料夾內。或者你想引用CDN的也可以，這樣你就不用下載任何東西。 jquery其實應該是用不到，只是習慣都會載入而已，接下來也不會有任何event事件需要寫！ 所以我的檔案結構如下 1
-2
-3
-4
-5 &hellip;">
+	<meta name="description" content="接著就是建立資料方面的事情啦！登入總要有先有資料對吧！ Step 1. Mysql設定 開啓phpmyadmin，建立一個新的Database，這邊取名為laravel_sample，如下圖 再來就是設定laravel的資料庫連線，開啓database.php，找到mysql的設定， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -87,6 +83,262 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/31/laravel-part-3/">
+		
+			Laravel Part 3</a>
+	</h2>
+	<div class="entry-content">
+		<p>接著就是建立資料方面的事情啦！登入總要有先有資料對吧！</p>
+
+<h2 id="step-1-mysql">Step 1. Mysql設定</h2>
+
+<p>開啓<code>phpmyadmin</code>，建立一個新的Database，這邊取名為<code>laravel_sample</code>，如下圖</p>
+
+<p><img src="/images/laravel_sample/laravel-6.jpg" /></p>
+
+<p>再來就是設定<code>laravel</code>的資料庫連線，開啓<code>database.php</code>，找到<code>mysql</code>的設定，輸入<code>database</code>名稱還有連線的帳號密碼</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>database.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="s1">&#39;mysql&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">	<span class="s1">&#39;driver&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;host&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;database&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;laravel_sample&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;username&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;password&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;charset&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;collation&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;utf8_unicode_ci&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;prefix&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line"><span class="p">),</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="step-2-table">Step 2. 建立Table</h2>
+
+<p><code>laravel</code>的<code>artisan</code>很方便，這邊你不需要自己在<code>phpmyadmin</code>手動一個一個輸入column name和type，也不用自己寫mysql的create，可以透過指令和一些code來幫你完成建立Table。</p>
+
+<p>開啟終端機，切換到專案的路徑下，以我的環境來說，我的的專案是在<code>/Application/XAMPP/htdocs/laravel_sample/</code>；然後輸入下面的指令：</p>
+
+<p><code>php artisan migrate:make create-users-table</code></p>
+
+<p>實際上會幫你建立一個 <code>時間</code> 加上 <code>create-users-table</code>的一個檔案，如下圖：</p>
+
+<p><img src="/images/laravel_sample/laravel-7.jpg" /></p>
+
+<p>接著開啟這個檔案，這個檔案的路徑會在<code>app/database/migrations/</code>下</p>
+
+<p>在這檔案會看到兩個method，一個是用來建立，另一個當然就是拿來還原的囉！建立的程式主要就是用來建立Table，直接看code吧，如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">/**
+</span><span class="line"> * Run the migrations.
+</span><span class="line"> *
+</span><span class="line"> * @return void
+</span><span class="line"> */
+</span><span class="line">public function up()
+</span><span class="line">{
+</span><span class="line">	Schema::create('users', function(Blueprint $table)
+</span><span class="line">	{
+</span><span class="line">		$table-&gt;increments('id');
+</span><span class="line">		$table-&gt;string('name', 32);
+</span><span class="line">		$table-&gt;string('username', 32);
+</span><span class="line">		$table-&gt;string('email', 320);
+</span><span class="line">		$table-&gt;string('password', 64);
+</span><span class="line">		$table-&gt;timestamps();
+</span><span class="line">	});
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">/**
+</span><span class="line"> * Reverse the migrations.
+</span><span class="line"> *
+</span><span class="line"> * @return void
+</span><span class="line"> */
+</span><span class="line">public function down()
+</span><span class="line">{
+</span><span class="line">	Schema::drop('users');
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>再次回到終端機，輸入下面的指令來建立Table</p>
+
+<p><code>php artisan migrate</code></p>
+
+<p>阿…發生錯誤了！</p>
+
+<p><img src="/images/laravel_sample/laravel-8.jpg" /></p>
+
+<p>似乎是無法跟mysql連線，請試著修改<code>database.php</code>的<code>host</code>，修改為<code>127.0.0.1</code>，或者你可以參考這篇<a href="http://stackoverflow.com/questions/14219692/laravel-setup-of-migrations-using-artisan-is-failing">Laravel setup of migrations using Artisan is failing</a>，直接指定<code>unix_socket</code>的路徑，因為我有在遠端安裝的時候遇過這情形。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>database.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="s1">&#39;mysql&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">	<span class="s1">&#39;driver&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span>
+</span><span class="line">	<span class="s1">&#39;host&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改完再執行一次吧！</p>
+
+<p><img src="/images/laravel_sample/laravel-9.jpg" /></p>
+
+<p>成功囉~</p>
+
+<p>來看看<code>phpmyadmin</code>是不是真的出現<code>users</code>的Table呢！？</p>
+
+<p><img src="/images/laravel_sample/laravel-10.jpg" /></p>
+
+<h2 id="step-3-">Step 3. 建立資料</h2>
+
+<p>建立資料的部分也不用你自己到資料庫裡面一筆一筆key，一樣可以透過<code>artisan</code>幫你完成，但你要先寫好code！在<code>app/database/seeds/</code>下建立一個<code>UsersTableSeeder.php</code>(注意：<code>U</code>要大寫)。建立完成後先不急著開起它來編輯，先看到<code>DatabaseSeeder.php</code>這隻檔案，預設執行時來執行這隻檔案，再由這隻檔案的內容去看你要執行哪隻檔案…直接看code吧！</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>DatabaseSeeder.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">	<span class="nx">Eloquent</span><span class="o">::</span><span class="na">unguard</span><span class="p">();</span>
+</span><span class="line">
+</span><span class="line">	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="s1">&#39;UsersTableSeeder&#39;</span><span class="p">);</span> <span class="c1">// 拿掉原本的註解，注意這邊預設User後是沒有加`s`的記得自己補上，跟檔案名稱對應</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>接下來就是編輯你要寫的內容了，開啟<code>UsersTableSeeder.php</code>，code如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>UsersTableSeeder.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">UsersTableSeeder</span> <span class="k">extends</span> <span class="nx">Seeder</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nx">DB</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span> <span class="c1">// 每次執行都先清理資料表單</span>
+</span><span class="line">        <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class="line">            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;lighter&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;awesome&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;test@gmail.com&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;awesome&#39;</span><span class="p">),</span>
+</span><span class="line">        <span class="p">));</span>
+</span><span class="line">
+</span><span class="line">        <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class="line">            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Tom&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;test2@gmail.com&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;awesome&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="p">));</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>完成之後到終端機輸入下面的指令</p>
+
+<p><code>php artisan db:seed</code></p>
+
+<p>成功囉～這樣以後如果需要很多測試資料，就不用手動一筆一筆操作建立了！而且轉換資料庫也方便很多，不用寫多套SQL語法。</p>
+
+<p><img src="/images/laravel_sample/laravel-11.jpg" /></p>
+
+<p><img src="/images/laravel_sample/laravel-12.jpg" /></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-31T17:18:37+08:00" pubdate data-updated="true">May 31<span>st</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/05/31/laravel-part-3/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -947,88 +1199,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2013/03/31/nodejs-an-zhuang/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/02/12/mysql-command/">
-		
-			Mysql Command</a>
-	</h2>
-	<div class="entry-content">
-		<h2 id="section">登入</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;mysql -u root -h localhost -p</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-1">顯示資料庫</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;show databases;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-2">選擇使用的資料庫</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;use database;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-3">顯示目前選擇的資料庫</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;select database();</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-4">顯示目前連線狀態</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;status</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="table">顯示該資料庫的表單(Table)</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;show tables;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="table-1">顯示表單(Table)結構</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;describe 資料表明稱;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-5">顯示資料表所有內容</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt;select * from 資料表明稱;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-12T15:48:00+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/mysql/'>mysql</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2013/02/12/mysql-command/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>

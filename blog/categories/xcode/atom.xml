@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xcode | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/xcode/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-07-26T12:44:08+08:00</updated>
+  <updated>2014-07-31T05:15:39+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 4]]></title>
+    <link href="http://lighter.tw/blog/2014/07/30/bi-ji-swift-part-4/"/>
+    <updated>2014-07-30T21:16:15+08:00</updated>
+    <id>http://lighter.tw/blog/2014/07/30/bi-ji-swift-part-4</id>
+    <content type="html"><![CDATA[<h2 id="class">class(類別)</h2>
+
+<p>類別整個跟結構的寫法沒有太大的差異，直接看範例吧！</p>
+
+<p><img src="/images/swift/swift-32.jpg"></p>
+
+<!-- more -->
+
+<h2 id="section">繼承</h2>
+
+<p><img src="/images/swift/swift-33.jpg"></p>
+
+<h2 id="class-func">class func(類別方法)</h2>
+
+<p>類別方法可允許不用實立化物件而直接呼叫，只需要在方法前面加上<code>class</code>這個keyword；在<code>struct</code>則是要用<code>static</code>。</p>
+
+<p><img src="/images/swift/swift-34.jpg"></p>
+
+<h2 id="class-ref">class ref</h2>
+
+<p>class是參考型別，從下面的範例可以看到<code>myClass2</code>是參考<code>myClass1</code>，所以當<code>myClass1</code>有所改變，<code>myClass2</code>也會跟著改變；而struct並不會因為這樣就有所改變。</p>
+
+<p><img src="/images/swift/swift-35.jpg"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 3]]></title>
