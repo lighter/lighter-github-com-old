@@ -4,7 +4,7 @@
   <title><![CDATA[Category: koding | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/koding/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-08-02T12:15:58+08:00</updated>
+  <updated>2014-08-02T12:31:27+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -22,35 +22,35 @@
 
 <p>列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的<code>phpmyadmin</code></p>
 
-<p>{% codeblock %}
-&gt; help programs
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; help programs</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>{% img /images/koding/koding-2014-04-20_09-50-47.jpg %}</p>
+<p><img src="/images/koding/koding-2014-04-20_09-50-47.jpg"></p>
 
 <p>可以看到你的phpmyadmin url及基本的mysql指令，你可以使用它提供的指令去修改密碼</p>
 
-<p>{% codeblock %}
-&gt; help phpmyadmin
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; help phpmyadmin</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>{% img /images/koding/koding-2014-04-20_10-00-13.jpg %}</p>
+<p><img src="/images/koding/koding-2014-04-20_10-00-13.jpg"></p>
 
 <p>修改mysql密碼</p>
 
-<p>{% codeblock %}
-mysqladmin -u root password YOUR_NEW_PASSWORD
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqladmin -u root password YOUR_NEW_PASSWORD</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>修改mysql root的帳號</p>
 
-<p>{% codeblock %}
-&gt; mysql -u root -p
-&gt; Enter password:
-mysql&gt; use mysql;
-mysql&gt; update user set user=’admin’ where user=’root’;
-mysql&gt; flush privileges;
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; mysql -u root -p
+</span><span class='line'>&gt; Enter password:
+</span><span class='line'>mysql&gt; use mysql;
+</span><span class='line'>mysql&gt; update user set user=’admin’ where user=’root’;
+</span><span class='line'>mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <!-- more -->
 
@@ -58,37 +58,36 @@ mysql&gt; flush privileges;
 
 <p>安裝<code>composer</code>(<a href="https://getcomposer.org/download/">連結</a>)</p>
 
-<p>{% codeblock %}
-&gt; cd
-&gt; cd Web/
-&gt; curl -sS https://getcomposer.org/installer | php
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cd
+</span><span class='line'>&gt; cd Web/
+</span><span class='line'>&gt; curl -sS https://getcomposer.org/installer | php</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>{% img /images/koding/koding-2014-04-20_17-31-50.jpg %}</p>
+<p><img src="/images/koding/koding-2014-04-20_17-31-50.jpg"></p>
 
 <p>安裝<code>Laravel</code>(<a href="http://laravel.com/docs/quick#installation">連結</a>)</p>
 
-<p>{% codeblock %}
-&gt; php composer.phar create-project laravel/laravel your-project-name –prefer-dist
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; php composer.phar create-project laravel/laravel your-project-name –prefer-dist</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>{% img /images/koding/koding-2014-04-20_17-38-03.jpg %}</p>
+<p><img src="/images/koding/koding-2014-04-20_17-38-03.jpg"></p>
 
 <p>安裝<code>php5-mcrypt</code></p>
 
-<p>{% codeblock %}
-&gt; sudo apt-get install php5-mcrypt
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; sudo apt-get install php5-mcrypt</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>{% img /images/koding/koding-2014-04-20_17-53-27.jpg %}</p>
+<p><img src="/images/koding/koding-2014-04-20_17-53-27.jpg"></p>
 
 <p>設定<code>sessions</code>資料夾權限，路徑<code>/home/UserNmae/Web/laravel-sample/app/storage/sessions</code></p>
 
-<p>{% img /images/koding/koding-2014-04-20_17-57-42.jpg %}</p>
+<p><img src="/images/koding/koding-2014-04-20_17-57-42.jpg"></p>
 
 <p>最後試著在瀏覽器輸入<code>http://YourUserName.kd.io/laravel-sample/public/</code>，就可以看到<code>Laravel</code>的預設網頁。</p>
 
-<p>{% img /images/koding/koding-2014-04-20_18-07-17.jpg %}</p>
+<p><img src="/images/koding/koding-2014-04-20_18-07-17.jpg"></p>
 ]]></content>
   </entry>
   

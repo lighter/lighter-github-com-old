@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/feed" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-08-02T12:15:27+08:00</updated>
+  <updated>2014-08-02T12:31:27+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -23,6 +23,8 @@
 <p><code>closure</code>就有如同<code>c</code>、<code>objective-c</code>的block。<code>function</code>其實也可以當作參數一樣傳遞，下面用簡單的範例做練習。</p>
 
 <p><img src="http://lighter.tw/images/swift/swift-36.jpg" /></p>
+
+<!-- more -->
 
 <p><code>closure</code>的格式如下</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-08-02T12:15:58+08:00</updated>
+  <updated>2014-08-02T12:31:27+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -22,21 +22,22 @@
 
 <p><code>closure</code>就有如同<code>c</code>、<code>objective-c</code>的block。<code>function</code>其實也可以當作參數一樣傳遞，下面用簡單的範例做練習。</p>
 
-<p>{% img /images/swift/swift-36.jpg %}</p>
+<p><img src="/images/swift/swift-36.jpg"></p>
 
 <!-- more -->
 
 <p><code>closure</code>的格式如下</p>
 
-<p>{% codeblock %}
-{ (parameters) -&gt; returnType in
-    statements
-}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{ (parameters) -&gt; returnType in
+</span><span class='line'>    statements
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>單行的表示式<code>closure</code>可以省略<code>return</code>，參數的部分甚至可以省略寫成<code>$0</code>代表第一個參數，<code>$1</code>代表第二個參數，以此類推，下面用簡單的範例表示</p>
 
-<p>{% img /images/swift/swift-37.jpg %}</p>
+<p><img src="/images/swift/swift-37.jpg"></p>
 
 <p>下面這個範例只是單純的介紹寫法而已！</p>
 
@@ -48,7 +49,7 @@
   <li><code>寫法3</code>則是把參數也給省略了，直接使用<code>&lt;</code>符號，swift則可以自動幫你推斷要將這兩個參數做<code>&lt;</code>的邏輯。</li>
 </ul>
 
-<p>{% img /images/swift/swift-38.jpg %}</p>
+<p><img src="/images/swift/swift-38.jpg"></p>
 
 <h2 id="lazydeldel-with-closure">lazy(<del>懶惰的?</del>緩慢的) with closure</h2>
 
@@ -56,11 +57,16 @@
 
 <p><code>lazy</code>在swift的使用方式如下</p>
 
-<p>{% codeblock %}</p>
-
-<p>lazy var lazyVar = <a href="">String</a></p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>lazy var lazyVar = &lt;a href="">String&lt;/a>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>只需要在<code>var</code>前面加上<code>lazy</code>這個keyword，還有一點要注意的是<code>lazy</code>並不能使用<code>let</code>，因為常數在初始化前是必需要有值的。</p>
 
@@ -70,40 +76,71 @@
 
 <p>如果你希望你的變數有會因為一些邏輯判斷而有不同的值，這時可以用<code>closure</code>來完成，下面這段code直接貼在playground是無法使用的，他會告訴你<code>lazy</code>必須是<code>struct</code>或<code>class</code>的成員。</p>
 
-<p>{% codeblock %}</p>
-
-<p>lazy var lazyStr:String = {
-    // do you want
-    return “This is a test”
-}()</p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>lazy var lazyStr:String = {
+</span><span class='line'>    // do you want
+</span><span class='line'>    return “This is a test”
+</span><span class='line'>}()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>在什麼時候你會需要使用使用<code>lazy</code>呢?如果你的變數的值，是需要等到物件初始化完成後才能明確的定義，這時你就會需要使用，下面使用一個簡單的範例；下面範例中可以看到<code>[unowned self]</code>，這是要避免<code>strong reference cycle</code>。</p>
 
-<p>{% codeblock %}</p>
-
-<p>class testClass {
-    var name:String</p>
-
-<pre><code>lazy var sayHiTo:String = {
-    [unowned self] in
-    return "Hi~ \(self.name)"
-}()
-
-init(name:String) {
-    self.name = name
-
-} }
-</code></pre>
-
-<p>var myClass = testClass(name: “Maya”)
-// 實立化一個myClass後，這時sayHiTo變數 is nil</p>
-
-<p>myClass.sayHiTo
-// 當sayHiTo這個變數被呼叫到才真正的給予值</p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>class testClass {
+</span><span class='line'>    var name:String&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>lazy var sayHiTo:String = {
+</span><span class='line'>    [unowned self] in
+</span><span class='line'>    return "Hi~ \(self.name)"
+</span><span class='line'>}()
+</span><span class='line'>
+</span><span class='line'>init(name:String) {
+</span><span class='line'>    self.name = name
+</span><span class='line'>
+</span><span class='line'>} }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var myClass = testClass(name: “Maya”)
+</span><span class='line'>// 實立化一個myClass後，這時sayHiTo變數 is nil&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>myClass.sayHiTo
+</span><span class='line'>// 當sayHiTo這個變數被呼叫到才真正的給予值&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 ]]></content>
   </entry>
@@ -117,25 +154,25 @@ init(name:String) {
 
 <p>類別整個跟結構的寫法沒有太大的差異，直接看範例吧！</p>
 
-<p>{% img /images/swift/swift-32.jpg %}</p>
+<p><img src="/images/swift/swift-32.jpg"></p>
 
 <!-- more -->
 
 <h2 id="section">繼承</h2>
 
-<p>{% img /images/swift/swift-33.jpg %}</p>
+<p><img src="/images/swift/swift-33.jpg"></p>
 
 <h2 id="class-func">class func(類別方法)</h2>
 
 <p>類別方法可允許不用實立化物件而直接呼叫，只需要在方法前面加上<code>class</code>這個keyword；在<code>struct</code>則是要用<code>static</code>。</p>
 
-<p>{% img /images/swift/swift-34.jpg %}</p>
+<p><img src="/images/swift/swift-34.jpg"></p>
 
 <h2 id="class-ref">class ref</h2>
 
 <p>class是參考型別，從下面的範例可以看到<code>myClass2</code>是參考<code>myClass1</code>，所以當<code>myClass1</code>有所改變，<code>myClass2</code>也會跟著改變；而struct並不會因為這樣就有所改變。</p>
 
-<p>{% img /images/swift/swift-35.jpg %}</p>
+<p><img src="/images/swift/swift-35.jpg"></p>
 ]]></content>
   </entry>
   
@@ -148,17 +185,17 @@ init(name:String) {
 
 <p>在<code>swift</code>，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個<code>car</code>的結構，裡面包含了<code>color</code>和<code>number</code>，接著實立化這個<code>car</code>結構，整個跟類別很像吧！</p>
 
-<p>{% img /images/swift/swift-29.jpg %}</p>
+<p><img src="/images/swift/swift-29.jpg"></p>
 
 <!-- more -->
 
 <p>接著再一個簡單的範例，<code>struct</code>裡面使用了別的<code>struct</code>，以及<code>struct</code>內含有方法</p>
 
-<p>{% img /images/swift/swift-30.jpg %}</p>
+<p><img src="/images/swift/swift-30.jpg"></p>
 
 <p>接這個範例能夠顯現<code>struct</code>跟類別不同的地方，在下面這個範例中可以看到<code>strunct</code>內的方法，會去操作內部的屬性，也就是<code>myName</code>，只要會去操作到內部的屬性值，在方法前面都需要加上<code>mutating</code>這個 keyword !</p>
 
-<p>{% img /images/swift/swift-31.jpg %}</p>
+<p><img src="/images/swift/swift-31.jpg"></p>
 
 <p>這是我參考stackoverflow這篇答案的[<a href="http://stackoverflow.com/a/24035861/685060">http://stackoverflow.com/a/24035861/685060</a>]，以下是我大意理解的節錄</p>
 
@@ -178,7 +215,7 @@ init(name:String) {
 
 <p>方法的一開始前面一定有<code>func</code>這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成<code>func</code>。</p>
 
-<p>{% img /images/swift/swift-21.jpg %}</p>
+<p><img src="/images/swift/swift-21.jpg"></p>
 
 <!-- more -->
 
@@ -186,37 +223,37 @@ init(name:String) {
 
 <p><code>func</code>要帶入參數直接在<code>( )</code>內寫入，其中比較不同的是否有宣告外部參數，為了code的可讀性，加上外部參數名，可以直接了解該參數的作用，外部參數名跟參數名稱可以不一樣，如果你要將外部參數跟參數名稱設定一樣可以在參數名稱前面加上一個<code>#</code>號，這樣可省去重複打一樣的名稱。</p>
 
-<p>{% img /images/swift/swift-22.jpg %}</p>
+<p><img src="/images/swift/swift-22.jpg"></p>
 
 <h2 id="section">回傳值</h2>
 
 <p>一個<code>func</code>要有回傳值，直接在<code>( )</code>後加上<code>-&gt; TYPE</code></p>
 
-<p>{% img /images/swift/swift-23.jpg %}</p>
+<p><img src="/images/swift/swift-23.jpg"></p>
 
 <p>如果有多個值要回傳，可以使用<code>Tuple</code></p>
 
-<p>{% img /images/swift/swift-24.jpg %}</p>
+<p><img src="/images/swift/swift-24.jpg"></p>
 
 <p>方法也可以當作參數傳入</p>
 
-<p>{% img /images/swift/swift-25.jpg %}</p>
+<p><img src="/images/swift/swift-25.jpg"></p>
 
 <h2 id="nested-function">Nested Function(嵌套函式)</h2>
 
 <p><code>func</code>回傳除了一般的<code>Int</code>, <code>String</code>，也可以回傳<code>func</code></p>
 
-<p>{% img /images/swift/swift-26.jpg %}</p>
+<p><img src="/images/swift/swift-26.jpg"></p>
 
 <p>如果有多個參數要傳入，除了可以考慮組成一個陣列在傳入，或是可以用<code>...</code>當作有多個參數要傳入</p>
 
-<p>{% img /images/swift/swift-27.jpg %}</p>
+<p><img src="/images/swift/swift-27.jpg"></p>
 
 <h2 id="inout">inout</h2>
 
 <p>這其實跟指標很像，下面的範例可以看到<code>sum</code>傳入的是<code>&amp;sum</code>也就是該參數的位置，所以計算的結果也會改變<code>sum</code>的值</p>
 
-<p>{% img /images/swift/swift-28.jpg %}</p>
+<p><img src="/images/swift/swift-28.jpg"></p>
 ]]></content>
   </entry>
   
