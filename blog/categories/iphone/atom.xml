@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-08-02T12:31:27+08:00</updated>
+  <updated>2014-08-02T18:30:20+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,223 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 6]]></title>
+    <link href="http://lighter.tw/blog/2014/08/02/bi-ji-swift-part-6/"/>
+    <updated>2014-08-02T15:57:18+08:00</updated>
+    <id>http://lighter.tw/blog/2014/08/02/bi-ji-swift-part-6</id>
+    <content type="html"><![CDATA[<h2 id="enums">Enums(列舉)</h2>
+
+<p>swift中的</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// enum 格式
+</span><span class='line'>enum testEnum {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 包含了東西南北的 compassPoint enum
+</span><span class='line'>enum compassPoint {
+</span><span class='line'>    case East
+</span><span class='line'>    case West
+</span><span class='line'>    case South
+</span><span class='line'>    case North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 縮減為一行
+</span><span class='line'>enum compassPoint2 {
+</span><span class='line'>    case East, West, South, North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var directionToHead = compassPoint.West&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 如果知道是 compassPoint形態，則可以忽略’compassPoint’
+</span><span class='line'>// 直接使用 .East
+</span><span class='line'>directionToHead = .East&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2 id="enum-with-switch">Enum with switch</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>enum compassPoint {
+</span><span class='line'>    case East
+</span><span class='line'>    case West
+</span><span class='line'>    case South
+</span><span class='line'>    case North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var directionToHead = compassPoint.East&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>switch directionToHead {
+</span><span class='line'>    case .East:
+</span><span class='line'>        println(“East”)
+</span><span class='line'>    case .West:
+</span><span class='line'>        println(“West”)
+</span><span class='line'>    case .South:
+</span><span class='line'>        println(“South”)
+</span><span class='line'>    case .North:
+</span><span class='line'>        println(“North”)
+</span><span class='line'>    default:
+</span><span class='line'>        println(“No value”)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2 id="associated-value">Associated Value</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>enum Barcode {
+</span><span class='line'>    case UPCA(Int, Int, Int)
+</span><span class='line'>    case QRCode(String)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var productBarcode = Barcode.UPCA(1, 123&lt;em>456&lt;/em>789, 222)
+</span><span class='line'>productBarcode = .QRCode(“ABCDEFGHIJKLMNOP”)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>switch productBarcode {
+</span><span class='line'>    case .UPCA(let numberSystem, let identifier, let check):
+</span><span class='line'>        println(“UPC-A with value of (numberSystem), (identifier), (check).”)
+</span><span class='line'>    case .QRCode(let productCode):
+</span><span class='line'>        println(“QR code with value of (productCode).”)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 輸出 “QR code with value of ABCDEFGHIJKLMNOP.”</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2 id="row-value">Row value</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>enum Number:Int {
+</span><span class='line'>    case One = 1
+</span><span class='line'>    case Two = 2
+</span><span class='line'>    case Three = 3
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 縮寫成一行，僅需定義一開始
+</span><span class='line'>enum Number2: Int {
+</span><span class='line'>    case One = 1, Two, Three
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 使用 toRaw 來取得值 1
+</span><span class='line'>var numberOne = Number.One.toRaw()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 將 1 轉回去取得 對應的 enum 值 One
+</span><span class='line'>var numberTwo = Number.fromRaw(2)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>if let two = Number.fromRaw(2) {
+</span><span class='line'>    switch two {
+</span><span class='line'>        case .Two:
+</span><span class='line'>            println(“It is number 2”)
+</span><span class='line'>        default:
+</span><span class='line'>            println(“Not found”)
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>else {
+</span><span class='line'>    println(“Not found”)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 5]]></title>
@@ -254,19 +471,6 @@
 <p>這其實跟指標很像，下面的範例可以看到<code>sum</code>傳入的是<code>&amp;sum</code>也就是該參數的位置，所以計算的結果也會改變<code>sum</code>的值</p>
 
 <p><img src="/images/swift/swift-28.jpg"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[學習iOS App 1]]></title>
-    <link href="http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1/"/>
-    <updated>2013-09-16T19:47:00+08:00</updated>
-    <id>http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1</id>
-    <content type="html"><![CDATA[<p>這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到<a href="http://www.raywenderlich.com/">Raywenderlich</a>，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好…而且有時英文要翻譯成中文真的蠻困難的，翻譯的過程中也曾想是否應該念過一次在用我理解的方式翻譯，還是要照字面上翻譯呢？這蠻苦惱的！由於自己英文不是很好，所以花了一點時間翻譯，然後檢查幾次，終於翻譯好一篇了！</p>
-
-<h1 id="ios-app-1welcome-to-programminghttpwwwraywenderlichcomzh-hans48771e5adb8e7bf92ios-app-1efbc9awelcome-to-programming"><a href="http://www.raywenderlich.com/zh-hans/48771/%E5%AD%B8%E7%BF%92ios-app-1%EF%BC%9Awelcome-to-programming">學習iOS App 1：Welcome to Programming</a></h1>
-
-<p>或許你會覺得怎麼會跟簡體中文在一起呢？沒錯我也是翻譯完才發現這問題，我也寫信去跟他說繁體中文跟簡體中文是不一樣的，但是由於分配工作的問題，似乎也不能修改了。所以就這樣吧….現在還在翻譯第二篇中…其實翻譯還蠻有趣的說！</p>
 ]]></content>
   </entry>
   

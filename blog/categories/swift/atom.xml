@@ -4,7 +4,7 @@
   <title><![CDATA[Category: swift | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/swift/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-08-02T12:31:27+08:00</updated>
+  <updated>2014-08-02T18:30:20+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,223 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 6]]></title>
+    <link href="http://lighter.tw/blog/2014/08/02/bi-ji-swift-part-6/"/>
+    <updated>2014-08-02T15:57:18+08:00</updated>
+    <id>http://lighter.tw/blog/2014/08/02/bi-ji-swift-part-6</id>
+    <content type="html"><![CDATA[<h2 id="enums">Enums(列舉)</h2>
+
+<p>swift中的</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// enum 格式
+</span><span class='line'>enum testEnum {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 包含了東西南北的 compassPoint enum
+</span><span class='line'>enum compassPoint {
+</span><span class='line'>    case East
+</span><span class='line'>    case West
+</span><span class='line'>    case South
+</span><span class='line'>    case North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 縮減為一行
+</span><span class='line'>enum compassPoint2 {
+</span><span class='line'>    case East, West, South, North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var directionToHead = compassPoint.West&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 如果知道是 compassPoint形態，則可以忽略’compassPoint’
+</span><span class='line'>// 直接使用 .East
+</span><span class='line'>directionToHead = .East&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2 id="enum-with-switch">Enum with switch</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>enum compassPoint {
+</span><span class='line'>    case East
+</span><span class='line'>    case West
+</span><span class='line'>    case South
+</span><span class='line'>    case North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var directionToHead = compassPoint.East&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>switch directionToHead {
+</span><span class='line'>    case .East:
+</span><span class='line'>        println(“East”)
+</span><span class='line'>    case .West:
+</span><span class='line'>        println(“West”)
+</span><span class='line'>    case .South:
+</span><span class='line'>        println(“South”)
+</span><span class='line'>    case .North:
+</span><span class='line'>        println(“North”)
+</span><span class='line'>    default:
+</span><span class='line'>        println(“No value”)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2 id="associated-value">Associated Value</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>enum Barcode {
+</span><span class='line'>    case UPCA(Int, Int, Int)
+</span><span class='line'>    case QRCode(String)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var productBarcode = Barcode.UPCA(1, 123&lt;em>456&lt;/em>789, 222)
+</span><span class='line'>productBarcode = .QRCode(“ABCDEFGHIJKLMNOP”)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>switch productBarcode {
+</span><span class='line'>    case .UPCA(let numberSystem, let identifier, let check):
+</span><span class='line'>        println(“UPC-A with value of (numberSystem), (identifier), (check).”)
+</span><span class='line'>    case .QRCode(let productCode):
+</span><span class='line'>        println(“QR code with value of (productCode).”)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 輸出 “QR code with value of ABCDEFGHIJKLMNOP.”</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2 id="row-value">Row value</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>enum Number:Int {
+</span><span class='line'>    case One = 1
+</span><span class='line'>    case Two = 2
+</span><span class='line'>    case Three = 3
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 縮寫成一行，僅需定義一開始
+</span><span class='line'>enum Number2: Int {
+</span><span class='line'>    case One = 1, Two, Three
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 使用 toRaw 來取得值 1
+</span><span class='line'>var numberOne = Number.One.toRaw()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 將 1 轉回去取得 對應的 enum 值 One
+</span><span class='line'>var numberTwo = Number.fromRaw(2)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>if let two = Number.fromRaw(2) {
+</span><span class='line'>    switch two {
+</span><span class='line'>        case .Two:
+</span><span class='line'>            println(“It is number 2”)
+</span><span class='line'>        default:
+</span><span class='line'>            println(“Not found”)
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>else {
+</span><span class='line'>    println(“Not found”)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 5]]></title>
@@ -254,122 +471,6 @@
 <p>這其實跟指標很像，下面的範例可以看到<code>sum</code>傳入的是<code>&amp;sum</code>也就是該參數的位置，所以計算的結果也會改變<code>sum</code>的值</p>
 
 <p><img src="/images/swift/swift-28.jpg"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[筆記]swift part 1]]></title>
-    <link href="http://lighter.tw/blog/2014/07/20/bi-ji-swift-part-1/"/>
-    <updated>2014-07-20T15:26:30+08:00</updated>
-    <id>http://lighter.tw/blog/2014/07/20/bi-ji-swift-part-1</id>
-    <content type="html"><![CDATA[<p>最近看了一下<code>swift</code>，順手記錄一下，一開始當然是最基本的語法囉，在新的<code>xcode</code>中出現了<code>playground</code>，這是一個很適合用來練習基本的語法，不用特地去建立一個大專案，也不用特地去編譯整個專案才能得到結果，這感覺跟其他語言在終端機下執行很像。以下就是簡單的記錄</p>
-
-<!-- more -->
-
-<p>一開始建立好<code>playground</code>的檔案就可以看到他已經為你建立好基本的範例了！但這裡並不需要使用到<code>Cocoa</code>，因為基礎的語法練習似乎還不會用到內建的東西，所以其實可以把它刪除。</p>
-
-<p><img src="/images/swift/swift-1.jpg"></p>
-
-<h2 id="var">var(變數)</h2>
-<p>變數的定義格式如下</p>
-
-<p><code>
-var VAR_NAME:TYPE = ASSIGN_VALUE
-</code></p>
-
-<p>一開始需要使用<code>var</code>來定義這是一個變數，至於變數的形態你可以自行定義或是交由編譯器來辨別，然後變數顧名思義就是會變得數，所以之後變數的直可以任意給予新的值。變數的值可以變，但變數的形態不能變，看到<code>str3</code>為<code>string</code>的形態，後面要assign一個數字就會出現錯誤。</p>
-
-<p><img src="/images/swift/swift-2.jpg"></p>
-
-<h2 id="let">let(常數)</h2>
-<p>常數的定義與變數不同，是使用<code>let</code>這個keyword，而且常數只能在一開始assign值，事後並不能更改他</p>
-
-<p><img src="/images/swift/swift-3.jpg"></p>
-
-<h2 id="for">for(回圈)</h2>
-
-<p>下面這個範例很明顯要印出1到5的數字但不包含5(也就是1到4)，但這裡有個小小不一樣的地方，在之前的版本使用<code>1..5</code>就可以了，這根<code>ruby</code>很像，但是後來在beta3就不能使用了，要改用<code>..&lt;</code></p>
-
-<p><img src="/images/swift/swift-4.jpg"></p>
-
-<p>如果單存只是想要跑回圈並無任何變數可以將<code>i</code>取代為<code>_</code>(底線)</p>
-
-<p><img src="/images/swift/swift-5.jpg"></p>
-
-<p>現在要包含最後一個數字的範圍也要跑，可以改用<code>...</code>(三個點)</p>
-
-<p><img src="/images/swift/swift-6.jpg"></p>
-
-<p>如果不想遞增的跑回圈，例如基數偶數，可以改用下面這種方式來寫，這跟以前原本的<code>for</code>回圈一樣，差別就是不用小括號</p>
-
-<p><img src="/images/swift/swift-7.jpg"></p>
-
-<h2 id="if">if(如果…)</h2>
-
-<p><code>if</code>，如果條件成立，就會進去執行，這很簡單啦！就不再費言了！</p>
-
-<p><img src="/images/swift/swift-8.jpg"></p>
-
-<p>我覺得比較特別也比較好的地方是這個！以往<code>1</code>也就是會被認作為<code>true</code>，所以不小心該變數的值就是<code>1</code>，那這樣判斷一定會通過，但是你並不是因為該變數為<code>1</code>就想讓它通過。但swift似乎不允許這樣，所以當你這樣定義的時候就會出現錯誤訊息，如下圖</p>
-
-<p><img src="/images/swift/swift-9.jpg"></p>
-
-<h2 id="switch">switch(選擇)</h2>
-
-<p>這裡可以看到我將<code>money</code>變數定義為<code>3_000_000</code>，這個<code>_</code>底線，在swift終是被允許的，主要是讓數字容易閱讀。而swift裡的<code>switch case</code>內是不需要寫<code>break</code>的，它自行會為每個<code>case</code>做<code>break</code>。</p>
-
-<p><img src="/images/swift/swift-10.jpg"></p>
-
-<p>多條件的要執行同一個的情況呢？直接在<code>case</code>內定義多個條件，用逗點隔開，甚至你可以使用範圍的方式<code>..&lt;</code>，如下圖</p>
-
-<p><img src="/images/swift/swift-11.jpg"></p>
-
-<h2 id="fallthrough">Fallthrough(貫穿)</h2>
-
-<p>如果你希望繼續往下執行下一個<code>case</code>，你可以使用<code>fallthrough</code>，就會繼續往下一個<code>case</code>執行，但下一個如果沒有<code>fallthrough</code>就會停止，也就是說他只會執行到下一個就停止，除非你每一個<code>case</code>內都有宣告</p>
-
-<p><img src="/images/swift/swift-12.jpg"></p>
-
-<h2 id="tuple-use-with-switch">Tuple(元組、組值) use with Switch</h2>
-
-<p>這給我的感覺有點像是陣列，但其實不是，我覺得這很好用，尤其是在回傳值得時候。下面這個範例結合<code>switch</code>來使用，這邊定義一個<code>tuple</code>的變數，裡面存放了兩個數字！很簡單吧</p>
-
-<p><img src="/images/swift/swift-13.jpg"></p>
-
-<p>也可以使用條<code>where</code>條件檢查</p>
-
-<p><img src="/images/swift/swift-14.jpg"></p>
-
-<h2 id="labeled-statements">Labeled Statements(帶標簽的語句)</h2>
-
-<p>這個我覺得蠻有趣的！可以去控制區塊的回圈，直接看code可能比較清楚了</p>
-
-<p><img src="/images/swift/swift-15.jpg"></p>
-
-<h2 id="array">Array(陣列)</h2>
-
-<p>這邊我覺得比較不一樣的是，陣列可以用<code>+=</code>直接在陣列後面加上(也就是串聯起來)，其他都蠻好理解的！</p>
-
-<p><img src="/images/swift/swift-16.jpg"></p>
-
-<p>清空陣列</p>
-
-<p><img src="/images/swift/swift-17.jpg"></p>
-
-<p>重複建立同樣的值，如果要將兩個陣列串聯起來，一樣使用<code>+</code>號就可以，但需注意這兩個陣咧的形態必須都一樣，下列這個範例一個是<code>Int</code>另一個是<code>Double</code>那這樣就不能串聯起來了。</p>
-
-<p><img src="/images/swift/swift-18.jpg"></p>
-
-<h2 id="dictionary">Dictionary(字典)</h2>
-
-<p>定義方式有兩種，如下圖</p>
-
-<p><img src="/images/swift/swift-19.jpg"></p>
-
-<p>字典的操作也很簡單</p>
-
-<p><img src="/images/swift/swift-20.jpg"></p>
-
 ]]></content>
   </entry>
   
