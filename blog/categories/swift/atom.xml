@@ -4,7 +4,7 @@
   <title><![CDATA[Category: swift | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/swift/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-07-31T05:15:39+08:00</updated>
+  <updated>2014-08-02T12:15:58+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 5]]></title>
+    <link href="http://lighter.tw/blog/2014/07/31/bi-ji-swift-part-5/"/>
+    <updated>2014-07-31T21:41:58+08:00</updated>
+    <id>http://lighter.tw/blog/2014/07/31/bi-ji-swift-part-5</id>
+    <content type="html"><![CDATA[<h2 id="closure">closure</h2>
+
+<p><code>closure</code>就有如同<code>c</code>、<code>objective-c</code>的block。<code>function</code>其實也可以當作參數一樣傳遞，下面用簡單的範例做練習。</p>
+
+<p>{% img /images/swift/swift-36.jpg %}</p>
+
+<!-- more -->
+
+<p><code>closure</code>的格式如下</p>
+
+<p>{% codeblock %}
+{ (parameters) -&gt; returnType in
+    statements
+}
+{% endcodeblock %}</p>
+
+<p>單行的表示式<code>closure</code>可以省略<code>return</code>，參數的部分甚至可以省略寫成<code>$0</code>代表第一個參數，<code>$1</code>代表第二個參數，以此類推，下面用簡單的範例表示</p>
+
+<p>{% img /images/swift/swift-37.jpg %}</p>
+
+<p>下面這個範例只是單純的介紹寫法而已！</p>
+
+<p><code>sort</code>這個方法預設是做了升序排列，如果你希望降序排列，可以傳入一個function(<code>closure</code>)進去。</p>
+
+<ul>
+  <li><code>寫法1</code>很單純，傳入已經寫好的function。</li>
+  <li><code>寫法2</code>則是將方法名稱、參數、回傳值省略了，並且使用<code>$0</code>表示第一個參數，<code>$1</code>為第二個以以此類推。</li>
+  <li><code>寫法3</code>則是把參數也給省略了，直接使用<code>&lt;</code>符號，swift則可以自動幫你推斷要將這兩個參數做<code>&lt;</code>的邏輯。</li>
+</ul>
+
+<p>{% img /images/swift/swift-38.jpg %}</p>
+
+<h2 id="lazydeldel-with-closure">lazy(<del>懶惰的?</del>緩慢的) with closure</h2>
+
+<p>什麼是<code>lazy</code>?，<code>就是當你真的需要使用，才真的會分配(記憶體)給你使用</code>。至於以前<code>objcetive-c</code>的寫法可以參考這篇文章<a href="http://mikebuss.com/2014/06/22/lazy-initialization-swift/">Lazy Initialization with Swift</a>，我覺得她寫很明確，所以我就用我理解的意思大概描述一遍，至於傳統的<code>objective-c</code>的寫法我就不贅述了，畢竟這邊是swift的note。</p>
+
+<p><code>lazy</code>在swift的使用方式如下</p>
+
+<p>{% codeblock %}</p>
+
+<p>lazy var lazyVar = <a href="">String</a></p>
+
+<p>{% endcodeblock %}</p>
+
+<p>只需要在<code>var</code>前面加上<code>lazy</code>這個keyword，還有一點要注意的是<code>lazy</code>並不能使用<code>let</code>，因為常數在初始化前是必需要有值的。</p>
+
+<blockquote>
+  <p>原本的寫法是<code>@lazy</code>後來修改為<code>lazy</code>，把小老鼠<code>@</code>給省略了。</p>
+</blockquote>
+
+<p>如果你希望你的變數有會因為一些邏輯判斷而有不同的值，這時可以用<code>closure</code>來完成，下面這段code直接貼在playground是無法使用的，他會告訴你<code>lazy</code>必須是<code>struct</code>或<code>class</code>的成員。</p>
+
+<p>{% codeblock %}</p>
+
+<p>lazy var lazyStr:String = {
+    // do you want
+    return “This is a test”
+}()</p>
+
+<p>{% endcodeblock %}</p>
+
+<p>在什麼時候你會需要使用使用<code>lazy</code>呢?如果你的變數的值，是需要等到物件初始化完成後才能明確的定義，這時你就會需要使用，下面使用一個簡單的範例；下面範例中可以看到<code>[unowned self]</code>，這是要避免<code>strong reference cycle</code>。</p>
+
+<p>{% codeblock %}</p>
+
+<p>class testClass {
+    var name:String</p>
+
+<pre><code>lazy var sayHiTo:String = {
+    [unowned self] in
+    return "Hi~ \(self.name)"
+}()
+
+init(name:String) {
+    self.name = name
+
+} }
+</code></pre>
+
+<p>var myClass = testClass(name: “Maya”)
+// 實立化一個myClass後，這時sayHiTo變數 is nil</p>
+
+<p>myClass.sayHiTo
+// 當sayHiTo這個變數被呼叫到才真正的給予值</p>
+
+<p>{% endcodeblock %}</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 4]]></title>
@@ -22,25 +117,25 @@
 
 <p>類別整個跟結構的寫法沒有太大的差異，直接看範例吧！</p>
 
-<p><img src="/images/swift/swift-32.jpg"></p>
+<p>{% img /images/swift/swift-32.jpg %}</p>
 
 <!-- more -->
 
 <h2 id="section">繼承</h2>
 
-<p><img src="/images/swift/swift-33.jpg"></p>
+<p>{% img /images/swift/swift-33.jpg %}</p>
 
 <h2 id="class-func">class func(類別方法)</h2>
 
 <p>類別方法可允許不用實立化物件而直接呼叫，只需要在方法前面加上<code>class</code>這個keyword；在<code>struct</code>則是要用<code>static</code>。</p>
 
-<p><img src="/images/swift/swift-34.jpg"></p>
+<p>{% img /images/swift/swift-34.jpg %}</p>
 
 <h2 id="class-ref">class ref</h2>
 
 <p>class是參考型別，從下面的範例可以看到<code>myClass2</code>是參考<code>myClass1</code>，所以當<code>myClass1</code>有所改變，<code>myClass2</code>也會跟著改變；而struct並不會因為這樣就有所改變。</p>
 
-<p><img src="/images/swift/swift-35.jpg"></p>
+<p>{% img /images/swift/swift-35.jpg %}</p>
 ]]></content>
   </entry>
   
@@ -53,17 +148,17 @@
 
 <p>在<code>swift</code>，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個<code>car</code>的結構，裡面包含了<code>color</code>和<code>number</code>，接著實立化這個<code>car</code>結構，整個跟類別很像吧！</p>
 
-<p><img src="/images/swift/swift-29.jpg"></p>
+<p>{% img /images/swift/swift-29.jpg %}</p>
 
 <!-- more -->
 
 <p>接著再一個簡單的範例，<code>struct</code>裡面使用了別的<code>struct</code>，以及<code>struct</code>內含有方法</p>
 
-<p><img src="/images/swift/swift-30.jpg"></p>
+<p>{% img /images/swift/swift-30.jpg %}</p>
 
 <p>接這個範例能夠顯現<code>struct</code>跟類別不同的地方，在下面這個範例中可以看到<code>strunct</code>內的方法，會去操作內部的屬性，也就是<code>myName</code>，只要會去操作到內部的屬性值，在方法前面都需要加上<code>mutating</code>這個 keyword !</p>
 
-<p><img src="/images/swift/swift-31.jpg"></p>
+<p>{% img /images/swift/swift-31.jpg %}</p>
 
 <p>這是我參考stackoverflow這篇答案的[<a href="http://stackoverflow.com/a/24035861/685060">http://stackoverflow.com/a/24035861/685060</a>]，以下是我大意理解的節錄</p>
 
@@ -83,7 +178,7 @@
 
 <p>方法的一開始前面一定有<code>func</code>這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成<code>func</code>。</p>
 
-<p><img src="/images/swift/swift-21.jpg"></p>
+<p>{% img /images/swift/swift-21.jpg %}</p>
 
 <!-- more -->
 
@@ -91,37 +186,37 @@
 
 <p><code>func</code>要帶入參數直接在<code>( )</code>內寫入，其中比較不同的是否有宣告外部參數，為了code的可讀性，加上外部參數名，可以直接了解該參數的作用，外部參數名跟參數名稱可以不一樣，如果你要將外部參數跟參數名稱設定一樣可以在參數名稱前面加上一個<code>#</code>號，這樣可省去重複打一樣的名稱。</p>
 
-<p><img src="/images/swift/swift-22.jpg"></p>
+<p>{% img /images/swift/swift-22.jpg %}</p>
 
 <h2 id="section">回傳值</h2>
 
 <p>一個<code>func</code>要有回傳值，直接在<code>( )</code>後加上<code>-&gt; TYPE</code></p>
 
-<p><img src="/images/swift/swift-23.jpg"></p>
+<p>{% img /images/swift/swift-23.jpg %}</p>
 
 <p>如果有多個值要回傳，可以使用<code>Tuple</code></p>
 
-<p><img src="/images/swift/swift-24.jpg"></p>
+<p>{% img /images/swift/swift-24.jpg %}</p>
 
 <p>方法也可以當作參數傳入</p>
 
-<p><img src="/images/swift/swift-25.jpg"></p>
+<p>{% img /images/swift/swift-25.jpg %}</p>
 
 <h2 id="nested-function">Nested Function(嵌套函式)</h2>
 
 <p><code>func</code>回傳除了一般的<code>Int</code>, <code>String</code>，也可以回傳<code>func</code></p>
 
-<p><img src="/images/swift/swift-26.jpg"></p>
+<p>{% img /images/swift/swift-26.jpg %}</p>
 
 <p>如果有多個參數要傳入，除了可以考慮組成一個陣列在傳入，或是可以用<code>...</code>當作有多個參數要傳入</p>
 
-<p><img src="/images/swift/swift-27.jpg"></p>
+<p>{% img /images/swift/swift-27.jpg %}</p>
 
 <h2 id="inout">inout</h2>
 
 <p>這其實跟指標很像，下面的範例可以看到<code>sum</code>傳入的是<code>&amp;sum</code>也就是該參數的位置，所以計算的結果也會改變<code>sum</code>的值</p>
 
-<p><img src="/images/swift/swift-28.jpg"></p>
+<p>{% img /images/swift/swift-28.jpg %}</p>
 ]]></content>
   </entry>
   
@@ -136,7 +231,7 @@
 
 <p>一開始建立好<code>playground</code>的檔案就可以看到他已經為你建立好基本的範例了！但這裡並不需要使用到<code>Cocoa</code>，因為基礎的語法練習似乎還不會用到內建的東西，所以其實可以把它刪除。</p>
 
-<p><img src="/images/swift/swift-1.jpg"></p>
+<p>{% img  /images/swift/swift-1.jpg %}</p>
 
 <h2 id="var">var(變數)</h2>
 <p>變數的定義格式如下</p>
@@ -147,96 +242,96 @@ var VAR_NAME:TYPE = ASSIGN_VALUE
 
 <p>一開始需要使用<code>var</code>來定義這是一個變數，至於變數的形態你可以自行定義或是交由編譯器來辨別，然後變數顧名思義就是會變得數，所以之後變數的直可以任意給予新的值。變數的值可以變，但變數的形態不能變，看到<code>str3</code>為<code>string</code>的形態，後面要assign一個數字就會出現錯誤。</p>
 
-<p><img src="/images/swift/swift-2.jpg"></p>
+<p>{% img /images/swift/swift-2.jpg %}</p>
 
 <h2 id="let">let(常數)</h2>
 <p>常數的定義與變數不同，是使用<code>let</code>這個keyword，而且常數只能在一開始assign值，事後並不能更改他</p>
 
-<p><img src="/images/swift/swift-3.jpg"></p>
+<p>{% img /images/swift/swift-3.jpg %}</p>
 
 <h2 id="for">for(回圈)</h2>
 
 <p>下面這個範例很明顯要印出1到5的數字但不包含5(也就是1到4)，但這裡有個小小不一樣的地方，在之前的版本使用<code>1..5</code>就可以了，這根<code>ruby</code>很像，但是後來在beta3就不能使用了，要改用<code>..&lt;</code></p>
 
-<p><img src="/images/swift/swift-4.jpg"></p>
+<p>{% img /images/swift/swift-4.jpg %}</p>
 
 <p>如果單存只是想要跑回圈並無任何變數可以將<code>i</code>取代為<code>_</code>(底線)</p>
 
-<p><img src="/images/swift/swift-5.jpg"></p>
+<p>{% img /images/swift/swift-5.jpg %}</p>
 
 <p>現在要包含最後一個數字的範圍也要跑，可以改用<code>...</code>(三個點)</p>
 
-<p><img src="/images/swift/swift-6.jpg"></p>
+<p>{% img /images/swift/swift-6.jpg %}</p>
 
 <p>如果不想遞增的跑回圈，例如基數偶數，可以改用下面這種方式來寫，這跟以前原本的<code>for</code>回圈一樣，差別就是不用小括號</p>
 
-<p><img src="/images/swift/swift-7.jpg"></p>
+<p>{% img /images/swift/swift-7.jpg %}</p>
 
 <h2 id="if">if(如果…)</h2>
 
 <p><code>if</code>，如果條件成立，就會進去執行，這很簡單啦！就不再費言了！</p>
 
-<p><img src="/images/swift/swift-8.jpg"></p>
+<p>{% img /images/swift/swift-8.jpg %}</p>
 
 <p>我覺得比較特別也比較好的地方是這個！以往<code>1</code>也就是會被認作為<code>true</code>，所以不小心該變數的值就是<code>1</code>，那這樣判斷一定會通過，但是你並不是因為該變數為<code>1</code>就想讓它通過。但swift似乎不允許這樣，所以當你這樣定義的時候就會出現錯誤訊息，如下圖</p>
 
-<p><img src="/images/swift/swift-9.jpg"></p>
+<p>{% img /images/swift/swift-9.jpg %}</p>
 
 <h2 id="switch">switch(選擇)</h2>
 
 <p>這裡可以看到我將<code>money</code>變數定義為<code>3_000_000</code>，這個<code>_</code>底線，在swift終是被允許的，主要是讓數字容易閱讀。而swift裡的<code>switch case</code>內是不需要寫<code>break</code>的，它自行會為每個<code>case</code>做<code>break</code>。</p>
 
-<p><img src="/images/swift/swift-10.jpg"></p>
+<p>{% img /images/swift/swift-10.jpg %}</p>
 
 <p>多條件的要執行同一個的情況呢？直接在<code>case</code>內定義多個條件，用逗點隔開，甚至你可以使用範圍的方式<code>..&lt;</code>，如下圖</p>
 
-<p><img src="/images/swift/swift-11.jpg"></p>
+<p>{% img /images/swift/swift-11.jpg %}</p>
 
 <h2 id="fallthrough">Fallthrough(貫穿)</h2>
 
 <p>如果你希望繼續往下執行下一個<code>case</code>，你可以使用<code>fallthrough</code>，就會繼續往下一個<code>case</code>執行，但下一個如果沒有<code>fallthrough</code>就會停止，也就是說他只會執行到下一個就停止，除非你每一個<code>case</code>內都有宣告</p>
 
-<p><img src="/images/swift/swift-12.jpg"></p>
+<p>{% img /images/swift/swift-12.jpg %}</p>
 
 <h2 id="tuple-use-with-switch">Tuple(元組、組值) use with Switch</h2>
 
 <p>這給我的感覺有點像是陣列，但其實不是，我覺得這很好用，尤其是在回傳值得時候。下面這個範例結合<code>switch</code>來使用，這邊定義一個<code>tuple</code>的變數，裡面存放了兩個數字！很簡單吧</p>
 
-<p><img src="/images/swift/swift-13.jpg"></p>
+<p>{% img /images/swift/swift-13.jpg %}</p>
 
 <p>也可以使用條<code>where</code>條件檢查</p>
 
-<p><img src="/images/swift/swift-14.jpg"></p>
+<p>{% img /images/swift/swift-14.jpg %}</p>
 
 <h2 id="labeled-statements">Labeled Statements(帶標簽的語句)</h2>
 
 <p>這個我覺得蠻有趣的！可以去控制區塊的回圈，直接看code可能比較清楚了</p>
 
-<p><img src="/images/swift/swift-15.jpg"></p>
+<p>{% img /images/swift/swift-15.jpg %}</p>
 
 <h2 id="array">Array(陣列)</h2>
 
 <p>這邊我覺得比較不一樣的是，陣列可以用<code>+=</code>直接在陣列後面加上(也就是串聯起來)，其他都蠻好理解的！</p>
 
-<p><img src="/images/swift/swift-16.jpg"></p>
+<p>{% img /images/swift/swift-16.jpg %}</p>
 
 <p>清空陣列</p>
 
-<p><img src="/images/swift/swift-17.jpg"></p>
+<p>{% img /images/swift/swift-17.jpg %}</p>
 
 <p>重複建立同樣的值，如果要將兩個陣列串聯起來，一樣使用<code>+</code>號就可以，但需注意這兩個陣咧的形態必須都一樣，下列這個範例一個是<code>Int</code>另一個是<code>Double</code>那這樣就不能串聯起來了。</p>
 
-<p><img src="/images/swift/swift-18.jpg"></p>
+<p>{% img /images/swift/swift-18.jpg %}</p>
 
 <h2 id="dictionary">Dictionary(字典)</h2>
 
 <p>定義方式有兩種，如下圖</p>
 
-<p><img src="/images/swift/swift-19.jpg"></p>
+<p>{% img /images/swift/swift-19.jpg %}</p>
 
 <p>字典的操作也很簡單</p>
 
-<p><img src="/images/swift/swift-20.jpg"></p>
+<p>{% img /images/swift/swift-20.jpg %}</p>
 
 ]]></content>
   </entry>

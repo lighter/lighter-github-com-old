@@ -7,7 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="接著就是建立資料方面的事情啦！登入總要有先有資料對吧！ Step 1. Mysql設定 開啓phpmyadmin，建立一個新的Database，這邊取名為laravel_sample，如下圖 再來就是設定laravel的資料庫連線，開啓database.php，找到mysql的設定， &hellip;">
+	<meta name="description" content="這篇會展是簡單的登入檢查、登入的Session建立、登出，這三個；主要是會使用到一些簡單的route、laravel的驗證、Session的建立。廢話不多說，往下看吧。 首先建立一個簡單的view用來查看目前登入狀態，建立的路徑是app/views/show/index.blade.php， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +83,237 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/02/laravel-part-4/">
+		
+			Laravel Part 4</a>
+	</h2>
+	<div class="entry-content">
+		<p>這篇會展是簡單的登入檢查、登入的<code>Session</code>建立、登出，這三個；主要是會使用到一些簡單的<code>route</code>、<code>laravel</code>的驗證、<code>Session</code>的建立。廢話不多說，往下看吧。</p>
+
+<p>首先建立一個簡單的<code>view</code>用來查看目前登入狀態，建立的路徑是<code>app/views/show/index.blade.php</code>，我刻意多開了一個<code>show</code>資料夾。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">app
+</span><span class="line">  ⌞views
+</span><span class="line">    ⌞show
+</span><span class="line">      ⌞index.blade.php</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>show/index.blade.php</code>的code如下(這邊可以先忽略變數怎麼來的…往下看你就可以知道了)：</p>
+
+<div><script src="https://gist.github.com/38e234e12e9e98652d5a.js"></script>
+<noscript><pre><code>&lt;h1&gt;This is show sample&lt;/h1&gt;
+&lt;p&gt;
+  Login_status:
+  {{ $login_status }}
+&lt;/p&gt;</code></pre></noscript></div>
+
+<p>再來就是增加<code>route</code>的設定，開啓<code>routes.php</code>，加入下面的code：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">// 登入</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uses&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HomeController@doLogin&#39;</span><span class="p">]);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// 登出</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uses&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HomeController@doLogout&#39;</span><span class="p">]);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// show</span>
+</span><span class="line"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uses&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HomeController@show&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>這邊我都香要使用的方法都寫在<code>HomeController</code>內。因此會依據網址的不同執行<code>HomeController</code>內對應的方法。</p>
+
+<p><code>HomeController.php</code>加入的code如下，解釋我都寫在註解上了。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>HomeController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">// 登入</span>
+</span><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">doLogin</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="c1">// 驗證規則</span>
+</span><span class="line">  <span class="nv">$rules</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">    <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;required|email&#39;</span><span class="p">,</span> <span class="c1">// 必填欄位，email格式</span>
+</span><span class="line">    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|alphaNum|min:3&#39;</span> <span class="c1">// 必填欄位，必須是字母或數字，不得小於3位</span>
+</span><span class="line">  <span class="p">);</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 驗證</span>
+</span><span class="line">  <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 規則驗證失敗</span>
+</span><span class="line">  <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">fails</span><span class="p">())</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// 回到首頁，並回傳錯誤訊息，與所有輸入的欄位，除了密碼</span>
+</span><span class="line">    <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span><span class="line">      <span class="o">-&gt;</span><span class="na">withErrors</span><span class="p">(</span><span class="nv">$validator</span><span class="p">)</span>
+</span><span class="line">      <span class="o">-&gt;</span><span class="na">withInput</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">except</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">));</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">  <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$userdata</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">        <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">),</span>
+</span><span class="line">        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+</span><span class="line">      <span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">// 與資料庫驗證</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="nx">Auth</span><span class="o">::</span><span class="na">attempt</span><span class="p">(</span><span class="nv">$userdata</span><span class="p">))</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">      <span class="c1">// 驗證成功，並增加一個session key value值</span>
+</span><span class="line">      <span class="nx">Session</span><span class="o">::</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;login_success&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">      <span class="c1">// 導向show/index.blade.php</span>
+</span><span class="line">      <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/show&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">      <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">doLogout</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="nx">Auth</span><span class="o">::</span><span class="na">logout</span><span class="p">();</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 刪除登入成功的key 值</span>
+</span><span class="line">  <span class="nx">Session</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="s1">&#39;login_seuccess&#39;</span><span class="p">);</span>
+</span><span class="line">  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="c1">// 取得所有session的資料</span>
+</span><span class="line">  <span class="nv">$all_session_data</span> <span class="o">=</span> <span class="nx">Session</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+</span><span class="line">  <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;all_session_data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$all_session_data</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line">  <span class="k">if</span> <span class="p">(</span> <span class="nx">Session</span><span class="o">::</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;login_success&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">check</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;login_status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;success&#39;</span><span class="p">;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">  <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;login_status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;failure&#39;</span><span class="p">;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1">// 這邊可以注意$data的login_status這個key值</span>
+</span><span class="line">  <span class="c1">// 跟 show/index.blade.php 使用的變數做對應</span>
+</span><span class="line">  <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;show.index&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+</span><span class="line">  <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果登入成功的話，可以看到登入成功的訊息</p>
+
+<p><img src="/images/laravel_sample/laravel-13.jpg" /></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-02T09:16:15+08:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/06/02/laravel-part-4/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -1118,87 +1349,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2013/08/07/shi-yong-dropboxjia-she-si-you-git/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/03/31/nodejs-an-zhuang/">
-		
-			NodeJS 安裝</a>
-	</h2>
-	<div class="entry-content">
-		<p>系統：Mountain Lion</p>
-
-<p><a href="http://mxcl.github.com/homebrew/index_zh-tw.html">Homebrew</a>是一個Mac OS套件管理工具</p>
-
-<p>因為Mac上預設都有安裝Ruby了，所以可以直接用以下的指令安裝</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>安裝node</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; brew update
-</span><span class="line">&gt; sudo brew install node</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>安裝npm</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; sudo npm install express -g</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>修改npm PATH，開啟<code>~/.bash_profile</code>，加入以下的代碼</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">export PATH=/usr/local/bin:$PATH:/usr/local/share/npm/bin</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>接著就可以使用<code>express</code>指令來建立專案了</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">express new project</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-31T08:31:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2013/03/31/nodejs-an-zhuang/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>

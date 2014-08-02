@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iPhone | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/iphone/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-07-31T05:15:39+08:00</updated>
+  <updated>2014-08-02T12:15:58+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift part 5]]></title>
+    <link href="http://lighter.tw/blog/2014/07/31/bi-ji-swift-part-5/"/>
+    <updated>2014-07-31T21:41:58+08:00</updated>
+    <id>http://lighter.tw/blog/2014/07/31/bi-ji-swift-part-5</id>
+    <content type="html"><![CDATA[<h2 id="closure">closure</h2>
+
+<p><code>closure</code>就有如同<code>c</code>、<code>objective-c</code>的block。<code>function</code>其實也可以當作參數一樣傳遞，下面用簡單的範例做練習。</p>
+
+<p>{% img /images/swift/swift-36.jpg %}</p>
+
+<!-- more -->
+
+<p><code>closure</code>的格式如下</p>
+
+<p>{% codeblock %}
+{ (parameters) -&gt; returnType in
+    statements
+}
+{% endcodeblock %}</p>
+
+<p>單行的表示式<code>closure</code>可以省略<code>return</code>，參數的部分甚至可以省略寫成<code>$0</code>代表第一個參數，<code>$1</code>代表第二個參數，以此類推，下面用簡單的範例表示</p>
+
+<p>{% img /images/swift/swift-37.jpg %}</p>
+
+<p>下面這個範例只是單純的介紹寫法而已！</p>
+
+<p><code>sort</code>這個方法預設是做了升序排列，如果你希望降序排列，可以傳入一個function(<code>closure</code>)進去。</p>
+
+<ul>
+  <li><code>寫法1</code>很單純，傳入已經寫好的function。</li>
+  <li><code>寫法2</code>則是將方法名稱、參數、回傳值省略了，並且使用<code>$0</code>表示第一個參數，<code>$1</code>為第二個以以此類推。</li>
+  <li><code>寫法3</code>則是把參數也給省略了，直接使用<code>&lt;</code>符號，swift則可以自動幫你推斷要將這兩個參數做<code>&lt;</code>的邏輯。</li>
+</ul>
+
+<p>{% img /images/swift/swift-38.jpg %}</p>
+
+<h2 id="lazydeldel-with-closure">lazy(<del>懶惰的?</del>緩慢的) with closure</h2>
+
+<p>什麼是<code>lazy</code>?，<code>就是當你真的需要使用，才真的會分配(記憶體)給你使用</code>。至於以前<code>objcetive-c</code>的寫法可以參考這篇文章<a href="http://mikebuss.com/2014/06/22/lazy-initialization-swift/">Lazy Initialization with Swift</a>，我覺得她寫很明確，所以我就用我理解的意思大概描述一遍，至於傳統的<code>objective-c</code>的寫法我就不贅述了，畢竟這邊是swift的note。</p>
+
+<p><code>lazy</code>在swift的使用方式如下</p>
+
+<p>{% codeblock %}</p>
+
+<p>lazy var lazyVar = <a href="">String</a></p>
+
+<p>{% endcodeblock %}</p>
+
+<p>只需要在<code>var</code>前面加上<code>lazy</code>這個keyword，還有一點要注意的是<code>lazy</code>並不能使用<code>let</code>，因為常數在初始化前是必需要有值的。</p>
+
+<blockquote>
+  <p>原本的寫法是<code>@lazy</code>後來修改為<code>lazy</code>，把小老鼠<code>@</code>給省略了。</p>
+</blockquote>
+
+<p>如果你希望你的變數有會因為一些邏輯判斷而有不同的值，這時可以用<code>closure</code>來完成，下面這段code直接貼在playground是無法使用的，他會告訴你<code>lazy</code>必須是<code>struct</code>或<code>class</code>的成員。</p>
+
+<p>{% codeblock %}</p>
+
+<p>lazy var lazyStr:String = {
+    // do you want
+    return “This is a test”
+}()</p>
+
+<p>{% endcodeblock %}</p>
+
+<p>在什麼時候你會需要使用使用<code>lazy</code>呢?如果你的變數的值，是需要等到物件初始化完成後才能明確的定義，這時你就會需要使用，下面使用一個簡單的範例；下面範例中可以看到<code>[unowned self]</code>，這是要避免<code>strong reference cycle</code>。</p>
+
+<p>{% codeblock %}</p>
+
+<p>class testClass {
+    var name:String</p>
+
+<pre><code>lazy var sayHiTo:String = {
+    [unowned self] in
+    return "Hi~ \(self.name)"
+}()
+
+init(name:String) {
+    self.name = name
+
+} }
+</code></pre>
+
+<p>var myClass = testClass(name: “Maya”)
+// 實立化一個myClass後，這時sayHiTo變數 is nil</p>
+
+<p>myClass.sayHiTo
+// 當sayHiTo這個變數被呼叫到才真正的給予值</p>
+
+<p>{% endcodeblock %}</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 4]]></title>
@@ -22,25 +117,25 @@
 
 <p>類別整個跟結構的寫法沒有太大的差異，直接看範例吧！</p>
 
-<p><img src="/images/swift/swift-32.jpg"></p>
+<p>{% img /images/swift/swift-32.jpg %}</p>
 
 <!-- more -->
 
 <h2 id="section">繼承</h2>
 
-<p><img src="/images/swift/swift-33.jpg"></p>
+<p>{% img /images/swift/swift-33.jpg %}</p>
 
 <h2 id="class-func">class func(類別方法)</h2>
 
 <p>類別方法可允許不用實立化物件而直接呼叫，只需要在方法前面加上<code>class</code>這個keyword；在<code>struct</code>則是要用<code>static</code>。</p>
 
-<p><img src="/images/swift/swift-34.jpg"></p>
+<p>{% img /images/swift/swift-34.jpg %}</p>
 
 <h2 id="class-ref">class ref</h2>
 
 <p>class是參考型別，從下面的範例可以看到<code>myClass2</code>是參考<code>myClass1</code>，所以當<code>myClass1</code>有所改變，<code>myClass2</code>也會跟著改變；而struct並不會因為這樣就有所改變。</p>
 
-<p><img src="/images/swift/swift-35.jpg"></p>
+<p>{% img /images/swift/swift-35.jpg %}</p>
 ]]></content>
   </entry>
   
@@ -53,17 +148,17 @@
 
 <p>在<code>swift</code>，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個<code>car</code>的結構，裡面包含了<code>color</code>和<code>number</code>，接著實立化這個<code>car</code>結構，整個跟類別很像吧！</p>
 
-<p><img src="/images/swift/swift-29.jpg"></p>
+<p>{% img /images/swift/swift-29.jpg %}</p>
 
 <!-- more -->
 
 <p>接著再一個簡單的範例，<code>struct</code>裡面使用了別的<code>struct</code>，以及<code>struct</code>內含有方法</p>
 
-<p><img src="/images/swift/swift-30.jpg"></p>
+<p>{% img /images/swift/swift-30.jpg %}</p>
 
 <p>接這個範例能夠顯現<code>struct</code>跟類別不同的地方，在下面這個範例中可以看到<code>strunct</code>內的方法，會去操作內部的屬性，也就是<code>myName</code>，只要會去操作到內部的屬性值，在方法前面都需要加上<code>mutating</code>這個 keyword !</p>
 
-<p><img src="/images/swift/swift-31.jpg"></p>
+<p>{% img /images/swift/swift-31.jpg %}</p>
 
 <p>這是我參考stackoverflow這篇答案的[<a href="http://stackoverflow.com/a/24035861/685060">http://stackoverflow.com/a/24035861/685060</a>]，以下是我大意理解的節錄</p>
 
@@ -83,7 +178,7 @@
 
 <p>方法的一開始前面一定有<code>func</code>這個關鍵字，我是有點覺得奇怪…何不乾脆用完整個名稱就好了，為什麼要縮減…成<code>func</code>。</p>
 
-<p><img src="/images/swift/swift-21.jpg"></p>
+<p>{% img /images/swift/swift-21.jpg %}</p>
 
 <!-- more -->
 
@@ -91,37 +186,37 @@
 
 <p><code>func</code>要帶入參數直接在<code>( )</code>內寫入，其中比較不同的是否有宣告外部參數，為了code的可讀性，加上外部參數名，可以直接了解該參數的作用，外部參數名跟參數名稱可以不一樣，如果你要將外部參數跟參數名稱設定一樣可以在參數名稱前面加上一個<code>#</code>號，這樣可省去重複打一樣的名稱。</p>
 
-<p><img src="/images/swift/swift-22.jpg"></p>
+<p>{% img /images/swift/swift-22.jpg %}</p>
 
 <h2 id="section">回傳值</h2>
 
 <p>一個<code>func</code>要有回傳值，直接在<code>( )</code>後加上<code>-&gt; TYPE</code></p>
 
-<p><img src="/images/swift/swift-23.jpg"></p>
+<p>{% img /images/swift/swift-23.jpg %}</p>
 
 <p>如果有多個值要回傳，可以使用<code>Tuple</code></p>
 
-<p><img src="/images/swift/swift-24.jpg"></p>
+<p>{% img /images/swift/swift-24.jpg %}</p>
 
 <p>方法也可以當作參數傳入</p>
 
-<p><img src="/images/swift/swift-25.jpg"></p>
+<p>{% img /images/swift/swift-25.jpg %}</p>
 
 <h2 id="nested-function">Nested Function(嵌套函式)</h2>
 
 <p><code>func</code>回傳除了一般的<code>Int</code>, <code>String</code>，也可以回傳<code>func</code></p>
 
-<p><img src="/images/swift/swift-26.jpg"></p>
+<p>{% img /images/swift/swift-26.jpg %}</p>
 
 <p>如果有多個參數要傳入，除了可以考慮組成一個陣列在傳入，或是可以用<code>...</code>當作有多個參數要傳入</p>
 
-<p><img src="/images/swift/swift-27.jpg"></p>
+<p>{% img /images/swift/swift-27.jpg %}</p>
 
 <h2 id="inout">inout</h2>
 
 <p>這其實跟指標很像，下面的範例可以看到<code>sum</code>傳入的是<code>&amp;sum</code>也就是該參數的位置，所以計算的結果也會改變<code>sum</code>的值</p>
 
-<p><img src="/images/swift/swift-28.jpg"></p>
+<p>{% img /images/swift/swift-28.jpg %}</p>
 ]]></content>
   </entry>
   
@@ -135,281 +230,6 @@
 <h1 id="ios-app-1welcome-to-programminghttpwwwraywenderlichcomzh-hans48771e5adb8e7bf92ios-app-1efbc9awelcome-to-programming"><a href="http://www.raywenderlich.com/zh-hans/48771/%E5%AD%B8%E7%BF%92ios-app-1%EF%BC%9Awelcome-to-programming">學習iOS App 1：Welcome to Programming</a></h1>
 
 <p>或許你會覺得怎麼會跟簡體中文在一起呢？沒錯我也是翻譯完才發現這問題，我也寫信去跟他說繁體中文跟簡體中文是不一樣的，但是由於分配工作的問題，似乎也不能修改了。所以就這樣吧….現在還在翻譯第二篇中…其實翻譯還蠻有趣的說！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[JSON資料於TableView與Pull Refresh]]></title>
-    <link href="http://lighter.tw/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh/"/>
-    <updated>2013-01-10T17:11:00+08:00</updated>
-    <id>http://lighter.tw/blog/2013/01/10/jsonzi-liao-yu-tableviewyu-pull-refresh</id>
-    <content type="html"><![CDATA[<p>我透過JSON的方式來取得資料，並且可以從網路上取得，並且當資料有變動的時候，透過<code>Table View</code>向下拉的方式來更新資料。我的JSON資料是透過php程式來撰寫。首先先來建置一個簡單的資料表。如下圖，在<code>Table View</code>的部分會呈現名字，當點選名字後會看到該名字的電話號碼。</p>
-
-<p><img src="/images/json/json1.png" width="216"></p>
-
-<!-- more -->
-
-<h3 id="php">php程式碼</h3>
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&amp;lt;?php</span>
-</span><span class='line'><span class="x">include(‘db.php’);</span>
-</span><span class='line'><span class="x">$query = mysql_query(‘SELECT * FROM user’);</span>
-</span><span class='line'><span class="x">$json_data = array();</span>
-</span><span class='line'><span class="x">while($row = mysql_fetch_assoc($query)) {</span>
-</span><span class='line'><span class="x">  $json_data[] = $row;</span>
-</span><span class='line'><span class="x">}</span>
-</span><span class='line'><span class="x">echo json_encode($json_data);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><strong>Step 1.</strong>建立<code>Master Detail Application</code>專案。</p>
-
-<p>建立完成專案後先開始編輯<code>MasterViewController.h</code>。建立一個<code>NSMutableArray</code>型態的<code>json_array</code>物件。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.h </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;</span>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">MasterViewController</span> : <span class="nc">UITableViewController</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">json_array</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p><strong>Step 2.</strong>編輯<code>MasterViewController.m</code></p>
-
-<p>在<code>viewDidLoad</code>方法內加入下面的程式碼</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">MasterViewController</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">json_array</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>    <span class="c1">//1</span>
-</span><span class='line'>     <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span>
-</span><span class='line'>                  <span class="nl">URLWithString:</span><span class="err">@”</span><span class="nl">http:</span><span class="c1">//XXX.XXX/json.php”];</span>
-</span><span class='line'>    <span class="c1">//2</span>
-</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">jsonData</span><span class="o">=</span><span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">//3</span>
-</span><span class='line'><span class="n">json_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSJSONSerialization</span> <span class="nl">JSONObjectWithData:</span><span class="n">jsonData</span> <span class="nl">options:</span>
-</span><span class='line'>        <span class="n">NSJSONReadingMutableContainers</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<ol>
-  <li>在上面的程式碼一開始定義一個<code>NSURL</code>類別的<code>url</code>變數，該變數很明顯的可以看到要連接的網頁網址！</li>
-  <li>將<code>url</code>網址的資料存放到<code>NSData</code>類別的<code>jsonData</code>變數中。</li>
-  <li>接著將取得到的結果放到<code>json</code>陣列中，當中可以看到<code>options:NSJSONReadingMutableContainers</code>這段，這意思是將<code>jsonData</code>取得的<code>JSON</code>資料轉為<code>NSMutableDictionary</code>，之後再取得名稱或電話時可以<code>objecForKey</code>的方式來取得。</li>
-</ol>
-
-<p>接著修改<code>Table View Cell</code>的回傳個數</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">numberOfRowsInSection:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">json_array</span><span class="p">.</span><span class="n">count</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>修改<code>Cell</code>顯示的文字，這邊需要透過<code>objectForKey</code>方法指定Key值為。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">[</span><span class="n">tableView</span> <span class="nl">dequeueReusableCellWithIdentifier:</span><span class="err">@”</span><span class="n">Cell</span><span class="err">”</span> <span class="nl">forIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="n">json_array</span> <span class="nl">objectAtIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="err">@”</span><span class="n">u_name</span><span class="err">”</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>傳遞參數也需要修改一下。
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="n">UIStoryboardSegue</span> <span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">([[</span><span class="n">segue</span> <span class="n">identifier</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="err">@”</span><span class="n">showDetail</span><span class="err">”</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">indexPathForSelectedRow</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">[[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">]</span> <span class="nl">setDetailItem:</span><span class="p">[</span><span class="n">json_array</span>
-</span><span class='line'>                                                          <span class="nl">objectAtIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>將<code>JSON</code>的資料放入<code>Table View</code>中會如下圖所示(資料內容有新增修改過)。</p>
-
-<p><img src="/images/json/json2.png" width="216">
-<img src="/images/json/json3.png" width="216"></p>
-
-<p>接下來當我<code>MySql</code>有新增資料，或是刪除資料時，我想要同步更新到<code>Table View</code>中，所以我使用了<code>PullToRefresh</code>這個套件。網路上蠻多人都說<code>EGOTableViewPullRefresh</code>這套，但是它似乎不支援<code>ARC</code>，所以我就改用別的了。</p>
-
-<p>這個套件使用上很簡單！首先下載好它的檔案<a href="https://github.com/sonnyparlin/PullToRefresh">Here</a>，並加入專案內。</p>
-
-<p><img src="/images/json/json4.png"></p>
-
-<p>接著加入<code>QuartzCore.framework</code>。</p>
-
-<p><img src="/images/json/json5.png"></p>
-
-<p>修改<code>MasterViewController.h</code>，程式碼如下：
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;</span>
-</span><span class='line'><span class="cp">#import “PullToRefreshView.h” </span><span class="c1">//1&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">MasterViewController</span> <span class="o">:</span> <span class="n">UITableViewController</span><span class="o">&lt;</span><span class="n">pulltorefreshviewdelegate</span><span class="o">&gt;</span> <span class="c1">//2</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">json_array</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">PullToRefreshView</span> <span class="o">*</span><span class="n">pull</span><span class="p">;</span> <span class="c1">//3</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></pulltorefreshviewdelegate></p>
-
-<p>回到<code>MasterViewController.m</code>在<code>viewDidLoad</code>將<code>PullToRefresh</code>加入到<code>Table View</code>中。
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">MasterViewController</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">json_array</span><span class="p">,</span> <span class="n">pull</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>	<span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span>
-</span><span class='line'>                  <span class="nl">URLWithString:</span><span class="err">@”</span><span class="nl">http:</span><span class="c1">//lighter.cp22.secserverpros.com/lighter127/JSON/json.php”];</span>
-</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">jsonData</span><span class="o">=</span><span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">json_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSJSONSerialization</span> <span class="nl">JSONObjectWithData:</span><span class="n">jsonData</span> <span class="nl">options:</span>
-</span><span class='line'>            <span class="n">NSJSONReadingMutableContainers</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">//pull refresh</span>
-</span><span class='line'><span class="n">pull</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PullToRefreshView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithScrollView:</span><span class="p">(</span><span class="n">UIScrollView</span> <span class="o">*</span><span class="p">)</span> <span class="n">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">pull</span> <span class="nl">setDelegate:</span><span class="n">self</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="nl">addSubview:</span><span class="n">pull</span><span class="p">];</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<p>當<code>Table View</code>往下拉的時候會呼叫<code>pullToRefreshViewShouldRefresh:</code>方法。這裡我會呼叫另一個自定的方法<code>reloadTableData</code>，而在該方法內我重新再連一次<code>json.php</code>的網頁並更新<code>json_array</code>的內容，最後才呼叫<code>tableView</code>的<code>reloadData</code>。</p>
-
-<p>當資料更新結束後，呼叫<code>finishedLoading</code>方法，結束<code>Pull Refresh</code>的動作。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MasterViewController.m </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Table View Pull Refresh&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">pullToRefreshViewShouldRefresh:</span><span class="p">(</span><span class="n">PullToRefreshView</span> <span class="o">*</span><span class="p">)</span><span class="n">view</span><span class="p">;</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">reloadTableData</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">reloadTableData</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span>
-</span><span class='line'>                <span class="nl">URLWithString:</span><span class="err">@”</span><span class="nl">http:</span><span class="c1">//XXX.XXX/json.php”];</span>
-</span><span class='line'>  <span class="n">NSData</span> <span class="o">*</span><span class="n">jsonData</span><span class="o">=</span><span class="p">[</span><span class="n">NSData</span> <span class="nl">dataWithContentsOfURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">json_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSJSONSerialization</span> <span class="nl">JSONObjectWithData:</span><span class="n">jsonData</span> <span class="nl">options:</span>
-</span><span class='line'>                <span class="n">NSJSONReadingMutableContainers</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">reloadData</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">pull</span> <span class="n">finishedLoading</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-  </li>
-</ul>
-
-<blockquote>
-  <p>註：由於向下捲動<code>Table View</code>的速度比我截圖速度快….我就放棄了…</p>
-</blockquote>
-
-<h1 id="section">參考資料</h1>
-<ol>
-  <li><a href="http://sonnyparlin.com/2011/12/pulltorefresh-ios-5-and-arc-tutorial/">PullToRefresh iOS 5 and ARC Tutorial</a></li>
-  <li><a href="https://github.com/sonnyparlin/PullToRefresh">PullToRefresh</a></li>
-  <li><a href="https://github.com/enormego/EGOTableViewPullRefresh">EGOTableViewPullRefresh</a></li>
-</ol>
 ]]></content>
   </entry>
   
