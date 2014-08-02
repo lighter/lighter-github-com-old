@@ -4,7 +4,7 @@
   <title><![CDATA[Category: swift | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/swift/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-08-02T18:30:20+08:00</updated>
+  <updated>2014-08-02T18:40:23+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -20,7 +20,7 @@
     <id>http://lighter.tw/blog/2014/08/02/bi-ji-swift-part-6</id>
     <content type="html"><![CDATA[<h2 id="enums">Enums(列舉)</h2>
 
-<p>swift中的</p>
+<p><code>enum</code>是定義一個通用型別的一組相關的值！我本身很少用，所以有點陌生…哈，還是來記錄一下，下面的code都是根據apple的文件練習的。</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -76,6 +76,8 @@
 </span><span class='line'>directionToHead = .East&lt;/p>
 </span><span class='line'>
 </span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!-- more -->
 
 <h2 id="enum-with-switch">Enum with switch</h2>
 

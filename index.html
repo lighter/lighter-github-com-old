@@ -7,7 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="Enums(列舉) swift中的 1
+	<meta name="description" content="Enums(列舉) enum是定義一個通用型別的一組相關的值！我本身很少用，所以有點陌生…哈，還是來記錄一下，下面的code都是根據apple的文件練習的。 1
 2
 3
 4
@@ -30,9 +30,7 @@
 21
 22
 23
-// enum 格式
-enum testEnum { } // 包含了東西南北的 compassPoint enum
-enum &hellip;">
+// enum &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -120,7 +118,7 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 	<div class="entry-content">
 		<h2 id="enums">Enums(列舉)</h2>
 
-<p>swift中的</p>
+<p><code>enum</code>是定義一個通用型別的一組相關的值！我本身很少用，所以有點陌生…哈，還是來記錄一下，下面的code都是根據apple的文件練習的。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -169,147 +167,9 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </span><span class="line">// 直接使用 .East
 </span><span class="line">directionToHead = .East</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="enum-with-switch">Enum with switch</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enum compassPoint {
-</span><span class="line">    case East
-</span><span class="line">    case West
-</span><span class="line">    case South
-</span><span class="line">    case North
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">var directionToHead = compassPoint.East
-</span><span class="line">
-</span><span class="line">switch directionToHead {
-</span><span class="line">    case .East:
-</span><span class="line">        println("East")
-</span><span class="line">    case .West:
-</span><span class="line">        println("West")
-</span><span class="line">    case .South:
-</span><span class="line">        println("South")
-</span><span class="line">    case .North:
-</span><span class="line">        println("North")
-</span><span class="line">    default:
-</span><span class="line">        println("No value")
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="associated-value">Associated Value</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enum Barcode {
-</span><span class="line">    case UPCA(Int, Int, Int)
-</span><span class="line">    case QRCode(String)
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">var productBarcode = Barcode.UPCA(1, 123_456_789, 222)
-</span><span class="line">productBarcode = .QRCode("ABCDEFGHIJKLMNOP")
-</span><span class="line">
-</span><span class="line">switch productBarcode {
-</span><span class="line">    case .UPCA(let numberSystem, let identifier, let check):
-</span><span class="line">        println("UPC-A with value of \(numberSystem), \(identifier), \(check).")
-</span><span class="line">    case .QRCode(let productCode):
-</span><span class="line">        println("QR code with value of \(productCode).")
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">// 輸出 "QR code with value of ABCDEFGHIJKLMNOP."</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="row-value">Row value</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enum Number:Int {
-</span><span class="line">    case One = 1
-</span><span class="line">    case Two = 2
-</span><span class="line">    case Three = 3
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">// 縮寫成一行，僅需定義一開始
-</span><span class="line">enum Number2: Int {
-</span><span class="line">    case One = 1, Two, Three
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">// 使用 toRaw 來取得值 1
-</span><span class="line">var numberOne = Number.One.toRaw()
-</span><span class="line">
-</span><span class="line">// 將 1 轉回去取得 對應的 enum 值 One
-</span><span class="line">var numberTwo = Number.fromRaw(2)
-</span><span class="line">
-</span><span class="line">if let two = Number.fromRaw(2) {
-</span><span class="line">    switch two {
-</span><span class="line">        case .Two:
-</span><span class="line">            println("It is number 2")
-</span><span class="line">        default:
-</span><span class="line">            println("Not found")
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">else {
-</span><span class="line">    println("Not found")
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 		
-		
+		<a href="/blog/2014/08/02/bi-ji-swift-part-6/" class="more-link">Read on &rarr;</a>
 	</div>
 
 
