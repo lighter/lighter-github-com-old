@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-08-02T18:40:23+08:00</updated>
+  <updated>2014-09-06T00:20:35+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[筆記]swift Part 7]]></title>
+    <link href="http://lighter.tw/blog/2014/08/04/bi-ji-swift-part-7/"/>
+    <updated>2014-08-04T23:49:38+08:00</updated>
+    <id>http://lighter.tw/blog/2014/08/04/bi-ji-swift-part-7</id>
+    <content type="html"><![CDATA[<h2 id="subscripts-">Subscripts 下標語法</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">struct testStruct {
+</span><span class="line">    let multiplier: Int
+</span><span class="line">    subscript(index:Int) -&gt; Int {
+</span><span class="line">        return multiplier * index
+</span><span class="line">    }
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">let stuct = testStruct(multiplier: 20)
+</span><span class="line">stuct[3]</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import Cocoa
+</span><span class="line">
+</span><span class="line">func randomizer(#range:Range&lt;UInt32&gt;) -&gt; UInt32 {
+</span><span class="line">    return range.startIndex + arc4random_uniform(range.endIndex - range.startIndex + 1)
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">struct LevelMaker {
+</span><span class="line">    var grid = Array&lt;Array&lt;UInt32&gt;&gt;()
+</span><span class="line">
+</span><span class="line">    mutating func makeGrid() {
+</span><span class="line">        var numColumns = 27
+</span><span class="line">        var numRows = 52
+</span><span class="line">        for column in 0..&lt;numColumns {
+</span><span class="line">            var newRow = Array&lt;UInt32&gt;()
+</span><span class="line">            for row in 0..&lt;numRows {
+</span><span class="line">                newRow.append(randomizer(range:1..&lt;32))
+</span><span class="line">            }
+</span><span class="line">            self.grid.append(newRow)
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    subscript(row:Int, column:Int) -&gt; UInt32 {
+</span><span class="line">        return grid[row][column]
+</span><span class="line">    }
+</span><span class="line">
+</span><span class="line">    init() {
+</span><span class="line">        makeGrid()
+</span><span class="line">    }
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">var level2 = LevelMaker()
+</span><span class="line">level2.grid
+</span><span class="line">level2.grid[2][5]</span></code></pre></td></tr></table></div></figure></notextile></div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[筆記]swift part 6]]></title>
@@ -2367,19 +2462,6 @@
     </tr>
   </tbody>
 </table>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[學習iOS App 1]]></title>
-    <link href="http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1/"/>
-    <updated>2013-09-16T19:47:00+08:00</updated>
-    <id>http://lighter.tw/blog/2013/09/16/xue-xi-ios-app-1</id>
-    <content type="html"><![CDATA[<p>這篇並不是要寫學習iOS的文章，而是要推廣一下我翻譯的文章，幾個月前看到<a href="http://www.raywenderlich.com/">Raywenderlich</a>，裡面有些是翻譯過的文章，那我是否可以也來參加這個翻譯呢？於是我就寫信去問了，很高興的是他們也很歡迎我加入，於是就開始利用空閒時間來翻譯，由於在下小弟我英文不是很好…而且有時英文要翻譯成中文真的蠻困難的，翻譯的過程中也曾想是否應該念過一次在用我理解的方式翻譯，還是要照字面上翻譯呢？這蠻苦惱的！由於自己英文不是很好，所以花了一點時間翻譯，然後檢查幾次，終於翻譯好一篇了！</p>
-
-<h1 id="ios-app-1welcome-to-programminghttpwwwraywenderlichcomzh-hans48771e5adb8e7bf92ios-app-1efbc9awelcome-to-programming"><a href="http://www.raywenderlich.com/zh-hans/48771/%E5%AD%B8%E7%BF%92ios-app-1%EF%BC%9Awelcome-to-programming">學習iOS App 1：Welcome to Programming</a></h1>
-
-<p>或許你會覺得怎麼會跟簡體中文在一起呢？沒錯我也是翻譯完才發現這問題，我也寫信去跟他說繁體中文跟簡體中文是不一樣的，但是由於分配工作的問題，似乎也不能修改了。所以就這樣吧….現在還在翻譯第二篇中…其實翻譯還蠻有趣的說！</p>
 ]]></content>
   </entry>
   
