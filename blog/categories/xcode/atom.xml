@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xcode | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/xcode/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-09-06T00:25:46+08:00</updated>
+  <updated>2015-01-12T23:28:51+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -22,53 +22,93 @@
 
 <p>練習範例</p>
 
-<p>{% codeblock %}
-struct testStruct {
-    let multiplier: Int
-    subscript(index:Int) -&gt; Int {
-        return multiplier * index
-    }
-}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct testStruct {
+</span><span class='line'>    let multiplier: Int
+</span><span class='line'>    subscript(index:Int) -&gt; Int {
+</span><span class='line'>        return multiplier * index
+</span><span class='line'>    }
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>let stuct = testStruct(multiplier: 20)
+</span><span class='line'>stuct[3]</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>let stuct = testStruct(multiplier: 20)
-stuct[3]
-{% endcodeblock %}</p>
+<!-- more -->
 
-<p>{% codeblock %}
-import Cocoa</p>
-
-<p>func randomizer(#range:Range<uint32>) -&gt; UInt32 {
-    return range.startIndex + arc4random_uniform(range.endIndex - range.startIndex + 1)
-}</uint32></p>
-
-<p>struct LevelMaker {
-    var grid = Array&lt;Array<uint32>&gt;()</uint32></p>
-
-<pre><code>mutating func makeGrid() {
-    var numColumns = 27
-    var numRows = 52
-    for column in 0..&lt;numColumns {
-        var newRow = Array&lt;UInt32&gt;()
-        for row in 0..&lt;numRows {
-            newRow.append(randomizer(range:1..&lt;32))
-        }
-        self.grid.append(newRow)
-    }
-}
-
-subscript(row:Int, column:Int) -&gt; UInt32 {
-    return grid[row][column]
-}
-
-init() {
-    makeGrid()
-} }
-</code></pre>
-
-<p>var level2 = LevelMaker()
-level2.grid
-level2.grid[2][5]
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import Cocoa&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>func randomizer(#range:Range&lt;uint32>) -&gt; UInt32 {
+</span><span class='line'>    return range.startIndex + arc4random_uniform(range.endIndex - range.startIndex + 1)
+</span><span class='line'>}&lt;/uint32>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>struct LevelMaker {
+</span><span class='line'>    var grid = Array&lt;Array&lt;uint32>&gt;()&lt;/uint32>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>mutating func makeGrid() {
+</span><span class='line'>    var numColumns = 27
+</span><span class='line'>    var numRows = 52
+</span><span class='line'>    for column in 0..&lt;numColumns {
+</span><span class='line'>        var newRow = Array&lt;UInt32&gt;()
+</span><span class='line'>        for row in 0..&lt;numRows {
+</span><span class='line'>            newRow.append(randomizer(range:1..&lt;32))
+</span><span class='line'>        }
+</span><span class='line'>        self.grid.append(newRow)
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>subscript(row:Int, column:Int) -&gt; UInt32 {
+</span><span class='line'>    return grid[row][column]
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>init() {
+</span><span class='line'>    makeGrid()
+</span><span class='line'>} }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var level2 = LevelMaker()
+</span><span class='line'>level2.grid
+</span><span class='line'>level2.grid[2][5]</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
@@ -81,118 +121,213 @@ level2.grid[2][5]
 
 <p><code>enum</code>是定義一個通用型別的一組相關的值！我本身很少用，所以有點陌生…哈，還是來記錄一下，下面的code都是根據apple的文件練習的。</p>
 
-<p>{% codeblock %}</p>
-
-<p>// enum 格式
-enum testEnum {</p>
-
-<p>}</p>
-
-<p>// 包含了東西南北的 compassPoint enum
-enum compassPoint {
-    case East
-    case West
-    case South
-    case North
-}</p>
-
-<p>// 縮減為一行
-enum compassPoint2 {
-    case East, West, South, North
-}</p>
-
-<p>var directionToHead = compassPoint.West</p>
-
-<p>// 如果知道是 compassPoint形態，則可以忽略’compassPoint’
-// 直接使用 .East
-directionToHead = .East</p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// enum 格式
+</span><span class='line'>enum testEnum {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 包含了東西南北的 compassPoint enum
+</span><span class='line'>enum compassPoint {
+</span><span class='line'>    case East
+</span><span class='line'>    case West
+</span><span class='line'>    case South
+</span><span class='line'>    case North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 縮減為一行
+</span><span class='line'>enum compassPoint2 {
+</span><span class='line'>    case East, West, South, North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var directionToHead = compassPoint.West&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 如果知道是 compassPoint形態，則可以忽略’compassPoint’
+</span><span class='line'>// 直接使用 .East
+</span><span class='line'>directionToHead = .East&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <!-- more -->
 
 <h2 id="enum-with-switch">Enum with switch</h2>
 
-<p>{% codeblock %}</p>
-
-<p>enum compassPoint {
-    case East
-    case West
-    case South
-    case North
-}</p>
-
-<p>var directionToHead = compassPoint.East</p>
-
-<p>switch directionToHead {
-    case .East:
-        println(“East”)
-    case .West:
-        println(“West”)
-    case .South:
-        println(“South”)
-    case .North:
-        println(“North”)
-    default:
-        println(“No value”)
-}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>enum compassPoint {
+</span><span class='line'>    case East
+</span><span class='line'>    case West
+</span><span class='line'>    case South
+</span><span class='line'>    case North
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var directionToHead = compassPoint.East&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>switch directionToHead {
+</span><span class='line'>    case .East:
+</span><span class='line'>        println(“East”)
+</span><span class='line'>    case .West:
+</span><span class='line'>        println(“West”)
+</span><span class='line'>    case .South:
+</span><span class='line'>        println(“South”)
+</span><span class='line'>    case .North:
+</span><span class='line'>        println(“North”)
+</span><span class='line'>    default:
+</span><span class='line'>        println(“No value”)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2 id="associated-value">Associated Value</h2>
 
-<p>{% codeblock %}
-enum Barcode {
-    case UPCA(Int, Int, Int)
-    case QRCode(String)
-}</p>
-
-<p>var productBarcode = Barcode.UPCA(1, 123<em>456</em>789, 222)
-productBarcode = .QRCode(“ABCDEFGHIJKLMNOP”)</p>
-
-<p>switch productBarcode {
-    case .UPCA(let numberSystem, let identifier, let check):
-        println(“UPC-A with value of (numberSystem), (identifier), (check).”)
-    case .QRCode(let productCode):
-        println(“QR code with value of (productCode).”)
-}</p>
-
-<p>// 輸出 “QR code with value of ABCDEFGHIJKLMNOP.”
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>enum Barcode {
+</span><span class='line'>    case UPCA(Int, Int, Int)
+</span><span class='line'>    case QRCode(String)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var productBarcode = Barcode.UPCA(1, 123&lt;em>456&lt;/em>789, 222)
+</span><span class='line'>productBarcode = .QRCode(“ABCDEFGHIJKLMNOP”)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>switch productBarcode {
+</span><span class='line'>    case .UPCA(let numberSystem, let identifier, let check):
+</span><span class='line'>        println(“UPC-A with value of (numberSystem), (identifier), (check).”)
+</span><span class='line'>    case .QRCode(let productCode):
+</span><span class='line'>        println(“QR code with value of (productCode).”)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 輸出 “QR code with value of ABCDEFGHIJKLMNOP.”</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2 id="row-value">Row value</h2>
 
-<p>{% codeblock %}</p>
-
-<p>enum Number:Int {
-    case One = 1
-    case Two = 2
-    case Three = 3
-}</p>
-
-<p>// 縮寫成一行，僅需定義一開始
-enum Number2: Int {
-    case One = 1, Two, Three
-}</p>
-
-<p>// 使用 toRaw 來取得值 1
-var numberOne = Number.One.toRaw()</p>
-
-<p>// 將 1 轉回去取得 對應的 enum 值 One
-var numberTwo = Number.fromRaw(2)</p>
-
-<p>if let two = Number.fromRaw(2) {
-    switch two {
-        case .Two:
-            println(“It is number 2”)
-        default:
-            println(“Not found”)
-    }
-}
-else {
-    println(“Not found”)
-}</p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>enum Number:Int {
+</span><span class='line'>    case One = 1
+</span><span class='line'>    case Two = 2
+</span><span class='line'>    case Three = 3
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 縮寫成一行，僅需定義一開始
+</span><span class='line'>enum Number2: Int {
+</span><span class='line'>    case One = 1, Two, Three
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 使用 toRaw 來取得值 1
+</span><span class='line'>var numberOne = Number.One.toRaw()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// 將 1 轉回去取得 對應的 enum 值 One
+</span><span class='line'>var numberTwo = Number.fromRaw(2)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>if let two = Number.fromRaw(2) {
+</span><span class='line'>    switch two {
+</span><span class='line'>        case .Two:
+</span><span class='line'>            println(“It is number 2”)
+</span><span class='line'>        default:
+</span><span class='line'>            println(“Not found”)
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>else {
+</span><span class='line'>    println(“Not found”)
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
@@ -205,21 +340,22 @@ else {
 
 <p><code>closure</code>就有如同<code>c</code>、<code>objective-c</code>的block。<code>function</code>其實也可以當作參數一樣傳遞，下面用簡單的範例做練習。</p>
 
-<p>{% img /images/swift/swift-36.jpg %}</p>
+<p><img src="/images/swift/swift-36.jpg"></p>
 
 <!-- more -->
 
 <p><code>closure</code>的格式如下</p>
 
-<p>{% codeblock %}
-{ (parameters) -&gt; returnType in
-    statements
-}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{ (parameters) -&gt; returnType in
+</span><span class='line'>    statements
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>單行的表示式<code>closure</code>可以省略<code>return</code>，參數的部分甚至可以省略寫成<code>$0</code>代表第一個參數，<code>$1</code>代表第二個參數，以此類推，下面用簡單的範例表示</p>
 
-<p>{% img /images/swift/swift-37.jpg %}</p>
+<p><img src="/images/swift/swift-37.jpg"></p>
 
 <p>下面這個範例只是單純的介紹寫法而已！</p>
 
@@ -231,7 +367,7 @@ else {
   <li><code>寫法3</code>則是把參數也給省略了，直接使用<code>&lt;</code>符號，swift則可以自動幫你推斷要將這兩個參數做<code>&lt;</code>的邏輯。</li>
 </ul>
 
-<p>{% img /images/swift/swift-38.jpg %}</p>
+<p><img src="/images/swift/swift-38.jpg"></p>
 
 <h2 id="lazydeldel-with-closure">lazy(<del>懶惰的?</del>緩慢的) with closure</h2>
 
@@ -239,11 +375,16 @@ else {
 
 <p><code>lazy</code>在swift的使用方式如下</p>
 
-<p>{% codeblock %}</p>
-
-<p>lazy var lazyVar = <a href="">String</a></p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>lazy var lazyVar = &lt;a href="">String&lt;/a>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>只需要在<code>var</code>前面加上<code>lazy</code>這個keyword，還有一點要注意的是<code>lazy</code>並不能使用<code>let</code>，因為常數在初始化前是必需要有值的。</p>
 
@@ -253,40 +394,71 @@ else {
 
 <p>如果你希望你的變數有會因為一些邏輯判斷而有不同的值，這時可以用<code>closure</code>來完成，下面這段code直接貼在playground是無法使用的，他會告訴你<code>lazy</code>必須是<code>struct</code>或<code>class</code>的成員。</p>
 
-<p>{% codeblock %}</p>
-
-<p>lazy var lazyStr:String = {
-    // do you want
-    return “This is a test”
-}()</p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>lazy var lazyStr:String = {
+</span><span class='line'>    // do you want
+</span><span class='line'>    return “This is a test”
+</span><span class='line'>}()&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>在什麼時候你會需要使用使用<code>lazy</code>呢?如果你的變數的值，是需要等到物件初始化完成後才能明確的定義，這時你就會需要使用，下面使用一個簡單的範例；下面範例中可以看到<code>[unowned self]</code>，這是要避免<code>strong reference cycle</code>。</p>
 
-<p>{% codeblock %}</p>
-
-<p>class testClass {
-    var name:String</p>
-
-<pre><code>lazy var sayHiTo:String = {
-    [unowned self] in
-    return "Hi~ \(self.name)"
-}()
-
-init(name:String) {
-    self.name = name
-
-} }
-</code></pre>
-
-<p>var myClass = testClass(name: “Maya”)
-// 實立化一個myClass後，這時sayHiTo變數 is nil</p>
-
-<p>myClass.sayHiTo
-// 當sayHiTo這個變數被呼叫到才真正的給予值</p>
-
-<p>{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>class testClass {
+</span><span class='line'>    var name:String&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>lazy var sayHiTo:String = {
+</span><span class='line'>    [unowned self] in
+</span><span class='line'>    return "Hi~ \(self.name)"
+</span><span class='line'>}()
+</span><span class='line'>
+</span><span class='line'>init(name:String) {
+</span><span class='line'>    self.name = name
+</span><span class='line'>
+</span><span class='line'>} }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>var myClass = testClass(name: “Maya”)
+</span><span class='line'>// 實立化一個myClass後，這時sayHiTo變數 is nil&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>myClass.sayHiTo
+</span><span class='line'>// 當sayHiTo這個變數被呼叫到才真正的給予值&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 ]]></content>
   </entry>
@@ -300,25 +472,25 @@ init(name:String) {
 
 <p>類別整個跟結構的寫法沒有太大的差異，直接看範例吧！</p>
 
-<p>{% img /images/swift/swift-32.jpg %}</p>
+<p><img src="/images/swift/swift-32.jpg"></p>
 
 <!-- more -->
 
 <h2 id="section">繼承</h2>
 
-<p>{% img /images/swift/swift-33.jpg %}</p>
+<p><img src="/images/swift/swift-33.jpg"></p>
 
 <h2 id="class-func">class func(類別方法)</h2>
 
 <p>類別方法可允許不用實立化物件而直接呼叫，只需要在方法前面加上<code>class</code>這個keyword；在<code>struct</code>則是要用<code>static</code>。</p>
 
-<p>{% img /images/swift/swift-34.jpg %}</p>
+<p><img src="/images/swift/swift-34.jpg"></p>
 
 <h2 id="class-ref">class ref</h2>
 
 <p>class是參考型別，從下面的範例可以看到<code>myClass2</code>是參考<code>myClass1</code>，所以當<code>myClass1</code>有所改變，<code>myClass2</code>也會跟著改變；而struct並不會因為這樣就有所改變。</p>
 
-<p>{% img /images/swift/swift-35.jpg %}</p>
+<p><img src="/images/swift/swift-35.jpg"></p>
 ]]></content>
   </entry>
   
@@ -331,17 +503,17 @@ init(name:String) {
 
 <p>在<code>swift</code>，結構基本上跟類別(class)很像，直接先看簡單的範例吧！下面建立了一個<code>car</code>的結構，裡面包含了<code>color</code>和<code>number</code>，接著實立化這個<code>car</code>結構，整個跟類別很像吧！</p>
 
-<p>{% img /images/swift/swift-29.jpg %}</p>
+<p><img src="/images/swift/swift-29.jpg"></p>
 
 <!-- more -->
 
 <p>接著再一個簡單的範例，<code>struct</code>裡面使用了別的<code>struct</code>，以及<code>struct</code>內含有方法</p>
 
-<p>{% img /images/swift/swift-30.jpg %}</p>
+<p><img src="/images/swift/swift-30.jpg"></p>
 
 <p>接這個範例能夠顯現<code>struct</code>跟類別不同的地方，在下面這個範例中可以看到<code>strunct</code>內的方法，會去操作內部的屬性，也就是<code>myName</code>，只要會去操作到內部的屬性值，在方法前面都需要加上<code>mutating</code>這個 keyword !</p>
 
-<p>{% img /images/swift/swift-31.jpg %}</p>
+<p><img src="/images/swift/swift-31.jpg"></p>
 
 <p>這是我參考stackoverflow這篇答案的[<a href="http://stackoverflow.com/a/24035861/685060">http://stackoverflow.com/a/24035861/685060</a>]，以下是我大意理解的節錄</p>
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jquery | Lighter]]></title>
+  <link href="http://lighter.tw/blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2015-01-12T23:28:51+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[IE scroll bar hidden not work]]></title>
+    <link href="http://lighter.tw/blog/2015/01/12/ie-scroll-bar-hidden-not-work/"/>
+    <updated>2015-01-12T23:07:39+08:00</updated>
+    <id>http://lighter.tw/blog/2015/01/12/ie-scroll-bar-hidden-not-work</id>
+    <content type="html"><![CDATA[<p>情境是這樣的，今天我不想要顯示scroll bar所以用css的<code>overflow-y</code>隱藏掉，在Chrome測試時寫一個<code>mousewheel</code> event是正常的，但是在ie似乎原本的寫法不行，上網google了一下，最後使用這個解法，註冊一個<code>wheelDelta</code> event，阿然後一樣…在<code>mousewheel</code>事件內來算<code>scrollTop</code>，很簡單，但紀錄一下…</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="err">‘</span><span class="nx">wheelDelta</span><span class="err">’</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="err">‘</span><span class="nx">tbody</span><span class="err">’</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="err">‘</span><span class="nx">mousewheel</span><span class="err">’</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">delta</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">wheelDelta</span> <span class="o">||</span> <span class="o">-</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">(</span><span class="nx">scrollTop</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">delta</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">30</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>整個範例CODE我放在<a href="https://gist.github.com/lighter/aac71f62b1fb4f802fbc">GIST</a>紀錄一下。</p>
+]]></content>
+  </entry>
+  
+</feed>

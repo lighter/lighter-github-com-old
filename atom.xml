@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-09-06T00:20:35+08:00</updated>
+  <updated>2015-01-12T23:28:51+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -14,11 +14,42 @@
 
   
   <entry>
+    <title type="html"><![CDATA[IE scroll bar hidden not work]]></title>
+    <link href="http://lighter.tw/blog/2015/01/12/ie-scroll-bar-hidden-not-work/"/>
+    <updated>2015-01-12T23:07:39+08:00</updated>
+    <id>http://lighter.tw/blog/2015/01/12/ie-scroll-bar-hidden-not-work</id>
+    <content type="html"><![CDATA[<p>情境是這樣的，今天我不想要顯示scroll bar所以用css的<code>overflow-y</code>隱藏掉，在Chrome測試時寫一個<code>mousewheel</code> event是正常的，但是在ie似乎原本的寫法不行，上網google了一下，最後使用這個解法，註冊一個<code>wheelDelta</code> event，阿然後一樣…在<code>mousewheel</code>事件內來算<code>scrollTop</code>，很簡單，但紀錄一下…</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">  <span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;wheelDelta&#39;</span><span class="p">);</span>
+</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;tbody&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mousewheel&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">delta</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">wheelDelta</span> <span class="o">||</span> <span class="o">-</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">;</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">(</span><span class="nx">scrollTop</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">delta</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">30</span><span class="p">);</span>
+</span><span class="line">  <span class="p">});</span>
+</span><span class="line"><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>整個範例CODE我放在<a href="https://gist.github.com/lighter/aac71f62b1fb4f802fbc">GIST</a>紀錄一下。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[[筆記]swift Part 7]]></title>
     <link href="http://lighter.tw/blog/2014/08/04/bi-ji-swift-part-7/"/>
     <updated>2014-08-04T23:49:38+08:00</updated>
     <id>http://lighter.tw/blog/2014/08/04/bi-ji-swift-part-7</id>
     <content type="html"><![CDATA[<h2 id="subscripts-">Subscripts 下標語法</h2>
+
+<p>練習範例</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -38,6 +69,8 @@
 </span><span class="line">
 </span><span class="line">let stuct = testStruct(multiplier: 20)
 </span><span class="line">stuct[3]</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!-- more -->
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -2252,216 +2285,6 @@
 <p>最後試著在瀏覽器輸入<code>http://YourUserName.kd.io/laravel-sample/public/</code>，就可以看到<code>Laravel</code>的預設網頁。</p>
 
 <p><img src="http://lighter.tw/images/koding/koding-2014-04-20_18-07-17.jpg" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sublime Text 3 plugin]]></title>
-    <link href="http://lighter.tw/blog/2013/10/03/sublime-text-3-plugin/"/>
-    <updated>2013-10-03T14:22:00+08:00</updated>
-    <id>http://lighter.tw/blog/2013/10/03/sublime-text-3-plugin</id>
-    <content type="html"><![CDATA[<p>整理一下我常用的Sublime Text 3的plugin。</p>
-
-<p>套件安裝管理工具可以參考這個網址</p>
-
-<p><a href="https://sublime.wbond.net/installation">https://sublime.wbond.net/installation</a></p>
-
-<h2 id="section">主題</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">名稱</th>
-      <th style="text-align: left">說明</th>
-      <th style="text-align: center">ST2</th>
-      <th style="text-align: center">ST3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Theme%20-%20Soda">Theme - Soda</a></td>
-      <td style="text-align: left"> </td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Theme%20-%20Flatland">Theme - Flatland</a></td>
-      <td style="text-align: left"> </td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="section-1">工具</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">名稱</th>
-      <th style="text-align: left">說明</th>
-      <th style="text-align: center">ST2</th>
-      <th style="text-align: center">ST3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Emmet">Emmet</a></td>
-      <td style="text-align: left">開發HTML好用的工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/SideBarEnhancements">Side​Bar​Enhancements</a></td>
-      <td style="text-align: left">側邊欄位加強工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Alignment">Alignment</a></td>
-      <td style="text-align: left">等號對齊</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/BracketHighlighter">BracketHighlighter</a></td>
-      <td style="text-align: left">左右括號顯示強化</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Themr">Themr</a></td>
-      <td style="text-align: left">Theme管理工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/GitGutter">GitGutter</a></td>
-      <td style="text-align: left">可看到目前檔案新增及修改的地方</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/AdvancedNewFile">AdvancedNewFile</a></td>
-      <td style="text-align: left">新增檔案</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/YUI%20Compressor">YUI Compressor</a></td>
-      <td style="text-align: left">css, js 壓縮工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/EasyMotion">EasyMotion</a></td>
-      <td style="text-align: left">游標移動工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">需要切換banch</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Git">Git</a></td>
-      <td style="text-align: left">git工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Tag">Tag</a></td>
-      <td style="text-align: left">在使用html時很好用，只需要打一個”/”符號就會幫你自動完成html關閉的符號</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CTags">CTags</a></td>
-      <td style="text-align: left">可以直接跳到該函數的方法</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Bower">Bower</a></td>
-      <td style="text-align: left">套件管理工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/DocBlockr">DocBlockr</a></td>
-      <td style="text-align: left">註解工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Better%20CoffeeScript">Better Coffee​Script</a></td>
-      <td style="text-align: left">CoffeeScript 工具</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Clipboard%20Manager">Clipboard Manager</a></td>
-      <td style="text-align: left">複製記錄管理</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/My%20Snippets">My Snippets</a></td>
-      <td style="text-align: left">快速建立 Snippets</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/All%20Autocomplete">All Autocomplete</a></td>
-      <td style="text-align: left">自動補齊</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/SublimeCodeIntel">Sublime​Code​Intel</a></td>
-      <td style="text-align: left">支援多種程式自動提示功能</td>
-      <td style="text-align: center">v</td>
-      <td style="text-align: center">v</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="section-2">補充</h3>
-
-<blockquote>
-  <p>BracketHighlighter在ST3的安裝無法直接使用<code>package install</code>直接去安裝
-需要參考這邊來安裝<a href="https://github.com/facelessuser/BracketHighlighter/tree/BH2ST3">https://github.com/facelessuser/BracketHighlighter/tree/BH2ST3</a></p>
-</blockquote>
-
-<blockquote>
-  <p>解決BracketHighlighter顏色的問題可以參考這篇<a href="http://stackoverflow.com/questions/15661731/sublime-bracket-highlighter-not-coloring-brackets">http://stackoverflow.com/questions/15661731/sublime-bracket-highlighter-not-coloring-brackets </a></p>
-</blockquote>
-
-<h2 id="snippet">Snippet</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">名稱</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CodeIgniter%20Snippets">Codeigniter Snippets</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/Additional%20PHP%20Snippets">Additional PHP Snippets</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CodeIgniter%20Utilities">CodeIgniter Utilities</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/jQuery%20Snippets%20pack">jQuery Snippets pack</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/CSS%20Snippets">CSS Snippets</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://sublime.wbond.net/packages/JavaScript%20Console">JavaScript Console</a></td>
-    </tr>
-  </tbody>
-</table>
 ]]></content>
   </entry>
   

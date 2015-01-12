@@ -3,12 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>NodeJS 安裝 - Lighter</title>
+	<title>IE scroll bar hidden not work - Lighter</title>
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="系統：Mountain Lion Homebrew是一個Mac OS套件管理工具 因為Mac上預設都有安裝Ruby了，所以可以直接用以下的指令安裝 1
-&gt; ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &hellip;">
+	<meta name="description" content="情境是這樣的，今天我不想要顯示scroll bar所以用css的overflow-y隱藏掉，在Chrome測試時寫一個mousewheel event是正常的，但是在ie似乎原本的寫法不行，上網google了一下，最後使用這個解法，註冊一個wheelDelta event，阿然後一樣… &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -84,46 +83,28 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">NodeJS 安裝</h2>
-	<div class="entry-content"><p>系統：Mountain Lion</p>
-
-<p><a href="http://mxcl.github.com/homebrew/index_zh-tw.html">Homebrew</a>是一個Mac OS套件管理工具</p>
-
-<p>因為Mac上預設都有安裝Ruby了，所以可以直接用以下的指令安裝</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>安裝node</li>
-</ol>
+	<h2 class="title">IE Scroll Bar Hidden Not Work</h2>
+	<div class="entry-content"><p>情境是這樣的，今天我不想要顯示scroll bar所以用css的<code>overflow-y</code>隱藏掉，在Chrome測試時寫一個<code>mousewheel</code> event是正常的，但是在ie似乎原本的寫法不行，上網google了一下，最後使用這個解法，註冊一個<code>wheelDelta</code> event，阿然後一樣…在<code>mousewheel</code>事件內來算<code>scrollTop</code>，很簡單，但紀錄一下…</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; brew update
-</span><span class="line">&gt; sudo brew install node</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">  <span class="nx">$</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;wheelDelta&#39;</span><span class="p">);</span>
+</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;tbody&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mousewheel&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">delta</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">wheelDelta</span> <span class="o">||</span> <span class="o">-</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">;</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">(</span><span class="nx">scrollTop</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">delta</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">30</span><span class="p">);</span>
+</span><span class="line">  <span class="p">});</span>
+</span><span class="line"><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<ol>
-  <li>安裝npm</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; sudo npm install express -g</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>修改npm PATH，開啟<code>~/.bash_profile</code>，加入以下的代碼</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">export PATH=/usr/local/bin:$PATH:/usr/local/share/npm/bin</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li>接著就可以使用<code>express</code>指令來建立專案了</li>
-</ol>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">express new project</span></code></pre></td></tr></table></div></figure></notextile></div>
-
+<p>整個範例CODE我放在<a href="https://gist.github.com/lighter/aac71f62b1fb4f802fbc">GIST</a>紀錄一下。</p>
 </div>
 
 
@@ -140,11 +121,11 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
   
 
 
-<time datetime="2013-03-31T08:31:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time></div>
+<time datetime="2015-01-12T23:07:39+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2015</time></div>
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/nodejs/'>NodeJS</a>
+	<a class='category' href='/blog/categories/jquery/'>jquery</a>
 
 
 </div>
@@ -193,8 +174,8 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://lighter.tw/blog/2013/03/31/nodejs-an-zhuang/';
-        var disqus_url = 'http://lighter.tw/blog/2013/03/31/nodejs-an-zhuang/';
+        var disqus_identifier = 'http://lighter.tw/blog/2015/01/12/ie-scroll-bar-hidden-not-work/';
+        var disqus_url = 'http://lighter.tw/blog/2015/01/12/ie-scroll-bar-hidden-not-work/';
         var disqus_script = 'embed.js';
       
     (function () {

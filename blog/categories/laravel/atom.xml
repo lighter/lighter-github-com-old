@@ -4,7 +4,7 @@
   <title><![CDATA[Category: laravel | Lighter]]></title>
   <link href="http://lighter.tw/blog/categories/laravel/atom.xml" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2014-09-06T00:25:46+08:00</updated>
+  <updated>2015-01-12T23:28:51+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -55,21 +55,54 @@
 
 <p>開啓<code>AccountController.php</code>，找到<code>show</code>這個方法，修改的code如下</p>
 
-<p>{% codeblock AccountController.php lang:php %}
-  public function show($id)
-  {
-    $account = User::find($id);
-    $view = View::make(‘account.show’)
-      -&gt;with(‘account’, $account);
-    return $view;
-  }
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="err">‘</span><span class="nx">account</span><span class="o">.</span><span class="nx">show</span><span class="err">’</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">with</span><span class="p">(</span><span class="err">‘</span><span class="nx">account</span><span class="err">’</span><span class="p">,</span> <span class="nv">$account</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>這邊要搜尋帳號也很簡單，使用<code>User::find($id)</code>就可以根據<code>ID</code>找到對應的帳號資料，也不用特地去寫些sql語法，但這應該只單存這種簡單的情況下使用吧！如果有多個Table要Join，或是有些特殊的欄位條件要篩選應該就沒這容易了。</p>
 
 <p>最後將這個搜尋結果塞到<code>view</code>裡面使用，所以接下來就是編輯view的部分；開啓<code>app/views/account/show.blade.php</code>，輸入的code如下</p>
 
-<p>{% gist 941fbf8d6296043346f6 show.blade.php %}</p>
+<p><div><script src='https://gist.github.com/941fbf8d6296043346f6.js?file=show.blade.php'></script>
+<noscript><pre><code>@extends('layouts.base')
+
+@section('content')
+  &lt;h1&gt;Show Account&lt;/h1&gt;
+  {{ Form::open(['class' =&gt; 'form-horizontal', 'role' =&gt; 'form']) }}
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;col-sm-2 control-label&quot; for=&quot;inputEmail3&quot;&gt;Email&lt;/label&gt;
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        &lt;input id=&quot;inputEmail3&quot; class=&quot;form-control&quot; type=&quot;email&quot; value=&quot;{{ $account-&gt;email }}&quot; disabled&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;col-sm-2 control-label&quot; for=&quot;inputUsername&quot;&gt;Username&lt;/label&gt;
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        &lt;input id=&quot;inputUsername&quot; class=&quot;form-control&quot; type=&quot;text&quot; value=&quot;{{ $account-&gt;username }}&quot; disabled&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;col-sm-2 control-label&quot; for=&quot;inputname&quot;&gt;name&lt;/label&gt;
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        &lt;input id=&quot;inputname&quot; class=&quot;form-control&quot; type=&quot;text&quot; value=&quot;{{ $account-&gt;name }}&quot; disabled&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  {{ Form::close() }}
+@stop</code></pre></noscript></div>
+</p>
 
 <p>這邊很簡單你要顯示的欄位資料就使用<code>-&gt;</code>這樣的方式操作，example: <code>$account-&gt;email</code></p>
 
@@ -77,50 +110,118 @@
 
 <p>編輯會呼叫到<code>AccountController.php</code>的<code>edit</code>方法，code如下</p>
 
-<p>{% codeblock AccountController.php lang:php %}
-  public function edit($id)
-  {
-    $account = User::find($id);</p>
-
-<pre><code>$view = View::make('account.edit')
-  -&gt;with('account', $account);
-return $view;   } {% endcodeblock %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.edit&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">with</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">,</span> <span class="nv">$account</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>   <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 </code></pre>
 
 <p>這邊跟顯示的地方並沒有什麼不同！接著就來看<code>app/views/account/edit.blade.php</code>吧</p>
 
-<p>{% gist f5984711c8d1a80d48fe edit.blade.php %}</p>
+<p><div><script src='https://gist.github.com/f5984711c8d1a80d48fe.js?file=edit.blade.php'></script>
+<noscript><pre><code>@extends('layouts.base')
 
-<p>這邊大致上跟新增很像！唯一比較不一樣的是<code>{{ Form model }}</code>(可以看到註解1的地方)，這邊要指定更新的方法，<code>account.update</code>就是呼叫<code>AccountController</code>的<code>update</code>方法，並帶入<code>$account-&gt;id</code>帳號ID；還有設定<code>'method' =&gt; 'PUT'</code>，這是因為要符合<code>restful</code>。</p>
+@section('content')
+  &lt;h1&gt;Edit Account&lt;/h1&gt;
+  {{ HTML::ul($errors-&gt;all()) }}
+  &lt;!-- 1 --&gt;
+  {{ Form::model($account, array('route' =&gt; array('account.update', $account-&gt;id), 'method' =&gt; 'PUT', 'class' =&gt; 'form-horizontal', 'role' =&gt; 'form')) }}
+    &lt;div class=&quot;form-group&quot;&gt;
+      {{ Form::label('email', 'Email', ['class' =&gt; 'col-sm-2 control-label']) }}
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        {{ Form::text('email', $account-&gt;email, ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+     &lt;div class=&quot;form-group&quot;&gt;
+      {{ Form::label('username', 'Username', ['class' =&gt; 'col-sm-2 control-label']) }}
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        {{ Form::text('username', $account-&gt;username, ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+     &lt;div class=&quot;form-group&quot;&gt;
+      {{ Form::label('name', 'Name', ['class' =&gt; 'col-sm-2 control-label']) }}
+      &lt;div class=&quot;col-sm-10&quot;&gt;
+        {{ Form::text('name', $account-&gt;name, ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;div class=&quot;col-sm-offset-2 col-sm-10&quot;&gt;
+        {{ Form::submit('Edit the Account!', array('class' =&gt; 'btn btn-primary')) }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  {{ Form::close() }}
+@stop</code></pre></noscript></div>
+</p>
+
+<p>這邊大致上跟新增很像！唯一比較不一樣的是<code></code>(可以看到註解1的地方)，這邊要指定更新的方法，<code>account.update</code>就是呼叫<code>AccountController</code>的<code>update</code>方法，並帶入<code>$account-&gt;id</code>帳號ID；還有設定<code>'method' =&gt; 'PUT'</code>，這是因為要符合<code>restful</code>。</p>
 
 <p>接下來就來寫更新資料的<code>update</code>方法吧！code如下</p>
 
-<p>{% codeblock AccountController.php lang:php %}
-  public function update($id)
-  {
-    $rules = array(
-      ‘email’ =&gt; ‘required|email’,
-      ‘username’ =&gt; ‘required’,
-      ‘name’ =&gt; ‘required’
-    );</p>
-
-<pre><code>$validator =  Validator::make(Input::all(), $rules);
-
-if($validator-&gt;fails()) {
-  return Redirect::to('account/' . $id . '/edit')
-    -&gt;withErrors($validator)
-    -&gt;withInput(Input::all());
-}
-else {
-  $account = User::find($id);
-  $account-&gt;email = Input::get('email');
-  $account-&gt;username = Input::get('username');
-  $account-&gt;name = Input::get('name');
-  $account-&gt;save();
-
-  Session::flash('message', '修改成功');
-  return Redirect::to('account');
-}   } {% endcodeblock %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$rules</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="err">‘</span><span class="nx">email</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="o">|</span><span class="nx">email</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>      <span class="err">‘</span><span class="nx">username</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>      <span class="err">‘</span><span class="nx">name</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="err">’</span>
+</span><span class='line'>    <span class="p">);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">$validator</span> <span class="o">=</span>  <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">fails</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;account/&#39;</span> <span class="o">.</span> <span class="nv">$id</span> <span class="o">.</span> <span class="s1">&#39;/edit&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">withErrors</span><span class="p">(</span><span class="nv">$validator</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">withInput</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">());</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">email</span> <span class="o">=</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">save</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Session</span><span class="o">::</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;修改成功&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>   <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 </code></pre>
 
 <p>這邊幾乎都跟建立資料時一樣，我就不再贅述了。</p>
@@ -129,14 +230,22 @@ else {
 
 <p>前一個章節已經建立好了刪除的連結，但是尚未在controller內寫方法，其實也很簡單，刪除預設會去呼叫<code>destroy</code>這個方法，所以找到<code>AccountController.php</code>內的<code>destroy</code>，code如下</p>
 
-<p>{% codeblock AccountController.php lang:php %}
-  public function destroy($id)
-  {
-    $account = User::find($id);
-    $account-&gt;delete();</p>
-
-<pre><code>Session::flash('message', '刪除成功');
-return Redirect::to('account');   }  {% endcodeblock %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$account</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$account</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">delete</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">Session</span><span class="o">::</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;刪除成功&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">);</span>   <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 </code></pre>
 
 <p>直接看code就可以理解！找到該筆帳號(根據ID)，最後<code>delete</code>！很簡單吧…</p>
@@ -163,15 +272,22 @@ return Redirect::to('account');   }  {% endcodeblock %}
 
 <p>首先開啟<code>AccountController.php</code>,輸入以下的code:</p>
 
-<p>{% codeblock AccountController.php lang:php %}
-  public function index()
-  {
-    $accounts = User::all();
-    $view = View::make(‘account.list’)
-      -&gt;with(‘accounts’, $accounts);
-    return $view;
-  }
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$accounts</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="err">‘</span><span class="nx">account</span><span class="o">.</span><span class="k">list</span><span class="err">’</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">with</span><span class="p">(</span><span class="err">‘</span><span class="nx">accounts</span><span class="err">’</span><span class="p">,</span> <span class="nv">$accounts</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>這裡可以看到撈取資料非常簡單!這裡使用的是<a href="http://kejyun.github.io/Laravel-4-Documentation-Traditional-Chinese/docs/eloquent/#introduction">Eloquent ORM</a>的方式,相關介紹官方文件已經說得很清楚了,這邊就不再多贅述了.</p>
 
@@ -184,21 +300,66 @@ return Redirect::to('account');   }  {% endcodeblock %}
 
 <p>Note:如果你的code有錯誤,在網頁出現到下圖的錯誤訊息,但卻沒有顯示code的錯誤問題在哪</p>
 
-<p>{% img /images/laravel_sample/laravel-16.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-16.jpg"></p>
 
 <p>可以開啟<code>app/config/app.php</code>這支檔案,找到<code>debug</code>這個key值,並把它改為<code>true</code>,這樣就可以顯示錯誤訊息了:</p>
 
-<p>{% codeblock app.php lang:php %}
-‘debug’ =&gt; true,
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="err">‘</span><span class="nx">debug</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">true</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>這邊可以很明確的看到<code>$accounts = User:all();</code>少一個分號!</p>
 
-<p>{% img /images/laravel_sample/laravel-17.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-17.jpg"></p>
 
 <p>再來開啟<code>app/views/account/list.blade.php</code>輸入下面的code:</p>
 
-<p>{% gist 5abb468d5c547c1305e7 list.blade.php %}</p>
+<p><div><script src='https://gist.github.com/5abb468d5c547c1305e7.js?file=list.blade.php'></script>
+<noscript><pre><code>@extends('layouts.base')
+
+@section('content')
+  &lt;h1&gt;List Account&lt;/h1&gt;
+  &lt;!-- 1 --&gt;
+  @if (Session::has('message'))
+    &lt;div class=&quot;alert alert-info&quot;&gt;{{Session::get('message')}}&lt;/div&gt;
+  @endif
+
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-6 col-md-offset-3&quot; style=&quot;text-align: left;&quot;&gt;
+      &lt;!-- 2 --&gt;
+      &lt;a class=&quot;btn btn-primary&quot; href=&quot;{{ URL::to('account/create') }}&quot;&gt;Create Account&lt;/a&gt;
+      &lt;hr&gt;
+      &lt;table class=&quot;table table-striped table-bordered&quot;&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;td&gt;ID&lt;/td&gt;
+            &lt;td&gt;Email&lt;/td&gt;
+            &lt;td&gt;Actions&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        &lt;!-- 3 --&gt;
+        @foreach($accounts as $key =&gt; $value)
+          &lt;tr&gt;
+            &lt;td&gt;{{ $key + 1 }}&lt;/td&gt;
+            &lt;td&gt;{{ $value-&gt;email }}&lt;/td&gt;
+            &lt;td&gt;
+              &lt;!-- 4 --&gt;
+              &lt;a href=&quot;{{ URL::to('account/' . $value-&gt;id) }}&quot; class=&quot;btn btn-success&quot;&gt;Show&lt;/a&gt;
+              &lt;a href=&quot;{{ URL::to('account/' . $value-&gt;id . '/edit') }}&quot; class=&quot;btn btn-info&quot;&gt;Edit&lt;/a&gt;
+              {{ Form::open(array('url' =&gt; 'account/' . $value-&gt;id, 'class' =&gt; 'pull-right')) }}
+                {{ Form::hidden('_method', 'DELETE') }}
+                {{ Form::submit('Delete', array('class' =&gt; 'btn btn-danger')) }}
+              {{ Form::close() }}
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        @endforeach
+        &lt;/tbody&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+@stop</code></pre></noscript></div>
+</p>
 
 <blockquote>
   <p>下面數字列表請依照code上的註解數字.</p>
@@ -213,13 +374,55 @@ return Redirect::to('account');   }  {% endcodeblock %}
 
 <p>如果都沒問題的話應該可以看到下面的畫面</p>
 
-<p>{% img /images/laravel_sample/laravel-18.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-18.jpg"></p>
 
 <h2 id="section-1">建立帳號</h2>
 
 <p>首先先來編輯建立帳號的畫面! 開啟<code>app/views/account/create.blade.php</code>, 輸入下面的code</p>
 
-<p>{% gist aa6f3eb91ff6f2e0a03e create.blade.php %}</p>
+<p><div><script src='https://gist.github.com/aa6f3eb91ff6f2e0a03e.js?file=create.blade.php'></script>
+<noscript><pre><code>@extends('layouts.base')
+
+@section('content')
+  &lt;h1&gt;Create Account&lt;/h1&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-6 col-md-offset-3&quot; style=&quot;text-align: left;&quot;&gt;
+      
+      // 1
+      {{ HTML::ul($errors-&gt;all()) }}
+      
+      // 2
+      {{ Form::open(['url' =&gt; 'account']) }}
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('name','Name') }}
+        
+        // 3
+        {{ Form::text('name', Input::old('name'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('username','Username') }}
+        {{ Form::text('username', Input::old('username'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('email','Email') }}
+        {{ Form::text('email', Input::old('email'), ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-group&quot;&gt;
+        {{ Form::label('password','Password') }}
+        {{ Form::password('password', ['class' =&gt; 'form-control']) }}
+      &lt;/div&gt;
+
+      // 4
+      {{ Form::submit('Create Account', ['class' =&gt; 'btn btn-primary']) }}
+
+      {{ Form::close() }}
+    &lt;/div&gt;
+  &lt;/div&gt;
+@stop</code></pre></noscript></div>
+</p>
 
 <p>這邊並沒有什麼太複雜的,大概依照註解的號碼解釋一下</p>
 
@@ -230,11 +433,43 @@ return Redirect::to('account');   }  {% endcodeblock %}
   <li>表單的送出按鈕.</li>
 </ol>
 
-<p>{% img /images/laravel_sample/laravel-19.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-19.jpg"></p>
 
 <p>接下來就是寫入資料庫的動作,開啟<code>app/controller/AccountController.php</code>,因為<code>laravel</code>是使用<code>RESTful</code>,所以預設會使用<code>store</code>這個function. code如下:</p>
 
-<p>{% gist d28b28c4c16ccd04c40b AccountController.php %}</p>
+<p><div><script src='https://gist.github.com/d28b28c4c16ccd04c40b.js?file=AccountController.php'></script>
+<noscript><pre><code>public function store()
+{
+  // 1. 
+  $rules = array(
+    'email' =&gt; 'required|email',
+    'password' =&gt; 'required|alphaNum|min:3',
+    'name' =&gt; 'required',
+    'username' =&gt; 'required'
+  );
+
+  $validator = Validator::make(Input::all(), $rules);
+
+  if ($validator-&gt;fails()) {
+    return Redirect::to('account/create')
+      -&gt;withErrors($validator)
+      -&gt;withInput(Input::except('password')); // 2.
+  }
+  else {
+    // 3.
+    $account = new User;
+    $account-&gt;email = Input::get('email');
+    $account-&gt;password = Hash::make(Input::get('password'));
+    $account-&gt;name = Input::get('name');
+    $account-&gt;username = Input::get('username');
+    $account-&gt;save();
+  
+  // 4.
+    Session::flash('message', 'Created success');
+    return Redirect::to('account');
+  }
+}</code></pre></noscript></div>
+</p>
 
 <ol>
   <li>驗證規則: 我個人覺得很方便,不然以往我都是使用<code>empty</code>等php的function一個一個條件檢查.而且連Email檢查也不用寫正規式檢查,可以看到密碼的部分<code>min:3</code>,最少為3個數字.</li>
@@ -243,7 +478,7 @@ return Redirect::to('account');   }  {% endcodeblock %}
   <li>返回建立成功訊息: 使用flash的session,至於在哪顯示?可以在<code>list.blade.php</code>中找到<code>@if (Session::has('message'))</code>這區塊的code,就是用來顯示這邊的<code>message</code>.</li>
 </ol>
 
-<p>{% img /images/laravel_sample/laravel-20.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-20.jpg"></p>
 ]]></content>
   </entry>
   
@@ -256,11 +491,10 @@ return Redirect::to('account');   }  {% endcodeblock %}
 
 <p>這部分主要是介紹樣板使用，主要是可以避免相同的code一再重複，只是要換掉中間的內容！首先我想要建立一個<code>帳號</code>的新增修改刪除的頁面，所以我先建立一個<code>Controller</code>；一樣使用<code>artisan</code>，開啟終端機輸入下列指令：</p>
 
-<p>{% codeblock %}
-php artisan controller:make AccountController
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan controller:make AccountController</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>{% img /images/laravel_sample/laravel-14.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-14.jpg"></p>
 
 <!-- more -->
 
@@ -268,10 +502,12 @@ php artisan controller:make AccountController
 
 <p>再來就是加入新的<code>route</code>啦！開啟<code>routes.php</code>，新增的code如下：</p>
 
-<p>{% codeblock routes.php lang:php %}
-// Account
-Route::resource(‘account’, ‘AccountController’);
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// Account</span>
+</span><span class='line'><span class="nx">Route</span><span class="o">::</span><span class="na">resource</span><span class="p">(</span><span class="err">‘</span><span class="nx">account</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="nx">AccountController</span><span class="err">’</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>這樣一來就會幫我們建立好對應的<code>RESTFul</code>。</p>
 
@@ -281,40 +517,103 @@ Route::resource(‘account’, ‘AccountController’);
 
 <p>首先我建立的的路徑跟檔案是這樣的：</p>
 
-<p>{% codeblock %}
-app
-  ⌞ views
-    ⌞ layouts
-      ⌞ base.blade.php
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app
+</span><span class='line'>  ⌞ views
+</span><span class='line'>    ⌞ layouts
+</span><span class='line'>      ⌞ base.blade.php</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>接下在<code>base.blade.php</code>輸入下面的code</p>
 
-<p>{% gist 43bda04901e61d152711 base.blade.php %}</p>
+<p><div><script src='https://gist.github.com/43bda04901e61d152711.js?file=base.blade.php'></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Show&lt;/title&gt;
+  {{ HTML::script('public/js/jquery-1.11.0.min.js') }}
+  {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap.min.css') }}
+  {{ HTML::style('public/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css') }}
+  &lt;style&gt;
+    body {
+      padding-top: 50px;
+    }
+    .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&quot;navbar navbar-inverse navbar-fixed-top&quot; role=&quot;navigation&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+
+      &lt;div class=&quot;navbar-header&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot; data-target=&quot;.navbar-collapse&quot;&gt;
+          &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Show&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;collapse navbar-collapse&quot;&gt;
+        &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+          &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;{{ URL::to('logout') }}&quot;&gt;Logout&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;&lt;!--/.nav-collapse --&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;starter-template&quot; style=&quot;position: relative;&quot;&gt;
+      @yield('content')
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></noscript></div>
+</p>
 
 <p>需特別留意的是第45行，你會更動的內容都跟這有關係！</p>
 
 <p>接著就是建立各自功能的畫面啦！我的檔案結構如下</p>
 
-<p>{% codeblock %}
-app
-  ⌞ views
-    ⌞ account
-      ⌞ create.blade.php // 建立
-      ⌞ edit.blade.php   // 修改
-      ⌞ list.blade.php   // 列表所有帳號
-      ⌞ show.blade.php   // 該帳號細部資訊
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app
+</span><span class='line'>  ⌞ views
+</span><span class='line'>    ⌞ account
+</span><span class='line'>      ⌞ create.blade.php // 建立
+</span><span class='line'>      ⌞ edit.blade.php   // 修改
+</span><span class='line'>      ⌞ list.blade.php   // 列表所有帳號
+</span><span class='line'>      ⌞ show.blade.php   // 該帳號細部資訊</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>接著就各自修改這四個檔案吧，很簡單！先舉一個例，先以<code>list.blade.php</code>為例，code如下：</p>
 
-<p>{% codeblock list.blade.php lang:php %}
-@extends(‘layouts.base’)</p>
-
-<p>@section(‘content’)</p>
-<h1>List Account</h1>
-<p>@stop
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>list.blade.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">@</span><span class="k">extends</span><span class="p">(</span><span class="err">‘</span><span class="nx">layouts</span><span class="o">.</span><span class="nx">base</span><span class="err">’</span><span class="p">)</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;@</span><span class="nx">section</span><span class="p">(</span><span class="err">‘</span><span class="nx">content</span><span class="err">’</span><span class="p">)</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="k">List</span> <span class="nx">Account</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;@</span><span class="nx">stop</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <ol>
   <li><code>@extends(layouts.base)</code>就是引用原本的頁面基本的架構，這樣一來你就不用再寫一堆html header了。</li>
@@ -325,101 +624,189 @@ app
 
 <p>最後修改<code>AccountController</code>，各自對應的方法要顯示的<code>view</code>，code如下：</p>
 
-<p>{% codeblock AccountController.php lang:php %}
-&lt;?php</p>
-
-<p>class AccountController extends \BaseController {</p>
-
-<pre><code>/**
- * Display a listing of the resource.
- *
- * @return Response
- */
-public function index()
-{
-    $view = View::make('account.list');
-    return $view;
-}
-
-
-/**
- * Show the form for creating a new resource.
- *
- * @return Response
- */
-public function create()
-{
-    $view = View::make('account.create');
-    return $view;
-}
-
-
-/**
- * Store a newly created resource in storage.
- *
- * @return Response
- */
-public function store()
-{
-    //
-}
-
-
-/**
- * Display the specified resource.
- *
- * @param  int  $id
- * @return Response
- */
-public function show($id)
-{
-    $view = View::make('account.show');
-    return $view;
-}
-
-
-/**
- * Show the form for editing the specified resource.
- *
- * @param  int  $id
- * @return Response
- */
-public function edit($id)
-{
-    $view = View::make('account.edit');
-    return $view;
-}
-
-
-/**
- * Update the specified resource in storage.
- *
- * @param  int  $id
- * @return Response
- */
-public function update($id)
-{
-    //
-}
-
-
-/**
- * Remove the specified resource from storage.
- *
- * @param  int  $id
- * @return Response
- */
-public function destroy($id)
-{
-    //
-} } {% endcodeblock %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AccountController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">AccountController</span> <span class="k">extends</span> <span class="nx">\BaseController</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;/**</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">Display</span> <span class="nx">a</span> <span class="nx">listing</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">resource</span><span class="o">.</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="k">return</span> <span class="nx">Response</span>
+</span><span class='line'> <span class="o">*/</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.list&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Show the form for creating a new resource.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @return Response</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.create&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Store a newly created resource in storage.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @return Response</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">store</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Display the specified resource.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @param  int  $id</span>
+</span><span class='line'><span class="sd"> * @return Response</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.show&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Show the form for editing the specified resource.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @param  int  $id</span>
+</span><span class='line'><span class="sd"> * @return Response</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;account.edit&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Update the specified resource in storage.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @param  int  $id</span>
+</span><span class='line'><span class="sd"> * @return Response</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Remove the specified resource from storage.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @param  int  $id</span>
+</span><span class='line'><span class="sd"> * @return Response</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//</span>
+</span><span class='line'><span class="p">}</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 </code></pre>
 
 <p>可以注意到<code>View::make()</code>內都是用<code>account.XXX</code>，<code>account</code>代表的就是<code>account</code>目錄路徑下的各自的檔案。</p>
 
 <p>如果成功的話可以看到這樣的畫面</p>
 
-<p>{% img /images/laravel_sample/laravel-15.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-15.jpg"></p>
 
 <p>功能的話…to be continued</p>
 ]]></content>
@@ -434,105 +821,186 @@ public function destroy($id)
 
 <p>首先建立一個簡單的<code>view</code>用來查看目前登入狀態，建立的路徑是<code>app/views/show/index.blade.php</code>，我刻意多開了一個<code>show</code>資料夾。</p>
 
-<p>{% codeblock %}
-app
-  ⌞views
-    ⌞show
-      ⌞index.blade.php
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app
+</span><span class='line'>  ⌞views
+</span><span class='line'>    ⌞show
+</span><span class='line'>      ⌞index.blade.php</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><code>show/index.blade.php</code>的code如下(這邊可以先忽略變數怎麼來的…往下看你就可以知道了)：</p>
 
-<p>{% gist 38e234e12e9e98652d5a %}</p>
+<p><div><script src='https://gist.github.com/38e234e12e9e98652d5a.js'></script>
+<noscript><pre><code>&lt;h1&gt;This is show sample&lt;/h1&gt;
+&lt;p&gt;
+  Login_status:
+  {{ $login_status }}
+&lt;/p&gt;</code></pre></noscript></div>
+</p>
 
 <p>再來就是增加<code>route</code>的設定，開啓<code>routes.php</code>，加入下面的code：</p>
 
-<p>{% codeblock routes.php lang:php %}
-// 登入
-Route::post(‘login’, [‘uses’ =&gt; ‘HomeController@doLogin’]);</p>
-
-<p>// 登出
-Route::get(‘logout’, [‘uses’ =&gt; ‘HomeController@doLogout’]);</p>
-
-<p>// show
-Route::get(‘show’, [‘uses’ =&gt; ‘HomeController@show’]);
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>routes.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// 登入</span>
+</span><span class='line'><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="err">‘</span><span class="nx">login</span><span class="err">’</span><span class="p">,</span> <span class="p">[</span><span class="err">‘</span><span class="nx">uses</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">HomeController</span><span class="o">@</span><span class="nx">doLogin</span><span class="err">’</span><span class="p">]);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;//</span> <span class="err">登出</span>
+</span><span class='line'><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="err">‘</span><span class="nx">logout</span><span class="err">’</span><span class="p">,</span> <span class="p">[</span><span class="err">‘</span><span class="nx">uses</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">HomeController</span><span class="o">@</span><span class="nx">doLogout</span><span class="err">’</span><span class="p">]);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;//</span> <span class="nx">show</span>
+</span><span class='line'><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="err">‘</span><span class="nx">show</span><span class="err">’</span><span class="p">,</span> <span class="p">[</span><span class="err">‘</span><span class="nx">uses</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">HomeController</span><span class="o">@</span><span class="nx">show</span><span class="err">’</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>這邊我都香要使用的方法都寫在<code>HomeController</code>內。因此會依據網址的不同執行<code>HomeController</code>內對應的方法。</p>
 
 <p><code>HomeController.php</code>加入的code如下，解釋我都寫在註解上了。</p>
 
-<p>{% codeblock HomeController.php lang:php %}
-// 登入
-public function doLogin()
-{
-  // 驗證規則
-  $rules = array(
-    ‘email’    =&gt; ‘required|email’, // 必填欄位，email格式
-    ‘password’ =&gt; ‘required|alphaNum|min:3’ // 必填欄位，必須是字母或數字，不得小於3位
-  );</p>
-
-<p>// 驗證
-  $validator = Validator::make(Input::all(), $rules);</p>
-
-<p>// 規則驗證失敗
-  if ($validator-&gt;fails()) {</p>
-
-<pre><code>// 回到首頁，並回傳錯誤訊息，與所有輸入的欄位，除了密碼
-return Redirect::to('/')
-  -&gt;withErrors($validator)
-  -&gt;withInput(Input::except('password'));   }   else {
-$userdata = array(
-    'email'    =&gt; Input::get('email'),
-    'password' =&gt; Input::get('password')
-  );
-
-// 與資料庫驗證
-if (Auth::attempt($userdata)) {
-
-  // 驗證成功，並增加一個session key value值
-  Session::put('login_success', 1);
-
-  // 導向show/index.blade.php
-  return Redirect::to('/show');
-}
-else {
-  return Redirect::to('/');
-}   } }
-</code></pre>
-
-<p>public function doLogout()
-{
-  Auth::logout();</p>
-
-<p>// 刪除登入成功的key 值
-  Session::forget(‘login_seuccess’);
-  return Redirect::to(‘/’);
-}</p>
-
-<p>public function show()
-{
-  // 取得所有session的資料
-  $all_session_data = Session::all();
-  $data[‘all_session_data’] = $all_session_data;</p>
-
-<p>if ( Session::has(‘login_success’) &amp;&amp; Auth::check() ) {
-    $data[‘login_status’] = ‘success’;
-  }
-  else {
-    $data[‘login_status’] = ‘failure’;
-  }</p>
-
-<p>// 這邊可以注意$data的login_status這個key值
-  // 跟 show/index.blade.php 使用的變數做對應
-  $view = View::make(‘show.index’, $data);
-  return $view;
-}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>HomeController.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// 登入</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">doLogin</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// 驗證規則</span>
+</span><span class='line'>  <span class="nv">$rules</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="err">‘</span><span class="nx">email</span><span class="err">’</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="o">|</span><span class="nx">email</span><span class="err">’</span><span class="p">,</span> <span class="c1">// 必填欄位，email格式</span>
+</span><span class='line'>    <span class="err">‘</span><span class="nx">password</span><span class="err">’</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">‘</span><span class="nx">required</span><span class="o">|</span><span class="nx">alphaNum</span><span class="o">|</span><span class="nx">min</span><span class="o">:</span><span class="mi">3</span><span class="err">’</span> <span class="c1">// 必填欄位，必須是字母或數字，不得小於3位</span>
+</span><span class='line'>  <span class="p">);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;//</span> <span class="err">驗證</span>
+</span><span class='line'>  <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validator</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">(),</span> <span class="nv">$rules</span><span class="p">);</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;//</span> <span class="err">規則驗證失敗</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">fails</span><span class="p">())</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;//</span> <span class="err">回到首頁，並回傳錯誤訊息，與所有輸入的欄位，除了密碼</span>
+</span><span class='line'><span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">withErrors</span><span class="p">(</span><span class="nv">$validator</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">withInput</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">except</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">));</span>   <span class="p">}</span>   <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'><span class="nv">$userdata</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;email&#39;</span>    <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;password&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Input</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 與資料庫驗證</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">Auth</span><span class="o">::</span><span class="na">attempt</span><span class="p">(</span><span class="nv">$userdata</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// 驗證成功，並增加一個session key value值</span>
+</span><span class='line'>  <span class="nx">Session</span><span class="o">::</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;login_success&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// 導向show/index.blade.php</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/show&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>   <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">public</span> <span class="k">function</span> <span class="nf">doLogout</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nx">Auth</span><span class="o">::</span><span class="na">logout</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;//</span> <span class="err">刪除登入成功的</span><span class="nb">key</span> <span class="err">值</span>
+</span><span class='line'>  <span class="nx">Session</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="err">‘</span><span class="nx">login_seuccess</span><span class="err">’</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Redirect</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="err">‘</span><span class="o">/</span><span class="err">’</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// 取得所有session的資料</span>
+</span><span class='line'>  <span class="nv">$all_session_data</span> <span class="o">=</span> <span class="nx">Session</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+</span><span class='line'>  <span class="nv">$data</span><span class="p">[</span><span class="err">‘</span><span class="nx">all_session_data</span><span class="err">’</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$all_session_data</span><span class="p">;</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span> <span class="nx">Session</span><span class="o">::</span><span class="na">has</span><span class="p">(</span><span class="err">‘</span><span class="nx">login_success</span><span class="err">’</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">check</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$data</span><span class="p">[</span><span class="err">‘</span><span class="nx">login_status</span><span class="err">’</span><span class="p">]</span> <span class="o">=</span> <span class="err">‘</span><span class="nx">success</span><span class="err">’</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$data</span><span class="p">[</span><span class="err">‘</span><span class="nx">login_status</span><span class="err">’</span><span class="p">]</span> <span class="o">=</span> <span class="err">‘</span><span class="nx">failure</span><span class="err">’</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;//</span> <span class="err">這邊可以注意</span><span class="nv">$data</span><span class="err">的</span><span class="nx">login_status</span><span class="err">這個</span><span class="nb">key</span><span class="err">值</span>
+</span><span class='line'>  <span class="c1">// 跟 show/index.blade.php 使用的變數做對應</span>
+</span><span class='line'>  <span class="nv">$view</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="err">‘</span><span class="nx">show</span><span class="o">.</span><span class="nx">index</span><span class="err">’</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>如果登入成功的話，可以看到登入成功的訊息</p>
 
-<p>{% img /images/laravel_sample/laravel-13.jpg %}</p>
+<p><img src="/images/laravel_sample/laravel-13.jpg"></p>
 ]]></content>
   </entry>
   
