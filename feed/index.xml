@@ -4,7 +4,7 @@
   <title><![CDATA[Lighter]]></title>
   <link href="http://lighter.tw/feed" rel="self"/>
   <link href="http://lighter.tw/"/>
-  <updated>2015-01-12T23:28:51+08:00</updated>
+  <updated>2015-03-25T07:04:02+08:00</updated>
   <id>http://lighter.tw/</id>
   <author>
     <name><![CDATA[Willy lighter]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Install nvm on mac]]></title>
+    <link href="http://lighter.tw/blog/2015/03/25/install-nvm-on-mac/"/>
+    <updated>2015-03-25T05:47:08+08:00</updated>
+    <id>http://lighter.tw/blog/2015/03/25/install-nvm-on-mac</id>
+    <content type="html"><![CDATA[<p><code>nvm</code>可以讓你安裝多個<code>node</code>版本，並且切換現在使用的版本，其實這跟<code>ruby</code>的<code>rvm</code>很像。</p>
+
+<p>首先更新<code>brew</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ brew update
+</span><span class="line">$ brew upgrade</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然後安裝<code>nvm</code>。</p>
+
+<p><code>$ brew install nvm</code></p>
+
+<p>最後需要將下面這行加入到<code>.profile</code>, <code>.bashrc</code> 或 <code>.zshrc</code>	，這樣才可以執行<code>rvm</code>，因為我是使用<code>zsh</code>，所以我加到<code>.zshrc</code>。</p>
+
+<p><code>$ echo "source $(brew --prefix nvm)/nvm.sh" &gt;&gt; ~/.zshrc</code></p>
+
+<h2 id="node--npm">安裝 node &amp; npm</h2>
+
+<p>可以使用下面這個指令列出所有的<code>node</code>版本</p>
+
+<p><code>$ nvm ls-remote</code></p>
+
+<p>接著我想裝<code>v0.12.1</code>的版本</p>
+
+<p><code>$ nvm install -s v0.12.1</code></p>
+
+<p>安裝完成後使用下面這指令可以看到安裝好的版本</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ node -v
+</span><span class="line">$ npm -v</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>下面這行指令可以讓你每次預設自動使用的版本。</p>
+
+<p><code>$ nvm alias default 0.12.1</code></p>
+
+<p>如果要切換版本可以使用。</p>
+
+<p><code>$nvm use VERSION</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[IE scroll bar hidden not work]]></title>
@@ -2207,84 +2256,6 @@
   <li><code>mongod.conf</code>路徑位置<code>/usr/local/etc/</code></li>
   <li>預設<code>mongod.lock</code>路徑位置<code>/usr/local/var/mongodb</code></li>
 </ol>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Koding Note]]></title>
-    <link href="http://lighter.tw/blog/2014/04/20/koding-note/"/>
-    <updated>2014-04-20T09:40:00+08:00</updated>
-    <id>http://lighter.tw/blog/2014/04/20/koding-note</id>
-    <content type="html"><![CDATA[<p>之前就知道Koding這平台，也申請帳號了一陣子，但一直沒有特別去使用。最近因為想說來玩玩看吧，而且又是免費的，空間也很夠用！以下是自己記錄一下使用上遇到的一些問題，大概記錄一下。</p>
-
-<p>列出已經預先幫你安裝的東西，從下圖就可以看到已經幫我們安裝的<code>phpmyadmin</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help programs</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_09-50-47.jpg" /></p>
-
-<p>可以看到你的phpmyadmin url及基本的mysql指令，你可以使用它提供的指令去修改密碼</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; help phpmyadmin</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_10-00-13.jpg" /></p>
-
-<p>修改mysql密碼</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">mysqladmin -u root password YOUR_NEW_PASSWORD</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>修改mysql root的帳號</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; mysql -u root -p
-</span><span class="line">&gt; Enter password:
-</span><span class="line">mysql&gt; use mysql;
-</span><span class="line">mysql&gt; update user set user='admin' where user='root';
-</span><span class="line">mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!-- more -->
-
-<h2 id="laravel">安裝 Laravel</h2>
-
-<p>安裝<code>composer</code>(<a href="https://getcomposer.org/download/">連結</a>)</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; cd
-</span><span class="line">&gt; cd Web/
-</span><span class="line">&gt; curl -sS https://getcomposer.org/installer | php</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-31-50.jpg" /></p>
-
-<p>安裝<code>Laravel</code>(<a href="http://laravel.com/docs/quick#installation">連結</a>)</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; php composer.phar create-project laravel/laravel your-project-name --prefer-dist</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-38-03.jpg" /></p>
-
-<p>安裝<code>php5-mcrypt</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&gt; sudo apt-get install php5-mcrypt</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-53-27.jpg" /></p>
-
-<p>設定<code>sessions</code>資料夾權限，路徑<code>/home/UserNmae/Web/laravel-sample/app/storage/sessions</code></p>
-
-<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_17-57-42.jpg" /></p>
-
-<p>最後試著在瀏覽器輸入<code>http://YourUserName.kd.io/laravel-sample/public/</code>，就可以看到<code>Laravel</code>的預設網頁。</p>
-
-<p><img src="http://lighter.tw/images/koding/koding-2014-04-20_18-07-17.jpg" /></p>
 ]]></content>
   </entry>
   

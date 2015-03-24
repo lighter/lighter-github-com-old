@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nvm | Lighter]]></title>
+  <link href="http://lighter.tw/blog/categories/nvm/atom.xml" rel="self"/>
+  <link href="http://lighter.tw/"/>
+  <updated>2015-03-25T07:04:02+08:00</updated>
+  <id>http://lighter.tw/</id>
+  <author>
+    <name><![CDATA[Willy lighter]]></name>
+    <email><![CDATA[apple.xva@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install nvm on mac]]></title>
+    <link href="http://lighter.tw/blog/2015/03/25/install-nvm-on-mac/"/>
+    <updated>2015-03-25T05:47:08+08:00</updated>
+    <id>http://lighter.tw/blog/2015/03/25/install-nvm-on-mac</id>
+    <content type="html"><![CDATA[<p><code>nvm</code>可以讓你安裝多個<code>node</code>版本，並且切換現在使用的版本，其實這跟<code>ruby</code>的<code>rvm</code>很像。</p>
+
+<p>首先更新<code>brew</code>。</p>
+
+<p><code>
+$ brew update
+$ brew upgrade
+</code></p>
+
+<p>然後安裝<code>nvm</code>。</p>
+
+<p><code>$ brew install nvm</code></p>
+
+<p>最後需要將下面這行加入到<code>.profile</code>, <code>.bashrc</code> 或 <code>.zshrc</code>	，這樣才可以執行<code>rvm</code>，因為我是使用<code>zsh</code>，所以我加到<code>.zshrc</code>。</p>
+
+<p><code>$ echo "source $(brew --prefix nvm)/nvm.sh" &gt;&gt; ~/.zshrc</code></p>
+
+<h2 id="node--npm">安裝 node &amp; npm</h2>
+
+<p>可以使用下面這個指令列出所有的<code>node</code>版本</p>
+
+<p><code>$ nvm ls-remote</code></p>
+
+<p>接著我想裝<code>v0.12.1</code>的版本</p>
+
+<p><code>$ nvm install -s v0.12.1</code></p>
+
+<p>安裝完成後使用下面這指令可以看到安裝好的版本</p>
+
+<p><code>
+$ node -v
+$ npm -v
+</code></p>
+
+<p>下面這行指令可以讓你每次預設自動使用的版本。</p>
+
+<p><code>$ nvm alias default 0.12.1</code></p>
+
+<p>如果要切換版本可以使用。</p>
+
+<p><code>$nvm use VERSION</code></p>
+]]></content>
+  </entry>
+  
+</feed>

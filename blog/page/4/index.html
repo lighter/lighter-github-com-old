@@ -7,7 +7,7 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="iPhone上已經有iCloud可以用來同步及備份資料了，但iCloud有空間的限制，而有在使用Dropbox的人，如果有參加一些特殊的活動或者是學生的身份，都可以多取得到一些額外的空間容量(或者是有邀請許多朋友加入也都可以額外增加空間)。雖然Dropbox官方的說明已經很清楚了， &hellip;">
+	<meta name="description" content="延續Core Data-Part2的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。 Read on &rarr; Nov 1st, 2012 iPhone &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -18,8 +18,8 @@
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript">
-  window.heap=window.heap||[];heap.load=function(a){window._heapid=a;var b=document.createElement("script");b.type="text/javascript",b.async=!0,b.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["identify","track"];for(var f=0;f<e.length;f++)heap[e[f]]=d(e[f])};
-  heap.load("2080758399");
+  window.heap=window.heap||[],heap.load=function(t,e){window.heap.appid=t,window.heap.config=e;var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+t+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(t){return function(){heap.push([t].concat(Array.prototype.slice.call(arguments,0)))}},p=["clearEventProperties","identify","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+  heap.load("2298597311");
 </script>
 </script>
 <!-- start Mixpanel -->
@@ -83,6 +83,53 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/11/01/core-data-part3/">
+		
+			Core Data-Part3</a>
+	</h2>
+	<div class="entry-content">
+		<p>延續<a href="http://lighter.tw/blog/2012/06/02/core-data-part2/">Core Data-Part2</a>的文章，現在要加入的是搜尋，當Table View中有越來越多的資料後，要尋找某比資料的話，用眼睛尋找是一件很累人的事情！所以可以透過輸入關鍵字來搜尋，接下來就來完成這個範例。</p>
+
+<p><img src="/images/CoreDataWithSearch/1.png" width="216" />
+<img src="/images/CoreDataWithSearch/2.png" width="216" /></p>
+
+
+		
+		<a href="/blog/2012/11/01/core-data-part3/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-01T11:48:00+08:00" pubdate data-updated="true">Nov 1<span>st</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2012/11/01/core-data-part3/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -1075,56 +1122,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2012/05/08/core-data-part1/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/05/01/segmented-controller/">
-		
-			Segmented Controller</a>
-	</h2>
-	<div class="entry-content">
-		<p><code>Segmented Controller</code>最典型的應用就是在行事曆的日、月、週切換，呈現的資料會根據日月週來分別呈現，下面使用<code>Segmented Controller</code>來切換網頁呈現網站內容。</p>
-
-<p>以下使用3個<code>Segments</code>來做Google、Yahoo、Youtube的切換。</p>
-
-<p><img src="/images/iPhone/segmentedController1.jpeg" />
-<img src="/images/iPhone/segmentedController2.jpeg" />
-<img src="/images/iPhone/segmentedController3.jpeg" /></p>
-
-
-		
-		<a href="/blog/2012/05/01/segmented-controller/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-01T10:07:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/iphone/'>iPhone</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2012/05/01/segmented-controller/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>

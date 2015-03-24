@@ -7,7 +7,10 @@
 	<meta name="author" content="Willy lighter">
 
 	
-	<meta name="description" content="情境是這樣的，今天我不想要顯示scroll bar所以用css的overflow-y隱藏掉，在Chrome測試時寫一個mousewheel event是正常的，但是在ie似乎原本的寫法不行，上網google了一下，最後使用這個解法，註冊一個wheelDelta event，阿然後一樣… &hellip;">
+	<meta name="description" content="nvm可以讓你安裝多個node版本，並且切換現在使用的版本，其實這跟ruby的rvm很像。 首先更新brew。 1
+2
+$ brew update
+$ brew upgrade 然後安裝nvm。 $ brew install nvm 最後需要將下面這行加入到.profile, .bashrc 或 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -18,8 +21,8 @@
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript">
-  window.heap=window.heap||[];heap.load=function(a){window._heapid=a;var b=document.createElement("script");b.type="text/javascript",b.async=!0,b.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["identify","track"];for(var f=0;f<e.length;f++)heap[e[f]]=d(e[f])};
-  heap.load("2080758399");
+  window.heap=window.heap||[],heap.load=function(t,e){window.heap.appid=t,window.heap.config=e;var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+t+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(t){return function(){heap.push([t].concat(Array.prototype.slice.call(arguments,0)))}},p=["clearEventProperties","identify","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+  heap.load("2298597311");
 </script>
 </script>
 <!-- start Mixpanel -->
@@ -83,6 +86,89 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/03/25/install-nvm-on-mac/">
+		
+			Install Nvm on Mac</a>
+	</h2>
+	<div class="entry-content">
+		<p><code>nvm</code>可以讓你安裝多個<code>node</code>版本，並且切換現在使用的版本，其實這跟<code>ruby</code>的<code>rvm</code>很像。</p>
+
+<p>首先更新<code>brew</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ brew update
+</span><span class="line">$ brew upgrade</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然後安裝<code>nvm</code>。</p>
+
+<p><code>$ brew install nvm</code></p>
+
+<p>最後需要將下面這行加入到<code>.profile</code>, <code>.bashrc</code> 或 <code>.zshrc</code>	，這樣才可以執行<code>rvm</code>，因為我是使用<code>zsh</code>，所以我加到<code>.zshrc</code>。</p>
+
+<p><code>$ echo "source $(brew --prefix nvm)/nvm.sh" &gt;&gt; ~/.zshrc</code></p>
+
+<h2 id="node--npm">安裝 node &amp; npm</h2>
+
+<p>可以使用下面這個指令列出所有的<code>node</code>版本</p>
+
+<p><code>$ nvm ls-remote</code></p>
+
+<p>接著我想裝<code>v0.12.1</code>的版本</p>
+
+<p><code>$ nvm install -s v0.12.1</code></p>
+
+<p>安裝完成後使用下面這指令可以看到安裝好的版本</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ node -v
+</span><span class="line">$ npm -v</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>下面這行指令可以讓你每次預設自動使用的版本。</p>
+
+<p><code>$ nvm alias default 0.12.1</code></p>
+
+<p>如果要切換版本可以使用。</p>
+
+<p><code>$nvm use VERSION</code></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-25T05:47:08+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2015</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/nvm/'>nvm</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2015/03/25/install-nvm-on-mac/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -634,63 +720,6 @@ mixpanel.init("95a2b2b7fcfe4eed08160ac18d524511");</script>
 </div>
 	
 	<div class="comments"><a href="/blog/2014/06/27/bi-ji-an-zhuang-vagrant/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/06/21/laravel-part-8/">
-		
-			Laravel Part 8</a>
-	</h2>
-	<div class="entry-content">
-		<p>這章節只是想做個整理，這些只是我根據官方文件還有一些影片自己實做，然後加以整理大概記錄一下，主要是釐清一些過程使用，所以幾乎都不會詳細的描述。如果有問題歡迎一起討論。</p>
-
-<p>目前使用比較多的還是codeigniter，相較之下laravel的debug比ci界面好看多了，還有<code>artisan</code>也真的蠻好用的。<code>Eloquent</code>真的是很好用，但是我不太確定當複雜的sql查詢時，很多大量的子查詢，還有個家sql提供的內件方法也都不一樣時，是否也可寫的這麼容易?就我目前工作上使用ci，我都是自己寫sql使用bind的方式，至於為什麼要用bind，似乎也是oracle的重複查詢時速度會比較快(因為cache)，有時間再來查查資料吧。</p>
-
-<p>整個完整的code我也放在GIT上供大家參考囉<a href="https://github.com/lighter/Laravel_sample">[Laravel GIT]</a></p>
-
-<ol>
-  <li><a href="http://lighter.tw/blog/2014/05/29/laravel-part-1/">Laravel part 1</a> - 安裝 <code>Laravel</code></li>
-  <li><a href="http://lighter.tw/blog/2014/05/30/laravel-part-2/">Laravel part 2</a> - 安裝<code>jquery</code>、<code>bootstrap</code></li>
-  <li><a href="http://lighter.tw/blog/2014/05/31/laravel-part-3/">Laravel part 3</a> - 建立資料庫</li>
-  <li><a href="http://lighter.tw/blog/2014/06/02/laravel-part-4/">Laravel part 4</a> - 登入 &amp; 簡易Session操作</li>
-  <li><a href="http://lighter.tw/blog/2014/06/04/laravel-part-5/">Laravel part 5</a> - 簡單的樣板使用</li>
-  <li><a href="http://lighter.tw/blog/2014/06/07/laravel-part-6/">Laravel part 6</a> - 帳號建立 &amp; 列表</li>
-  <li><a href="http://lighter.tw/blog/2014/06/09/laravel-part-7/">Laravel part 7</a> - 帳號修改 &amp; 顯示帳號資訊 &amp; 修改帳號 &amp; 刪除帳號</li>
-</ol>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-21T22:37:03+08:00" pubdate data-updated="true">Jun 21<span>st</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/laravel/'>laravel</a>, <a class='category' href='/blog/categories/php/'>php</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2014/06/21/laravel-part-8/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>
